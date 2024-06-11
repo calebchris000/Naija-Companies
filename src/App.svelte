@@ -20,5 +20,6 @@
 <main>
   <Router {url}>
     <Route path="/home" component={Home} />
+    <Route path="/about" component={Home} />
   </Router>
 </main>

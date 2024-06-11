@@ -77,7 +77,7 @@
       > Employee Reviews
     </h1>
   </div>
-  <div class="w-full max-md:w-full">
+  <div class="w-full -z-10 max-md:w-full">
     <div class="swiper">
       <div class="swiper-wrapper">
         {#each reviewers as { alias, organization, review, rate, employee }}
