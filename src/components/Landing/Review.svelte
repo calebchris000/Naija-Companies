@@ -27,7 +27,7 @@
       {/each}
     </span>
   </div>
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-1 mt-2">
     <span>
       <Quote className="w-6 fill-green-800" />
     </span>

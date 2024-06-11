@@ -70,14 +70,14 @@
 <section
   class="flex max-md:flex-col lg:justify-between h-[100vh] pt-20 max-md:pt-28 gap-6"
 >
-  <div class="border border-orange-600 w-full">
+  <div class="w-full">
     <h1 class="font-medium max-md:text-3xl">
       Uncover the Truth About Nigerian Workplaces - Read <strong
         class="text-orange-600">Authentic</strong
       > Employee Reviews
     </h1>
   </div>
-  <div class="border border-orange-600 w-full max-md:w-full">
+  <div class="w-full max-md:w-full">
     <div class="swiper">
       <div class="swiper-wrapper">
         {#each reviewers as { alias, organization, review, rate, employee }}
