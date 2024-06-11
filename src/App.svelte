@@ -1,24 +1,24 @@
 <script lang="ts">
-  import logo from "@src/assets/logo.jpeg";
-  import More from "@src/assets/svg/More.svelte"
-  $: isMobile = window.innerWidth <= 820;
+  import { Router, Route } from "svelte-routing";
+  import Home from "./pages/home/Index.svelte";
+
+  let url = "";
+
+  function handleAutoRoute() {
+    const { pathname } = window.location;
+
+    const split = pathname.split("/");
+    console.log(split);
+    if (split[split.length - 1]) return;
+
+    window.location.replace("home");
+  }
+
+  $: handleAutoRoute();
 </script>
 
 <main>
-  <section
-    class="border border-red-500 flex items-center justify-between max-md:p-4"
-  >
-    <div class="flex flex-col gap-1 items-center">
-      <img class="w-10 h-10 rounded-full overflow-hidden" src={logo} alt="" />
-      <!-- <span class="text-sm font-semibold">NC</span> -->
-    </div>
-    <div>Home</div>
-    {#if isMobile}
-      <button>
-        <More className=" fill-orange-600 h-8" />
-      </button>
-    {:else}
-      <div>Account</div>
-    {/if}
-  </section>
+  <Router {url}>
+    <Route path="/home" component={Home} />
+  </Router>
 </main>
