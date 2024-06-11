@@ -1,1 +1,2 @@
 padding x = 1rem (px-4)
+swiper installed
