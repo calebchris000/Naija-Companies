@@ -4,6 +4,7 @@
   import "swiper/css";
   import { onMount } from "svelte";
   import Info from "./Info.svelte";
+  import Signup from "./Signup.svelte";
 
   let swiper: Swiper | null = null;
   onMount(() => {
@@ -35,7 +36,7 @@
       <div class="swiper-slide">
         <Info on:click={slideNext} />
       </div>
-      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide"><Signup /></div>
       <div class="swiper-slide">Slide 3</div>
     </div>
     <div class="swiper-pagination"></div>
