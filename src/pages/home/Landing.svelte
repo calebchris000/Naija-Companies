@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import Hero from "@src/components/Landing/Hero.svelte";
 
 

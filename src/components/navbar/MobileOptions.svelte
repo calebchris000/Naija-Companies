@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import { Link } from "svelte-routing";
 
   const routes = [{ label: "About", path: "/about" }];

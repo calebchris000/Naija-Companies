@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import user_privacy from "@src/assets/user_privacy.png";
   import { createEventDispatcher } from "svelte";
 

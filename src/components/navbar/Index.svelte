@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import logo_text from "@src/assets/logo_text.png";
   import "./style.css";
   import More from "@src/assets/svg/More.svelte";
