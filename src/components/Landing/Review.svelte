@@ -39,8 +39,8 @@
     </span>
   </div>
   <div class="">
-    <span>{reviewer_alias}</span>
-    <span>
+    <span>{reviewer_alias} :</span>
+    <span class="font-semibold">
       {is_employee ? "Employee" : "Ex-Employee"}
     </span>
   </div>
