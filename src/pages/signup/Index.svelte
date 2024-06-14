@@ -5,6 +5,7 @@
   import { onMount } from "svelte";
   import Info from "./Info.svelte";
   import Signup from "./Signup.svelte";
+  import VerifyEmail from "./VerifyEmail.svelte";
 
   let swiper: Swiper | null = null;
   onMount(() => {
@@ -15,13 +16,13 @@
       },
     });
 
-    swiper.disable();
+    // swiper.disable();
   });
 
   function slideNext() {
     swiper?.enable();
     swiper?.slideNext();
-    swiper?.disable();
+    // swiper?.disable();
   }
   function slidePrev() {
     swiper?.enable();
@@ -36,8 +37,14 @@
       <div class="swiper-slide">
         <Info on:click={slideNext} />
       </div>
-      <div class="swiper-slide"><Signup /></div>
-      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">
+        <Signup
+          on:signup_success={() => {
+            slideNext();
+          }}
+        />
+      </div>
+      <div class="swiper-slide"><VerifyEmail /></div>
     </div>
     <div class="swiper-pagination"></div>
 

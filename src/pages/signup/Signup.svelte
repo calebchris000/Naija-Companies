@@ -6,6 +6,10 @@
   import padlock from "@src/assets/padlock.png";
   import Arrow from "@src/assets/svg/Arrow.svelte";
   import { Notification } from "@src/utils/notification";
+  import { createEventDispatcher } from "svelte";
+  const dispatcher = createEventDispatcher();
+
+  $: signup_status = "not_signed_up";
 
   let inputValues: Map<string, string> = new Map();
   const emailRegex =
@@ -45,11 +49,22 @@
       notification.error({ text: "Include 6 or more unique characters" });
       return;
     }
-
-    isSigningUp = true;
+    signup_status = "pending";
 
     const to_object = Object.fromEntries(inputValues);
     const [firstName, lastName] = fullName?.split(" ");
+  }
+
+  $: {
+    if (signup_status === "pending") {
+      setTimeout(() => {
+        signup_status = "success";
+      }, 2000);
+    } else if (signup_status === "success") {
+      setTimeout(() => {
+        dispatcher("signup_success");
+      }, 2000);
+    }
   }
 </script>
 
@@ -104,10 +119,23 @@
       icon={padlock}
     />
     <button
-      on:click={!isSigningUp ? handleSignup : () => {}}
-      style="background-color: {isSigningUp ? '#6b7280' : '#ea580c'}"
-      class="p-4 w-full block rounded-xl bg-orange-600 font-medium mt-5 text-white"
-      type="button">{isSigningUp ? "Creating Account" : "Sign Up"}</button
+      on:click={signup_status === "not_signed_up" ? handleSignup : () => {}}
+      style="background-color: {signup_status === 'pending'
+        ? '#6b7280'
+        : signup_status === 'success'
+          ? '#22c55e'
+          : signup_status === 'failure'
+            ? '#ef4444'
+            : '#ea580c'}"
+      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white"
+      type="button"
+      >{signup_status === "pending"
+        ? "Creating Account"
+        : signup_status === "success"
+          ? "Sign Up Successful!"
+          : signup_status === "failed"
+            ? "Signup Failed"
+            : "Sign Up"}</button
     >
     <span class="text-sm text-center"
       >Already have an account? <a
