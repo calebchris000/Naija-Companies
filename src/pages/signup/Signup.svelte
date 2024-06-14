@@ -7,6 +7,7 @@
   import Arrow from "@src/assets/svg/Arrow.svelte";
   import { Notification } from "@src/utils/notification";
   import { createEventDispatcher } from "svelte";
+  import { Signup } from "@src/core/api/auth";
   const dispatcher = createEventDispatcher();
 
   $: signup_status = "not_signed_up";
@@ -16,7 +17,7 @@
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   let isSigningUp = false;
 
-  function handleSignup() {
+  async function handleSignup() {
     const notification = new Notification();
     const fullName = inputValues.get("Full Name");
 
@@ -51,18 +52,34 @@
     }
     signup_status = "pending";
 
-    const to_object = Object.fromEntries(inputValues);
+    // const to_object = Object.fromEntries(inputValues);
     const [firstName, lastName] = fullName?.split(" ");
+    console.log("logger");
+
+    try {
+      const response = await Signup({ firstName, lastName, email, password });
+      if (response.status !== 201) {
+        signup_status = "failure";
+        notification.error({
+          text: response.data.message ?? "Could not connect to server",
+        });
+        return;
+      }
+      const { id } = response.data.data as any;
+      localStorage.setItem("userId", id);
+      console.log(response.data);
+      signup_status = "success";
+      dispatcher("signup_success");
+    } catch (error) {
+      signup_status = "failure";
+      notification.error({ text: String(error) ?? "Something went wrong" });
+    }
   }
 
   $: {
-    if (signup_status === "pending") {
+    if (signup_status === "failure") {
       setTimeout(() => {
-        signup_status = "success";
-      }, 2000);
-    } else if (signup_status === "success") {
-      setTimeout(() => {
-        dispatcher("signup_success");
+        signup_status = "not_signed_up";
       }, 2000);
     }
   }
@@ -133,7 +150,7 @@
         ? "Creating Account"
         : signup_status === "success"
           ? "Sign Up Successful!"
-          : signup_status === "failed"
+          : signup_status === "failure"
             ? "Signup Failed"
             : "Sign Up"}</button
     >

@@ -1,17 +1,19 @@
 <script lang="ts">
+  import { ResendOtp } from "@src/core/api/auth";
   import Input from "@src/components/Input/Index.svelte";
   import otp from "@src/assets/signup/otp.png";
   import man_otp from "@src/assets/svg/man_otp.svg";
   import Arrow from "@src/assets/svg/Arrow.svelte";
   import { Notification } from "@src/utils/notification";
   import { createEventDispatcher } from "svelte";
+  import { VerifyOtp } from "@src/core/api/auth";
   const dispatcher = createEventDispatcher();
 
-  $: verify_status = "not_signed_up";
+  $: verify_status = "not_verified";
 
   let inputValues: Map<string, string> = new Map();
 
-  function handleVerify() {
+  async function handleVerify() {
     const notification = new Notification();
 
     const OTP = inputValues.get("OTP");
@@ -26,18 +28,68 @@
       return;
     }
     verify_status = "pending";
+
+    try {
+      const userId = localStorage.getItem("userId") ?? "";
+      const response = await VerifyOtp({ otp: OTP, userId });
+      console.log(response.data);
+      if (response.data && response.data.statusCode === 3) {
+        notification.error({
+          text: "OTP has expired. Click on 'Resend' to generate a new code",
+        });
+      }
+
+      if (response.status !== 200) {
+        verify_status = "failure";
+        const { message } = response.data;
+        notification.error({
+          text:
+            message ??
+            "Verification failed. Click on 'Resend' to generate a new OTP",
+        });
+        return;
+      }
+      const user = response.data.data as object;
+      verify_status = "success";
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error: any) {
+      console.log(error.response);
+      verify_status = "failure";
+      if (error?.response) {
+        notification.error({
+          text:
+            String(error.response?.data?.message) ??
+            "Could not connect to server",
+        });
+      } else {
+        notification.error({
+          text: String(error) ?? "Could not connect to server",
+        });
+      }
+    }
   }
 
   $: {
-    if (verify_status === "pending") {
+    if (verify_status === "success" || verify_status === "failure") {
       setTimeout(() => {
-        verify_status = "success";
-      }, 2000);
-    } else if (verify_status === "success") {
-      setTimeout(() => {
-        dispatcher("signup_success");
+        verify_status = "not_verified";
       }, 2000);
     }
+  }
+
+  async function handleResend() {
+    const notification = new Notification();
+    const user = JSON.parse(localStorage.getItem("user") ?? "");
+    if (!user) return;
+    const response = await ResendOtp({ userId: user.id });
+
+    if (response.status !== 200) {
+      notification.error({
+        text: "Could not generate OTP. Try again in an hour",
+      });
+      return;
+    }
+    notification.success({ text: "OTP is generated. Check your inbox" });
   }
 </script>
 
@@ -62,7 +114,7 @@
     />
 
     <button
-      on:click={verify_status === "not_signed_up" ? handleVerify : () => {}}
+      on:click={verify_status === "not_verified" ? handleVerify : () => {}}
       style="background-color: {verify_status === 'pending'
         ? '#6b7280'
         : verify_status === 'success'
@@ -76,14 +128,15 @@
         ? "Verifying Account"
         : verify_status === "success"
           ? "Verify Successful!"
-          : verify_status === "failed"
+          : verify_status === "failure"
             ? "Verification Failed"
             : "Verify Account"}</button
     >
     <span class="text-sm text-center"
-      >Already have an account? <a
-        class="font-medium text-orange-600"
-        href="/login">Login</a
+      >Can't find OTP? <button
+        on:click={handleResend}
+        type="button"
+        class="font-medium text-orange-600">Resend</button
       ></span
     >
   </div>
