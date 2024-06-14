@@ -70,9 +70,15 @@
       console.log(response.data);
       signup_status = "success";
       dispatcher("signup_success");
-    } catch (error) {
+    } catch (error: any) {
       signup_status = "failure";
-      notification.error({ text: String(error) ?? "Something went wrong" });
+      if (error?.response) {
+        notification.error({
+          text: error.response?.data?.message ?? "Something went wrong",
+        });
+      } else {
+        notification.error({ text: String(error) ?? "Something went wrong" });
+      }
     }
   }
 

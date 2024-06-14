@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Timer } from "@src/utils/timer";
   import { ResendOtp } from "@src/core/api/auth";
   import Input from "@src/components/Input/Index.svelte";
   import otp from "@src/assets/signup/otp.png";
@@ -7,6 +8,7 @@
   import { Notification } from "@src/utils/notification";
   import { createEventDispatcher } from "svelte";
   import { VerifyOtp } from "@src/core/api/auth";
+  import { navigate } from "svelte-routing";
   const dispatcher = createEventDispatcher();
 
   $: verify_status = "not_verified";
@@ -49,9 +51,11 @@
         });
         return;
       }
-      const user = response.data.data as object;
+      const { token, ...user } = response.data.data as any;
       verify_status = "success";
       localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+      navigate("/home");
     } catch (error: any) {
       console.log(error.response);
       verify_status = "failure";
@@ -77,19 +81,38 @@
     }
   }
 
+  $: time = { minute: "00", seconds: "00", total_seconds: 0 } as {
+    minute: string;
+    seconds: string;
+    total_seconds?: number;
+  };
+  const timer = new Timer(0, (d) => {
+    time = d;
+  });
+
   async function handleResend() {
+    timer.start();
     const notification = new Notification();
     const user = JSON.parse(localStorage.getItem("user") ?? "");
     if (!user) return;
-    const response = await ResendOtp({ userId: user.id });
+    try {
+      const response = await ResendOtp({ userId: user.id });
 
-    if (response.status !== 200) {
-      notification.error({
-        text: "Could not generate OTP. Try again in an hour",
-      });
-      return;
+      if (response.status !== 200) {
+        notification.error({
+          text: "Could not generate OTP. Try again in an hour",
+        });
+        return;
+      }
+      timer.start();
+      notification.success({ text: "OTP is generated. Check your inbox" });
+    } catch (error: any) {
+      if (error.response) {
+        notification.error({ text: error.response?.data?.message });
+        return;
+      }
+      notification.error({ text: String(error) });
     }
-    notification.success({ text: "OTP is generated. Check your inbox" });
   }
 </script>
 
@@ -112,6 +135,12 @@
       label="OTP"
       icon={otp}
     />
+
+    {#if time.total_seconds !== 0}
+      <div class="font-medium text-center text-sm">
+        {time.minute}:{time.seconds} remaining
+      </div>
+    {/if}
 
     <button
       on:click={verify_status === "not_verified" ? handleVerify : () => {}}
