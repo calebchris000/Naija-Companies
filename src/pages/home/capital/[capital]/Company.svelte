@@ -1,5 +1,6 @@
 <script>
   import { getStarRating } from "@src/core/logic/getStarRating";
+  import { createEventDispatcher } from "svelte";
   export let logo = "";
   export let name = "";
   name = name.length > 14 ? name.slice(0, 14) + "..." : name;
@@ -9,10 +10,17 @@
     rating <= 2 ? "red" : rating >= 2.5 && rating <= 3.5 ? "orange" : "green";
 
   const stars = getStarRating(rating);
+  const dispatch = createEventDispatcher();
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-interactive-supports-focus -->
 <section
-  class="overflow-hidden bg-gray-50 justify-between shadow-md flex flex-col pt-4"
+  role="button"
+  on:click={() => {
+    dispatch("click", { company: name });
+  }}
+  class="overflow-hidden w-full bg-gray-50 justify-between shadow-md flex flex-col pt-4"
 >
   <div class="px-4">
     <img class="w-20 mx-auto rounded-full" alt="img" src={logo} />
