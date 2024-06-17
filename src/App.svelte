@@ -28,7 +28,7 @@
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
     <Route path="/about" component={Home} />
-    <Route path="/home/organizations" component={Organization} />
-    <Route path="/home/organizations/:capital" component={Capital} />
+    <Route path="/home/capital" component={Organization} />
+    <Route path="/home/capital/:capital" component={Capital} />
   </Router>
 </main>

@@ -9,7 +9,7 @@
     localStorage.setItem("params", capital);
 console.log(capital, "cap");
 
-    navigate(`organizations/${capital}/`)
+    navigate(`capital/${capital}/`)
   }
 </script>
 

@@ -9,7 +9,7 @@
       window.location.replace("login");
       return;
     }
-    window.location.href = "/home/organizations?focus=true";
+    window.location.href = "/home/capital?focus=true";
   }
 </script>
 

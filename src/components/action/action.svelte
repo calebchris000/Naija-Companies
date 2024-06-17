@@ -1,5 +1,6 @@
 <script lang="ts">
   import Arrow from "@src/assets/svg/Arrow.svelte";
+  import { navigate } from "svelte-routing";
   export let title = "";
 
   function handleBack() {
@@ -10,7 +11,7 @@
     newRoute.pop();
     newRoute = newRoute.join("/");
     console.log(newRoute);
-    window.location.href = newRoute;
+    navigate(newRoute);
   }
 </script>
 
