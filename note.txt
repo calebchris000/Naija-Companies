@@ -1,2 +1,3 @@
 padding x = 1rem (px-4)
 swiper installed
+space between navbar = 5rem (pt-20)

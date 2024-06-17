@@ -55,7 +55,10 @@
       verify_status = "success";
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
-      navigate("/home");
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
     } catch (error: any) {
       console.log(error.response);
       verify_status = "failure";

@@ -16,13 +16,13 @@
       },
     });
 
-    // swiper.disable();
+    swiper.disable();
   });
 
   function slideNext() {
     swiper?.enable();
     swiper?.slideNext();
-    // swiper?.disable();
+    swiper?.disable();
   }
   function slidePrev() {
     swiper?.enable();

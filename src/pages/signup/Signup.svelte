@@ -69,7 +69,9 @@
       localStorage.setItem("userId", id);
       console.log(response.data);
       signup_status = "success";
-      dispatcher("signup_success");
+      setTimeout(() => {
+        dispatcher("signup_success");
+      }, 2000);
     } catch (error: any) {
       signup_status = "failure";
       if (error?.response) {

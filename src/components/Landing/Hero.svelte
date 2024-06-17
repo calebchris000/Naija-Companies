@@ -8,6 +8,7 @@
   onMount(() => {
     new Swiper(".swiper", {
       modules: [Navigation, Pagination, Autoplay],
+      loop: true,
       autoplay: {
         delay: 3000,
         disableOnInteraction: false,
