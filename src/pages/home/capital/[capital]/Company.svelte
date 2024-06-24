@@ -3,7 +3,7 @@
   import { createEventDispatcher } from "svelte";
   export let logo = "";
   export let name = "";
-  name = name.length > 14 ? name.slice(0, 14) + "..." : name;
+  const company_name =  name.length > 14 ? name.slice(0, 14) + "..." : name;
   export let rating = 0;
 
   let star_color =
@@ -34,7 +34,7 @@
     class="border-t border-orange-600 flex justify-center h-full items-center py-2"
   >
     <span class="font-medium">
-      {name}
+      {company_name}
     </span>
   </div>
 </section>

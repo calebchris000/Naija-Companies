@@ -3,11 +3,14 @@
   import Action from "@src/components/action/action.svelte";
   import { companies } from "@src/lib/companies";
   import Company from "./Company.svelte";
+  import { navigate } from "svelte-routing";
 
   const capital = localStorage.getItem("params");
 
-  function handleClick(company_name: string) {
-    console.log(company_name);
+  function handleClick(d: { company: string }) {
+    const { company } = d;
+    const join = company.toLowerCase().split(' ').join("-")
+    navigate(`${join}/review`);
   }
 </script>
 

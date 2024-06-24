@@ -5,11 +5,13 @@
   import padlock from "@src/assets/padlock.png";
   import Arrow from "@src/assets/svg/Arrow.svelte";
   import { Notification } from "@src/utils/notification";
+  import { Login } from "@src/core/api/auth";
+  import { navigate } from "svelte-routing";
 
   $: login_status = "not_logged_in";
   let inputValues: Map<string, string> = new Map();
 
-  function handleLogin() {
+  async function handleLogin() {
     const notification = new Notification();
     const user = inputValues.get("Username or Email");
     const password = inputValues.get("Password");
@@ -24,12 +26,36 @@
       return;
     }
     login_status = "pending";
+    try {
+      const response = await Login({ user, password });
+
+      if (response.status !== 200) {
+        login_status = "failure";
+        notification.error({
+          text: response.data?.message ?? "Please try again later",
+        });
+        return;
+      }
+      login_status = "success";
+      notification.success({ text: `Welcome back, ${user}` });
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
+    } catch (error: any) {
+      login_status = "failure";
+      if (error.response) {
+        notification.error({ text: error.response?.data?.message });
+      } else {
+        notification.error({ text: "Please try again later" });
+      }
+    }
   }
 
   $: {
-    if (login_status === "pending") {
+    if (login_status === "failure") {
       setTimeout(() => {
-        login_status = "success";
+        login_status = "not_logged_in";
       }, 2000);
     }
   }
@@ -81,7 +107,7 @@
         ? "Authenticating"
         : login_status === "success"
           ? "Login Successful!"
-          : login_status === "failed"
+          : login_status === "failure"
             ? "Login Failed"
             : "Login"}</button
     >
