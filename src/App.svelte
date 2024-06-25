@@ -3,8 +3,9 @@
   import Home from "./pages/home/Index.svelte";
   import Login from "./pages/login/Index.svelte";
   import Signup from "./pages/signup/Index.svelte";
-  import Organization from "@src/pages/home/capital/Index.svelte";
-  import Capital from "./pages/home/capital/[capital]/Index.svelte";
+  import Capital from "@src/pages/home/capital/Index.svelte";
+  import Organization from "./pages/home/capital/[capital]/Index.svelte";
+  import CompanyRedirect from "./pages/home/capital/[capital]/[organization]/Index.svelte"
   import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
 
   let url = "";
@@ -29,8 +30,9 @@
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
     <Route path="/about" component={Home} />
-    <Route path="/home/capital" component={Organization} />
-    <Route path="/home/capital/:capital" component={Capital} />
+    <Route path="/home/capital" component={Capital} />
+    <Route path="/home/capital/:capital" component={Organization} />
+    <Route path="/home/capital/:capital/:company" component={CompanyRedirect} />
     <Route path="/home/capital/:capital/:company/review" component={Review} />
   </Router>
 </main>
