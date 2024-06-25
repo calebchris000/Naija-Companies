@@ -17,7 +17,7 @@
     <div></div>
   </Navbar>
   <div class="py-4">
-    <Action title="Write Your Review" />
+    <Action custom_path="/home" title="Write Your Review" />
   </div>
 
   <div class="px-4 flex flex-col gap-4">

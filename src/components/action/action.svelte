@@ -2,8 +2,13 @@
   import Arrow from "@src/assets/svg/Arrow.svelte";
   import { navigate } from "svelte-routing";
   export let title = "";
+  export let custom_path = "";
 
   function handleBack() {
+    if (custom_path) {
+      navigate(custom_path);
+      return;
+    }
     const { pathname } = window.location;
     const path =
       pathname[pathname.length - 1] === "/" ? pathname.slice(0, -2) : pathname;

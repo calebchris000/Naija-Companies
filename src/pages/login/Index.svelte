@@ -8,11 +8,14 @@
   import { Login } from "@src/core/api/auth";
   import { navigate } from "svelte-routing";
 
+  localStorage.clear();
+
   $: login_status = "not_logged_in";
   let inputValues: Map<string, string> = new Map();
 
   async function handleLogin() {
     const notification = new Notification();
+
     const user = inputValues.get("Username or Email");
     const password = inputValues.get("Password");
 
@@ -38,6 +41,12 @@
       }
       login_status = "success";
       notification.success({ text: `Welcome back, ${user}` });
+      localStorage.setItem("token", response.data.data.token);
+      const { firstName, lastName, email, userName } = response.data.data;
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ firstName, lastName, email, userName })
+      );
 
       setTimeout(() => {
         navigate("/home");
@@ -119,3 +128,7 @@
     >
   </div>
 </section>
+
+<svelte:head>
+  <title>Login To Your Account</title>
+</svelte:head>
