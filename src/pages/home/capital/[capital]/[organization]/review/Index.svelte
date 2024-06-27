@@ -1,14 +1,31 @@
 <script lang="ts">
   import Editor from "@src/components/editor/Editor.svelte";
   import Review from "@src/components/review/Review.svelte";
-  import Company from "./../../Company.svelte";
   import Action from "@src/components/action/action.svelte";
   import Navbar from "@src/components/navbar/Index.svelte";
   import { reviews } from "@src/lib/rating";
+  import { Notification } from "@src/utils/notification";
+  import { useUserData } from "@src/core/utils/utils";
+
+  const user = useUserData();
+  $: review_status = "not_reviewed";
 
   function saveItem() {
     const saveEditor = new CustomEvent("onSaveEditor");
     document.dispatchEvent(saveEditor);
+  }
+
+  async function handleSave(data: { content: any[] }) {
+    const notification = new Notification();
+    const { content, star } = data;
+    if (!content.length) {
+      notification.error({ text: "Write a review" });
+      return;
+    }
+    const userId = user.id;
+    const review_data = { userId, content, star };
+
+    console.log(content);
   }
 </script>
 
@@ -21,7 +38,11 @@
   </div>
 
   <div class="px-4 flex flex-col gap-4">
-    <Editor />
+    <Editor
+      on:save={(e) => {
+        handleSave(e.detail);
+      }}
+    />
     <button
       class="bg-blue-500 text-white w-fit mx-auto p-2 px-4 rounded-sm"
       on:click={() => {

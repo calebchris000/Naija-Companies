@@ -23,6 +23,7 @@
   import { cities } from "@src/lib/cities";
   import Link from "@src/assets/svg/Link.svelte";
   import { navigate } from "svelte-routing";
+  import Action from "@src/components/action/action.svelte";
 
   $: capitals = $store.capital_list;
   $: cities_in_capital = $store.cities_in_capital;
@@ -244,8 +245,11 @@
   <Navbar>
     <div></div>
   </Navbar>
+  <div class="mt-24 mb-4">
+    <Action title="Add an existing Organization" custom_path="/home" />
+  </div>
   <div
-    class="px-6 mt-24 py-5 mx-4 flex flex-col gap-10 bg-orange-50 rounded-[1.6rem]"
+    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-50 rounded-[1.6rem]"
   >
     <input
       on:input={handleFileInput}

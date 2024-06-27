@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
 
   export let capital_name = "Ibadan";
+  export let capital_id = "";
   export let capital_color = "blue";
   export let capital_img = "";
   export let numberOfCompanies = 1
@@ -10,7 +11,7 @@
 
 <button
   on:click={() => {
-    dispatch("click", { capital: capital_name });
+    dispatch("click", { capital: capital_name, id: capital_id });
   }}
   style="border-color: {capital_color}"
   class="p-4 cursor-pointer border-b-2 bg-gray-200 shadow-md h-20 flex items-center justify-center"

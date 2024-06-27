@@ -29,6 +29,7 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.29.1",
     "axios": "^1.7.2",
+    "editorjs-html": "^3.4.3",
     "simple-notify": "^1.0.4",
     "swiper": "^11.1.4"
   }

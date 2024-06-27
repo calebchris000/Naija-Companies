@@ -1,3 +1,5 @@
+import type { UserDataType } from "@src/types";
+
 export const useToken = (): string => {
   const token = localStorage.getItem("token");
 
@@ -6,6 +8,24 @@ export const useToken = (): string => {
   } else {
     return "";
   }
+};
+
+export const useEndpoint = (): string => {
+  const url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
+
+  if (!url) {
+    return "";
+  }
+  return url;
+};
+
+export const useUserData = (): UserDataType => {
+  const user: UserDataType = JSON.parse(localStorage.getItem("user") ?? "{}");
+
+  if (!user) {
+    return { firstName: "", lastName: "", email: "", id: "", userName: "" };
+  }
+  return user;
 };
 
 export const emailRegex =

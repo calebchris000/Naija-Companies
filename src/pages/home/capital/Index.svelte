@@ -9,9 +9,12 @@
   import { useToken } from "@src/core/utils/utils";
   import { Notification } from "@src/utils/notification";
   import CapitalSkeleton from "@src/components/skeleton/CapitalSkeleton.svelte";
+  import { store } from "@src/lib/store";
 
-  function handleClick({ capital }: { capital: string }) {
+  function handleClick({ capital, id }: { capital: string; id: string }) {
     localStorage.setItem("params", capital);
+
+    $store.application.selected_capital = { name: capital, id };
 
     navigate(`capital/${capital}/`);
   }
@@ -59,11 +62,12 @@
   {/if}
 
   <div class="grid grid-cols-2 gap-2 overflow-y-scroll h-[50vh]">
-    {#each capitals_list as { name, color, image, numberOfCompanies }}
+    {#each capitals_list as { id, name, color, image, numberOfCompanies }}
       <Capital
         on:click={(e) => {
           handleClick(e.detail);
         }}
+        capital_id={id}
         {numberOfCompanies}
         capital_name={name}
         capital_img={image}

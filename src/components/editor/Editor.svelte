@@ -1,7 +1,11 @@
 <script lang="ts">
   import EditorJS from "@editorjs/editorjs";
   import { getStarRating } from "@src/core/logic/getStarRating";
-  import { onDestroy, onMount } from "svelte";
+  import { createEventDispatcher, onDestroy, onMount } from "svelte";
+  import edjsHTML from "editorjs-html";
+
+  const dispatch = createEventDispatcher();
+  const edjsParser = edjsHTML();
 
   $: rated_value = 0;
   $: stars = getStarRating(rated_value).join("");
@@ -9,7 +13,8 @@
 
   function handleSave() {
     editor.save().then((d) => {
-      console.log(d.blocks);
+      const html = edjsParser.parse(d);
+      dispatch("save", { content: html, star: rated_value });
     });
   }
 
@@ -50,7 +55,14 @@
 <section class="relative flex flex-col gap-2">
   <span style="color: {star_color}" class="text-3xl">{stars}</span>
   <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0">
-    <input on:change={handleChange} on:input={handleChange} type="range" class="h-full" name="" id="" />
+    <input
+      on:change={handleChange}
+      on:input={handleChange}
+      type="range"
+      class="h-full"
+      name=""
+      id=""
+    />
   </div>
   <div
     class="px-4 w-full border border-gray-400 max-h-44 overflow-auto"

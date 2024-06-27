@@ -42,10 +42,10 @@
       login_status = "success";
       notification.success({ text: `Welcome back, ${user}` });
       localStorage.setItem("token", response.data.data.token);
-      const { firstName, lastName, email, userName } = response.data.data;
+      const { id, firstName, lastName, email, userName } = response.data.data;
       localStorage.setItem(
         "user",
-        JSON.stringify({ firstName, lastName, email, userName })
+        JSON.stringify({ id, firstName, lastName, email, userName })
       );
 
       setTimeout(() => {

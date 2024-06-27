@@ -5,8 +5,9 @@
   import Company from "./Company.svelte";
   import { navigate } from "svelte-routing";
   import Building from "@src/assets/svg/Building.svelte";
+  import { store } from "@src/lib/store";
 
-  const capital = localStorage.getItem("params");
+  const capital = $store.application.selected_capital.name;
 
   function handleClick(d: { company: string }) {
     const { company } = d;

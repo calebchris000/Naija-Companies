@@ -9,6 +9,7 @@
   import { createEventDispatcher } from "svelte";
   import { VerifyOtp } from "@src/core/api/auth";
   import { navigate } from "svelte-routing";
+  import { useUserData } from "@src/core/utils/utils";
   const dispatcher = createEventDispatcher();
 
   $: verify_status = "not_verified";
@@ -32,7 +33,7 @@
     verify_status = "pending";
 
     try {
-      const userId = localStorage.getItem("userId") ?? "";
+      const userId = useUserData().id;
       const response = await VerifyOtp({ otp: OTP, userId });
       console.log(response.data);
       if (response.data && response.data.statusCode === 3) {
@@ -96,7 +97,7 @@
   async function handleResend() {
     timer.start();
     const notification = new Notification();
-    const user = JSON.parse(localStorage.getItem("user") ?? "");
+    const user = useUserData();
     if (!user) return;
     try {
       const response = await ResendOtp({ userId: user.id });

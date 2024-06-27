@@ -3,3 +3,12 @@ export type ResponseType = {
   message?: string;
   data?: string | object | number;
 };
+
+export type UserDataType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string | null;
+  id: string;
+};
+
