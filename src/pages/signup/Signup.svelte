@@ -54,7 +54,6 @@
 
     // const to_object = Object.fromEntries(inputValues);
     const [firstName, lastName] = fullName?.split(" ");
-    console.log("logger");
 
     try {
       const response = await Signup({ firstName, lastName, email, password });
@@ -67,7 +66,6 @@
       }
       const { id } = response.data.data as any;
       localStorage.setItem("userId", id);
-      console.log(response.data);
       signup_status = "success";
       setTimeout(() => {
         dispatcher("signup_success");

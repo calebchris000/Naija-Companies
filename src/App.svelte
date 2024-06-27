@@ -5,8 +5,9 @@
   import Signup from "./pages/signup/Index.svelte";
   import Capital from "@src/pages/home/capital/Index.svelte";
   import Organization from "./pages/home/capital/[capital]/Index.svelte";
-  import CompanyRedirect from "./pages/home/capital/[capital]/[organization]/Index.svelte"
+  import CompanyRedirect from "./pages/home/capital/[capital]/[organization]/Index.svelte";
   import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
+  import CreateOrganization from "./pages/home/organization/create/Index.svelte";
 
   let url = "";
 
@@ -34,5 +35,6 @@
     <Route path="/home/capital/:capital" component={Organization} />
     <Route path="/home/capital/:capital/:company" component={CompanyRedirect} />
     <Route path="/home/capital/:capital/:company/review" component={Review} />
+    <Route path="/home/organization/add" component={CreateOrganization} />
   </Router>
 </main>

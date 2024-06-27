@@ -4,19 +4,31 @@
   import { companies } from "@src/lib/companies";
   import Company from "./Company.svelte";
   import { navigate } from "svelte-routing";
+  import Building from "@src/assets/svg/Building.svelte";
 
   const capital = localStorage.getItem("params");
 
   function handleClick(d: { company: string }) {
     const { company } = d;
-    const join = company.toLowerCase().split(' ').join("-")
+    const join = company.toLowerCase().split(" ").join("-");
     navigate(`${join}/review`);
+  }
+
+  function handleAddCompany() {
+    navigate("/home/organization/add");
   }
 </script>
 
 <section class="pt-20">
   <Navbar>
-    <div></div>
+    <button
+      on:click={handleAddCompany}
+      class="text-orange-500 w-full justify-center p-1 transition-all flex items-center gap-2"
+      type="button"
+    >
+      <Building className="w-3" />
+      <span class="text-xs">Add a company</span>
+    </button>
   </Navbar>
   <div class="py-4">
     <Action title="Search Companies In {capital}" />

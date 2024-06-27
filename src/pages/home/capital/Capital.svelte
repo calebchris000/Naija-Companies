@@ -4,6 +4,7 @@
   export let capital_name = "Ibadan";
   export let capital_color = "blue";
   export let capital_img = "";
+  export let numberOfCompanies = 1
   const dispatch = createEventDispatcher();
 </script>
 
@@ -15,7 +16,8 @@
   class="p-4 cursor-pointer border-b-2 bg-gray-200 shadow-md h-20 flex items-center justify-center"
 >
   <div></div>
-  <div>
+  <div class="flex flex-col gap-1">
     <span class="font-semibold">{capital_name}</span>
+    <span class="text-xs font-medium">{numberOfCompanies} companies</span>
   </div>
 </button>

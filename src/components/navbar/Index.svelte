@@ -8,19 +8,21 @@
   export let style = "";
   $: mobile_option_opened = false;
 
-  console.log(window.location.pathname);
 </script>
 
 <nav
   {style}
-  class="w-full shadow-sm grid grid-cols-3 bg-white items-center fixed top-0 p-0 px-4 h-20 overflow-hidden {className}"
+  class="w-full shadow-sm grid grid-cols-4 bg-white items-center fixed top-0 p-0 px-4 h-20 overflow-hidden {className}"
 >
   <div class="h-fit">
     <button class="">
       <img class="h-20" src={logo_text} alt="logo" />
     </button>
   </div>
-  <slot />
+  <div class="col-span-2">
+
+    <slot />
+  </div>
   <div class="ms-auto">
     {#if isMobile}
       <button

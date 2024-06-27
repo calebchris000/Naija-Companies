@@ -25,7 +25,6 @@ export class Timer {
 
   public start() {
     if (this.interval) {
-      console.log("interval");
       clearInterval(this.interval);
       this.interval = null;
     }

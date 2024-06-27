@@ -10,6 +10,7 @@ export const capitals = [
     { name: "Damaturu", color: "#D62828", image: "" },
     { name: "Dutse", color: "#023E8A", image: "" },
     { name: "Enugu", color: "#6B9080", image: "" },
+    { name: "FCT", color: "#8FE3CF", image: "" },
     { name: "Gombe", color: "#8FE3CF", image: "" },
     { name: "Gusau", color: "#F4D160", image: "" },
     { name: "Ibadan", color: "#720E07", image: "" },
@@ -27,10 +28,10 @@ export const capitals = [
     { name: "Oshogbo", color: "#F72585", image: "" },
     { name: "Owerri", color: "#7FB77E", image: "" },
     { name: "Port Harcourt", color: "#ECC30B", image: "" },
-    { name: "Umuahia", color: "#A8E6CF", image: "" },
-    { name: "Uyo", color: "#FF6D00", image: "" },
+    { name: "Umuahia", color: "#A8E6CF", image: "" }, //1
+    { name: "Uyo", color: "#FF6D00", image: "" }, //3
     { name: "Yenagoa", color: "#8D8DAA", image: "" },
-    { name: "Yola", color: "#3D2C8D", image: "" },
+    { name: "Yola", color: "#3D2C8D", image: "" }, //2
     { name: "Sokoto", color: "#B0DAFF", image: "" },
     { name: "Zaria", color: "#FFA900", image: "" }
 ];

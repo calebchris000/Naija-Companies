@@ -13,7 +13,7 @@
   }
 </script>
 
-<div class="border-b p-2 px-4 ps-8 relative border-gray-400 rounded-sm">
+<div class="border-b p-2 px-4 ps-8 relative border-gray-400">
   <img
     class="absolute w-4 left-0 top-[50%] translate-y-[-50%] {icon_class}"
     src={icon}

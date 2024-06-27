@@ -15,7 +15,6 @@
     let newRoute: string | string[] = path.split("/");
     newRoute.pop();
     newRoute = newRoute.join("/");
-    console.log(newRoute);
     navigate(newRoute);
   }
 </script>

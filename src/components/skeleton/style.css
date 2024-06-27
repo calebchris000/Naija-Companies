@@ -1,0 +1,17 @@
+
+.pulse {
+    animation: pulse 1s ease infinite;
+}
+
+.pulse:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background-color: #e5e7eb;
+    }
+    50% {
+        background-color: #bebebe;
+    }
+}

@@ -32,7 +32,7 @@
   });
 
   function handleChange(e: Event) {
-    const { value } = e.target;
+    const { value } = e.target as any;
     const float = parseFloat(value);
     const converted = (float / 100) * 5;
     if (converted % 0.5 === 0 && float) {
