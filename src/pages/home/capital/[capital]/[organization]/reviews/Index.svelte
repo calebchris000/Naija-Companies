@@ -24,6 +24,7 @@
   const user = useUserData();
   const token = useToken();
   $: reviews = [];
+  $: reactions = [];
   $: review_status = "not_reviewed";
 
   function saveItem() {
@@ -52,8 +53,7 @@
       });
       return;
     }
-    reviews = response.data?.data;
-    console.log(response.data?.data);
+    reviews = response.data?.data as any[];
   }
 
   onMount(() => {
@@ -66,8 +66,9 @@
     <button
       on:click={() => {
         const { href } = window.location;
-        const _href = href[href.length - 1] === "/" ? href.slice(0, -2) : href.slice(0, -1);
-        navigate(_href)
+        const _href =
+          href[href.length - 1] === "/" ? href.slice(0, -2) : href.slice(0, -1);
+        navigate(_href);
       }}
       class="text-orange-500 w-full justify-center p-1 transition-all flex items-center gap-2"
       type="button"
@@ -99,8 +100,13 @@
       />
     </div>
     <div class="flex flex-col gap-4">
-      {#each reviews as { fullName, star, content }}
-        <Review user_alias={fullName} user_rating={star} user_review={content} />
+      {#each reviews as { fullName, star, quickReactionView, content }}
+        <Review
+          reactions={quickReactionView}
+          user_alias={fullName}
+          user_rating={star}
+          user_review={content}
+        />
       {/each}
     </div>
   </div>

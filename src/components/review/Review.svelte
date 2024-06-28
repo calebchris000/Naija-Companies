@@ -6,6 +6,7 @@
   export let user_alias = "";
   export let user_rating = 0;
   export let user_review = "";
+  export let reactions = { likes: 0, dislikes: 0 };
   const dispatch = createEventDispatcher();
   const stars = getStarRating(user_rating).join("");
   $: max_length = 120;
@@ -49,7 +50,8 @@
           >View {expand_review ? "Less" : "More"}</button
         >
       {/if}
-      <span class="w-fit ms-auto font-medium text-orange-600 text-xs">Mar 12, 2024</span
+      <span class="w-fit ms-auto font-medium text-orange-600 text-xs"
+        >Mar 12, 2024</span
       >
     </div>
   </div>
@@ -57,12 +59,16 @@
     <button
       class="block transition-all hover:bg-gray-300 text-sm h-full py-3 w-full bg-gray-200"
       type="button"
-      >I agree <span class="font-medium">(10)</span>
+      >I agree <span class="font-medium"
+        >{reactions.likes ? `(${reactions.likes})` : ""}</span
+      >
     </button>
     <button
       class="block transition-all hover:bg-gray-300 text-sm h-full py-3 w-full text-red-400 bg-gray-200"
       type="button"
-      >I disagree <span class="font-medium">(2)</span>
+      >I disagree <span class="font-medium"
+        >{reactions.dislikes ? `(${reactions.dislikes})` : ""}</span
+      >
     </button>
   </div>
 </section>
