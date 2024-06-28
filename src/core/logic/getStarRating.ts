@@ -14,3 +14,13 @@ export const getStarRating = (rating: number) => {
   }
   return initial_stars;
 };
+
+export const getStarColor = (star: number): string => {
+  if (star < 2.5) {
+    return "red";
+  } else if (star >= 2.5 && star <= 3.5) {
+    return "orange";
+  } else {
+    return "green";
+  }
+};

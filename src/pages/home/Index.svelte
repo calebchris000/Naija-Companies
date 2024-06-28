@@ -2,9 +2,10 @@
   import Navbar from "@src/components/navbar/Index.svelte";
   import Landing from "./Landing.svelte";
   import Pencil from "@src/assets/svg/Pencil.svelte";
+  import { useToken } from "@src/core/utils/utils";
 
   function handleWrite() {
-    const token = localStorage.getItem("token");
+    const token = useToken()
     if (!token) {
       window.location.replace("login");
       return;
@@ -15,7 +16,7 @@
 
 <section>
   <Navbar>
-    <div class="mx-auto flex items-center gap-1">
+    <div class="mx-auto flex items-center justify-center gap-1 w-full">
       <Pencil className="fill-orange-600 stroke-white w-4" />
       <button
         on:click={handleWrite}

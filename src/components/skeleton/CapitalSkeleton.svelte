@@ -3,7 +3,7 @@
   import "./style.css";
 </script>
 
-<section class="grid grid-cols-2 gap-2 overflow-y-scroll h-[50vh] ">
+<section class="grid grid-cols-2 gap-2 overflow-y-scroll h-[60vh] ">
   {#each thirty_six_content as _}
     <div
       style=""

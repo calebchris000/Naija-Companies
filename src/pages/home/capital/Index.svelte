@@ -12,8 +12,10 @@
   import { store } from "@src/lib/store";
 
   function handleClick({ capital, id }: { capital: string; id: string }) {
-    localStorage.setItem("params", capital);
-
+    localStorage.setItem(
+      "selected_capital",
+      JSON.stringify({ name: capital, id })
+    );
     $store.application.selected_capital = { name: capital, id };
 
     navigate(`capital/${capital}/`);
@@ -45,23 +47,25 @@
   });
 </script>
 
-<section class="pt-24 grid grid-cols-1 gap-2 px-4">
+<section class="">
   <Navbar>
-    <div></div>
+    <button type="button" class="w-full"></button>
   </Navbar>
-  <Action title="Select a capital" />
+  <div class="pt-24 py-4">
+    <Action title="Select a capital" />
+  </div>
 
   <div>
     <span></span>
   </div>
 
   {#if fetch_state === "pending"}
-    <div class="">
+    <div class="px-4">
       <CapitalSkeleton />
     </div>
   {/if}
 
-  <div class="grid grid-cols-2 gap-2 overflow-y-scroll h-[50vh]">
+  <div class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[60vh]">
     {#each capitals_list as { id, name, color, image, numberOfCompanies }}
       <Capital
         on:click={(e) => {

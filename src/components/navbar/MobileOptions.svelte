@@ -2,35 +2,20 @@
   import { Link } from "svelte-routing";
 
   const routes = [{ label: "About", path: "/about" }];
-  const account_actions = [
-    { label: "Edit Details", path: "/account_edit" },
-    { label: "Delete Account", path: "/account_delete" },
-  ];
+  const account_actions = [{ label: "Preferences", path: "/account_edit" }];
 </script>
 
 <section class="bg-white p-2 px-4 flex flex-col gap-4">
   <div>
-    <span class="text-sm">MENU</span>
-    <div class="flex flex-col gap-1">
-      {#each routes as { label, path }}
-        <Link to={path}
-          ><span class="font-medium text-lg">
-            {label}
-          </span>
-        </Link>
-      {/each}
-    </div>
-  </div>
-  <div>
-    <span class="text-sm">ACCOUNT</span>
-    <div class="flex flex-col gap-1">
+    <span>Account</span>
+    <div class="font-medium mt-2 flex flex-col gap-2">
       {#each account_actions as { label, path }}
-        <Link to={path}
-          ><span class="font-medium text-lg">
-            {label}
-          </span>
-        </Link>
+        <Link to="">{label}</Link>
       {/each}
     </div>
+    <button
+      class="bg-orange-500 p-4 py-3 mt-2 w-full rounded-md mx-auto block font-medium"
+      type="button">Logout</button
+    >
   </div>
 </section>

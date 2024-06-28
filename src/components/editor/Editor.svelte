@@ -14,6 +14,8 @@
   function handleSave() {
     editor.save().then((d) => {
       const html = edjsParser.parse(d);
+      console.log(html);
+      
       dispatch("save", { content: html, star: rated_value });
     });
   }
