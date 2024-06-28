@@ -25,6 +25,7 @@
 
       {#if organization_website}
         <a
+        target="_blank"
           href={organization_website}
           class="text-blue-600 text-sm flex items-center gap-2"
         >

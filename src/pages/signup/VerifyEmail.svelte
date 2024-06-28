@@ -9,9 +9,9 @@
   import { createEventDispatcher } from "svelte";
   import { VerifyOtp } from "@src/core/api/auth";
   import { navigate } from "svelte-routing";
-  import { useUserData } from "@src/core/utils/utils";
+  import { LocalStorage, useUserData } from "@src/core/utils/utils";
   const dispatcher = createEventDispatcher();
-
+  const local_storage = new LocalStorage();
   $: verify_status = "not_verified";
 
   let inputValues: Map<string, string> = new Map();
@@ -33,7 +33,7 @@
     verify_status = "pending";
 
     try {
-      const userId = useUserData().id;
+      const userId = local_storage.getItem("userId", true);
       const response = await VerifyOtp({ otp: OTP, userId });
       console.log(response.data);
       if (response.data && response.data.statusCode === 3) {

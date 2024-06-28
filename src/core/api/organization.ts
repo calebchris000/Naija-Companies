@@ -1,9 +1,16 @@
 import axios from "axios";
 
-export const GetOrganizations = async ({ token }: { token: string }) => {
+export const GetOrganizations = async ({
+  token,
+  getReviews,
+}: {
+  token: string;
+  getReviews: boolean;
+}) => {
   try {
+    const query = getReviews ? "getReviews=true" : "";
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
-    const response = await axios.get(`${base_url}/organizations`, {
+    const response = await axios.get(`${base_url}/organizations?${query}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

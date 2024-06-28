@@ -2,16 +2,24 @@
   import Navbar from "@src/components/navbar/Index.svelte";
   import Landing from "./Landing.svelte";
   import Pencil from "@src/assets/svg/Pencil.svelte";
-  import { useToken } from "@src/core/utils/utils";
+  import { LocalStorage, useToken } from "@src/core/utils/utils";
+  import { onMount } from "svelte";
+  const local_storage = new LocalStorage();
 
   function handleWrite() {
-    const token = useToken()
+    const token = useToken();
     if (!token) {
       window.location.replace("login");
       return;
     }
     window.location.href = "/home/capital?focus=true";
   }
+
+  onMount(() => {
+    local_storage.removeItem("selected_organization");
+    local_storage.removeItem("selected_capital");
+    local_storage.removeItem("params");
+  });
 </script>
 
 <section>

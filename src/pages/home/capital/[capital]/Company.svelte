@@ -1,14 +1,13 @@
 <script>
-  import { getStarRating } from "@src/core/logic/getStarRating";
+  import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
   import { createEventDispatcher } from "svelte";
+  export let id = "";
   export let logo = "";
   export let name = "";
-  const company_name =  name.length > 14 ? name.slice(0, 14) + "..." : name;
   export let rating = 0;
-
-  let star_color =
-    rating <= 2 ? "red" : rating >= 2.5 && rating <= 3.5 ? "orange" : "green";
-
+  
+  let star_color = getStarColor(rating);
+  const company_name = name.length > 14 ? name.slice(0, 14) + "..." : name;
   const stars = getStarRating(rating);
   const dispatch = createEventDispatcher();
 </script>
@@ -18,7 +17,7 @@
 <section
   role="button"
   on:click={() => {
-    dispatch("click", { company: name });
+    dispatch("click", { company: name, id });
   }}
   class="overflow-hidden w-full bg-gray-50 justify-between shadow-md flex flex-col pt-4"
 >

@@ -12,7 +12,7 @@
 
 <nav
   {style}
-  class="w-full shadow-sm grid grid-cols-4 bg-white items-center fixed top-0 p-0 px-4 h-20 overflow-hidden {className}"
+  class="w-full shadow-sm grid grid-cols-4 bg-white items-center fixed top-0 p-0 px-4 h-20 z-10 overflow-hidden {className}"
 >
   <div class="h-fit">
     <button class="">

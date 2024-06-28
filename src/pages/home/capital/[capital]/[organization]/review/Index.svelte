@@ -5,10 +5,16 @@
   import Navbar from "@src/components/navbar/Index.svelte";
   import { reviews } from "@src/lib/rating";
   import { Notification } from "@src/utils/notification";
-  import { useToken, useUserData } from "@src/core/utils/utils";
+  import {
+    useLocalStorage,
+    useToken,
+    useUserData,
+  } from "@src/core/utils/utils";
   import { store } from "@src/lib/store";
   import { AddReview } from "@src/core/api/review";
   import { navigate } from "svelte-routing";
+  import Pencil from "@src/assets/svg/Pencil.svelte";
+  import ReviewOutline from "@src/assets/svg/ReviewOutline.svelte";
 
   const user = useUserData();
   const token = useToken();
@@ -20,6 +26,10 @@
   }
 
   async function handleSave(data: { content: any[] }) {
+    const organizationId = useLocalStorage({
+      key: "selected_organization",
+      isString: false,
+    })?.id;
     const notification = new Notification();
     const { content, star } = data;
     if (!content.length) {
@@ -31,10 +41,8 @@
     const review_data = {
       content: to_plain_html,
       star: star === 0 ? 0.5 : star,
-      // organizationId: $store.application.selected_capital.id,
-      organizationId: "617f74e7-40d3-4503-88b2-403dc04788c6",
+      organizationId,
     };
-    console.log(review_data);
 
     const response = await AddReview({ token, data: review_data });
     if (response.status !== 201) {
@@ -47,7 +55,7 @@
 
     setTimeout(() => {
       const { href } = window.location;
-      let href_ = href[href.length -1] === "/" ? href.slice(0, -1) : href
+      let href_ = href[href.length - 1] === "/" ? href.slice(0, -1) : href;
       navigate(`${href_}s`);
     }, 4000);
   }
@@ -55,7 +63,19 @@
 
 <section class="pt-20">
   <Navbar>
-    <div></div>
+    <button
+      on:click={() => {
+        const { href } = window.location;
+        const _href =
+          href[href.length - 1] === "/" ? href.slice(0, -1) + "s" : href + "s";
+        navigate(_href);
+      }}
+      class="text-orange-500 w-full justify-center p-1 transition-all flex items-center gap-2"
+      type="button"
+    >
+      <span class="text-sm">View all reviews</span>
+      <ReviewOutline className="w-4" />
+    </button>
   </Navbar>
   <div class="py-4">
     <Action custom_path="/home" title="Write Your Review" />
@@ -76,8 +96,8 @@
     >
 
     <div class=" flex flex-col gap-4">
-      {#each reviews as { user_alias, user_rating, user_review }}
-        <Review {user_alias} {user_rating} {user_review} />
+      {#each reviews as { fullName, star, user_review }}
+        <Review user_alias={fullName} user_rating={star} {user_review} />
       {/each}
     </div>
   </div>

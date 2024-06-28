@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
+  export let className = ""
+
   type ListType = {
     id: string;
     name: string;
@@ -30,7 +32,7 @@
 <div
   role="button"
   on:click|stopPropagation={handleState}
-  class="border-b p-2 flex ps-8 items-center relative border-gray-400"
+  class="border-b p-2 flex ps-8 items-center relative border-gray-400 {className}"
 >
   <img
     class="absolute w-4 left-0 top-[50%] translate-y-[-50%]"

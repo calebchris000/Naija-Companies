@@ -28,5 +28,48 @@ export const useUserData = (): UserDataType => {
   return user;
 };
 
+export const useLocalStorage = ({
+  key,
+  isString,
+}: {
+  key: string;
+  isString: boolean;
+}): object | string => {
+  const item = localStorage.getItem(key);
+  if (!item) return "";
+  if (isString) {
+    return item;
+  } else {
+    const parsed = JSON.parse(item);
+    return parsed;
+  }
+};
+
+export class LocalStorage {
+  constructor() {}
+
+  public getItem(key: string, isString: boolean) {
+    const item = localStorage.getItem(key);
+
+    if (!item) return "";
+    if (isString) return item;
+    const parsed = JSON.parse(item);
+    return parsed;
+  }
+  public setItem(key: string, data: string | object) {
+    if (typeof data === "object") {
+      localStorage.setItem(key, JSON.stringify(data));
+    } else {
+      localStorage.setItem(key, data);
+    }
+  }
+  public removeItem(key: string) {
+    localStorage.removeItem(key);
+  }
+  public clear() {
+    localStorage.clear();
+  }
+}
+
 export const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

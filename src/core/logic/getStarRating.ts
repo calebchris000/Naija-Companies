@@ -1,5 +1,5 @@
 export const getStarRating = (rating: number) => {
-  rating = Math.max(0.5, Math.min(5, rating));
+  // rating = Math.max(0.5, Math.min(5, rating));
   const initial_stars = new Array(5).fill("☆");
 
   const full_stars = Math.floor(rating);
@@ -16,6 +16,9 @@ export const getStarRating = (rating: number) => {
 };
 
 export const getStarColor = (star: number): string => {
+  if(!star) {
+    return "black"
+  }
   if (star < 2.5) {
     return "red";
   } else if (star >= 2.5 && star <= 3.5) {

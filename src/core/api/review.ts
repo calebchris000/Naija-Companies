@@ -3,14 +3,14 @@ import { useEndpoint } from "../utils/utils";
 
 export const GetReviews = async ({
   token,
-  data,
+  organizationId,
 }: {
   token: string;
-  data: any;
+  organizationId: string;
 }) => {
   try {
     const base_url = useEndpoint();
-    const response = await axios.get(`${base_url}/reviews`, {
+    const response = await axios.get(`${base_url}/reviews?organizationId=${organizationId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
