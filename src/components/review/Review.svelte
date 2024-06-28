@@ -96,9 +96,9 @@
       type="button"
     >
       {#if userReaction === "disliked"}
-        <LikeFilled className="w-6 rotate-180 mt-1" />
+        <LikeFilled className="w-5 rotate-180 mt-1" />
       {:else}
-        <Like className="w-6 rotate-180 mt-1" />
+        <Like className="w-5 rotate-180 mt-1" />
       {/if}
       <span>I disagree</span>
       <span class="font-medium"
