@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Like from "@src/assets/svg/Like.svelte";
+  import LikeFilled from "@src/assets/svg/LikeFilled.svelte";
   import { GetReviews } from "@src/core/api/review";
   import { getStarRating } from "@src/core/logic/getStarRating";
   import { createEventDispatcher, onMount } from "svelte";
@@ -6,7 +8,10 @@
   export let user_alias = "";
   export let user_rating = 0;
   export let user_review = "";
+  export let userLiked;
   export let reactions = { likes: 0, dislikes: 0 };
+  console.log("react", reactions);
+  
   const dispatch = createEventDispatcher();
   const stars = getStarRating(user_rating).join("");
   $: max_length = 120;
@@ -20,6 +25,12 @@
     } else {
       max_length = 120;
     }
+  }
+
+  function handleReaction() {
+    userLiked ? console.log("Dislike attempt"): console.log("Like attempt");
+    
+    
   }
 
   $: star_color =
@@ -57,16 +68,38 @@
   </div>
   <div class="w-full flex items-start">
     <button
-      class="block transition-all hover:bg-gray-300 text-sm h-full py-3 w-full bg-gray-200"
+      style="user-select: {userLiked ? 'none' : 'all'};"
+      on:click={() => {
+        !userLiked && handleReaction();
+      }}
+      class="transition-all flex gap-2 bg-gray-200 items-center justify-center hover:bg-gray-300 text-sm h-full py-3 w-full"
       type="button"
-      >I agree <span class="font-medium"
+    >
+      {#if typeof userLiked === "boolean" && userLiked}
+        <LikeFilled className="w-6" />
+      {:else}
+        <Like className="w-6" />
+      {/if}
+
+      <span> I agree</span>
+      <span class="font-medium"
         >{reactions.likes ? `(${reactions.likes})` : ""}</span
       >
     </button>
     <button
-      class="block transition-all hover:bg-gray-300 text-sm h-full py-3 w-full text-red-400 bg-gray-200"
+      on:click={() => {
+        userLiked && handleReaction();
+      }}
+      class="flex gap-2 items-center justify-center transition-all hover:bg-gray-300 text-sm h-full py-3 w-full text-red-400 bg-gray-200"
       type="button"
-      >I disagree <span class="font-medium"
+    >
+      {#if typeof userLiked === "boolean" && !userLiked}
+        <LikeFilled className="w-6 rotate-180 mt-1" />
+      {:else}
+        <Like className="w-6 rotate-180 mt-1" />
+      {/if}
+      <span>I disagree</span>
+      <span class="font-medium"
         >{reactions.dislikes ? `(${reactions.dislikes})` : ""}</span
       >
     </button>

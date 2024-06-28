@@ -59,6 +59,8 @@
       return;
     }
     reviews = response.data?.data as any[];
+    console.log(reviews);
+    
   }
 
   function handleSort() {
@@ -149,9 +151,10 @@
       />
     </div>
     <div class="flex flex-col gap-4">
-      {#each filter_reviews as { fullName, star, quickReactionView, content }}
+      {#each filter_reviews as { fullName, star, userLiked, quickReactionView, content }}
         <Review
           reactions={quickReactionView}
+          {userLiked}
           user_alias={fullName}
           user_rating={star}
           user_review={content}
