@@ -4,12 +4,15 @@
   import Action from "@src/components/action/action.svelte";
   import Navbar from "@src/components/navbar/Index.svelte";
   import { Notification } from "@src/utils/notification";
+  import moment from "moment";
   import {
     useLocalStorage,
     useToken,
     useUserData,
   } from "@src/core/utils/utils";
   import { store } from "@src/lib/store";
+  import month from "@src/assets/svg/month.svg";
+  import calendar from "@src/assets/svg/calendar.svg";
   import { AddReview, GetReviews } from "@src/core/api/review";
   import CompanyDetail from "@src/components/CompanyDetail/CompanyDetail.svelte";
   import { getStarColor } from "@src/core/logic/getStarRating";
@@ -23,9 +26,11 @@
 
   const user = useUserData();
   const token = useToken();
-  $: reviews = [];
+  $: reviews = [] as any[];
   $: reactions = [];
   $: review_status = "not_reviewed";
+  $: filter_reviews = reviews;
+  $: filter_by = { year: "", month: "" };
 
   function saveItem() {
     const saveEditor = new CustomEvent("onSaveEditor");
@@ -54,6 +59,36 @@
       return;
     }
     reviews = response.data?.data as any[];
+  }
+
+  function handleSort() {
+    console.log(filter_by);
+
+    let sorted_review = reviews;
+
+    if (filter_by.year && filter_by.month) {
+      sorted_review = reviews.filter((r) => {
+        const r_year = moment(r.createdAt).year();
+        const r_month = moment(r.createdAt).format("MMMM");
+
+        return filter_by.year === r_year && filter_by.month === r_month;
+      });
+    } else {
+      if (filter_by.year) {
+        sorted_review = reviews.filter((r) => {
+          const date = moment(r.createdAt).year();
+          return date === filter_by.year;
+        });
+      }
+
+      if (filter_by.month) {
+        sorted_review = reviews.filter((r) => {
+          const date = moment(r.createdAt).format("MMMM");
+          return date === filter_by.month;
+        });
+      }
+    }
+    filter_reviews = sorted_review;
   }
 
   onMount(() => {
@@ -90,17 +125,31 @@
       organization_logo="https://i.ibb.co/85czqJQ/Gemini-Generated-Image-rx2vc3rx2vc3rx2v.jpg"
     />
     <div class="py-5 flex items-center justify-between gap-8">
-      <!-- <span class="font-medium text-lg">Filter</span> -->
-      <Select list={years} placeholder="Year" className="w-full" icon={edit} />
       <Select
+        on:item_click={(e) => {
+          filter_by.year = e.detail.name;
+          handleSort();
+        }}
+        list={years}
+        defaultValue={years[0].name}
+        placeholder="Year"
+        className="w-full"
+        icon={calendar}
+      />
+      <Select
+        on:item_click={(e) => {
+          filter_by.month = e.detail.name;
+          handleSort();
+        }}
         list={months}
+        defaultValue={moment().format("MMMM")}
         placeholder="Month"
         className="w-full"
-        icon={edit}
+        icon={month}
       />
     </div>
     <div class="flex flex-col gap-4">
-      {#each reviews as { fullName, star, quickReactionView, content }}
+      {#each filter_reviews as { fullName, star, quickReactionView, content }}
         <Review
           reactions={quickReactionView}
           user_alias={fullName}

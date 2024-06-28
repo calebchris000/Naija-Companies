@@ -1,12 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
-  export let className = ""
+  export let className = "";
 
   type ListType = {
-    id: string;
-    name: string;
+    id: string | number;
+    name: string | number;
   };
+  export let defaultValue = "";
   export let icon: string = "";
   export let label: string = "";
   export let custom_empty_message = "Nothing";
@@ -14,14 +15,21 @@
   const Placeholder = placeholder;
   export let list: ListType[] = [{ id: "0", name: "Nothing" }];
   const dispatch = createEventDispatcher();
+
   $: isOpen = false;
+  $: value_exist = list.find((l) => String(l.name) === String(defaultValue));
+
+   
+  $: if (value_exist) {
+    placeholder = `${Placeholder}: ${defaultValue}`;
+  }
   function handleState() {
     isOpen = !isOpen;
 
     dispatch("open", { isOpen, label });
   }
 
-  function handleItemClick({ id, name }) {
+  function handleItemClick({ id, name }: any) {
     dispatch("item_click", { id, name });
     placeholder = `${Placeholder}: ${name}`;
   }
