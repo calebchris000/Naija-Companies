@@ -13,7 +13,7 @@
   import { store } from "@src/lib/store";
   import month from "@src/assets/svg/month.svg";
   import calendar from "@src/assets/svg/calendar.svg";
-  import { AddReview, GetReviews } from "@src/core/api/review";
+  import { AddReview, GetReviews, ReactReview } from "@src/core/api/review";
   import CompanyDetail from "@src/components/CompanyDetail/CompanyDetail.svelte";
   import { getStarColor } from "@src/core/logic/getStarRating";
   import Select from "@src/components/Input/Select.svelte";
@@ -60,7 +60,6 @@
     }
     reviews = response.data?.data as any[];
     console.log(reviews);
-    
   }
 
   function handleSort() {
@@ -91,6 +90,30 @@
       }
     }
     filter_reviews = sorted_review;
+  }
+
+  async function handleReaction(d: {
+    id: string;
+    reaction: "no_reaction" | "liked" | "disliked";
+  }) {
+    const notification = new Notification();
+    const response = await ReactReview({
+      token,
+      data: { reviewId: d.id, reaction: d.reaction },
+    });
+    
+
+    const status = [200, 201];
+
+    if (!status.includes(response.status)) {
+      notification.error({
+        text: response.data?.message ?? "Could not react to review. Try again",
+      });
+      return;
+    }
+
+    console.log("Successfully add reaction");
+    getReviews();
   }
 
   onMount(() => {
@@ -151,10 +174,12 @@
       />
     </div>
     <div class="flex flex-col gap-4">
-      {#each filter_reviews as { fullName, star, userLiked, quickReactionView, content }}
+      {#each filter_reviews as { id, fullName, star, userReaction, quickReactionView, content }}
         <Review
+          on:reaction={(e) => handleReaction(e.detail)}
+          {id}
           reactions={quickReactionView}
-          {userLiked}
+          {userReaction}
           user_alias={fullName}
           user_rating={star}
           user_review={content}

@@ -6,12 +6,12 @@
   import { createEventDispatcher, onMount } from "svelte";
 
   export let user_alias = "";
+  export let id = "";
   export let user_rating = 0;
   export let user_review = "";
-  export let userLiked;
+  export let userReaction;
   export let reactions = { likes: 0, dislikes: 0 };
-  console.log("react", reactions);
-  
+
   const dispatch = createEventDispatcher();
   const stars = getStarRating(user_rating).join("");
   $: max_length = 120;
@@ -27,10 +27,8 @@
     }
   }
 
-  function handleReaction() {
-    userLiked ? console.log("Dislike attempt"): console.log("Like attempt");
-    
-    
+  function handleReaction({ reaction }) {
+    dispatch("reaction", { reaction, id });
   }
 
   $: star_color =
@@ -68,14 +66,16 @@
   </div>
   <div class="w-full flex items-start">
     <button
-      style="user-select: {userLiked ? 'none' : 'all'};"
+      style=""
       on:click={() => {
-        !userLiked && handleReaction();
+        userReaction === "liked"
+          ? handleReaction({ reaction: "no_reaction" })
+          : handleReaction({ reaction: "liked" });
       }}
       class="transition-all flex gap-2 bg-gray-200 items-center justify-center hover:bg-gray-300 text-sm h-full py-3 w-full"
       type="button"
     >
-      {#if typeof userLiked === "boolean" && userLiked}
+      {#if userReaction === "liked"}
         <LikeFilled className="w-6" />
       {:else}
         <Like className="w-6" />
@@ -88,12 +88,14 @@
     </button>
     <button
       on:click={() => {
-        userLiked && handleReaction();
+        userReaction === "disliked"
+          ? handleReaction({ reaction: "no_reaction" })
+          : handleReaction({ reaction: "disliked" });
       }}
       class="flex gap-2 items-center justify-center transition-all hover:bg-gray-300 text-sm h-full py-3 w-full text-red-400 bg-gray-200"
       type="button"
     >
-      {#if typeof userLiked === "boolean" && !userLiked}
+      {#if userReaction === "disliked"}
         <LikeFilled className="w-6 rotate-180 mt-1" />
       {:else}
         <Like className="w-6 rotate-180 mt-1" />
