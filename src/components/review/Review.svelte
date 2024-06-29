@@ -5,18 +5,19 @@
   import More from "@src/assets/svg/More.svelte";
   import { getStarRating } from "@src/core/logic/getStarRating";
   import { createEventDispatcher, onMount } from "svelte";
-  import { useToken } from "@src/core/utils/utils";
+  import { useToken, useUserData } from "@src/core/utils/utils";
   import { Notification } from "@src/utils/notification";
 
   export let user_alias = "";
   export let options = ["Delete"];
   export let id = "";
+  export let posterId = "";
   export let user_rating = 0;
   export let user_review = "";
   export let userReaction;
   export let reactions = { likes: 0, dislikes: 0 };
-
   const token = useToken();
+  const user = useUserData();
   const dispatch = createEventDispatcher();
   const stars = getStarRating(user_rating).join("");
   $: max_length = 120;
@@ -49,7 +50,9 @@
       notification.error({ text: response.data ?? "Could not delete review" });
       return;
     }
-    notification.success({text: response.data?.message ?? "Successfully removed review"})
+    notification.success({
+      text: response.data?.message ?? "Successfully removed review",
+    });
     dispatch("delete");
   }
 
@@ -81,9 +84,11 @@
   >
     <span class="font-medium text-lg">{user_alias}</span>
     <span style="color: {star_color}" class="text-2xl">{stars}</span>
-    <button on:click={handleMoreOptions} type="button" class="">
-      <More className="w-5" />
-    </button>
+    {#if user.id === posterId}
+      <button on:click={handleMoreOptions} type="button" class="">
+        <More className="w-5" />
+      </button>
+    {/if}
 
     {#if show_options}
       <div class="bg-white absolute right-0 shadow-md top-10 p-2">

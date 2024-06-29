@@ -197,11 +197,12 @@
       />
     </div>
     <div class="flex flex-col gap-4">
-      {#each filter_reviews as { id, fullName, star, userReaction, quickReactionView, content }}
+      {#each filter_reviews as { id, userId, fullName, star, userReaction, quickReactionView, content }}
         <Review
           on:delete={() => getReviews()}
           on:reaction={(e) => handleReaction(e.detail)}
           {id}
+          posterId={userId}
           reactions={quickReactionView}
           {userReaction}
           user_alias={fullName}
