@@ -47,8 +47,10 @@
 
     const response = await AddReview({ token, data: review_data });
     if (response.status !== 201) {
+      console.log(response.data);
+
       notification.error({
-        text: response.data?.message ?? "Could not add review. Try again.",
+        text: response.data ?? "Could not add review. Try again.",
       });
       return;
     }
@@ -123,6 +125,7 @@
     <div class=" flex flex-col gap-4">
       {#each reviews as { id, fullName, star, content, userReaction, user_review }}
         <Review
+          on:delete={() => getReviews()}
           {id}
           user_review={content}
           user_alias={fullName}

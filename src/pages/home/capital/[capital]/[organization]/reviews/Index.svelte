@@ -88,7 +88,6 @@
   }
 
   function handleSort() {
-
     let sorted_review = reviews;
 
     if (filter_by.year && filter_by.month) {
@@ -200,6 +199,7 @@
     <div class="flex flex-col gap-4">
       {#each filter_reviews as { id, fullName, star, userReaction, quickReactionView, content }}
         <Review
+          on:delete={() => getReviews()}
           on:reaction={(e) => handleReaction(e.detail)}
           {id}
           reactions={quickReactionView}
