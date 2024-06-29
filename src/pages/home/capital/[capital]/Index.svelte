@@ -2,7 +2,7 @@
   import Navbar from "@src/components/navbar/Index.svelte";
   import Action from "@src/components/action/action.svelte";
   import Company from "./Company.svelte";
-  import { navigate } from "svelte-routing";
+  import { Link, navigate } from "svelte-routing";
   import Building from "@src/assets/svg/Building.svelte";
   import { store } from "@src/lib/store";
   import { onMount } from "svelte";
@@ -33,8 +33,13 @@
   async function getOrganizations() {
     organization_status = "pending";
     const notification = new Notification();
+    const capitalId = local_storage.getItem("selected_capital", false)?.id;
 
-    const response = await GetOrganizations({ token, getReviews: true });
+    const response = await GetOrganizations({
+      token,
+      getReviews: true,
+      capitalId,
+    });
 
     if (response.status !== 200) {
       organization_status = "failure";
@@ -45,6 +50,11 @@
     }
     organization_status = "success";
     organizations = response.data?.data;
+  }
+
+  function handleRoute() {
+    const { origin } = window.location;
+    navigate(`${origin}/home/organization/add`);
   }
 
   onMount(() => {
@@ -70,7 +80,7 @@
   <div class="grid grid-cols-2 gap-2 px-4">
     {#if organization_status === "pending"}
       <span>Loading. Please wait...</span>
-    {:else}
+    {:else if organizations.length}
       {#each organizations as { id, name, logoUrl, rating }}
         <Company
           {id}
@@ -80,6 +90,17 @@
           rating={Number(rating)}
         />
       {/each}
+    {:else}
+      <div class="fixed top-36 left-0 right-0 mx-4 flex flex-col gap-4">
+        <span class="font-medium text-gray-500"
+          >There are no organizations listed on this capital.</span
+        >
+        <button
+          on:click={handleRoute}
+          class="bg-orange-500 p-2 px-4 w-fit mx-auto block rounded-md text-white font-medium"
+          type="button">Add An Existing Organization</button
+        >
+      </div>
     {/if}
   </div>
 </section>

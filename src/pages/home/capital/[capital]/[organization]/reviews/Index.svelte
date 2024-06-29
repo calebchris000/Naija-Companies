@@ -6,6 +6,7 @@
   import { Notification } from "@src/utils/notification";
   import moment from "moment";
   import {
+    LocalStorage,
     useLocalStorage,
     useToken,
     useUserData,
@@ -23,11 +24,21 @@
   import Building from "@src/assets/svg/Building.svelte";
   import Pencil from "@src/assets/svg/Pencil.svelte";
   import { navigate } from "svelte-routing";
+  import { GetOrganization } from "@src/core/api/organization";
 
   const user = useUserData();
   const token = useToken();
+  const local_storage = new LocalStorage();
   $: reviews = [] as any[];
   $: reactions = [];
+  $: organization_info = {
+    name: "",
+    website: "",
+    city: "",
+    review: 0,
+    description: "",
+    logoUrl: "",
+  };
   $: review_status = "not_reviewed";
   $: filter_reviews = reviews;
   $: filter_by = { year: "", month: "" };
@@ -40,6 +51,23 @@
     id: Math.random() * 10,
     name: y,
   }));
+
+  async function getOrganization() {
+    const notification = new Notification();
+    const orgId = local_storage.getItem("selected_organization", false)?.id;
+
+    const response = await GetOrganization({ token, organizationId: orgId });
+
+    if (response.status !== 200) {
+      notification.error({
+        text: response.data?.message ?? "Could not get organization info",
+      });
+      return;
+    }
+    console.log(response.data?.data, "info");
+    
+    organization_info = response.data?.data;
+  }
 
   async function getReviews() {
     const notification = new Notification();
@@ -101,7 +129,6 @@
       token,
       data: { reviewId: d.id, reaction: d.reaction },
     });
-    
 
     const status = [200, 201];
 
@@ -117,6 +144,7 @@
   }
 
   onMount(() => {
+    getOrganization();
     getReviews();
   });
 </script>
@@ -143,11 +171,11 @@
 
   <div class="px-4 flex flex-col gap-4">
     <CompanyDetail
-      organization_name="Gurugeeks LTD"
-      organization_review={2}
-      organization_website="https://www.gurugeeks.com"
-      organization_description="Gurugeeks develops cloud-based HRM software for mid-sized businesses. Their user-friendly platform streamlines hiring, onboarding, performance reviews, and payroll processes. Founded by HR veterans, PeopleFlow aims to simplify workforce management, boost employee engagement, and drive productivity."
-      organization_logo="https://i.ibb.co/85czqJQ/Gemini-Generated-Image-rx2vc3rx2vc3rx2v.jpg"
+      organization_name={organization_info.name}
+      organization_review={organization_info.review}
+      organization_website={organization_info.website}
+      organization_description={organization_info.description ?? ""}
+      organization_logo={organization_info.logoUrl}
     />
     <div class="py-5 flex items-center justify-between gap-8">
       <Select
