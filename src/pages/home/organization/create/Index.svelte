@@ -151,6 +151,11 @@
       notification.error({ text: "Fill out all required fields" });
       return;
     }
+
+    if(!description) {
+      notification.error({text: "Provide a short description of what the organization do."})
+      return;
+    }
     if (!image_file) {
       notification.error({ text: "Upload the company's official logo" });
       return;

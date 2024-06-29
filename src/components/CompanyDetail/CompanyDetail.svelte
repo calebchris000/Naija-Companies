@@ -8,9 +8,10 @@
   export let organization_description = "";
   export let organization_website = "";
   export let organization_logo = "";
-
-  const stars = getStarRating(organization_review).join("");
-  const star_color = getStarColor(organization_review);
+  console.log("star", organization_review);
+  
+  $: stars = getStarRating(organization_review).join("");
+  $: star_color = getStarColor(organization_review);
 </script>
 
 <section class="h-[16rem] bg-gray-200 shadow-sm space-y-6 p-4">

@@ -64,8 +64,6 @@
       });
       return;
     }
-    console.log(response.data?.data, "info");
-    
     organization_info = response.data?.data;
   }
 
@@ -74,7 +72,7 @@
     const organization = useLocalStorage({
       key: "selected_organization",
       isString: false,
-    });
+    }) as any;
     const response = await GetReviews({
       token,
       organizationId: organization?.id as string,
@@ -100,13 +98,13 @@
         const r_year = moment(r.createdAt).year();
         const r_month = moment(r.createdAt).format("MMMM");
 
-        return filter_by.year === r_year && filter_by.month === r_month;
+        return Number(filter_by.year) === r_year && filter_by.month === r_month;
       });
     } else {
       if (filter_by.year) {
         sorted_review = reviews.filter((r) => {
           const date = moment(r.createdAt).year();
-          return date === filter_by.year;
+          return date === Number(filter_by.year);
         });
       }
 
@@ -172,7 +170,7 @@
   <div class="px-4 flex flex-col gap-4">
     <CompanyDetail
       organization_name={organization_info.name}
-      organization_review={organization_info.review}
+      organization_review={Number(organization_info.review)}
       organization_website={organization_info.website}
       organization_description={organization_info.description ?? ""}
       organization_logo={organization_info.logoUrl}

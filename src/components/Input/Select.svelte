@@ -7,7 +7,7 @@
     id: string | number;
     name: string | number;
   };
-  export let defaultValue = "";
+  export let defaultValue: any = "";
   export let icon: string = "";
   export let label: string = "";
   export let custom_empty_message = "Nothing";
@@ -19,7 +19,6 @@
   $: isOpen = false;
   $: value_exist = list.find((l) => String(l.name) === String(defaultValue));
 
-   
   $: if (value_exist) {
     placeholder = `${Placeholder}: ${defaultValue}`;
   }
@@ -56,7 +55,6 @@
       {#each list as { id, name }}
         <span
           on:click|self={() => handleItemClick({ id, name })}
-          {id}
           role="button"
           class="select-none border-b px-2 border-gray-100 py-2 text-sm"
           >{name}</span
