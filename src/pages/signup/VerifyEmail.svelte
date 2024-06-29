@@ -35,7 +35,6 @@
     try {
       const userId = local_storage.getItem("userId", true);
       const response = await VerifyOtp({ otp: OTP, userId });
-      console.log(response.data);
       if (response.data && response.data.statusCode === 3) {
         notification.error({
           text: "OTP has expired. Click on 'Resend' to generate a new code",

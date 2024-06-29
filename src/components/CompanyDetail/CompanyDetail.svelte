@@ -8,10 +8,13 @@
   export let organization_description = "";
   export let organization_website = "";
   export let organization_logo = "";
-  console.log("star", organization_review);
-  
+
   $: stars = getStarRating(organization_review).join("");
   $: star_color = getStarColor(organization_review);
+  $: website =
+    organization_website.slice(0, 4) !== "http"
+      ? `https://${organization_website}`
+      : organization_website;
 </script>
 
 <section class="h-[16rem] bg-gray-200 shadow-sm space-y-6 p-4">
@@ -26,8 +29,8 @@
 
       {#if organization_website}
         <a
-        target="_blank"
-          href={organization_website}
+          target="_blank"
+          href={website}
           class="text-blue-600 text-sm flex items-center gap-2"
         >
           <span>Visit Website</span>

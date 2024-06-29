@@ -85,11 +85,9 @@
       return;
     }
     reviews = response.data?.data as any[];
-    console.log(reviews);
   }
 
   function handleSort() {
-    console.log(filter_by);
 
     let sorted_review = reviews;
 

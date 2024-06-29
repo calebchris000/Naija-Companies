@@ -79,7 +79,6 @@
       return;
     }
     reviews = response.data?.data as any[];
-    console.log(reviews);
   }
 
   onMount(() => {
