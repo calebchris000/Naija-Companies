@@ -9,7 +9,11 @@
   import { createEventDispatcher } from "svelte";
   import { VerifyOtp } from "@src/core/api/auth";
   import { navigate } from "svelte-routing";
-  import { LocalStorage, useUserData } from "@src/core/utils/utils";
+  import {
+    LocalStorage,
+    useLocalStorage,
+    useUserData,
+  } from "@src/core/utils/utils";
   const dispatcher = createEventDispatcher();
   const local_storage = new LocalStorage();
   $: verify_status = "not_verified";
@@ -96,10 +100,11 @@
   async function handleResend() {
     timer.start();
     const notification = new Notification();
+    const userId = useLocalStorage({ key: "userId", isString: true });
     const user = useUserData();
     if (!user) return;
     try {
-      const response = await ResendOtp({ userId: user.id });
+      const response = await ResendOtp({ userId: userId as string });
 
       if (response.status !== 200) {
         notification.error({
