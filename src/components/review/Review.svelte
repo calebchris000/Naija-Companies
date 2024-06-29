@@ -27,7 +27,7 @@
     }
   }
 
-  function handleReaction({ reaction }) {
+  function handleReaction({ reaction }: any) {
     dispatch("reaction", { reaction, id });
   }
 
