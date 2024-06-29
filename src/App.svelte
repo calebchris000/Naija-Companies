@@ -1,24 +1,42 @@
 <script lang="ts">
-  import logo from "@src/assets/logo.jpeg";
-  import More from "@src/assets/svg/More.svelte"
-  $: isMobile = window.innerWidth <= 820;
+  import { Router, Route } from "svelte-routing";
+  import Home from "./pages/home/Index.svelte";
+  import Login from "./pages/login/Index.svelte";
+  import Signup from "./pages/signup/Index.svelte";
+  import Capital from "@src/pages/home/capital/Index.svelte";
+  import Organization from "./pages/home/capital/[capital]/Index.svelte";
+  import CompanyRedirect from "./pages/home/capital/[capital]/[organization]/Index.svelte";
+  import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
+  import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
+  import CreateOrganization from "./pages/home/organization/create/Index.svelte";
+
+  let url = "";
+
+  function handleAutoRoute() {
+    const { pathname } = window.location;
+
+    const path =
+      pathname[pathname.length - 1] === "/" ? pathname.slice(0, -2) : pathname;
+    const split = path.split("/");
+    if (split[split.length - 1]) return;
+
+    window.location.href = "home";
+  }
+
+  $: handleAutoRoute();
 </script>
 
 <main>
-  <section
-    class="border border-red-500 flex items-center justify-between max-md:p-4"
-  >
-    <div class="flex flex-col gap-1 items-center">
-      <img class="w-10 h-10 rounded-full overflow-hidden" src={logo} alt="" />
-      <!-- <span class="text-sm font-semibold">NC</span> -->
-    </div>
-    <div>Home</div>
-    {#if isMobile}
-      <button>
-        <More className=" fill-orange-600 h-8" />
-      </button>
-    {:else}
-      <div>Account</div>
-    {/if}
-  </section>
+  <Router {url}>
+    <Route path="/home" component={Home} />
+    <Route path="/login" component={Login} />
+    <Route path="/signup" component={Signup} />
+    <Route path="/about" component={Home} />
+    <Route path="/home/capital" component={Capital} />
+    <Route path="/home/capital/:capital" component={Organization} />
+    <Route path="/home/capital/:capital/:company" component={CompanyRedirect} />
+    <Route path="/home/capital/:capital/:company/review" component={Review} />
+    <Route path="/home/capital/:capital/:company/reviews" component={Reviews} />
+    <Route path="/home/organization/add" component={CreateOrganization} />
+  </Router>
 </main>
