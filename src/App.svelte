@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Router, Route } from "svelte-routing";
+  import { Router, Route, link } from "svelte-routing";
   import Home from "./pages/home/Index.svelte";
   import Login from "./pages/login/Index.svelte";
   import Signup from "./pages/signup/Index.svelte";
@@ -9,6 +9,7 @@
   import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
   import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
   import CreateOrganization from "./pages/home/organization/create/Index.svelte";
+  import { onMount } from "svelte";
 
   let url = "";
 
@@ -24,6 +25,21 @@
   }
 
   $: handleAutoRoute();
+
+  function setFavicon() {
+    if (!document.querySelector('link[rel="icon"]')) {
+      const link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/webp';
+      link.href = '/public/favicon.webp'; // Adjust the path if necessary
+      document.head.appendChild(link);
+    }
+  }
+
+  // Call setFavicon when the component mounts
+  onMount(() => {
+    setFavicon();
+  });
 </script>
 
 <main>
