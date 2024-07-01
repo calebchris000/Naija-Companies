@@ -1,8 +1,13 @@
 <script lang="ts">
-  import { Link } from "svelte-routing";
+  import { Link, navigate } from "svelte-routing";
 
   const routes = [{ label: "About", path: "/about" }];
   const account_actions = [{ label: "Preferences", path: "/account_edit" }];
+
+  function handleLogout() {
+    localStorage.clear();
+    navigate("/home");
+  }
 </script>
 
 <section class="bg-white p-2 px-4 flex flex-col gap-4">
@@ -14,6 +19,7 @@
       {/each}
     </div>
     <button
+      on:click={handleLogout}
       class="bg-orange-500 p-4 py-3 mt-2 w-full rounded-md mx-auto block font-medium"
       type="button">Logout</button
     >
