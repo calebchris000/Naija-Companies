@@ -24,10 +24,12 @@
   import Link from "@src/assets/svg/Link.svelte";
   import { navigate } from "svelte-routing";
   import Action from "@src/components/action/action.svelte";
+  import Description from "@src/assets/svg/description.svelte";
 
   $: capitals = $store.capital_list;
   $: cities_in_capital = $store.cities_in_capital;
   $: logoUrl = "";
+  $: device = $store.device;
 
   $: store.update((c: any) => {
     c.cities_in_capital = Object.values(
@@ -255,11 +257,13 @@
   <Navbar>
     <div></div>
   </Navbar>
-  <div class="mt-24 mb-4">
-    <Action title="Add an existing Organization" custom_path="/home" />
-  </div>
+  {#if device === "mobile"}
+    <div class="mt-24 mb-4">
+      <Action title="Add an existing Organization" custom_path="/home" />
+    </div>
+  {/if}
   <div
-    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-50 rounded-[1.6rem]"
+    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-50 rounded-[1.6rem] translate-y-36 xl:w-[85vw] xl:mx-auto"
   >
     <input
       on:input={handleFileInput}
@@ -302,10 +306,11 @@
         >Click to insert logo</span
       >
     </button>
-    <div class="h-[35vh] overflow-y-scroll flex flex-col gap-4">
+    <div class="h-[35vh] overflow-y-scroll flex flex-col gap-4 xl:grid xl:grid-cols-2">
       {#each inputValue as { type, label, list, onOpen, placeholder, icon }}
         {#if type === "select"}
           <Select
+          icon_class="xl:w-5"
             custom_empty_message={label === "city"
               ? "Select a capital below"
               : ""}
@@ -351,7 +356,8 @@
         {/if}
       {/each}
       <TextArea
-        Icon={Link}
+      icon_class="xl:w-5"
+        Icon={Description}
         on:input={(data) => {
           const { label, value } = data.detail;
           inputValues.set(label, value);

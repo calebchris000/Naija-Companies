@@ -13,9 +13,9 @@
   }
 </script>
 
-<div class="border-b p-2 px-4 ps-8 relative border-gray-400">
+<div class="border-b p-2 px-4 ps-8 flex items-center relative border-gray-400">
   <img
-    class="absolute w-4 left-0 top-[50%] translate-y-[-50%] {icon_class}"
+    class="absolute w-4 left-0 top-[50%] translate-y-[-50%] xl:w-5 {icon_class}"
     src={icon}
     alt="icon"
   />

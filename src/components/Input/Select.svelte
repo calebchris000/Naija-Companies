@@ -9,6 +9,7 @@
   };
   export let defaultValue: any = "";
   export let icon: string = "";
+  export let icon_class: string = "";
   export let label: string = "";
   export let custom_empty_message = "Nothing";
   export let placeholder: string = "";
@@ -32,24 +33,35 @@
     dispatch("item_click", { id, name });
     placeholder = `${Placeholder}: ${name}`;
   }
+
+  let parent: HTMLDivElement;
+
+  document.addEventListener("mousedown", (e: any) => {
+    if (!e.target) return;
+
+    if (e.target !== parent) {
+      isOpen = false;
+    }
+  });
 </script>
 
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
+  bind:this={parent}
   role="button"
   on:click|stopPropagation={handleState}
-  class="border-b p-2 flex ps-8 items-center relative border-gray-400 {className}"
+  class="border-b p-2 select_parent flex ps-8 items-center relative border-gray-400 {className}"
 >
   <img
-    class="absolute w-4 left-0 top-[50%] translate-y-[-50%]"
+    class="absolute w-4 left-0 top-[50%] translate-y-[-50%] {icon_class}"
     src={icon}
     alt="icon"
   />
   <span class="text-gray-600 font-medium">{placeholder}</span>
   <div
     style="display: {isOpen ? 'flex' : 'none'}"
-    class="absolute flex flex-col gap-2 z-10 max-h-[30vh] overflow-y-scroll transition-all top-8 bg-white left-0 right-0 py-2 shadow-sm"
+    class="absolute flex flex-col gap-2 z-20 max-h-[30vh] overflow-y-scroll transition-all top-8 bg-white left-0 right-0 py-2 shadow-sm"
   >
     {#if Array.isArray(list) && list.length}
       {#each list as { id, name }}
