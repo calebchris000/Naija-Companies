@@ -15,7 +15,7 @@
       window.location.replace("login");
       return;
     }
-    window.location.href = "/home/capital?focus=true";
+    window.location.href = "/home/capital";
   }
 
   function handleGetStarted() {

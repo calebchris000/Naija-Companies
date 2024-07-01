@@ -29,9 +29,11 @@
   $: cities_in_capital = $store.cities_in_capital;
   $: logoUrl = "";
 
-  $: store.update((c) => {
+  $: store.update((c: any) => {
     c.cities_in_capital = Object.values(
-      cities.find((c) => Object.keys(c)[0] === $store.selected_capital) ?? {}
+      cities.find(
+        (c) => Object.keys(c)[0] === ($store.selected_capital as any)
+      ) ?? {}
     )
       .flat()
       .map((city) => ({ id: Math.random() * 100, name: city }));
@@ -152,8 +154,10 @@
       return;
     }
 
-    if(!description) {
-      notification.error({text: "Provide a short description of what the organization do."})
+    if (!description) {
+      notification.error({
+        text: "Provide a short description of what the organization do.",
+      });
       return;
     }
     if (!image_file) {
@@ -172,6 +176,7 @@
       const response = await UploadImage(formData);
 
       if (response.status !== 200) {
+        create_status = "failure";
         notification.error({
           text: response?.data ?? "Processing logo failed. Try again",
         });
