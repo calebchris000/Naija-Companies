@@ -4,6 +4,6 @@
 
 </script>
 
-<section class="px-4">
+<section class="">
     <Hero />
 </section>

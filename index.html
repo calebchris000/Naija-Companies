@@ -12,12 +12,12 @@
   </body>
 
   <script>
-    if (document.querySelector('link[rel="icon"]')) return;
-
-    const link = document.createElement("link");
-    link.rel = "icon";
-    link.type = "image/webp";
-    link.href = "/public/favicon.webp"; // Adjust the path if necessary
-    document.head.appendChild(link);
+    if (!document.querySelector('link[rel="icon"]')) {
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.type = "image/webp";
+      link.href = "/public/favicon.webp"; // Adjust the path if necessary
+      document.head.appendChild(link);
+    }
   </script>
 </html>
