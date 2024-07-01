@@ -8,6 +8,7 @@
   import { Notification } from "@src/utils/notification";
   import { createEventDispatcher } from "svelte";
   import { Signup } from "@src/core/api/auth";
+  import Action from "@src/components/action/action.svelte";
   const dispatcher = createEventDispatcher();
 
   $: signup_status = "not_signed_up";
@@ -93,10 +94,7 @@
 
 <section class="space-y-8">
   <div class="flex items-center gap-6 mx-4 mt-10">
-    <button type="button">
-      <Arrow className="w-5" />
-    </button>
-    <span class="text-2xl font-semibold">Create a new account</span>
+    <Action custom_path="/home" title="Create a new account" />
   </div>
   <div class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem]">
     <img class="w-[50%] mx-auto rounded-3xl" src={man_on_pc} alt="" />
