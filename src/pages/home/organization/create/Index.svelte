@@ -96,13 +96,7 @@
       onOpen: (d: any) => handleIndustryOpen(d),
       icon: industry,
     },
-    {
-      type: "select",
-      label: "city",
-      icon: city,
-      placeholder: "City",
-      list: [],
-    },
+
     {
       type: "select",
       label: "capitalId",
@@ -110,6 +104,13 @@
 
       placeholder: "Capital",
       icon: castle,
+      list: [],
+    },
+    {
+      type: "select",
+      label: "city",
+      icon: city,
+      placeholder: "City",
       list: [],
     },
   ];
@@ -306,13 +307,15 @@
         >Click to insert logo</span
       >
     </button>
-    <div class="h-[35vh] overflow-y-scroll flex flex-col gap-4 xl:grid xl:grid-cols-2">
+    <div
+      class="h-[35vh] overflow-y-scroll flex flex-col gap-4 xl:grid xl:grid-cols-2"
+    >
       {#each inputValue as { type, label, list, onOpen, placeholder, icon }}
         {#if type === "select"}
           <Select
-          icon_class="xl:w-5"
+            icon_class="xl:w-5"
             custom_empty_message={label === "city"
-              ? "Select a capital below"
+              ? "Select a capital"
               : ""}
             on:item_click={(e) => {
               const { id, name } = e.detail;
@@ -356,7 +359,7 @@
         {/if}
       {/each}
       <TextArea
-      icon_class="xl:w-5"
+        icon_class="xl:w-5"
         Icon={Description}
         on:input={(data) => {
           const { label, value } = data.detail;

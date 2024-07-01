@@ -35,11 +35,13 @@
   }
 
   let parent: HTMLDivElement;
+  let options: HTMLDivElement;
 
-  document.addEventListener("mousedown", (e: any) => {
-    if (!e.target) return;
+  document.addEventListener("mousedown", (e) => {
+    if (!e.target && !parent) return;
+    const element = e.target as HTMLElement;
 
-    if (e.target !== parent) {
+    if (!parent.contains(element)) {
       isOpen = false;
     }
   });
@@ -60,6 +62,7 @@
   />
   <span class="text-gray-600 font-medium">{placeholder}</span>
   <div
+    bind:this={options}
     style="display: {isOpen ? 'flex' : 'none'}"
     class="absolute flex flex-col gap-2 z-20 max-h-[30vh] overflow-y-scroll transition-all top-8 bg-white left-0 right-0 py-2 shadow-sm"
   >
