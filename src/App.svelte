@@ -25,21 +25,6 @@
   }
 
   $: handleAutoRoute();
-
-  function setFavicon() {
-    if (!document.querySelector('link[rel="icon"]')) {
-      const link = document.createElement('link');
-      link.rel = 'icon';
-      link.type = 'image/webp';
-      link.href = '/public/favicon.webp'; // Adjust the path if necessary
-      document.head.appendChild(link);
-    }
-  }
-
-  // Call setFavicon when the component mounts
-  onMount(() => {
-    setFavicon();
-  });
 </script>
 
 <main>
