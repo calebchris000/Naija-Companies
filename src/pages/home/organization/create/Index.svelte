@@ -251,7 +251,7 @@
   }
 </script>
 
-<section>
+<section class="">
   <Navbar>
     <div></div>
   </Navbar>

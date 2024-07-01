@@ -10,8 +10,10 @@
   import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
   import CreateOrganization from "./pages/home/organization/create/Index.svelte";
   import { onMount } from "svelte";
+  import { store } from "./lib/store";
 
   let url = "";
+  console.log("Hi");
 
   function handleAutoRoute() {
     const { pathname } = window.location;
@@ -25,6 +27,27 @@
   }
 
   $: handleAutoRoute();
+
+  function handleResize() {
+    const { innerWidth } = window;
+
+    let deviceType;
+    if (innerWidth >= 768 && innerWidth <= 1024) {
+      $store.device = "tablet";
+    } else if (innerWidth > 1024 && innerWidth <= 1200) {
+      $store.device = "large-tablet";
+    } else if (innerWidth > 1200) {
+      $store.device = "desktop";
+    } else {
+      $store.device = "mobile";
+    }
+  }
+
+  window.addEventListener("resize", handleResize);
+
+  onMount(() => {
+    handleResize();
+  });
 </script>
 
 <main>

@@ -7,6 +7,7 @@ const initialValue = {
   application: {
     selected_capital: { id: "", name: "" },
   },
+  device: "desktop" as "desktop" | "mobile" | "tablet" | "large-tablet"
 };
 
 // Define a writable store with an initial value

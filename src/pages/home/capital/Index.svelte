@@ -17,7 +17,7 @@
   const local_storage = new LocalStorage();
   $: capitals_list = [];
   $: fetch_state = "success";
-  $: is_mobile = window.innerWidth < 820;
+  $: is_mobile = $store.device === "mobile";
   $: organizations = [];
   $: organization_status = "not_active" as
     | "pending"
@@ -153,7 +153,7 @@
     {#if !is_mobile}
       <div style="" class="bg-gray-100 p-4 h-[80vh] overflow-y-scroll">
         {#if organization_status === "not_active"}
-          <span class="font-medium text-gray-400 pt-10 text-2xl mx-auto "
+          <span class="font-medium text-gray-400 pt-10 text-2xl mx-auto"
             >Select a capital on the left.</span
           >
         {:else}

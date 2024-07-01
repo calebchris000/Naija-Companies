@@ -1,15 +1,14 @@
 <script lang="ts">
   import logo_text from "@src/assets/svg/logo.svg";
-  import Mobile from "./Mobile.svelte";
-  import Desktop from "./Desktop.svelte";
   import "./style.css";
   import More from "@src/assets/svg/More.svelte";
   import MobileOptions from "./MobileOptions.svelte";
-  $: isMobile = window.innerWidth <= 820;
+  import { store } from "@src/lib/store";
+
+  $: isMobile = $store.device === "mobile";
   export let className = "";
   export let style = "";
   $: mobile_option_opened = false;
-  $: device = "" as "desktop" | "mobile" | "tablet" | "large-tablet";
 </script>
 
 <nav
