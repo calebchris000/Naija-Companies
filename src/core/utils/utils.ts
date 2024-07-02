@@ -1,4 +1,5 @@
 import type { UserDataType } from "@src/types";
+import { navigate } from "svelte-routing";
 
 export const useToken = (): string => {
   const token = localStorage.getItem("token");
@@ -70,6 +71,11 @@ export class LocalStorage {
     localStorage.clear();
   }
 }
+
+export const handleLogout = () => {
+  localStorage.clear();
+  navigate("/home");
+};
 
 export const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

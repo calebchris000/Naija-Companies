@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { reviews as rv} from '@src/lib/rating.ts';
   import Editor from "@src/components/editor/Editor.svelte";
   import Review from "@src/components/review/Review.svelte";
   import Action from "@src/components/action/action.svelte";
@@ -10,7 +11,7 @@
     useUserData,
   } from "@src/core/utils/utils";
   import { store } from "@src/lib/store";
-  import { AddReview, GetReviews } from "@src/core/api/review";
+  import { AddReview, GetReviews, ReactReview } from "@src/core/api/review";
   import { navigate } from "svelte-routing";
   import Pencil from "@src/assets/svg/Pencil.svelte";
   import ReviewOutline from "@src/assets/svg/ReviewOutline.svelte";
@@ -18,7 +19,7 @@
 
   const user = useUserData();
   const token = useToken();
-  $: reviews = [];
+  $: reviews = [] as any;
   $: review_status = "not_reviewed";
 
   function saveItem() {
@@ -80,7 +81,30 @@
       });
       return;
     }
-    reviews = response.data?.data as any[];
+    reviews = [...response.data?.data as any, ...rv];
+  }
+
+  async function handleReaction(d: {
+    id: string;
+    reaction: "no_reaction" | "liked" | "disliked";
+  }) {
+    const notification = new Notification();
+    const response = await ReactReview({
+      token,
+      data: { reviewId: d.id, reaction: d.reaction },
+    });
+
+    const status = [200, 201];
+
+    if (!status.includes(response.status)) {
+      notification.error({
+        text: response.data?.message ?? "Could not react to review. Try again",
+      });
+      return;
+    }
+
+    console.log("Successfully add reaction");
+    getReviews();
   }
 
   onMount(() => {
@@ -88,7 +112,7 @@
   });
 </script>
 
-<section class="pt-20">
+<section class="pt-20 xl:p-0">
   <Navbar>
     <button
       on:click={() => {
@@ -104,33 +128,41 @@
       <ReviewOutline className="w-4" />
     </button>
   </Navbar>
-  <div class="py-4">
+  <div class="py-4 xl:pt-20">
     <Action custom_path="/home" title="Write Your Review" />
   </div>
 
-  <div class="px-4 flex flex-col gap-4">
-    <Editor
-      on:save={(e) => {
-        handleSave(e.detail);
-      }}
-    />
-    <button
-      class="bg-blue-500 text-white w-fit mx-auto p-2 px-4 rounded-sm"
-      on:click={() => {
-        saveItem();
-      }}
-      type="button">Add Review</button
-    >
+  <div
+    class="px-4 flex flex-col gap-4 xl:w-[80vw] xl:mx-auto xl:flex-row xl:justify-between xl:gap-20"
+  >
+    <div class="flex flex-col gap-4 xl:w-full">
+      <Editor
+        on:save={(e) => {
+          handleSave(e.detail);
+        }}
+      />
+      <button
+        class="bg-blue-500 text-white w-fit mx-auto p-2 px-4 rounded-sm xl:w-full xl:rounded-xl xl:py-4"
+        on:click={() => {
+          saveItem();
+        }}
+        type="button">Add Review</button
+      >
+    </div>
 
-    <div class=" flex flex-col gap-4">
-      {#each reviews as { id, fullName, star, content, userReaction, user_review }}
+    <div class=" flex flex-col gap-4 xl:w-full xl:mt-10 xl:h-[85vh] xl:overflow-y-scroll">
+      {#each reviews as { id, fullName, star, content, userReaction, userId, user_review }}
         <Review
+          on:reaction={(e) => {
+            handleReaction(e.detail);
+          }}
           on:delete={() => getReviews()}
           {id}
           user_review={content}
           user_alias={fullName}
           {userReaction}
           user_rating={star}
+          posterId={userId}
         />
       {/each}
     </div>

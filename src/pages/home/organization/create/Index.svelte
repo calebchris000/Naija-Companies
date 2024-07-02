@@ -264,7 +264,7 @@
     </div>
   {/if}
   <div
-    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-50 rounded-[1.6rem] translate-y-36 xl:w-[85vw] xl:mx-auto"
+    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-100 rounded-[1.6rem] xl:translate-y-36 xl:w-[50vw] xl:mx-auto"
   >
     <input
       on:input={handleFileInput}
@@ -289,14 +289,14 @@
         show_tooltip = create_status === "not_created";
       }}
       type="button"
-      class="flex relative rounded-full bg-blue-500 w-fit mx-auto flex-col gap-2 items-center"
+      class="flex relative rounded-full bg-blue-500 w-fit mx-auto flex-col gap-2 items-center xl:w-32 xl:h-32"
     >
       <div
-        class="bg-blue-100 transition-all border-2 border-transparent hover:border-orange-500 rounded-full flex items-center justify-center overflow-hidden w-20 h-20"
+        class="bg-blue-100 transition-all border-2 border-transparent hover:border-orange-500 rounded-full flex items-center justify-center overflow-hidden w-20 h-20 xl:w-32 xl:h-32"
       >
         <img
           bind:this={image_element}
-          class="w-10 mx-auto"
+          class="w-10 xl:w-16 mx-auto"
           src={building}
           alt=""
         />
@@ -384,7 +384,7 @@
         ? 'none'
         : 'auto'}
             "
-      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white"
+      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white xl:w-fit xl:px-20 xl:mx-auto"
       type="button"
       >{create_status === "pending"
         ? "Adding Company, please wait..."

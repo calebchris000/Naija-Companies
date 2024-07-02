@@ -96,7 +96,7 @@
       organization: company,
     });
     const join = company.toLowerCase().split(" ").join("-");
-    navigate(`${join}/reviews`);
+    navigate(`capital/${join}/reviews`);
   }
 
   onMount(() => {

@@ -38,7 +38,7 @@
   let options: HTMLDivElement;
 
   document.addEventListener("mousedown", (e) => {
-    if (!e.target && !parent) return;
+    if (!e.target || !parent) return;
     const element = e.target as HTMLElement;
 
     if (!parent.contains(element)) {
