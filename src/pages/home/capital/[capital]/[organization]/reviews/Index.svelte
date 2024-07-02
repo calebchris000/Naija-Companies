@@ -144,7 +144,7 @@
   });
 </script>
 
-<section class="pt-20">
+<section class="pt-20 xl:p-0">
   <Navbar>
     <button
       on:click={() => {
@@ -160,11 +160,11 @@
       <Pencil className="w-3" />
     </button>
   </Navbar>
-  <div class="py-4">
+  <div class="py-4 xl:pt-32">
     <Action custom_path="/home" title="" />
   </div>
 
-  <div class="px-4 flex flex-col gap-4">
+  <div class="px-4 flex flex-col gap-4 xl:flex-row xl:gap-2">
     <CompanyDetail
       organization_name={organization_info.name}
       organization_review={Number(organization_info.review)}
