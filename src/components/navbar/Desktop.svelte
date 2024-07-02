@@ -49,6 +49,8 @@
       </Link>
     {:else}
       <Link class="font-medium text-sm" to="/home">About Us</Link>
+      <Link class="font-medium text-sm" to="/home">FAQ</Link>
+      <Link class="font-medium text-sm" to="/home">Contact</Link>
     {/if}
   </div>
   <div>
