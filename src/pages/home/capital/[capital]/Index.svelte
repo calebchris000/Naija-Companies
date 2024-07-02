@@ -71,7 +71,7 @@
       type="button"
     >
       <Building className="w-3" />
-      <span class="text-xs">Add a company</span>
+      <span class="text-xs">Add Organization</span>
     </button>
   </Navbar>
   <div class="py-4">

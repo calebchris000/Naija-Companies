@@ -9,7 +9,7 @@
   }
 </script>
 
-<section class="p-4 flex flex-col gap-4 items-center">
+<section class="p-4 flex flex-col gap-4 items-center xl:w-[30vw] xl:mx-auto xl:mt-20">
   <img
     class="rounded-xl w-[16rem]"
     src={user_privacy}
@@ -21,7 +21,7 @@
   >
   <button
     on:click={handleContinue}
-    class="bg-orange-600 mt-4 font-semibold text-xl p-4 rounded-xl text-white w-[calc(100vw-30%)] block"
+    class="bg-orange-600 mt-4 font-semibold text-xl p-4 rounded-xl text-white w-[calc(100vw-30%)] block xl:w-full"
     type="button">I Understand</button
   >
 </section>

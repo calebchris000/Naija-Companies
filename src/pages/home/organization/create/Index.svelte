@@ -24,14 +24,18 @@
   import Link from "@src/assets/svg/Link.svelte";
   import { navigate } from "svelte-routing";
   import Action from "@src/components/action/action.svelte";
+  import Description from "@src/assets/svg/description.svelte";
 
   $: capitals = $store.capital_list;
   $: cities_in_capital = $store.cities_in_capital;
   $: logoUrl = "";
+  $: device = $store.device;
 
-  $: store.update((c) => {
+  $: store.update((c: any) => {
     c.cities_in_capital = Object.values(
-      cities.find((c) => Object.keys(c)[0] === $store.selected_capital) ?? {}
+      cities.find(
+        (c) => Object.keys(c)[0] === ($store.selected_capital as any)
+      ) ?? {}
     )
       .flat()
       .map((city) => ({ id: Math.random() * 100, name: city }));
@@ -92,13 +96,7 @@
       onOpen: (d: any) => handleIndustryOpen(d),
       icon: industry,
     },
-    {
-      type: "select",
-      label: "city",
-      icon: city,
-      placeholder: "City",
-      list: [],
-    },
+
     {
       type: "select",
       label: "capitalId",
@@ -106,6 +104,13 @@
 
       placeholder: "Capital",
       icon: castle,
+      list: [],
+    },
+    {
+      type: "select",
+      label: "city",
+      icon: city,
+      placeholder: "City",
       list: [],
     },
   ];
@@ -152,8 +157,10 @@
       return;
     }
 
-    if(!description) {
-      notification.error({text: "Provide a short description of what the organization do."})
+    if (!description) {
+      notification.error({
+        text: "Provide a short description of what the organization do.",
+      });
       return;
     }
     if (!image_file) {
@@ -172,6 +179,7 @@
       const response = await UploadImage(formData);
 
       if (response.status !== 200) {
+        create_status = "failure";
         notification.error({
           text: response?.data ?? "Processing logo failed. Try again",
         });
@@ -246,15 +254,17 @@
   }
 </script>
 
-<section>
+<section class="">
   <Navbar>
     <div></div>
   </Navbar>
-  <div class="mt-24 mb-4">
-    <Action title="Add an existing Organization" custom_path="/home" />
-  </div>
+  {#if device === "mobile"}
+    <div class="mt-24 mb-4">
+      <Action title="Add an existing Organization" custom_path="/home" />
+    </div>
+  {/if}
   <div
-    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-50 rounded-[1.6rem]"
+    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-100 rounded-[1.6rem] xl:translate-y-36 xl:w-[50vw] xl:mx-auto"
   >
     <input
       on:input={handleFileInput}
@@ -279,14 +289,14 @@
         show_tooltip = create_status === "not_created";
       }}
       type="button"
-      class="flex relative rounded-full bg-blue-500 w-fit mx-auto flex-col gap-2 items-center"
+      class="flex relative rounded-full bg-blue-500 w-fit mx-auto flex-col gap-2 items-center xl:w-32 xl:h-32"
     >
       <div
-        class="bg-blue-100 transition-all border-2 border-transparent hover:border-orange-500 rounded-full flex items-center justify-center overflow-hidden w-20 h-20"
+        class="bg-blue-100 transition-all border-2 border-transparent hover:border-orange-500 rounded-full flex items-center justify-center overflow-hidden w-20 h-20 xl:w-32 xl:h-32"
       >
         <img
           bind:this={image_element}
-          class="w-10 mx-auto"
+          class="w-10 xl:w-16 mx-auto"
           src={building}
           alt=""
         />
@@ -297,12 +307,15 @@
         >Click to insert logo</span
       >
     </button>
-    <div class="h-[35vh] overflow-y-scroll flex flex-col gap-4">
+    <div
+      class="h-[35vh] overflow-y-scroll flex flex-col gap-4 xl:grid xl:grid-cols-2"
+    >
       {#each inputValue as { type, label, list, onOpen, placeholder, icon }}
         {#if type === "select"}
           <Select
+            icon_class="xl:w-5"
             custom_empty_message={label === "city"
-              ? "Select a capital below"
+              ? "Select a capital"
               : ""}
             on:item_click={(e) => {
               const { id, name } = e.detail;
@@ -346,7 +359,8 @@
         {/if}
       {/each}
       <TextArea
-        Icon={Link}
+        icon_class="xl:w-5"
+        Icon={Description}
         on:input={(data) => {
           const { label, value } = data.detail;
           inputValues.set(label, value);
@@ -370,7 +384,7 @@
         ? 'none'
         : 'auto'}
             "
-      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white"
+      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white xl:w-fit xl:px-20 xl:mx-auto"
       type="button"
       >{create_status === "pending"
         ? "Adding Company, please wait..."

@@ -19,7 +19,7 @@
   }
 </script>
 
-<div class="flex items-center gap-4 px-4">
+<div class="flex items-center gap-4 px-4 xl:hidden">
   <button on:click={handleBack} type="button">
     <Arrow className="w-4" />
   </button>

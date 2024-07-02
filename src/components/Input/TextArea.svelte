@@ -22,7 +22,7 @@
   alt="icon"
   /> -->
   {:else}
-    <Icon className="absolute w-4 left-0 top-[1.3rem] translate-y-[-50%]" />
+    <Icon className="absolute w-4 left-0 top-[1.3rem] translate-y-[-50%] {icon_class}" />
   {/if}
   <textarea
     on:input={handleInput}

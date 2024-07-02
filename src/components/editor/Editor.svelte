@@ -3,6 +3,7 @@
   import { getStarRating } from "@src/core/logic/getStarRating";
   import { createEventDispatcher, onDestroy, onMount } from "svelte";
   import edjsHTML from "editorjs-html";
+  import { store } from "@src/lib/store";
 
   const dispatch = createEventDispatcher();
   const edjsParser = edjsHTML();
@@ -54,8 +55,11 @@
 </script>
 
 <section class="relative flex flex-col gap-2">
+  {#if $store.device === "desktop"}
+    <span class="font-medium text-orange-600 translate-y-2">Slide on the stars to review</span>
+  {/if}
   <span style="color: {star_color}" class="text-3xl">{stars}</span>
-  <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0">
+  <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0 xl:top-10">
     <input
       on:change={handleChange}
       on:input={handleChange}
@@ -66,7 +70,7 @@
     />
   </div>
   <div
-    class="px-4 w-full border border-gray-400 max-h-44 overflow-auto"
+    class="px-4 w-full border border-gray-400 max-h-44 overflow-auto xl:max-h-[24rem]"
     id="editor_parent"
   ></div>
 </section>

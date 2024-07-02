@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Router, Route } from "svelte-routing";
+  import { Router, Route, link } from "svelte-routing";
   import Home from "./pages/home/Index.svelte";
   import Login from "./pages/login/Index.svelte";
   import Signup from "./pages/signup/Index.svelte";
@@ -9,8 +9,11 @@
   import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
   import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
   import CreateOrganization from "./pages/home/organization/create/Index.svelte";
+  import { onMount } from "svelte";
+  import { store } from "./lib/store";
 
   let url = "";
+  console.log("Hi");
 
   function handleAutoRoute() {
     const { pathname } = window.location;
@@ -24,6 +27,27 @@
   }
 
   $: handleAutoRoute();
+
+  function handleResize() {
+    const { innerWidth } = window;
+
+    let deviceType;
+    if (innerWidth >= 768 && innerWidth <= 1024) {
+      $store.device = "tablet";
+    } else if (innerWidth > 1024 && innerWidth <= 1200) {
+      $store.device = "large-tablet";
+    } else if (innerWidth > 1200) {
+      $store.device = "desktop";
+    } else {
+      $store.device = "mobile";
+    }
+  }
+
+  window.addEventListener("resize", handleResize);
+
+  onMount(() => {
+    handleResize();
+  });
 </script>
 
 <main>

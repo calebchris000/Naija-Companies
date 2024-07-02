@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="/public/favicon.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nigerian Companies Review</title>
   </head>
@@ -10,4 +10,14 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
+
+  <script>
+    if (!document.querySelector('link[rel="icon"]')) {
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.type = "image/webp";
+      link.href = "/public/favicon.webp"; // Adjust the path if necessary
+      document.head.appendChild(link);
+    }
+  </script>
 </html>

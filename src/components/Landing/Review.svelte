@@ -20,27 +20,27 @@
 
 <section>
   <div class="flex flex-col text-orange-500">
-    <span class="font-medium text-xl">{company_name}</span>
+    <span class="font-medium text-xl xl:text-2xl">{company_name}</span>
     <span style="color: {star_color}" class="flex items-center text-lg">
       {#each stars as star}
-        <span class="text-xl">{star}</span>
+        <span class="text-xl xl:text-4xl">{star}</span>
       {/each}
     </span>
   </div>
   <div class="flex flex-col gap-1 mt-2">
     <span>
-      <Quote className="w-6 fill-green-800" />
+      <Quote className="w-6 fill-green-800 xl:w-10" />
     </span>
-    <span>
+    <span class="xl:text-2xl ">
       {review_text}
     </span>
     <span class="ms-auto">
-      <Quote className="w-6 rotate-180 fill-green-800" />
+      <Quote className="w-6 rotate-180 fill-green-800 xl:w-10" />
     </span>
   </div>
   <div class="">
     <span>{reviewer_alias} :</span>
-    <span class="font-semibold">
+    <span class="font-semibold xl:text-xl">
       {is_employee ? "Employee" : "Ex-Employee"}
     </span>
   </div>

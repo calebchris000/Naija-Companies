@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Navbar from "@src/components/navbar/Index.svelte";
   import Input from "@src/components/Input/Index.svelte";
   import man_on_pc from "@src/assets/signup/man_on_pc.png";
   import user from "@src/assets/user.png";
@@ -7,6 +8,8 @@
   import { Notification } from "@src/utils/notification";
   import { Login } from "@src/core/api/auth";
   import { navigate } from "svelte-routing";
+  import Action from "@src/components/action/action.svelte";
+  import { store } from "@src/lib/store";
 
   localStorage.clear();
 
@@ -70,14 +73,18 @@
   }
 </script>
 
-<section class="space-y-8">
-  <div class="flex items-center gap-6 mx-4 mt-10">
-    <button type="button">
-      <Arrow className="w-5" />
-    </button>
-    <span class="text-2xl font-semibold">Sign in your account</span>
-  </div>
-  <div class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem]">
+<section class="space-y-8 xl:space-y-0">
+  {#if $store.device === "mobile"}
+    <div class="flex items-center gap-6 mx-4 mt-10">
+      <Action custom_path="/home" title="Sign in your account" />
+    </div>
+  {/if}
+  <Navbar>
+    <div></div>
+  </Navbar>
+  <div
+    class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem] xl:w-[30vw] xl:mx-auto xl:translate-y-32"
+  >
     <img class="w-[50%] mx-auto rounded-3xl" src={man_on_pc} alt="" />
     <Input
       on:input={(data) => {

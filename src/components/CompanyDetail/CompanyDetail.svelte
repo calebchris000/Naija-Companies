@@ -17,24 +17,24 @@
       : organization_website;
 </script>
 
-<section class="h-[16rem] bg-gray-200 shadow-sm space-y-6 p-4">
+<section class="h-[16rem] bg-gray-200 shadow-sm space-y-6 p-4 xl:w-full xl:p-6 xl:h-[80vh]">
   <div class="flex items-center gap-20">
-    <div class="w-16 h-16 rounded-full overflow-hidden">
+    <div class="w-16 h-16 rounded-full overflow-hidden xl:w-28 xl:h-28">
       <img class="w-full" src={organization_logo} alt="organization_logo" />
     </div>
 
     <div class="flex flex-col">
-      <span class="font-medium text-lg">{organization_name}</span>
-      <span style="color: {star_color}" class="text-xl">{stars}</span>
+      <span class="font-medium text-lg xl:text-4xl xl:font-semibold">{organization_name}</span>
+      <span style="color: {star_color}" class="text-xl xl:text-4xl">{stars}</span>
 
       {#if organization_website}
         <a
           target="_blank"
           href={website}
-          class="text-blue-600 text-sm flex items-center gap-2"
+          class="text-blue-600 text-sm flex items-center gap-2 xl:text-lg"
         >
           <span>Visit Website</span>
-          <LinkIcon className="text-blue-500 w-4" />
+          <LinkIcon className="text-blue-500 w-4 xl:w-6" />
         </a>
       {/if}
     </div>

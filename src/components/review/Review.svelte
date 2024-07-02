@@ -76,6 +76,9 @@
       : user_rating >= 2.5 && user_rating <= 3.5
         ? "orange"
         : "green";
+
+  $: console.log(posterId);
+  
 </script>
 
 <section class="w-full flex flex-col bg-gray-50">
@@ -83,7 +86,7 @@
     class="flex items-center relative justify-between gap-6 px-4 py-2 bg-gray-300"
   >
     <span class="font-medium text-lg">{user_alias}</span>
-    <span style="color: {star_color}" class="text-2xl">{stars}</span>
+    <span style="color: {star_color}" class="text-2xl xl:ms-auto">{stars}</span>
     {#if user.id === posterId}
       <button on:click={handleMoreOptions} type="button" class="">
         <More className="w-5" />
