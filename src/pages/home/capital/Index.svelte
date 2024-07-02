@@ -137,7 +137,7 @@
         </div>
       {/if}
       <div
-        class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[60vh] xl:h-[80vh]"
+        class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[75vh] xl:h-[80vh]"
       >
         {#each capitals_list as { id, name, color, image, numberOfCompanies }}
           <Capital
