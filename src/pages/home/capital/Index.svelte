@@ -115,7 +115,7 @@
     </div>
   {/if}
 
-  {#if fetch_state === "pending"}
+  {#if true}
     <div class="px-4">
       <CapitalSkeleton />
     </div>
