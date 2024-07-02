@@ -39,7 +39,7 @@
         <Pencil className="w-4" />
         <span>Write a Review</span>
       </Link>
-      <Link class="font-medium text-sm flex items-center gap-2" to="">
+      <Link class="font-medium text-sm flex items-center gap-2" to="/home">
         <Category className="w-5" />
         <span>Categories</span>
       </Link>

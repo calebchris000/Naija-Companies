@@ -190,3 +190,8 @@
     {/if}
   </div>
 </section>
+
+
+<svelte:head>
+  <title>Find Organizations - Naija Companies</title>
+</svelte:head>

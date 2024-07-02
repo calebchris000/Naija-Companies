@@ -168,3 +168,7 @@
     </div>
   </div>
 </section>
+
+<svelte:head>
+  <title>See Reviews - Naija Companies</title>
+</svelte:head>
