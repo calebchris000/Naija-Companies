@@ -19,7 +19,7 @@
 </script>
 
 <nav
-  class="fixed w-full py-4 px-44 flex items-center justify-between gap-32 bg-white shadow-md"
+  class="fixed w-full py-4 px-44 flex items-center z-50 justify-between gap-32 bg-white shadow-md"
 >
   <button
     type="button"
