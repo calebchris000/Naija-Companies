@@ -128,7 +128,7 @@
   function handleCapitalOpen({ isOpen, label }: any) {
     if (label !== "capitalId") return;
     if (isOpen) {
-      getCapitals();
+      !$store.capital_list.length && getCapitals();
     } else {
       $store.capital_list = [];
     }
@@ -314,9 +314,7 @@
         {#if type === "select"}
           <Select
             icon_class="xl:w-5"
-            custom_empty_message={label === "city"
-              ? "Select a capital"
-              : ""}
+            custom_empty_message={label === "city" ? "Select a capital" : ""}
             on:item_click={(e) => {
               const { id, name } = e.detail;
               if (label === "city") {
