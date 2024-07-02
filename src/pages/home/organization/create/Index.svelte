@@ -68,9 +68,18 @@
     }
   }
 
-  let inputValues: Map<string, string> = new Map();
+  let inputValues: Map<any, any> = new Map();
 
-  let inputValue = [
+  type InputType = {
+    type: "text" | "select" | "number" | "email";
+    label: string;
+    onOpen?: (d: any) => void;
+    placeholder: string;
+    list?: any[];
+    icon: string;
+  };
+
+  let inputValue: InputType[] = [
     { type: "text", label: "name", placeholder: "Name", icon: edit },
     { type: "text", label: "website", placeholder: "Website", icon: link },
     {
@@ -128,7 +137,7 @@
   function handleCapitalOpen({ isOpen, label }: any) {
     if (label !== "capitalId") return;
     if (isOpen) {
-      getCapitals();
+      !$store.capital_list.length && getCapitals();
     } else {
       $store.capital_list = [];
     }
@@ -224,7 +233,7 @@
 
         reader.onload = (event) => {
           if (event.target?.result && image_element) {
-            image_element.style = "width: 100%";
+            image_element.style.width = "100%";
             image_element.src = event.target.result as string;
           }
         };
@@ -314,9 +323,7 @@
         {#if type === "select"}
           <Select
             icon_class="xl:w-5"
-            custom_empty_message={label === "city"
-              ? "Select a capital"
-              : ""}
+            custom_empty_message={label === "city" ? "Select a capital" : ""}
             on:item_click={(e) => {
               const { id, name } = e.detail;
               if (label === "city") {

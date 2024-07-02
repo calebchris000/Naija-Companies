@@ -43,7 +43,7 @@
         <Category className="w-5" />
         <span>Categories</span>
       </Link>
-      <Link class="font-medium text-sm flex items-center gap-2" to="">
+      <Link class="font-medium text-sm flex items-center gap-2" to="/home/organization/add">
         <Building className="w-3" />
         <span>Add An Organization</span>
       </Link>
