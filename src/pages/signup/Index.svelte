@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Navbar from "@src/components/navbar/Index.svelte";
   import Swiper from "swiper";
   import { Navigation, Pagination } from "swiper/modules";
   import "swiper/css";
@@ -32,6 +33,9 @@
 </script>
 
 <section class="h-screen">
+  <Navbar show_right_action={false}>
+    <div></div>
+  </Navbar>
   <div class="swiper select-none border border-red-500 h-full">
     <div class="swiper-wrapper">
       <div class="swiper-slide">

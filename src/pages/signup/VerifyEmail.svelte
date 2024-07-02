@@ -14,6 +14,7 @@
     useLocalStorage,
     useUserData,
   } from "@src/core/utils/utils";
+  import { store } from "@src/lib/store";
   const dispatcher = createEventDispatcher();
   const local_storage = new LocalStorage();
   $: verify_status = "not_verified";
@@ -126,12 +127,14 @@
 
 <section class="space-y-8">
   <div class="flex items-center gap-6 mx-4 mt-10">
-    <button type="button">
-      <Arrow className="w-5" />
-    </button>
-    <span class="text-2xl font-semibold">Verify Email Address</span>
+    {#if $store.device === "mobile"}
+      <button type="button">
+        <Arrow className="w-5" />
+      </button>
+      <span class="text-2xl font-semibold">Verify Email Address</span>
+    {/if}
   </div>
-  <div class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem]">
+  <div class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem] xl:w-[30vw] xl:mx-auto">
     <img class="w-[70%] mx-auto mb-5 rounded-3xl" src={man_otp} alt="" />
     <Input
       on:input={(data) => {

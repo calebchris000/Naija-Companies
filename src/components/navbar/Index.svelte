@@ -8,12 +8,13 @@
   import { store } from "@src/lib/store";
   export let className = "";
   export let style = "";
+  export let show_right_action: boolean = true
   $: device = $store.device as "desktop" | "mobile" | "tablet" | "large-tablet";
 
 </script>
 
 {#if device === "desktop"}
-  <Desktop />
+  <Desktop {show_right_action} />
 {:else}
   <Mobile>
     <slot />

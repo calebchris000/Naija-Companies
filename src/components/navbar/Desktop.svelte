@@ -9,6 +9,7 @@
   import { Link } from "svelte-routing";
   import { navigate } from "svelte-routing";
 
+  export let show_right_action = true;
   $: device = $store.device;
   const token = useToken();
 
@@ -51,13 +52,13 @@
     {/if}
   </div>
   <div>
-    {#if !token}
+    {#if !token && show_right_action}
       <button
         on:click={handleGetStarted}
         class="bg-orange-500 p-2 px-4 rounded-md font-medium text-white"
         type="button">Get Started</button
       >
-    {:else}
+    {:else if show_right_action}
       <button
         class="bg-orange-500 p-2 flex gap-2 items-center px-4 rounded-md font-medium text-white"
         type="button"
