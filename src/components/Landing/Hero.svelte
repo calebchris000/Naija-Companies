@@ -69,16 +69,16 @@
 </script>
 
 <section
-  class="flex max-md:flex-col lg:justify-between h-fit px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-blue-100"
+  class="flex max-md:flex-col lg:justify-between h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-blue-100"
 >
-  <div class="w-full">
-    <h1 class="font-medium max-md:text-3xl xl:text-[3rem] xl:leading-[4.5rem]">
+  <div class="w-full flex items-center">
+    <h1 class="font-medium max-md:text-3xl xl:text-[4rem] xl:leading-[5rem] xl:font-normal">
       Uncover the Truth About Nigerian Workplaces - Read <strong
         class="text-orange-600">Authentic</strong
       > Employee Reviews
     </h1>
   </div>
-  <div class="w-full">
+  <div class="w-full flex items-center">
     <div class="swiper">
       <div class="swiper-wrapper">
         {#each reviewers as { alias, organization, review, rate, employee }}
