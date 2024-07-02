@@ -16,7 +16,7 @@
     <span>Account</span>
     <div class="font-medium mt-2 flex flex-col gap-2">
       {#each account_actions as { label, path }}
-        <Link to="">{label}</Link>
+        <Link to="/home">{label}</Link>
       {/each}
     </div>
     <button

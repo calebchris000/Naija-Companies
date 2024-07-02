@@ -65,27 +65,27 @@
       <div class="flex flex-col gap-6">
         <span class="font-semibold text-xl xl:text-2xl">Company</span>
         <span class="flex flex-col gap-6 xl:text-xl">
-          <Link to="">Home</Link>
-          <Link to="">FAQ</Link>
-          <Link to="">Blog</Link>
-          <Link to="">Career</Link>
+          <Link to="/home">Home</Link>
+          <Link to="/home">FAQ</Link>
+          <Link to="/home">Blog</Link>
+          <Link to="/home">Career</Link>
         </span>
       </div>
       <div class="flex flex-col gap-6">
         <span class="font-semibold text-xl xl:text-2xl">Legal</span>
         <span class="flex flex-col gap-6 xl:text-xl">
-          <Link to="">Terms of use</Link>
-          <Link to="">Privacy</Link>
-          <Link to="">Cookie</Link>
+          <Link to="/home">Terms of use</Link>
+          <Link to="/home">Privacy</Link>
+          <Link to="/home">Cookie</Link>
         </span>
       </div>
       <div class="flex flex-col gap-6">
         <span class="font-semibold text-xl xl:text-2xl">Social</span>
         <span class="flex flex-col gap-6 xl:text-xl">
-          <Link to="">LinkedIn</Link>
-          <Link to="">Twitter</Link>
-          <Link to="">Facebook</Link>
-          <Link to="">Instagram</Link>
+          <Link to="/home">LinkedIn</Link>
+          <Link to="/home">Twitter</Link>
+          <Link to="/home">Facebook</Link>
+          <Link to="/home">Instagram</Link>
         </span>
       </div>
     </div>
