@@ -40,7 +40,7 @@
     </div>
   </div>
   <div
-    class="border-t border-gray-300 py-2 font-normal text-sm max-h-[8rem] overflow-y-scroll"
+    class="border-t border-gray-300 py-2 font-normal text-sm max-h-[8rem] overflow-y-scroll xl:text-lg xl:max-h-[40vh] xl:overflow-auto"
   >
     <span>{organization_description}</span>
   </div>

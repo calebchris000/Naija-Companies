@@ -95,8 +95,9 @@
       id,
       organization: company,
     });
+    const selected_capital = local_storage.getItem("selected_capital", false);
     const join = company.toLowerCase().split(" ").join("-");
-    navigate(`capital/${join}/reviews`);
+    navigate(`/home/capital/${selected_capital?.name}/${join}/reviews`);
   }
 
   onMount(() => {
@@ -190,7 +191,6 @@
     {/if}
   </div>
 </section>
-
 
 <svelte:head>
   <title>Find Organizations - Naija Companies</title>
