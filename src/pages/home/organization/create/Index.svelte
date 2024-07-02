@@ -264,7 +264,7 @@
     </div>
   {/if}
   <div
-    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-orange-100 rounded-[1.6rem] xl:translate-y-36 xl:w-[50vw] xl:mx-auto"
+    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-gray-100 rounded-xl xl:translate-y-36 xl:w-[30vw] xl:mx-auto"
   >
     <input
       on:input={handleFileInput}
