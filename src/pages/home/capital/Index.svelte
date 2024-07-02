@@ -147,7 +147,6 @@
             capital_id={id}
             {numberOfCompanies}
             capital_name={name}
-            capital_img={image}
             capital_color={color}
           />
         {/each}
