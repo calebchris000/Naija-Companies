@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { reviews as rv} from '@src/lib/rating.ts';
   import Editor from "@src/components/editor/Editor.svelte";
   import Review from "@src/components/review/Review.svelte";
   import Action from "@src/components/action/action.svelte";
@@ -27,11 +26,13 @@
     document.dispatchEvent(saveEditor);
   }
 
-  async function handleSave(data: { content: any[] }) {
-    const organizationId = useLocalStorage({
-      key: "selected_organization",
-      isString: false,
-    })?.id;
+  async function handleSave(data: { content: any[]; star: any }) {
+    const organizationId: any = (
+      useLocalStorage({
+        key: "selected_organization",
+        isString: false,
+      }) as any
+    )?.id;
     const notification = new Notification();
     const { content, star } = data;
     if (!content.length) {
@@ -81,7 +82,7 @@
       });
       return;
     }
-    reviews = [...response.data?.data as any, ...rv];
+    reviews = response.data?.data as any[];
   }
 
   async function handleReaction(d: {
@@ -150,7 +151,9 @@
       >
     </div>
 
-    <div class=" flex flex-col gap-4 xl:w-full xl:mt-10 xl:h-[85vh] xl:overflow-y-scroll">
+    <div
+      class=" flex flex-col gap-4 xl:w-full xl:mt-10 xl:h-[85vh] xl:overflow-y-scroll"
+    >
       {#each reviews as { id, fullName, star, content, userReaction, userId, user_review }}
         <Review
           on:reaction={(e) => {
