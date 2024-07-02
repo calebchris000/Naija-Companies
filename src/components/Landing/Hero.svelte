@@ -69,7 +69,7 @@
 </script>
 
 <section
-  class="flex max-md:flex-col lg:justify-between h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-blue-100"
+  class="flex max-md:flex-col lg:justify-between h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-gray-50"
 >
   <div class="w-full flex items-center">
     <h1 class="font-medium max-md:text-3xl xl:text-[4rem] xl:leading-[5rem] xl:font-normal">

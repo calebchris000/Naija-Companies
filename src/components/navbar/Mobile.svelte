@@ -4,6 +4,7 @@
   import More from "@src/assets/svg/More.svelte";
   import MobileOptions from "./MobileOptions.svelte";
   import { store } from "@src/lib/store";
+  import { navigate } from "svelte-routing";
 
   $: isMobile = $store.device === "mobile";
   export let className = "";
@@ -16,7 +17,12 @@
   class="w-full shadow-sm grid grid-cols-4 bg-white items-center fixed top-0 p-0 px-4 h-20 z-10 {className}"
 >
   <div class="h-fit flex items-center">
-    <button class="">
+    <button
+      on:click={() => {
+        navigate("/home");
+      }}
+      class=""
+    >
       <img class="h-6" src={logo_text} alt="logo" />
     </button>
   </div>

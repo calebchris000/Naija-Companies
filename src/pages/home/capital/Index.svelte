@@ -119,77 +119,78 @@
     <div class="px-4">
       <CapitalSkeleton />
     </div>
-  {/if}
-
-  <div class="xl:grid xl:grid-cols-2 xl:pt-28 xl:gap-4 xl:w-[85vw] xl:mx-auto">
-    {#if !is_mobile}
-      <div
-        class="col-span-2 flex justify-between font-semibold text-orange-500 text-xl px-4"
-      >
-        <span>Capitals</span>
-        <span class="flex flex-col"
-          >Organizations In Selected Capital <Link
-            class="font-normal text-sm ms-auto underline"
-            to="/home/organization/add">Add an existing organization</Link
-          >
-        </span>
-      </div>
-    {/if}
+  {:else}
     <div
-      class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[60vh] xl:h-[80vh]"
+      class="xl:grid xl:grid-cols-2 xl:pt-28 xl:gap-4 xl:w-[85vw] xl:mx-auto"
     >
-      {#each capitals_list as { id, name, color, image, numberOfCompanies }}
-        <Capital
-          on:click={(e) => {
-            handleClick(e.detail);
-          }}
-          capital_id={id}
-          {numberOfCompanies}
-          capital_name={name}
-          capital_img={image}
-          capital_color={color}
-        />
-      {/each}
-    </div>
-    {#if !is_mobile}
-      <div style="" class="bg-gray-100 p-4 h-[80vh] overflow-y-scroll">
-        {#if organization_status === "not_active"}
-          <span class="font-medium text-gray-400 pt-10 text-2xl mx-auto"
-            >Select a capital on the left.</span
-          >
-        {:else}
-          <div class="grid grid-cols-3 gap-4 px-0 w-full">
-            {#if organization_status === "pending"}
-              <span>Loading. Please wait...</span>
-            {:else if organizations.length}
-              {#each organizations as { id, name, logoUrl, rating }}
-                <Company
-                  {id}
-                  on:click={(e) => handleCapital(e.detail)}
-                  {name}
-                  logo={logoUrl}
-                  rating={Number(rating)}
-                />
-              {/each}
-            {:else}
-              <div class="flex flex-col col-span-3 px-10 w-full gap-10">
-                <span class="font-medium text-gray-400 pt-10 text-2xl"
-                  >There are no organizations listed on this capital.</span
-                >
-                {#if is_mobile}
-                  <button
-                    on:click={handleRoute}
-                    class="bg-orange-500 p-4 w-full mx-auto block rounded-md text-white font-medium"
-                    type="button">Add An Existing Organization</button
-                  >
-                {/if}
-              </div>
-            {/if}
-          </div>
-        {/if}
+      {#if !is_mobile}
+        <div
+          class="col-span-2 flex justify-between font-semibold text-orange-500 text-xl px-4"
+        >
+          <span>Capitals</span>
+          <span class="flex flex-col"
+            >Organizations In Selected Capital <Link
+              class="font-normal text-sm ms-auto underline"
+              to="/home/organization/add">Add an existing organization</Link
+            >
+          </span>
+        </div>
+      {/if}
+      <div
+        class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[75vh] xl:h-[80vh]"
+      >
+        {#each capitals_list as { id, name, color, image, numberOfCompanies }}
+          <Capital
+            on:click={(e) => {
+              handleClick(e.detail);
+            }}
+            capital_id={id}
+            {numberOfCompanies}
+            capital_name={name}
+            capital_color={color}
+          />
+        {/each}
       </div>
-    {/if}
-  </div>
+      {#if !is_mobile}
+        <div style="" class="bg-gray-100 p-4 h-[80vh] overflow-y-scroll">
+          {#if organization_status === "not_active"}
+            <span class="font-medium text-gray-400 pt-10 text-2xl mx-auto"
+              >Select a capital on the left.</span
+            >
+          {:else}
+            <div class="grid grid-cols-3 gap-4 px-0 w-full">
+              {#if organization_status === "pending"}
+                <span>Loading. Please wait...</span>
+              {:else if organizations.length}
+                {#each organizations as { id, name, logoUrl, rating }}
+                  <Company
+                    {id}
+                    on:click={(e) => handleCapital(e.detail)}
+                    {name}
+                    logo={logoUrl}
+                    rating={Number(rating)}
+                  />
+                {/each}
+              {:else}
+                <div class="flex flex-col col-span-3 px-10 w-full gap-10">
+                  <span class="font-medium text-gray-400 pt-10 text-2xl"
+                    >There are no organizations listed on this capital.</span
+                  >
+                  {#if is_mobile}
+                    <button
+                      on:click={handleRoute}
+                      class="bg-orange-500 p-4 w-full mx-auto block rounded-md text-white font-medium"
+                      type="button">Add An Existing Organization</button
+                    >
+                  {/if}
+                </div>
+              {/if}
+            </div>
+          {/if}
+        </div>
+      {/if}
+    </div>
+  {/if}
 </section>
 
 <svelte:head>
