@@ -4,7 +4,6 @@
   export let capital_name = "Ibadan";
   export let capital_id = "";
   export let capital_color = "blue";
-  export let capital_img = "";
   export let numberOfCompanies = 1
   const dispatch = createEventDispatcher();
 </script>

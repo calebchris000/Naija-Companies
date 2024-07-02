@@ -6,8 +6,6 @@
   import More from "@src/assets/svg/More.svelte";
   import MobileOptions from "./MobileOptions.svelte";
   import { store } from "@src/lib/store";
-  export let className = "";
-  export let style = "";
   export let show_right_action: boolean = true
   $: device = $store.device as "desktop" | "mobile" | "tablet" | "large-tablet";
 
