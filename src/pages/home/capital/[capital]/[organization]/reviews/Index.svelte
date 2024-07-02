@@ -85,7 +85,7 @@
       });
       return;
     }
-    reviews = [...response.data?.data, ...rv] as any[];
+    reviews = response.data?.data as any[];
   }
 
   function handleSort() {

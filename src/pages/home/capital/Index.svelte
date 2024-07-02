@@ -15,7 +15,7 @@
 
   const token = useToken();
   const local_storage = new LocalStorage();
-  $: capitals_list = [];
+  $: capitals_list = [] as any;
   $: fetch_state = "success";
   $: is_mobile = $store.device === "mobile";
   $: organizations = [];
