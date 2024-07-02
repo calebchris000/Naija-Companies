@@ -68,9 +68,18 @@
     }
   }
 
-  let inputValues: Map<string, string> = new Map();
+  let inputValues: Map<any, any> = new Map();
 
-  let inputValue = [
+  type InputType = {
+    type: "text" | "select" | "number" | "email";
+    label: string;
+    onOpen?: (d: any) => void;
+    placeholder: string;
+    list?: any[];
+    icon: string;
+  };
+
+  let inputValue: InputType[] = [
     { type: "text", label: "name", placeholder: "Name", icon: edit },
     { type: "text", label: "website", placeholder: "Website", icon: link },
     {
@@ -224,7 +233,7 @@
 
         reader.onload = (event) => {
           if (event.target?.result && image_element) {
-            image_element.style = "width: 100%";
+            image_element.style.width = "100%";
             image_element.src = event.target.result as string;
           }
         };
