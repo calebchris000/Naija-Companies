@@ -21,7 +21,7 @@
   />
   <input
     on:input={handleInput}
-    class="outline-none font-medium placeholder:text-gray-600 bg-transparent border-transparent"
+    class="outline-none font-medium placeholder:text-gray-600 bg-transparent border-transparent xl:w-full"
     {type}
     {placeholder}
   />
