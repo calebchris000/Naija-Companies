@@ -24,7 +24,7 @@
   import { onMount } from "svelte";
   import Building from "@src/assets/svg/Building.svelte";
   import Pencil from "@src/assets/svg/Pencil.svelte";
-  import { navigate } from "svelte-routing";
+  import { Link, navigate } from "svelte-routing";
   import { GetOrganization } from "@src/core/api/organization";
 
   const user = useUserData();
@@ -139,6 +139,12 @@
     getReviews();
   }
 
+  function handleAddReview() {
+    const { href } = window.location;
+    const _href = href[href.length - 1] === "/" ?href.slice(0, -1) : href;
+    navigate(_href.slice(0, -1))
+  }
+
   onMount(() => {
     getOrganization();
     getReviews();
@@ -202,19 +208,27 @@
         />
       </div>
       <div class="flex flex-col gap-4 xl:h-[75vh] overflow-y-scroll">
-        {#each filter_reviews as { id, userId, fullName, star, userReaction, quickReactionView, content }}
-          <Review
-            on:delete={() => getReviews()}
-            on:reaction={(e) => handleReaction(e.detail)}
-            {id}
-            posterId={userId}
-            reactions={quickReactionView}
-            {userReaction}
-            user_alias={fullName}
-            user_rating={star}
-            user_review={content}
-          />
-        {/each}
+        {#if filter_reviews.length}
+          {#each filter_reviews as { id, userId, fullName, star, userReaction, quickReactionView, content }}
+            <Review
+              on:delete={() => getReviews()}
+              on:reaction={(e) => handleReaction(e.detail)}
+              {id}
+              posterId={userId}
+              reactions={quickReactionView}
+              {userReaction}
+              user_alias={fullName}
+              user_rating={star}
+              user_review={content}
+            />
+          {/each}
+        {:else}
+          <span class="text-3xl text-gray-500 font-medium translate-y-10"
+            >Be the first to <button class="text-orange-500 underline" on:click={handleAddReview} type="button"
+              >add a review.</button
+            >
+          </span>
+        {/if}
       </div>
     </div>
   </div>
