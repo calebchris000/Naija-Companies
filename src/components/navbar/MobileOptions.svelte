@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Logout from "@src/assets/svg/logout.svelte";
   import { Link, navigate } from "svelte-routing";
 
   const routes = [{ label: "About", path: "/about" }];
@@ -20,8 +21,11 @@
     </div>
     <button
       on:click={handleLogout}
-      class="bg-orange-500 p-4 py-3 mt-2 w-full rounded-md mx-auto block font-medium"
-      type="button">Logout</button
+      class="bg-orange-500 p-4 py-3 mt-2 w-full rounded-md mx-auto flex items-center gap-2 justify-center text-white font-medium"
+      type="button"
     >
+      <Logout className="w-6" />
+      <span>Logout</span>
+    </button>
   </div>
 </section>

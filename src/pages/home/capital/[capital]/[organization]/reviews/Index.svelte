@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { reviews as rv } from "@src/lib/rating";
   import edit from "@src/assets/svg/edit.svg";
   import Review from "@src/components/review/Review.svelte";
   import Action from "@src/components/action/action.svelte";
@@ -84,7 +85,7 @@
       });
       return;
     }
-    reviews = response.data?.data as any[];
+    reviews = [...response.data?.data, ...rv] as any[];
   }
 
   function handleSort() {
@@ -164,7 +165,9 @@
     <Action custom_path="/home" title="" />
   </div>
 
-  <div class="px-4 flex flex-col gap-4 xl:flex-row xl:gap-2">
+  <div
+    class="px-4 flex flex-col gap-4 xl:flex-row xl:gap-20 xl:w-[85vw] xl:mx-auto"
+  >
     <CompanyDetail
       organization_name={organization_info.name}
       organization_review={Number(organization_info.review)}
@@ -172,44 +175,47 @@
       organization_description={organization_info.description ?? ""}
       organization_logo={organization_info.logoUrl}
     />
-    <div class="py-5 flex items-center justify-between gap-8">
-      <Select
-        on:item_click={(e) => {
-          filter_by.year = e.detail.name;
-          handleSort();
-        }}
-        list={years}
-        defaultValue={years[0].name}
-        placeholder="Year"
-        className="w-full"
-        icon={calendar}
-      />
-      <Select
-        on:item_click={(e) => {
-          filter_by.month = e.detail.name;
-          handleSort();
-        }}
-        list={months}
-        defaultValue={moment().format("MMMM")}
-        placeholder="Month"
-        className="w-full"
-        icon={month}
-      />
-    </div>
-    <div class="flex flex-col gap-4">
-      {#each filter_reviews as { id, userId, fullName, star, userReaction, quickReactionView, content }}
-        <Review
-          on:delete={() => getReviews()}
-          on:reaction={(e) => handleReaction(e.detail)}
-          {id}
-          posterId={userId}
-          reactions={quickReactionView}
-          {userReaction}
-          user_alias={fullName}
-          user_rating={star}
-          user_review={content}
+
+    <div class="flex flex-col gap-4 w-full">
+      <div class="py-5 flex items-center justify-between gap-8 xl:py-0">
+        <Select
+          on:item_click={(e) => {
+            filter_by.year = e.detail.name;
+            handleSort();
+          }}
+          list={years}
+          defaultValue={years[0].name}
+          placeholder="Year"
+          className="w-full"
+          icon={calendar}
         />
-      {/each}
+        <Select
+          on:item_click={(e) => {
+            filter_by.month = e.detail.name;
+            handleSort();
+          }}
+          list={months}
+          defaultValue={moment().format("MMMM")}
+          placeholder="Month"
+          className="w-full"
+          icon={month}
+        />
+      </div>
+      <div class="flex flex-col gap-4 xl:h-[75vh] overflow-y-scroll">
+        {#each filter_reviews as { id, userId, fullName, star, userReaction, quickReactionView, content }}
+          <Review
+            on:delete={() => getReviews()}
+            on:reaction={(e) => handleReaction(e.detail)}
+            {id}
+            posterId={userId}
+            reactions={quickReactionView}
+            {userReaction}
+            user_alias={fullName}
+            user_rating={star}
+            user_review={content}
+          />
+        {/each}
+      </div>
     </div>
   </div>
 </section>
