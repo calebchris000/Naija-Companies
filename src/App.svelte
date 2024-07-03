@@ -9,11 +9,13 @@
   import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
   import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
   import CreateOrganization from "./pages/home/organization/create/Index.svelte";
+  import AdminDashboard from "@src/pages/admin/dashboard/index.svelte";
   import { onMount } from "svelte";
   import { store } from "./lib/store";
-  import { useToken } from "./core/utils/utils";
+  import { useToken, useUserData } from "./core/utils/utils";
 
   const token = useToken();
+  const user = useUserData();
   let url = "";
   function handleAutoRoute() {
     const { pathname } = window.location;
@@ -23,10 +25,13 @@
     const split = path.split("/");
     if (split[split.length - 1]) return;
 
-    window.location.href = "home";
+    if (["admin", "sub-admin"].includes(user.role as string)) {
+      navigate("/admin/dashboard");
+      return;
+    } else {
+      window.location.href = "home";
+    }
   }
-
-  $: handleAutoRoute();
 
   function handleResize() {
     const { innerWidth } = window;
@@ -53,6 +58,7 @@
   window.addEventListener("resize", handleResize);
 
   onMount(() => {
+    handleAutoRoute();
     handleResize();
     handleAuth();
   });
@@ -70,5 +76,8 @@
     <Route path="/home/capital/:capital/:company/review" component={Review} />
     <Route path="/home/capital/:capital/:company/reviews" component={Reviews} />
     <Route path="/home/organization/add" component={CreateOrganization} />
+
+    <!-- Admin Routes -->
+    <Route path="/admin/dashboard" component={AdminDashboard} />
   </Router>
 </main>
