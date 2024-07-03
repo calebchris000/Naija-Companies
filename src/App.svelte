@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Router, Route, link } from "svelte-routing";
+  import { Router, Route, link, navigate } from "svelte-routing";
   import Home from "./pages/home/Index.svelte";
   import Login from "./pages/login/Index.svelte";
   import Signup from "./pages/signup/Index.svelte";
@@ -11,10 +11,10 @@
   import CreateOrganization from "./pages/home/organization/create/Index.svelte";
   import { onMount } from "svelte";
   import { store } from "./lib/store";
+  import { useToken } from "./core/utils/utils";
 
+  const token = useToken();
   let url = "";
-  console.log("Hi");
-
   function handleAutoRoute() {
     const { pathname } = window.location;
 
@@ -43,10 +43,18 @@
     }
   }
 
+  function handleAuth() {
+    const { pathname } = window.location;
+    if (!token && pathname !== "/home") {
+      navigate("/login");
+    }
+  }
+
   window.addEventListener("resize", handleResize);
 
   onMount(() => {
     handleResize();
+    handleAuth();
   });
 </script>
 

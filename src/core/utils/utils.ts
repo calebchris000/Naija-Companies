@@ -74,7 +74,13 @@ export class LocalStorage {
 
 export const handleLogout = () => {
   localStorage.clear();
-  navigate("/home");
+  
+
+  if (window.location.pathname === "/home") {
+    window.location.reload();
+  } else {
+    navigate("/home");
+  }
 };
 
 export const emailRegex =
