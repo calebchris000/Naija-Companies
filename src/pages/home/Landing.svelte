@@ -8,7 +8,7 @@ import Hero from "@src/components/Landing/Hero.svelte";
 
 <section class="">
     <Hero />
-    <!-- <BestAndWorst /> -->
+    <BestAndWorst />
     <Footer />
 </section>
 
