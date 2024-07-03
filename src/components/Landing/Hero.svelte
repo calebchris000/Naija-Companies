@@ -4,6 +4,12 @@
   import "swiper/css";
   import { onMount } from "svelte";
   import Review from "./Review.svelte";
+  import { useToken } from "@src/core/utils/utils";
+  import Arrow from "@src/assets/svg/Arrow.svelte";
+  import { navigate } from "svelte-routing";
+
+  const token = useToken();
+  $: button_text = token ? "Continue to Review" : "Start Reviewing";
 
   onMount(() => {
     new Swiper(".swiper", {
@@ -66,17 +72,36 @@
       employee: false,
     },
   ];
+
+  function handleStartReview() {
+    if (token) {
+      navigate("/home/capital");
+    } else {
+      navigate("/signup");
+    }
+  }
 </script>
 
 <section
-  class="flex max-md:flex-col lg:justify-between h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-gray-50"
+  class="flex max-md:flex-col lg:justify-between h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-cyan-50"
 >
-  <div class="w-full flex items-center">
-    <h1 class="font-medium max-md:text-3xl xl:text-[4rem] xl:leading-[5rem] xl:font-normal">
+  <div class="w-full flex flex-col items-center gap-6 xl:gap-12">
+    <h1
+      class="font-medium max-md:text-3xl xl:text-[4rem] xl:leading-[5rem] xl:font-normal"
+    >
       Uncover the Truth About Nigerian Workplaces - Read <strong
         class="text-orange-600">Authentic</strong
       > Employee Reviews
     </h1>
+
+    <button
+      on:click={handleStartReview}
+      class="bg-orange-600 rounded-lg p-2 gap-4 flex items-center px-10 font-medium text-white mr-auto text-lg xl:text-2xl xl:p-4 xl:px-8"
+      type="button"
+    >
+      <span>{button_text}</span>
+      <Arrow className="w-6 rotate-180" />
+    </button>
   </div>
   <div class="w-full flex items-center">
     <div class="swiper">
