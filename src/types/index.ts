@@ -8,6 +8,7 @@ export type UserDataType = {
   firstName: string;
   lastName: string;
   email: string;
+  role?: "admin" |"user" | "sub-admin";
   userName: string | null;
   id: string;
 };

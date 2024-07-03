@@ -45,14 +45,20 @@
       login_status = "success";
       notification.success({ text: `Welcome back, ${user}` });
       localStorage.setItem("token", response.data.data.token);
-      const { id, firstName, lastName, email, userName } = response.data.data;
+      const { id, firstName, lastName, role, email, userName } =
+        response.data.data;
+
       localStorage.setItem(
         "user",
-        JSON.stringify({ id, firstName, lastName, email, userName })
+        JSON.stringify({ id, firstName, role, lastName, email, userName })
       );
 
       setTimeout(() => {
-        navigate("/home");
+        if (["sub-admin", "admin"].includes(role)) {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/home");
+        }
       }, 2000);
     } catch (error: any) {
       login_status = "failure";
