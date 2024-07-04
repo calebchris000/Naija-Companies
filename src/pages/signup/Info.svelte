@@ -9,7 +9,7 @@
   }
 </script>
 
-<section class="p-4 flex flex-col gap-4 items-center xl:w-[30vw] xl:mx-auto xl:mt-20">
+<section class="p-4 flex flex-col mt-20 gap-4 items-center xl:w-[30vw] xl:mx-auto xl:mt-20">
   <img
     class="rounded-xl w-[16rem]"
     src={user_privacy}
