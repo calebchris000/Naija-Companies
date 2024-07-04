@@ -6,7 +6,7 @@
 </script>
 
 <section class="bg-blue-200 xl:h-screen py-10 pb-20">
-  <span class=" font-medium w-fit mx-auto py-5 block text-xl text-center xl:text-4xl"
+  <span class=" font-medium xl:w-fit mx-auto w-[85vw] py-5 block text-xl text-center xl:text-4xl"
     >The Best And Worst Companies for <b>2024</b></span
   >
   <div class="w-[85vw] mx-auto py-10 grid grid-cols-1 gap-20 items-center justify-between xl:flex xl:gap-10">

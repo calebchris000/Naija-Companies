@@ -13,31 +13,14 @@
   import AdminOrganization from "@src/pages/admin/dashboard/organization/index.svelte";
   import AdminUsers from "@src/pages/admin/dashboard/user/index.svelte";
   import { onMount } from "svelte";
-  import { store } from "./lib/store";
   import { Middleware } from "./middleware";
-  import { useToken, useUserData } from "./core/utils/utils";
+  import { handleResize } from "./middleware/screen";
 
   let url = "";
-
-  function handleResize() {
-    const { innerWidth } = window;
-
-    let deviceType;
-    if (innerWidth >= 768 && innerWidth <= 1024) {
-      $store.device = "tablet";
-    } else if (innerWidth > 1024 && innerWidth <= 1200) {
-      $store.device = "large-tablet";
-    } else if (innerWidth > 1200) {
-      $store.device = "desktop";
-    } else {
-      $store.device = "mobile";
-    }
-  }
 
   window.addEventListener("resize", handleResize);
 
   onMount(() => {
-    handleResize();
     Middleware();
   });
 </script>
