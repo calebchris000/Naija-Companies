@@ -1,7 +1,7 @@
 <script lang="ts">
   import Crown from "@src/assets/svg/crown.svelte";
   import Poop from "@src/assets/svg/poop.svelte";
-  import frame_gold from "@src/assets/frame_gold.png";
+  import frame_gold from "@src/assets/svg/frame_gold.svg";
   import Company from "../navbar/Trophy/company.svelte";
 </script>
 
