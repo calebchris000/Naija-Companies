@@ -5,17 +5,17 @@
   import Company from "../navbar/Trophy/company.svelte";
 </script>
 
-<section class="bg-blue-200 h-screen py-10 pb-20">
-  <span class="text-4xl font-medium w-fit mx-auto py-5 block"
-    >Best And Worst Companies for <b>2024</b></span
+<section class="bg-blue-200 xl:h-screen py-10 pb-20">
+  <span class=" font-medium xl:w-fit mx-auto w-[85vw] py-5 block text-xl text-center xl:text-4xl"
+    >The Best And Worst Companies for <b>2024</b></span
   >
-  <div class="w-[85vw] mx-auto py-10 flex gap-10 items-center justify-between">
+  <div class="w-[85vw] mx-auto py-10 grid grid-cols-1 gap-20 items-center justify-between xl:flex xl:gap-10">
     <div class="w-full flex flex-col gap-8 items-center">
-      <div class="flex items-center gap-8">
-        <span class="text-3xl font-semibold text-[#8a7000]"
+      <div class="flex items-center gap-4 xl:gap-8">
+        <span class="text-[#8a7000] text-3xl font-medium  xl:font-semibold"
           >Employee's Choice</span
         >
-        <Crown className="w-12 text-[#8a7000]" />
+        <Crown className="w-8 xl:w-12 text-[#8a7000]" />
       </div>
       <Company
         frame={frame_gold}
@@ -26,10 +26,10 @@
     </div>
     <div class="w-full flex flex-col gap-8 items-center">
       <div class="flex items-center gap-8">
-        <span class="text-3xl font-semibold text-orange-900"
+        <span class="text-2xl font-medium xl:text-3xl xl:font-semibold text-orange-900"
           >Employee's Nightmare</span
         >
-        <Poop className="w-8 text-orange-900" />
+        <Poop className="w-5 xl:w-8 text-orange-900" />
       </div>
       <Company
         company_name="Zed Technology LTD"

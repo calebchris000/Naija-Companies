@@ -83,7 +83,7 @@
 </script>
 
 <section
-  class="flex max-md:flex-col lg:justify-between h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-cyan-50"
+  class="flex max-md:flex-col lg:justify-between xl:h-[80vh] px-4 max-md:pt-28 pb-8 gap-10 pt-20 xl:py-32 xl:pt-36 xl:px-44 xl:grid xl:grid-cols-2 bg-cyan-50"
 >
   <div class="w-full flex flex-col items-center gap-6 xl:gap-12">
     <h1

@@ -13,56 +13,15 @@
   import AdminOrganization from "@src/pages/admin/dashboard/organization/index.svelte";
   import AdminUsers from "@src/pages/admin/dashboard/user/index.svelte";
   import { onMount } from "svelte";
-  import { store } from "./lib/store";
-  import { useToken, useUserData } from "./core/utils/utils";
+  import { Middleware } from "./middleware";
+  import { handleResize } from "./middleware/screen";
 
-  const token = useToken();
-  const user = useUserData();
   let url = "";
-  function handleAutoRoute() {
-    const { pathname } = window.location;
-
-    const path =
-      pathname[pathname.length - 1] === "/" ? pathname.slice(0, -2) : pathname;
-    const split = path.split("/");
-    if (split[split.length - 1]) return;
-
-    if (["admin", "sub-admin"].includes(user.role as string)) {
-      navigate("/admin/dashboard");
-      return;
-    } else {
-      window.location.href = "home";
-    }
-  }
-
-  function handleResize() {
-    const { innerWidth } = window;
-
-    let deviceType;
-    if (innerWidth >= 768 && innerWidth <= 1024) {
-      $store.device = "tablet";
-    } else if (innerWidth > 1024 && innerWidth <= 1200) {
-      $store.device = "large-tablet";
-    } else if (innerWidth > 1200) {
-      $store.device = "desktop";
-    } else {
-      $store.device = "mobile";
-    }
-  }
-
-  function handleAuth() {
-    const { pathname } = window.location;
-    if (!token && pathname !== "/home") {
-      navigate("/login");
-    }
-  }
 
   window.addEventListener("resize", handleResize);
 
   onMount(() => {
-    handleAutoRoute();
-    handleResize();
-    handleAuth();
+    Middleware();
   });
 </script>
 

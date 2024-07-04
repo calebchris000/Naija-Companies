@@ -36,7 +36,7 @@
   <Navbar show_right_action={false}>
     <div></div>
   </Navbar>
-  <div class="swiper select-none border border-red-500 h-full">
+  <div class="swiper select-none bg-orange-50 h-full">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <Info on:click={slideNext} />

@@ -7,7 +7,12 @@
 
   function handleLogout() {
     localStorage.clear();
-    navigate("/home");
+    const { pathname } = window.location;
+    if (pathname === "/home") {
+      window.location.reload();
+    } else {
+      navigate("/home");
+    }
   }
 </script>
 
