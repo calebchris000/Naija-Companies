@@ -16,10 +16,10 @@
 </script>
 
 <div
-  class="bg-gray-50 h-[54vh] relative w-full flex gap-4 py-4 flex-col items-center shadow-lg xl:w-[20vw] max-md:overflow-hidden"
+  class="bg-gray-50 h-[54vh] relative w-[80vw] flex gap-4 py-4 flex-col items-center shadow-lg xl:w-[20vw] max-md:overflow-hidden"
 >
-  <div class="absolute top-[50%] translate-y-[-50%] w-[30rem] xl:w-[34rem]">
-    <img class="w-full" src={frame} alt="" />
+  <div class="absolute top-[50%] translate-y-[-50%] w-[100vw] xl:w-[34rem]">
+    <!-- <img class="w-10" src={frame} alt="" /> -->
   </div>
   <div class="border-2 h-24 w-24 overflow-hidden rounded-full xl:h-32 xl:w-32">
     <img class="w-full" src={logo} alt="" />
