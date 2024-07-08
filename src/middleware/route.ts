@@ -15,7 +15,7 @@ export const HandleRoute = () => {
     split[1] === "home" &&
     ["admin", "sub-admin"].includes(user.role as string)
   ) {
-    navigate("/admin/dashboard");
+    navigate("/admin/dashboard/user");
   } else if (token || (split[1] === "admin" && user.role === "user")) {
     navigate("/home");
   }
