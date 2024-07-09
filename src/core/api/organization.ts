@@ -6,14 +6,16 @@ export const GetOrganizations = async ({
   capitalId,
 }: {
   token: string;
-  getReviews: boolean;
-  capitalId: string;
+  getReviews?: boolean;
+  capitalId?: string;
 }) => {
   try {
     const query = getReviews ? "getReviews=true" : "";
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
     const response = await axios.get(
-      `${base_url}/organizations?${query}&capitalId=${capitalId}`,
+      `${base_url}/organizations?${query}${
+        capitalId ? `&capitalId=${capitalId}` : ""
+      }`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
