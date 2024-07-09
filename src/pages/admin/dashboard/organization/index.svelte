@@ -62,5 +62,9 @@
       </div>
       <Table {columns} rows={organizations} />
     </div>
+    <div class="text-white mx-10">
+      <span class="font-medium text-3xl">Pending Approval</span>
+    </div>
   </div>
+ 
 </main>

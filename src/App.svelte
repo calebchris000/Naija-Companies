@@ -15,6 +15,7 @@
   import { onMount } from "svelte";
   import { Middleware } from "./middleware";
   import { handleResize } from "./middleware/screen";
+  import DashText from "./pages/admin/dash_text.svelte";
 
   let url = "";
 
@@ -44,5 +45,6 @@
     <Route path="/dashboard" component={AdminDashboard} />
     <Route path="/dashboard/organization" component={AdminOrganization} />
     <Route path="/dashboard/user" component={AdminUsers} />
+    <Route path="/dashboard/test" component={DashText} />
   </Router>
 </main>
