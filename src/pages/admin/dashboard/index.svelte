@@ -3,6 +3,7 @@
   import Stat from "../components/stat.svelte";
   import Notifications from "../components/notifications.svelte";
   import "./style.css"
+  import OrganizationRequest from "../components/organization_request.svelte";
 </script>
 
 <main class="bg-gray-900 w-screen h-screen text-white test">
@@ -44,7 +45,9 @@
     <div class="w-full h-full bg-gray-700 col-span-3 row-span-6">
       <Notifications />
     </div>
-    <div class="w-full h-full bg-gray-700 col-span-6 row-span-6"></div>
+    <div class="w-full h-full bg-gray-700 col-span-6 row-span-6">
+      <OrganizationRequest />
+    </div>
     <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
     <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
     <div class="w-full h-full bg-gray-700 col-span-3 row-span-4"></div>
