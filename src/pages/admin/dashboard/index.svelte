@@ -1,5 +1,4 @@
 <script>
-  import Grid from "@src/assets/svg/grid.svelte";
   import Stat from "../components/stat.svelte";
   import Notifications from "../components/notifications.svelte";
   import "./style.css";

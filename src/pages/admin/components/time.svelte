@@ -18,13 +18,15 @@
   }
 
   function startInterval() {
-    setInterval(() => {
-      getTime();
+    const id = setInterval(() => {
+    //   getTime();
     }, 10000);
+       
+    return () => clearInterval(id);
   }
 
   onMount(() => {
-    getTime();
+    // getTime();
   });
 </script>
 
