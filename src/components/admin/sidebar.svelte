@@ -14,7 +14,7 @@
   $: selected = $store.sidebar_selected;
 </script>
 
-<nav class="h-screen w-64 bg-blue-900 py-10 px-5 flex flex-col gap-10">
+<nav class="h-screen w-64 bg-blue-900 py-20 px-5 flex flex-col gap-10">
   <div class="w-full border-b p-4 flex items-center justify-center">
     <img class="w-32" src={logo} alt="" />
   </div>
