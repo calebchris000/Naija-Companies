@@ -4,8 +4,8 @@
   import moment from "moment";
   import { onMount } from "svelte";
 
-  $: time = "12:00 PM";
-  $: date = "Monday, 12th June, 2026";
+  $: time = moment().format("HH:mm A");
+  $: date = moment().format("dddd, Do MMMM, YYYY");
 
   async function getTime() {
     const res = await GetTime();
