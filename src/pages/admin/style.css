@@ -1,0 +1,14 @@
+  /* Add this to your global stylesheet or within the <style> tag */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #4a5568 !important; /* This is the equivalent of gray-700 in Tailwind */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d1d5db !important; /* This is the equivalent of gray-700 in Tailwind */
+    border-radius: 4px;
+    outline: 1px solid #d1d5db !important; /* Optional: Adds an outline to the thumb */
+  }
