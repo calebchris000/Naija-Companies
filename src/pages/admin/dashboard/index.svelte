@@ -2,8 +2,9 @@
   import Grid from "@src/assets/svg/grid.svelte";
   import Stat from "../components/stat.svelte";
   import Notifications from "../components/notifications.svelte";
-  import "./style.css"
+  import "./style.css";
   import OrganizationRequest from "../components/organization_request.svelte";
+  import Time from "../components/time.svelte";
 </script>
 
 <main class="bg-gray-900 w-screen h-screen text-white test">
@@ -51,7 +52,9 @@
     <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
     <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
     <div class="w-full h-full bg-gray-700 col-span-3 row-span-4"></div>
-    <div class="w-full h-full bg-gray-700 col-span-3 row-span-4"></div>
+    <div class="w-full h-full bg-gray-700 col-span-3 row-span-4">
+      <Time />
+    </div>
     <div
       class="w-full h-full bg-gray-700 col-start-7 row-span-2 col-span-6"
     ></div>
