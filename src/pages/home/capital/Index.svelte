@@ -70,6 +70,7 @@
     const response = await GetOrganizations({
       token,
       getReviews: true,
+      verified: true,
       capitalId,
     });
 
