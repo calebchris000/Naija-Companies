@@ -7,7 +7,6 @@
   export let company_name = "Delta Inc.";
   export let company_name_style = "text-[#8a7000]";
   export let divider_color = "#7c2d12";
-  export let frame = "";
   export let star_color = getStarColor(rating);
 
   const stars = getStarRating(rating).join("");
