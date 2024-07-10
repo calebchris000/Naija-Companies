@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   export let Icon = "";
   export let title = "";
-  export let value = "";
+  export let value: string | number = "";
 </script>
 
 <section

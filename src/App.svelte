@@ -10,8 +10,6 @@
   import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
   import CreateOrganization from "./pages/home/organization/create/Index.svelte";
   import AdminDashboard from "@src/pages/admin/dashboard/index.svelte";
-  import AdminOrganization from "@src/pages/admin/dashboard/organization/index.svelte";
-  import AdminUsers from "@src/pages/admin/dashboard/user/index.svelte";
   import { onMount } from "svelte";
   import { Middleware } from "./middleware";
   import { handleResize } from "./middleware/screen";
@@ -42,7 +40,5 @@
   <!-- Admin Routes -->
   <Router basepath="admin">
     <Route path="/dashboard" component={AdminDashboard} />
-    <Route path="/dashboard/organization" component={AdminOrganization} />
-    <Route path="/dashboard/user" component={AdminUsers} />
   </Router>
 </main>

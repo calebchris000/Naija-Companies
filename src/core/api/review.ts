@@ -1,6 +1,36 @@
 import axios from "axios";
 import { useEndpoint } from "../utils/utils";
 
+export const GetAllReviews = async ({ token }: { token: string }) => {
+  try {
+    const base_url = useEndpoint();
+    const response = await axios.get(`${base_url}/reviews/all`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const { data: d, status } = response;
+
+    return {
+      status,
+      data: d,
+    };
+  } catch (error: any) {
+    if (error?.response) {
+      return {
+        status: 403,
+        data: error.response?.data.message,
+      };
+    } else {
+      return {
+        status: 403,
+        data: String(error),
+      };
+    }
+  }
+};
+
 export const GetReviews = async ({
   token,
   organizationId,

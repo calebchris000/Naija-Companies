@@ -118,3 +118,24 @@ export const ResendOtp = async ({ userId }: { userId: string }) => {
     data: data as ResponseType,
   };
 };
+
+export const VerifyToken = async ({ token }: { token: string }) => {
+  const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
+
+  const response = await axios.post(
+    `${base_url}/user/verifyToken`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const { data, status } = response;
+
+  return {
+    status,
+    data: data as ResponseType,
+  };
+};

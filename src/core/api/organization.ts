@@ -6,14 +6,16 @@ export const GetOrganizations = async ({
   capitalId,
 }: {
   token: string;
-  getReviews: boolean;
-  capitalId: string;
+  getReviews?: boolean;
+  capitalId?: string;
 }) => {
   try {
     const query = getReviews ? "getReviews=true" : "";
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
     const response = await axios.get(
-      `${base_url}/organizations?${query}&capitalId=${capitalId}`,
+      `${base_url}/organizations?${query}${
+        capitalId ? `&capitalId=${capitalId}` : ""
+      }`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,6 +94,46 @@ export const AddOrganization = async ({
     const { data: d, status } = response;
 
     return { data: d, status };
+  } catch (error: any) {
+    if (error?.response) {
+      return {
+        status: 403,
+        data: error.response?.data.message,
+      };
+    } else {
+      return {
+        status: 403,
+        data: String(error),
+      };
+    }
+  }
+};
+
+export const AcceptOrReject = async ({
+  token,
+  organizationId,
+  action,
+}: {
+  token: string;
+  organizationId: string;
+  action: string;
+}) => {
+  try {
+    const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
+    const response = await axios.post(
+      `${base_url}/organizations/action`,
+      {
+        organizationId,
+        action,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const { status, data } = response;
+    return { status, data };
   } catch (error: any) {
     if (error?.response) {
       return {
