@@ -38,7 +38,7 @@
     statistics.users_unverified = not_verified.length;
   }
   async function getOrganizations() {
-    const res = await GetOrganizations({ token });
+    const res = await GetOrganizations({ token, verified: false });
     if (res.status !== 200) {
       return notification.error({
         text: "Could not get organizations at this time",
