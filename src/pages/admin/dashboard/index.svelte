@@ -115,8 +115,4 @@
   .main {
     font-family: "Rajdhani", sans-serif;
   }
-
-  .spaced {
-    letter-spacing: 0.5px;
-  }
 </style>
