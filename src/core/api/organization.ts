@@ -3,14 +3,17 @@ import axios from "axios";
 export const GetOrganizations = async ({
   token,
   getReviews,
+  verified,
   capitalId,
 }: {
   token: string;
   getReviews?: boolean;
+  verified?: boolean;
   capitalId?: string;
 }) => {
   try {
-    const query = getReviews ? "getReviews=true" : "";
+    let query = getReviews ? "getReviews=true" : "";
+    query = query + `&verified=${verified}`;
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
     const response = await axios.get(
       `${base_url}/organizations?${query}${
