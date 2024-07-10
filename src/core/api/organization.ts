@@ -108,3 +108,43 @@ export const AddOrganization = async ({
     }
   }
 };
+
+export const AcceptOrReject = async ({
+  token,
+  organizationId,
+  action,
+}: {
+  token: string;
+  organizationId: string;
+  action: string;
+}) => {
+  try {
+    const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
+    const response = await axios.post(
+      `${base_url}/organizations/action`,
+      {
+        organizationId,
+        action,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const { status, data } = response;
+    return { status, data };
+  } catch (error: any) {
+    if (error?.response) {
+      return {
+        status: 403,
+        data: error.response?.data.message,
+      };
+    } else {
+      return {
+        status: 403,
+        data: String(error),
+      };
+    }
+  }
+};

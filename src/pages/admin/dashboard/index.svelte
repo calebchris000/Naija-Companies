@@ -9,10 +9,14 @@
   import { GetUsers } from "@src/core/api/user";
   import { useToken } from "@src/core/utils/utils";
   import { Notification } from "@src/utils/notification";
-  import { GetOrganizations } from "@src/core/api/organization";
+  import { AcceptOrReject, GetOrganizations } from "@src/core/api/organization";
+  import TextArea from "@src/components/Input/TextArea.svelte";
 
   const token = useToken();
   const notification = new Notification();
+  $: all_organizations = [] as any[];
+  $: all_users = [] as any[];
+  $: unverified_organizations = [] as any[];
   $: statistics = {
     organizations_verified: 0,
     organizations_unverified: 0,
@@ -27,6 +31,7 @@
       return notification.error({ text: "Could not get users at this time" });
     }
     const users = res.data?.data as any[];
+    all_users = users;
     const verified = users.filter((u) => u.isVerified);
     const not_verified = users.filter((u) => !u.isVerified);
     statistics.users_verified = verified.length;
@@ -40,10 +45,29 @@
       });
     }
     const org = res.data?.data as any[];
+    all_organizations = org;
     const verified = org.filter((o) => o.verified);
     const not_verified = org.filter((o) => !o.verified);
+    unverified_organizations = not_verified.map((uo: any) => ({
+      id: uo.id,
+      name: uo.name,
+      website: uo.website,
+      email: uo.email,
+    }));
+    console.log(unverified_organizations);
+
     statistics.organizations_verified = verified.length;
     statistics.organizations_unverified = not_verified.length;
+  }
+
+  async function handleAction(d: any) {
+    console.log(d);
+    const { organizationId, action } = d;
+    const res = await AcceptOrReject({ token, organizationId, action });
+    if (res.status !== 200) {
+      return notification.error({ text: "Accept or reject failed" });
+    }
+    notification.success({ text: res.data?.message });
   }
 
   onMount(() => {
@@ -80,7 +104,12 @@
       <Notifications />
     </div>
     <div class="w-full h-full bg-gray-700 col-span-6 row-span-6">
-      <OrganizationRequest />
+      <OrganizationRequest
+        on:action={(e) => {
+          handleAction(e.detail);
+        }}
+        rows={unverified_organizations}
+      />
     </div>
     <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
     <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>

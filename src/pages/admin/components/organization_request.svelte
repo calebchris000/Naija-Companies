@@ -1,28 +1,42 @@
 <script lang="ts">
   import Cancel from "@src/assets/svg/cancel.svelte";
   import Check from "@src/assets/svg/check.svelte";
+  import { createEventDispatcher } from "svelte";
 
-  export let rows: any[] = [
-    {
-      name: "Gurugeeks LTD",
-      email: "gurugeeks@mail.com",
-      website: "gurugeeks.com",
-    },
-    {
-      name: "Marksman Enterprise",
-      email: "marksman@mail.com",
-      website: "marksman.com",
-    },
-  ];
-  export let columns: { title: string; label: string; url: boolean }[] = [
+  const dispatch = createEventDispatcher();
+
+  export let rows: any[] = [];
+  $: row_ids = rows.map((r) => r.id);
+  $: rows_edited = rows.map((r, i) => {
+    const { id, ...others } = r;
+    return { "s/n": i + 1, ...others };
+  });
+  $: console.log(rows, "is in");
+
+  export let columns: {
+    title: string;
+    label: string;
+    url: boolean;
+    type?: string;
+  }[] = [
     { title: "S/N", label: "s/n", url: false },
     { title: "Name", label: "name", url: false },
-    { title: "Website", label: "website", url: true },
-    { title: "Email Address", label: "email", url: true },
+    { title: "Website", label: "website", url: true, type: "https://" },
+    { title: "Email Address", label: "email", url: true, type: "mailto:" },
     { title: "Action", label: "action", url: false },
   ];
 
   function handleClick() {}
+  function handleAction({
+    index,
+    action,
+  }: {
+    index: number;
+    action: "approve" | "reject";
+  }) {
+    const id = row_ids[index];
+    dispatch("action", { organizationId: id, action });
+  }
 </script>
 
 <div class="p-6 flex flex-col gap-4">
@@ -37,26 +51,40 @@
       </tr>
     </thead>
     <tbody>
-      {#each rows as row, idx}
+      {#each rows_edited as row, idx}
         <tr class="">
-          <td>{idx + 1}</td>
-          {#each Object.values(row) as cell, idx}
-            <td role="button" on:click={handleClick} class="font-medium"
-              >{cell}</td
-            >
+          {#each columns as { title, label, url, type }}
+            {#if label !== "action"}
+              <td class="font-medium">
+                {#if url}
+                  <a target="_blank" href="{type}{row?.[label]}"
+                    >{row?.[label]}</a
+                  >
+                {:else}
+                  <span>{row?.[label]}</span>
+                {/if}
+              </td>
+            {:else}
+              <td>
+                <div class="flex items-center gap-2">
+                  <button
+                    on:click={() =>
+                      handleAction({ index: idx, action: "approve" })}
+                    type="button"
+                    class="w-8 h-8 rounded-full bg-green-500 overflow-hidden flex items-center justify-center"
+                    ><Check /></button
+                  >
+                  <button
+                    on:click={() =>
+                      handleAction({ index: idx, action: "reject" })}
+                    type="button"
+                    class="w-8 h-8 rounded-full bg-red-500 overflow-hidden flex items-center justify-center"
+                    ><Cancel className="w-3" />
+                  </button>
+                </div>
+              </td>
+            {/if}
           {/each}
-          <td>
-            <button class="flex items-center gap-2" type="button">
-              <span
-                class="w-8 h-8 rounded-full bg-green-500 overflow-hidden flex items-center justify-center"
-                ><Check /></span
-              >
-              <span
-                class="w-8 h-8 rounded-full bg-red-500 overflow-hidden flex items-center justify-center"
-                ><Cancel className="w-3" />
-              </span>
-            </button>
-          </td>
         </tr>
       {/each}
     </tbody>
