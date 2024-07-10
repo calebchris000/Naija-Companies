@@ -77,7 +77,7 @@
   });
 </script>
 
-<main class="bg-gray-900 w-screen h-screen text-white test">
+<main class="bg-gray-900 w-screen h-screen text-white main">
   <Navbar />
 
   <section
@@ -126,7 +126,7 @@
 </main>
 
 <style>
-  .test {
+  .main {
     font-family: "Rajdhani", sans-serif;
   }
 
