@@ -11,6 +11,7 @@
   import { Notification } from "@src/utils/notification";
   import { AcceptOrReject, GetOrganizations } from "@src/core/api/organization";
   import TextArea from "@src/components/Input/TextArea.svelte";
+  import UserList from "../components/user_list.svelte";
 
   const token = useToken();
   const notification = new Notification();
@@ -111,8 +112,9 @@
         rows={unverified_organizations}
       />
     </div>
-    <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
-    <div class="w-full h-full bg-gray-700 row-span-6 col-span-3"></div>
+    <div class="w-full h-full bg-gray-700 row-span-6 col-span-6">
+      <UserList />
+    </div>
     <div class="w-full h-full bg-gray-700 col-span-3 row-span-4"></div>
     <div class="w-full h-full bg-gray-700 col-span-3 row-span-4">
       <Time />

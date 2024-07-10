@@ -19,14 +19,17 @@
 
   function startInterval() {
     const id = setInterval(() => {
-    //   getTime();
-    }, 10000);
-       
+      //   getTime();
+      time = moment().format("HH:mm A");
+      date = moment().format("dddd, Do MMMM, YYYY");
+    }, 3000);
+
     return () => clearInterval(id);
   }
 
   onMount(() => {
     // getTime();
+    // startInterval()
   });
 </script>
 
