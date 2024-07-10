@@ -1,19 +1,24 @@
 <script lang="ts">
   import Cancel from "@src/assets/svg/cancel.svelte";
   import Check from "@src/assets/svg/check.svelte";
-  import { createEventDispatcher } from "svelte";
+  import { AcceptOrReject, GetOrganizations } from "@src/core/api/organization";
+  import { useToken } from "@src/core/utils/utils";
+  import { Notification } from "@src/utils/notification";
+  import { createEventDispatcher, onMount } from "svelte";
 
   const dispatch = createEventDispatcher();
+  const token = useToken();
+  const notification = new Notification();
 
-  export let rows: any[] = [];
-  $: row_ids = rows.map((r) => r.id);
-  $: rows_edited = rows.map((r, i) => {
+  $: all_organizations = [] as any[];
+  $: unverified_organizations = [] as any[];
+  $: row_ids = unverified_organizations.map((r) => r.id);
+  $: rows_edited = unverified_organizations.map((r, i) => {
     const { id, ...others } = r;
     return { "s/n": i + 1, ...others };
   });
-  $: console.log(rows, "is in");
 
-  export let columns: {
+  const columns: {
     title: string;
     label: string;
     url: boolean;
@@ -26,8 +31,24 @@
     { title: "Action", label: "action", url: false },
   ];
 
-  function handleClick() {}
-  function handleAction({
+  async function getOrganizations() {
+    const res = await GetOrganizations({ token });
+    if (res.status !== 200) {
+      return notification.error({
+        text: "Could not get organizations at this time",
+      });
+    }
+    const org = res.data?.data as any[];
+    all_organizations = org;
+    const not_verified = org.filter((o) => !o.verified);
+    unverified_organizations = not_verified.map((uo: any) => ({
+      id: uo.id,
+      name: uo.name,
+      website: uo.website,
+      email: uo.email,
+    }));
+  }
+  async function handleAction({
     index,
     action,
   }: {
@@ -35,8 +56,18 @@
     action: "approve" | "reject";
   }) {
     const id = row_ids[index];
-    dispatch("action", { organizationId: id, action });
+
+    const res = await AcceptOrReject({ token, organizationId: id, action });
+    if (res.status !== 200) {
+      return notification.error({ text: "Accept or reject failed" });
+    }
+    getOrganizations();
+    notification.success({ text: res.data?.message });
   }
+
+  onMount(() => {
+    getOrganizations();
+  });
 </script>
 
 <div class="p-6 flex flex-col gap-4">
