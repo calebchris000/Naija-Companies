@@ -13,7 +13,7 @@ export const GetOrganizations = async ({
 }) => {
   try {
     let query = getReviews ? "getReviews=true" : "";
-    query = query + `&verified=${verified ?? ""}`;
+    query = query + `&verified=${verified ?? false}`;
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
     const response = await axios.get(
       `${base_url}/organizations?${query}${
