@@ -43,7 +43,7 @@
 <div class="p-6 flex flex-col items-start gap-4">
   <span class="text-2xl font-medium text-center">NOTIFICATIONS</span>
 
-  <div class="flex flex-col gap-2 w-full overflow-y-auto h-[24rem]">
+  <div class="flex flex-col gap-2 w-full overflow-y-auto h-[20rem]">
     {#each notification_list as { value, read, date }}
       <button
         class="bg-gray-600 h-64 p-4 grid grid-cols-12 items-center py-2 w-full"

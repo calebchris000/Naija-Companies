@@ -61,13 +61,13 @@
 
 {#await VerifyToken({ token }) then { status, data }}
   {#if data.data?.privilege === "admin"}
-    <main class="bg-gray-900 w-screen h-screen text-white main">
+      <main class="bg-gray-900 w-screen overflow-x-hidden h-screen max-lg:h-full text-white main">
       <Navbar />
 
       <section
-        class="grid grid-cols-12 gap-4 grid-rows-12 pt-24 pb-4 px-5 h-screen border border-white"
+        class="max-md:flex max-md:flex-col md:grid 2xl:grid-cols-12 gap-4 2xl:grid-rows-12 pt-24 pb-4 px-5 h-screen  xl:grid-rows-3 xl:grid-cols-6 lg:grid-cols-4 lg:grid-rows-3"
       >
-        <div class="w-full h-full bg-gray-700 col-span-3 row-span-3">
+        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-3 xl:col-span-2">
           <Stat
             title="Total Organizations"
             value={[
@@ -80,7 +80,7 @@
           />
         </div>
         <div
-          class="w-full h-full bg-gray-700 row-start-4 row-span-3 col-span-3"
+          class="w-full h-full bg-gray-700 2xl:row-start-4 2xl:row-span-3 2xl:col-span-3 xl:col-span-2"
         >
           <Stat
             title="Total Users"
@@ -90,21 +90,21 @@
             ]}
           />
         </div>
-        <div class="w-full h-full bg-gray-700 col-span-3 row-span-6">
+        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-6 xl:col-span-2 xl:row-span-2 lg:col-span-2 lg:row-span-2">
           <Notifications />
         </div>
-        <div class="w-full h-full bg-gray-700 col-span-6 row-span-6">
+        <div class="w-full h-full bg-gray-700 2xl:col-span-6 2xl:row-span-6 xl:row-start-2 xl:col-span-3 lg:col-span-2">
           <OrganizationRequest />
         </div>
-        <div class="w-full h-full bg-gray-700 row-span-6 col-span-6">
+        <div class="w-full h-full bg-gray-700 2xl:row-span-6 2xl:col-span-6 xl:row-start-3 xl:col-span-3 lg:row-start-3 lg:col-span-2">
           <UserList />
         </div>
-        <div class="w-full h-full bg-gray-700 col-span-3 row-span-4"></div>
-        <div class="w-full h-full bg-gray-700 col-span-3 row-span-4">
+        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-4"></div>
+        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-4 xl:col-span-2">
           <Time />
         </div>
         <div
-          class="w-full h-full bg-gray-700 col-start-7 row-span-2 col-span-6"
+          class="w-full h-full bg-gray-700 2xl:col-start-7 2xl:row-span-2 2xl:col-span-6"
         ></div>
       </section>
     </main>
