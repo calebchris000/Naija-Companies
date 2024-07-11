@@ -94,8 +94,8 @@
 
 <section class="p-6 flex flex-col gap-4">
   <span class="text-2xl font-medium">USERS</span>
-  <div class="grid grid-cols-6 items-center gap-4 w-[28rem]">
-    <div class="w-full col-span-4">
+  <div class="grid grid-cols-6 max-md:grid-cols-1 max-md:w-full items-center gap-4 w-[28rem]">
+    <div class="w-full lg:col-span-4">
       <input
         on:input={handleSearch}
         class="w-full h-10 rounded-2xl outline-none bg-gray-300 text-gray-900 px-6 font-medium placeholder:text-gray-600 text-lg"
@@ -107,7 +107,7 @@
     </div>
     <select
       on:change={handleFilter}
-      class="w-full h-10 outline-none text-gray-600 font-medium rounded-2xl px-2 col-span-2 bg-gray-300"
+      class="w-full h-10 outline-none text-gray-600 font-medium rounded-2xl px-2 lg:col-span-2 bg-gray-300"
       name=""
       id=""
     >
@@ -118,6 +118,7 @@
       <option class="font-medium" value="2020">2020</option>
     </select>
   </div>
+
   <div class="w-full">
     {#if users_status === "pending"}
       <span>Loading Users</span>
@@ -125,23 +126,26 @@
       <span>Sorry. Could not fetch users</span>
     {:else if users_status === "success"}
       {#if filtered_users.length}
-        <section class="flex flex-col gap-2">
-          <div class="grid grid-cols-12 w-full">
-            {#each columns as column}
-              <span class="font-semibold" id={column.label}>{column.title}</span
-              >
-            {/each}
-          </div>
-          {#each filtered_users as u}
+        <div class="w-full overflow-x-auto">
+          <section class="flex flex-col gap-2 max-lg:w-[35rem]">
             <div class="grid grid-cols-12 w-full">
-              {#each columns as { label }}
-                <span class="font-medium" id={label}
-                  >{u?.[label]?.toUpperCase()}</span
+              {#each columns as column}
+                <span class="font-semibold" id={column.label}
+                  >{column.title}</span
                 >
               {/each}
             </div>
-          {/each}
-        </section>
+            {#each filtered_users as u}
+              <div class="grid grid-cols-12 w-full">
+                {#each columns as { label }}
+                  <span class="font-medium" id={label}
+                    >{u?.[label]?.toUpperCase()}</span
+                  >
+                {/each}
+              </div>
+            {/each}
+          </section>
+        </div>
       {:else}
         <span class="font-semibold text-lg">NO USERS</span>
       {/if}
