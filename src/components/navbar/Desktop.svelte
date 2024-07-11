@@ -31,7 +31,7 @@
     <img src={logo} alt="logo" />
   </button>
   <div class="flex gap-6">
-    {#if token}
+    {#if $store.user_role === "user"}
       <Link
         class="font-medium text-sm flex items-center gap-1"
         to="/home/capital"
@@ -46,6 +46,11 @@
       <Link class="font-medium text-sm flex items-center gap-2" to="/home/organization/add">
         <Building className="w-3" />
         <span>Add An Organization</span>
+      </Link>
+      {:else if $store.user_role === "admin"}
+      <Link class="font-medium text-sm flex items-center gap-2" to="/admin/dashboard">
+        <Building className="w-3" />
+        <span>Go To Dashboard</span>
       </Link>
     {:else}
       <Link class="font-medium text-sm" to="/home">About Us</Link>
