@@ -25,6 +25,7 @@
     | "pending";
 
   const columns = [
+    { title: "S/N", label: "s-n" },
     { title: "FULL NAME", label: "full_name" },
     { title: "EMAIL", label: "email" },
     { title: "JOINED", label: "joined" },
@@ -72,8 +73,9 @@
       return;
     }
 
-    const data: any[] = res.data.data.map((u: any) => {
+    const data: any[] = res.data.data.map((u: any, idx: number) => {
       return {
+        "s-n": String(idx + 1),
         full_name: `${u.firstName} ${u.lastName}`,
         joined: moment(u.createdAt).format("MMMM D, YYYY"),
         role: u.role.toUpperCase(),
@@ -94,7 +96,9 @@
 
 <section class="p-6 flex flex-col gap-4">
   <span class="text-2xl font-medium">USERS</span>
-  <div class="grid grid-cols-6 max-md:grid-cols-1 max-md:w-full items-center gap-4 w-[28rem]">
+  <div
+    class="grid grid-cols-6 max-md:grid-cols-1 max-md:w-full items-center gap-4 w-[28rem]"
+  >
     <div class="w-full lg:col-span-4">
       <input
         on:input={handleSearch}
@@ -127,16 +131,16 @@
     {:else if users_status === "success"}
       {#if filtered_users.length}
         <div class="w-full overflow-x-auto">
-          <section class="flex flex-col gap-2 max-lg:w-[35rem]">
-            <div class="grid grid-cols-12 w-full">
+          <section class="flex flex-col gap-2 max-lg:w-[40rem]">
+            <div
+              class="grid bg-gray-900 p-2 border-b border-gray-300 font-bold grid-cols-12 w-full"
+            >
               {#each columns as column}
-                <span class="font-semibold" id={column.label}
-                  >{column.title}</span
-                >
+                <span class="" id={column.label}>{column.title}</span>
               {/each}
             </div>
             {#each filtered_users as u}
-              <div class="grid grid-cols-12 w-full">
+              <div class="grid grid-cols-12 p-2 w-full border-b border-gray-300">
                 {#each columns as { label }}
                   <span class="font-medium" id={label}
                     >{u?.[label]?.toUpperCase()}</span
@@ -154,11 +158,14 @@
 </section>
 
 <style>
+  #s-n {
+    @apply col-span-1;
+  }
   #full_name {
     @apply col-span-3;
   }
   #email {
-    @apply col-span-6;
+    @apply col-span-5;
   }
   #joined {
     @apply col-span-2;
