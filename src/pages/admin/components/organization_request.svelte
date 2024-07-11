@@ -72,54 +72,55 @@
 
 <div class="p-6 flex flex-col gap-4">
   <span class="text-2xl font-medium">INCOMING ORGANIZATION REQUEST</span>
-
-  <table>
-    <thead>
-      <tr>
-        {#each columns as column}
-          <th>{column.title}</th>
-        {/each}
-      </tr>
-    </thead>
-    <tbody>
-      {#each rows_edited as row, idx}
-        <tr class="">
-          {#each columns as { title, label, url, type }}
-            {#if label !== "action"}
-              <td class="font-medium">
-                {#if url}
-                  <a target="_blank" href="{type}{row?.[label]}"
-                    >{row?.[label]}</a
-                  >
-                {:else}
-                  <span>{row?.[label]}</span>
-                {/if}
-              </td>
-            {:else}
-              <td>
-                <div class="flex items-center gap-2">
-                  <button
-                    on:click={() =>
-                      handleAction({ index: idx, action: "approve" })}
-                    type="button"
-                    class="w-8 h-8 rounded-full bg-green-500 overflow-hidden flex items-center justify-center"
-                    ><Check /></button
-                  >
-                  <button
-                    on:click={() =>
-                      handleAction({ index: idx, action: "reject" })}
-                    type="button"
-                    class="w-8 h-8 rounded-full bg-red-500 overflow-hidden flex items-center justify-center"
-                    ><Cancel className="w-3" />
-                  </button>
-                </div>
-              </td>
-            {/if}
+  <div class="w-full overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          {#each columns as column}
+            <th>{column.title}</th>
           {/each}
         </tr>
-      {/each}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {#each rows_edited as row, idx}
+          <tr class="">
+            {#each columns as { title, label, url, type }}
+              {#if label !== "action"}
+                <td class="font-medium">
+                  {#if url}
+                    <a target="_blank" href="{type}{row?.[label]}"
+                      >{row?.[label]}</a
+                    >
+                  {:else}
+                    <span>{row?.[label]}</span>
+                  {/if}
+                </td>
+              {:else}
+                <td>
+                  <div class="flex items-center gap-2">
+                    <button
+                      on:click={() =>
+                        handleAction({ index: idx, action: "approve" })}
+                      type="button"
+                      class="w-8 h-8 rounded-full bg-green-500 overflow-hidden flex items-center justify-center"
+                      ><Check /></button
+                    >
+                    <button
+                      on:click={() =>
+                        handleAction({ index: idx, action: "reject" })}
+                      type="button"
+                      class="w-8 h-8 rounded-full bg-red-500 overflow-hidden flex items-center justify-center"
+                      ><Cancel className="w-3" />
+                    </button>
+                  </div>
+                </td>
+              {/if}
+            {/each}
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <style>
