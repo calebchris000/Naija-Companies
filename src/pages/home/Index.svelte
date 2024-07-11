@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import Door from "@src/assets/svg/Door.svelte";
   import { navigate } from "svelte-routing";
+  import { store } from "@src/lib/store";
   const local_storage = new LocalStorage();
   const token = useToken();
 
@@ -32,13 +33,24 @@
 <section>
   <Navbar>
     <div class="mx-auto flex items-center justify-center gap-1 w-full">
-      {#if token}
+      {#if $store.user_role === "user"}
         <Pencil className="fill-orange-600 stroke-white w-4" />
         <button
           on:click={handleWrite}
           class="font-medium underline text-orange-600 p-0 text-nowrap"
           type="button">Write a Review</button
         >
+      {:else if $store.user_role === "admin"}
+        <div>
+          <button
+          on:click={handleGetStarted}
+          class="bg-orange-500 flex items-center justify-between p-2 px-4 gap-2 font-medium text-white rounded"
+          type="button"
+        >
+          <Door className="w-5" />
+          <span>Dashboard</span>
+        </button>
+        </div>
       {:else}
         <button
           on:click={handleGetStarted}
