@@ -12,8 +12,13 @@ export const HandleRoute = async () => {
     pathname[pathname.length - 1] === "/" ? pathname.slice(0, -2) : pathname;
   const split = path.split("/");
 
+  if(!split[1]) {
+    window.location.href = "home";
+    return
+  }
+  
   const res = await VerifyToken({ token });
-  if (res.status !== 200) {
+  if (res.status && res.status !== 200) {
     local.clear();
     navigate("/home");
     return;
@@ -21,18 +26,8 @@ export const HandleRoute = async () => {
 
   const role: "admin" | "user" | "sub-admin" = (res.data?.data as any)
     ?.privilege;
-  console.log(role);
 
   if (role === "user" && split[1] === "admin") {
     window.location.href = "/home";
   }
-  // if (split[split.length]) return;
-  // if (
-  //   split[1] === "home" &&
-  //   ["admin", "sub-admin"].includes(user.role as string)
-  // ) {
-  //   navigate("/admin/dashboard");
-  // } else if (token || (split[1] === "admin" && user.role === "user")) {
-  //   navigate("/home");
-  // }
 };
