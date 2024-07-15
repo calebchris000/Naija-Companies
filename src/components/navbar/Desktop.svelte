@@ -19,7 +19,7 @@
 </script>
 
 <nav
-  class="fixed w-full py-4 px-44 flex items-center z-50 justify-between gap-32 bg-white shadow-md"
+  class="fixed w-full py-4 px-44 flex items-center z-50 justify-between gap-32 bg-gray-900 text-white border-b"
 >
   <button
     type="button"
@@ -62,12 +62,12 @@
     {#if !token && show_right_action}
       <button
         on:click={handleGetStarted}
-        class="bg-orange-500 p-2 px-4 rounded-md font-medium text-white"
+        class="bg-yellow-500 text-black p-2 px-4 rounded-md font-semibold"
         type="button">Get Started</button
       >
     {:else if show_right_action}
       <button
-        class="bg-orange-500 p-2 flex gap-2 items-center px-4 rounded-md font-medium text-white"
+        class="bg-yellow-500 text-black p-2 flex gap-2 items-center px-4 rounded-md font-semibold"
         type="button"
         on:click={handleLogout}
         ><Logout className="w-6 rotate-180" />
