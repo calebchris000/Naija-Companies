@@ -17,7 +17,7 @@
       : organization_website;
 </script>
 
-<section class="h-[16rem] bg-gray-200 shadow-sm space-y-6 p-4 xl:w-full xl:p-6 xl:h-[80vh]">
+<section class="h-[16rem] bg-gray-800 text-white shadow-sm space-y-6 p-4 xl:w-full xl:p-6 xl:h-[80vh]">
   <div class="flex items-center gap-20">
     <div class="w-16 h-16 rounded-full overflow-hidden xl:w-28 xl:h-28">
       <img class="w-full" src={organization_logo} alt="organization_logo" />
