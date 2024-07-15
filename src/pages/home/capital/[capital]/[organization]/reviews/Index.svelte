@@ -151,7 +151,7 @@
   });
 </script>
 
-<section class="pt-20 xl:p-0">
+<section class="pt-20 xl:p-0 bg-gray-900">
   <Navbar>
     <button
       on:click={() => {
@@ -160,7 +160,7 @@
           href[href.length - 1] === "/" ? href.slice(0, -2) : href.slice(0, -1);
         navigate(_href);
       }}
-      class="text-orange-500 w-full justify-center p-1 transition-all flex items-center gap-2"
+      class="text-yellow-500 w-full justify-center p-1 transition-all flex items-center gap-2"
       type="button"
     >
       <span class="text-sm">Write a review</span>
@@ -224,7 +224,7 @@
           {/each}
         {:else}
           <span class="text-3xl text-gray-500 font-medium translate-y-10"
-            >Be the first to <button class="text-orange-500 underline" on:click={handleAddReview} type="button"
+            >Be the first to <button class="text-yellow-500 underline" on:click={handleAddReview} type="button"
               >add a review.</button
             >
           </span>
