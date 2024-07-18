@@ -32,7 +32,7 @@
   class="sticky top-0 w-full bg-primary h-24"
 >
   <!--* Desktop -->
-  <div class="hidden xl:flex items-center w-full h-full px-44 gap-20">
+  <div class="hidden xl:flex items-center w-full h-full px-32 gap-20">
     <div class="items-center hidden xl:flex">
       <img class="w-32" src={logo} alt="" />
     </div>
@@ -43,7 +43,7 @@
     </div>
     <div class="gap-4 items-center justify-self-end xl:flex ms-auto">
       <button
-        class=" bg-cto p-3 px-4 rounded-lg font-semibold text-primary"
+        class=" bg-cto p-2 px-4 rounded-lg font-semibold text-primary"
         type="button">Get Started</button
       >
       <button class="font-semibold text-cto" type="button">Log In</button>
