@@ -13,7 +13,7 @@
       insights on workplace experiences across diverse sectors.</span
     >
   </div>
-  <div class="grid max-md:grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 xl:gap-10">
+  <div class="grid max-sm:grid-cols-1 max-md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 xl:gap-10">
     {#each sector as { id, label, color }}
       <Pill {id} {label} {color} />
     {/each}

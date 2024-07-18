@@ -5,16 +5,16 @@
 
 <section class="w-full h-screen bg-primary flex justify-between p-4 py-10 xl:p-32 xl:py-20">
   <div class="w-full h-full flex flex-col gap-4 xl:w-[42rem]">
-    <span class="text-3xl leading-relaxed font-medium text-secondary text-center xl:text-start">
+    <span class="leading-relaxed text-4xl font-medium text-secondary text-center xl:text-start lg:text-3xl">
       Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
       Reviews
     </span>
-    <span class="text-secondary leading-loose text-sm text-center xl:text-start">
+    <span class="text-secondary leading-loose text-center xl:text-start lg:text-sm">
       Get honest insights from real Nigerian employees. Make informed career
       decisions based on genuine workplace experiences.
     </span>
 
-    <div class="bg-skyblue max-w-[42rem] h-12 flex items-center p-4 gap-4 rounded-lg mt-10">
+    <div class="bg-skyblue max-w-[42rem] flex h-16 items-center p-4 gap-4 rounded-lg mt-10 xl:h-12">
       <Search className="w-6 text-light" />
       <input
         class="text-light placeholder:text-light outline-none w-full bg-transparent"
