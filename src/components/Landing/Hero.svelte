@@ -3,7 +3,7 @@
   import Search from "@src/assets/svg/search.svelte";
 </script>
 
-<section class="w-full h-screen bg-primary flex justify-between p-4 py-10 xl:p-32">
+<section class="w-full h-screen bg-primary flex justify-between p-4 py-10 xl:p-32 xl:py-20">
   <div class="w-full h-full flex flex-col gap-4 xl:w-[42rem]">
     <span class="text-3xl leading-relaxed font-medium text-secondary text-center xl:text-start">
       Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
@@ -26,6 +26,6 @@
     </div>
   </div>
   <div class="w-full hidden xl:block">
-    <img class="ms-auto w-[20rem]" src={hero_review} alt="" />
+    <img class="ms-auto w-[28rem]" src={hero_review} alt="" />
   </div>
 </section>

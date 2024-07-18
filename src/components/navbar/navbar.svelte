@@ -43,7 +43,7 @@
     </div>
     <div class="gap-4 items-center justify-self-end xl:flex ms-auto">
       <button
-        class=" bg-cto p-2 px-4 rounded-lg font-semibold text-primary"
+        class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
         type="button">Get Started</button
       >
       <button class="font-semibold text-cto" type="button">Log In</button>
