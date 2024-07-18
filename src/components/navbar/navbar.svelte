@@ -2,14 +2,20 @@
   import logo from "@src/assets/svg/logo-no-background.png";
   import { Link } from "svelte-routing";
 
-  $: menu_open = true;
+  $: menu_open = false;
   $: screen_height = window.innerHeight;
+  $: scroll_y = 0;
+
   let menu_element: HTMLDivElement;
 
   function handleMenuToggle() {
     menu_open = !menu_open;
     console.log(menu_open);
   }
+
+  window.addEventListener("scroll", () => {
+    scroll_y = window.scrollY;
+  });
 
   window.addEventListener("resize", () => {
     setTimeout(() => {
@@ -21,7 +27,10 @@
   });
 </script>
 
-<nav class="fixed bg-primary h-24 w-screen">
+<nav
+  style="box-shadow: {scroll_y > 0 ? '0 1px 10px rgba(131, 143, 165, 0.5)' : ''};"
+  class="sticky top-0 w-full bg-primary h-24"
+>
   <!--* Desktop -->
   <div class="hidden xl:flex items-center w-full h-full px-44 gap-20">
     <div class="items-center hidden xl:flex">
