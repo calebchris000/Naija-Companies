@@ -99,7 +99,7 @@
           >Services</Link
         >
       </div>
-      <div>
+      <div class="flex flex-col gap-4">
         <Link class="text-[4rem] text-light font-semibold" to="/">Sign Up</Link>
         <Link class="text-[4rem] text-light font-semibold" to="/">Log In</Link>
       </div>

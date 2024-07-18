@@ -3,13 +3,13 @@
   import Search from "@src/assets/svg/search.svelte";
 </script>
 
-<section class="w-full h-screen bg-primary flex justify-between p-32 py-10">
-  <div class="w-[42rem] h-full flex flex-col gap-4">
-    <span class="text-3xl leading-relaxed font-medium text-secondary">
+<section class="w-full h-screen bg-primary flex justify-between p-4 py-10 xl:p-32">
+  <div class="w-full h-full flex flex-col gap-4 xl:w-[42rem]">
+    <span class="text-3xl leading-relaxed font-medium text-secondary text-center xl:text-start">
       Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
       Reviews
     </span>
-    <span class="text-secondary leading-loose text-sm">
+    <span class="text-secondary leading-loose text-sm text-center xl:text-start">
       Get honest insights from real Nigerian employees. Make informed career
       decisions based on genuine workplace experiences.
     </span>
@@ -25,7 +25,7 @@
       />
     </div>
   </div>
-  <div class="w-full">
+  <div class="w-full hidden xl:block">
     <img class="ms-auto w-[20rem]" src={hero_review} alt="" />
   </div>
 </section>
