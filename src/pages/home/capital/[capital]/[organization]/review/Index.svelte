@@ -2,7 +2,7 @@
   import Editor from "@src/components/editor/Editor.svelte";
   import Review from "@src/components/review/Review.svelte";
   import Action from "@src/components/action/action.svelte";
-  import Navbar from "@src/components/navbar/Index.svelte";
+  import Navbar from "@src/components/navbar/navbar.svelte";
   import { Notification } from "@src/utils/notification";
   import {
     useLocalStorage,

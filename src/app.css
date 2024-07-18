@@ -15,7 +15,14 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary: "#b4c5e4";
+  --secondary: "#3c3744";
+  --cto: "#090c9b";
+  --skyblue: "#3d52d5";
+  --light: "#fbfff1"
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -35,14 +42,14 @@ input[type="number"] {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the tracking area */
+  background: #b4c5e4; /* Color of the tracking area */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f97316; /* Color of the scroll thumb */
+  background: #3c3744; /* Color of the scroll thumb */
   border-radius: 10px; /* Roundness of the scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #dd5c00; /* Color of the scroll thumb on hover */
+  background: #3c3744; /* Color of the scroll thumb on hover */
 }

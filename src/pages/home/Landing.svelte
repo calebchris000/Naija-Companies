@@ -1,17 +1,13 @@
 <script lang="ts">
-  import BestAndWorst from "@src/components/Landing/BestAndWorst.svelte";
-  import Footer from "@src/components/Landing/Footer.svelte";
-import Hero from "@src/components/Landing/Hero.svelte";
-
-
+  import Hero from "@src/components/Landing/hero.svelte";
+  import Navbar from "@src/components/navbar/navbar.svelte";
 </script>
 
 <section class="">
-    <Hero />
-    <BestAndWorst />
-    <Footer />
-</section>
+  <Navbar />
+  <Hero />
 
+</section>
 
 <svelte:head>
   <title>Naija Companies - Home</title>

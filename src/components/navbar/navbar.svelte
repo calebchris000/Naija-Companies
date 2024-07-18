@@ -29,7 +29,7 @@
 
 <nav
   style="box-shadow: {scroll_y > 0 ? '0 1px 10px rgba(131, 143, 165, 0.5)' : ''};"
-  class="sticky top-0 w-full bg-primary h-24"
+  class="sticky top-0 w-full bg-primary h-20"
 >
   <!--* Desktop -->
   <div class="hidden xl:flex items-center w-full h-full px-32 gap-20">

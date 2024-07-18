@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Navbar from "@src/components/navbar/Index.svelte";
+  import Navbar from "@src/components/navbar/navbar.svelte";
   import Action from "@src/components/action/action.svelte";
   import Company from "./Company.svelte";
   import { Link, navigate } from "svelte-routing";

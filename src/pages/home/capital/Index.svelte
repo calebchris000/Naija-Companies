@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Navbar from "@src/components/navbar/Index.svelte";
+  import Navbar from "@src/components/navbar/navbar.svelte";
   import Capital from "./Capital.svelte";
   import { capitals } from "@src/lib/capitals";
   import Action from "@src/components/action/action.svelte";
