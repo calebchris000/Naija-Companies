@@ -7,6 +7,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 :root {
   font-family: Poppins, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -46,7 +49,7 @@ input[type="number"] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3c3744; /* Color of the scroll thumb */
+  background: #f97316; /* Color of the scroll thumb */
   border-radius: 10px; /* Roundness of the scroll thumb */
 }
 

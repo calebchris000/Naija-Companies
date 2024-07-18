@@ -113,7 +113,7 @@
   });
 </script>
 
-<section class="pt-20 xl:p-0">
+<section class="pt-20 xl:p-0 bg-gray-900">
   <Navbar>
     <button
       on:click={() => {
@@ -122,7 +122,7 @@
           href[href.length - 1] === "/" ? href.slice(0, -1) + "s" : href + "s";
         navigate(_href);
       }}
-      class="text-orange-500 w-full justify-center p-1 transition-all flex items-center gap-2"
+      class="text-yellow-500 w-full justify-center p-1 transition-all flex items-center gap-2"
       type="button"
     >
       <span class="text-sm">View all reviews</span>
@@ -143,7 +143,7 @@
         }}
       />
       <button
-        class="bg-blue-500 text-white w-fit mx-auto p-2 px-4 rounded-sm xl:w-full xl:rounded-xl xl:py-4"
+        class="bg-yellow-500 font-semibold w-fit mx-auto p-2 px-4 rounded-sm xl:w-full xl:rounded-xl xl:py-4"
         on:click={() => {
           saveItem();
         }}
