@@ -1,5 +1,6 @@
 <script lang="ts">
-  import Hero from "@src/components/Landing/hero.svelte";
+  import BestRated from "@src/components/Landing/components/best-rated.svelte";
+import Hero from "@src/components/Landing/hero.svelte";
   import Sector from "@src/components/Landing/sector.svelte";
   import Stats from "@src/components/Landing/stats.svelte";
   import Navbar from "@src/components/navbar/navbar.svelte";
@@ -10,6 +11,7 @@
   <Hero />
   <Stats />
   <Sector />
+  <BestRated />
 </section>
 
 <svelte:head>
