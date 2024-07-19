@@ -7,6 +7,7 @@
   $: scroll_y = 0;
 
   let menu_element: HTMLDivElement;
+  let nav_element: HTMLElement;
 
   function handleMenuToggle() {
     menu_open = !menu_open;
@@ -28,8 +29,11 @@
 </script>
 
 <nav
-  style="box-shadow: {scroll_y > 0 ? '0 1px 10px rgba(131, 143, 165, 0.5)' : ''};"
-  class="sticky top-0 w-full bg-primary h-20"
+  bind:this={nav_element}
+  style="box-shadow: {scroll_y > 0
+    ? '0 1px 10px rgba(131, 143, 165, 0.5)'
+    : ''}; z-index: {scroll_y > 0 ? '100' : '0'}"
+  class="sticky top-0 w-full bg-primary h-20 transition-all"
 >
   <!--* Desktop -->
   <div class="hidden xl:flex items-center w-full h-full px-32 gap-20">

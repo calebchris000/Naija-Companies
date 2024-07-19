@@ -10,9 +10,12 @@
   <Hero />
   <Stats />
   <Sector />
-
 </section>
 
 <svelte:head>
   <title>Naija Companies - Home</title>
 </svelte:head>
+
+<style>
+ 
+</style>

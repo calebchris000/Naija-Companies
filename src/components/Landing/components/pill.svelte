@@ -6,7 +6,7 @@
 
 <div
   {id}
-  class="grid grid-cols-12 h-16 rounded-lg w-full items-center overflow-hidden bg-white xl:max-w-[40vw]"
+  class="grid grid-cols-12 h-16 z-10 rounded-lg w-full items-center overflow-hidden bg-light border border-primary xl:max-w-[40vw]"
 >
   <span style="background-color: {color};" class="h-full w-full col-span-1"
   ></span>
