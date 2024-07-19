@@ -113,7 +113,7 @@
   });
 </script>
 
-<section class="pt-20 xl:p-0 bg-gray-900">
+<section class="pt-20 lg:p-0 bg-gray-900">
   <Navbar>
     <button
       on:click={() => {
@@ -129,21 +129,21 @@
       <ReviewOutline className="w-4" />
     </button>
   </Navbar>
-  <div class="py-4 xl:pt-20">
+  <div class="py-4 lg:pt-20">
     <Action custom_path="/home" title="Write Your Review" />
   </div>
 
   <div
-    class="px-4 flex flex-col gap-4 xl:w-[80vw] xl:mx-auto xl:flex-row xl:justify-between xl:gap-20"
+    class="px-4 flex flex-col gap-4 lg:w-[80vw] lg:mx-auto lg:flex-row lg:justify-between lg:gap-20"
   >
-    <div class="flex flex-col gap-4 xl:w-full">
+    <div class="flex flex-col gap-4 lg:w-full">
       <Editor
         on:save={(e) => {
           handleSave(e.detail);
         }}
       />
       <button
-        class="bg-yellow-500 font-semibold w-fit mx-auto p-2 px-4 rounded-sm xl:w-full xl:rounded-xl xl:py-4"
+        class="bg-yellow-500 font-semibold w-fit mx-auto p-2 px-4 rounded-sm lg:w-full lg:rounded-xl lg:py-4"
         on:click={() => {
           saveItem();
         }}
@@ -152,7 +152,7 @@
     </div>
 
     <div
-      class=" flex flex-col gap-4 xl:w-full xl:mt-10 xl:h-[85vh] xl:overflow-y-scroll"
+      class=" flex flex-col gap-4 lg:w-full lg:mt-10 lg:h-[85vh] lg:overflow-y-scroll"
     >
       {#each reviews as { id, fullName, star, content, userReaction, userId, user_review }}
         <Review

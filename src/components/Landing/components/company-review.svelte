@@ -26,7 +26,7 @@
   <!--* Divider  -->
 
   <!--* Ratings  -->
-  <div class="grid grid-cols-1 gap-5 xl:gap-8 xl:grid-cols-2">
+  <div class="grid grid-cols-1 gap-5 lg:gap-8 lg:grid-cols-2">
     {#each rating as { label, percent }}
       <div class="space-y-2">
         <span class="font-normal text-sm text-light">{label}</span>

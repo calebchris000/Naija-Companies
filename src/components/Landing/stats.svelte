@@ -2,7 +2,7 @@
 </script>
 
 <section
-  class="shapedividers_com-3867 w-full h-full gap-20 bg-white text-secondary flex flex-col items-center px-32 py-40 pb-20 justify-between xl:flex-row xl:py-0 xl:h-[50vh] xl:gap-0"
+  class="shapedividers_com-3867 w-full h-full gap-20 bg-white text-secondary flex flex-col items-center px-32 py-40 pb-20 justify-between lg:flex-row lg:py-0 lg:h-[50vh] lg:gap-0"
 >
   <div
     class="flex flex-col justify-center gap-1 leading-tight lg:gap-2 items-center"

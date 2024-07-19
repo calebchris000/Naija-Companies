@@ -122,7 +122,7 @@
     </div>
   {:else}
     <div
-      class="xl:grid xl:grid-cols-2 xl:pt-28 xl:gap-4 xl:w-[85vw] xl:mx-auto"
+      class="lg:grid lg:grid-cols-2 lg:pt-28 lg:gap-4 lg:w-[85vw] lg:mx-auto"
     >
       {#if !is_mobile}
         <div
@@ -138,7 +138,7 @@
         </div>
       {/if}
       <div
-        class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[75vh] xl:h-[80vh]"
+        class="grid grid-cols-2 px-4 gap-2 overflow-y-scroll h-[75vh] lg:h-[80vh]"
       >
         {#each capitals_list as { id, name, color, image, numberOfCompanies }}
           <Capital

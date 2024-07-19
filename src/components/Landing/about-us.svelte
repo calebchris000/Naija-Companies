@@ -5,7 +5,7 @@
 
 
 
-<section class="xl:h-screen xl:w-full">
+<section class="lg:h-screen lg:w-full">
     <div></div>
     <div></div>
 </section>

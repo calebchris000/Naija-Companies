@@ -36,16 +36,16 @@
   class="sticky top-0 w-full bg-primary h-20 transition-all"
 >
   <!--* Desktop -->
-  <div class="hidden xl:flex items-center w-full h-full px-32 gap-20">
-    <div class="items-center hidden xl:flex">
+  <div class="hidden lg:flex items-center w-full h-full px-32 gap-20">
+    <div class="items-center hidden lg:flex">
       <img class="w-32" src={logo} alt="" />
     </div>
-    <div class="items-center gap-10 font-medium text-secondary xl:flex">
+    <div class="items-center gap-10 font-medium text-secondary lg:flex">
       <Link to="/">Blog</Link>
       <Link to="/">Features</Link>
       <Link to="/">Services</Link>
     </div>
-    <div class="gap-4 items-center justify-self-end xl:flex ms-auto">
+    <div class="gap-4 items-center justify-self-end lg:flex ms-auto">
       <button
         class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
         type="button">Get Started</button
@@ -57,7 +57,7 @@
 
   <!--* Mobile -->
   <div
-    class="w-full h-full px-4 flex relative items-center justify-end xl:hidden"
+    class="w-full h-full px-4 flex relative items-center justify-end lg:hidden"
   >
     <img
       class="w-32 absolute left-[50%] translate-x-[-50%]"

@@ -4,24 +4,24 @@
 </script>
 
 <section
-  class="hero w-full separator h-screen xl:h-[85vh] bg-primary flex justify-between p-4 py-10 xl:p-32 xl:py-20 pb-0 xl:pb-0"
+  class="hero w-full separator h-screen lg:h-[85vh] bg-primary flex justify-between p-4 py-10 lg:p-32 lg:py-20 pb-0 lg:pb-0"
 >
-  <div class="w-full h-full flex flex-col gap-4 xl:w-[42rem] z-10">
+  <div class="w-full h-full flex flex-col gap-4 lg:w-[42rem] z-10">
     <span
-      class="leading-relaxed text-4xl font-medium text-secondary text-center xl:text-start lg:text-3xl"
+      class="leading-relaxed text-4xl font-medium text-secondary text-center lg:text-start lg:text-3xl"
     >
       Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
       Reviews
     </span>
     <span
-      class="text-secondary leading-loose text-center xl:text-start lg:text-sm"
+      class="text-secondary leading-loose text-center lg:text-start lg:text-sm"
     >
       Get honest insights from real Nigerian employees. Make informed career
       decisions based on genuine workplace experiences.
     </span>
 
     <div
-      class="bg-skyblue max-w-[42rem] flex h-16 items-center p-4 gap-4 rounded-lg mt-10 xl:h-12"
+      class="bg-skyblue max-w-[42rem] flex h-16 items-center p-4 gap-4 rounded-lg mt-10 lg:h-12"
     >
       <Search className="w-6 text-light" />
       <input
@@ -33,7 +33,7 @@
       />
     </div>
   </div>
-  <div class="w-full hidden xl:block z-10">
+  <div class="w-full hidden lg:block z-10">
     <img class="ms-auto w-[28rem]" src={hero_review} alt="" />
   </div>
 </section>

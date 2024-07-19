@@ -17,30 +17,30 @@
       : organization_website;
 </script>
 
-<section class="h-[16rem] bg-gray-800 text-white shadow-sm space-y-6 p-4 xl:w-full xl:p-6 xl:h-[80vh]">
+<section class="h-[16rem] bg-gray-800 text-white shadow-sm space-y-6 p-4 lg:w-full lg:p-6 lg:h-[80vh]">
   <div class="flex items-center gap-20">
-    <div class="w-16 h-16 rounded-full overflow-hidden xl:w-28 xl:h-28">
+    <div class="w-16 h-16 rounded-full overflow-hidden lg:w-28 lg:h-28">
       <img class="w-full" src={organization_logo} alt="organization_logo" />
     </div>
 
     <div class="flex flex-col">
-      <span class="font-medium text-lg xl:text-4xl xl:font-semibold">{organization_name}</span>
-      <span style="color: {star_color}" class="text-xl xl:text-4xl">{stars}</span>
+      <span class="font-medium text-lg lg:text-4xl lg:font-semibold">{organization_name}</span>
+      <span style="color: {star_color}" class="text-xl lg:text-4xl">{stars}</span>
 
       {#if organization_website}
         <a
           target="_blank"
           href={website}
-          class="text-blue-600 text-sm flex items-center gap-2 xl:text-lg"
+          class="text-blue-600 text-sm flex items-center gap-2 lg:text-lg"
         >
           <span>Visit Website</span>
-          <LinkIcon className="text-blue-500 w-4 xl:w-6" />
+          <LinkIcon className="text-blue-500 w-4 lg:w-6" />
         </a>
       {/if}
     </div>
   </div>
   <div
-    class="border-t border-gray-300 py-2 font-normal text-sm max-h-[8rem] overflow-y-scroll xl:text-lg xl:max-h-[40vh] xl:overflow-auto"
+    class="border-t border-gray-300 py-2 font-normal text-sm max-h-[8rem] overflow-y-scroll lg:text-lg lg:max-h-[40vh] lg:overflow-auto"
   >
     <span>{organization_description}</span>
   </div>

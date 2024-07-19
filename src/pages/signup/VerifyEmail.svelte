@@ -134,7 +134,7 @@
       <span class="text-2xl font-semibold">Verify Email Address</span>
     {/if}
   </div>
-  <div class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem] xl:w-[30vw] xl:mx-auto">
+  <div class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem] lg:w-[30vw] lg:mx-auto">
     <img class="w-[70%] mx-auto mb-5 rounded-3xl" src={man_otp} alt="" />
     <Input
       on:input={(data) => {
