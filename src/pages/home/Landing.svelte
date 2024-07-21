@@ -1,5 +1,6 @@
 <script lang="ts">
-  import BestRated from "@src/components/Landing/best-rated.svelte";
+  import AboutUs from "@src/components/Landing/about-us.svelte";
+import BestRated from "@src/components/Landing/best-rated.svelte";
   import Hero from "@src/components/Landing/hero.svelte";
   import Sector from "@src/components/Landing/sector.svelte";
   import Stats from "@src/components/Landing/stats.svelte";
@@ -12,6 +13,7 @@
   <Stats />
   <Sector />
   <BestRated />
+  <AboutUs />
 </section>
 
 <svelte:head>
