@@ -1,8 +1,9 @@
 <script lang="ts">
+    import Pencil from "@src/assets/svg/Pencil.svelte";
 </script>
 
 <section
-    class="lg:max-h-[200vh] lg:w-full h-fit bg-secondary space-y-10 shapedividers_com-3867 mb-32 py-40"
+    class="lg:max-h-[280vh] lg:w-full h-fit bg-secondary space-y-10 shapedividers_com-3867 py-40"
 >
     <span
         class="text-3xl text-light text-center flex justify-center font-medium"
@@ -59,6 +60,23 @@
                 about your career. Together, we can make a difference in the
                 Nigerian business world.</span
             >
+        </div>
+        <div class="col-span-3 mt-16 text-light flex flex-col gap-4">
+            <span class="text-3xl font-semibold">OUR VISION</span>
+            <span class="leading-loose text-lg"
+                >We aim to create a more transparent, fair, and thriving
+                Nigerian business landscape. By empowering individuals with
+                information, we hope to encourage companies to improve their
+                practices and recognize those already doing right by their
+                employees and customers.</span
+            >
+            <button
+                class="self-start mt-5 1-full flex items-center bg-skyblue p-3 px-4 gap-4 rounded-lg"
+                type="button"
+            >
+                <span class="font-semibold">Write A Review</span>
+                <Pencil className="w-6" />
+            </button>
         </div>
     </section>
 </section>
