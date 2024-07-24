@@ -59,7 +59,7 @@
     <span class="font-medium text-orange-600 translate-y-2">Slide on the stars to review</span>
   {/if}
   <span style="color: {star_color}" class="text-3xl">{stars}</span>
-  <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0 xl:top-10">
+  <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0 lg:top-10">
     <input
       on:change={handleChange}
       on:input={handleChange}
@@ -70,7 +70,7 @@
     />
   </div>
   <div
-    class="px-4 w-full border border-gray-400 max-h-44 overflow-auto xl:max-h-[24rem]"
+    class="px-4 w-full border border-gray-400 max-h-44 overflow-auto lg:max-h-[24rem]"
     id="editor_parent"
   ></div>
 </section>

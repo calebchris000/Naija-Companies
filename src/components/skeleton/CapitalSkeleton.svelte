@@ -5,7 +5,7 @@
 </script>
 
 <section
-  class="xl:grid xl:grid-cols-2 xl:pt-28 xl:gap-4 xl:w-[85vw] xl:mx-auto h-[85vh]"
+  class="lg:grid lg:grid-cols-2 lg:pt-28 lg:gap-4 lg:w-[85vw] lg:mx-auto h-[85vh]"
 >
   <div class="grid grid-cols-2 max-md:h-[75vh] gap-2 overflow-y-scroll w-full">
     {#each thirty_six_content as _}

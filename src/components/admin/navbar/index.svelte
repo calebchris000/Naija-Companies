@@ -15,7 +15,7 @@
       <span class="w-5 h-5 block absolute overflow-hidden -top-3 -right-3 rounded-full bg-red-500">1</span>
     </button>
     <button
-      class="bg-orange-500 p-2 flex gap-2 items-center px-4 rounded-md font-medium text-white"
+      class="bg-yellow-500 p-2 flex gap-2 items-center px-4 rounded-md font-medium text-white"
       type="button"
       on:click={handleLogout}
       ><Logout className="w-6 rotate-180" />

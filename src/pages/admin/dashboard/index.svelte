@@ -65,9 +65,9 @@
       <Navbar />
 
       <section
-        class="max-md:flex max-md:flex-col md:grid 2xl:grid-cols-12 gap-4 2xl:grid-rows-12 pt-24 pb-4 px-5 h-screen  xl:grid-rows-3 xl:grid-cols-6 lg:grid-cols-4 lg:grid-rows-3"
+        class="max-md:flex max-md:flex-col md:grid 2lg:grid-cols-12 gap-4 2lg:grid-rows-12 pt-24 pb-4 px-5 h-screen  lg:grid-rows-3 lg:grid-cols-6 lg:grid-cols-4 lg:grid-rows-3"
       >
-        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-3 xl:col-span-2">
+        <div class="w-full h-full bg-gray-700 2lg:col-span-3 2lg:row-span-3 lg:col-span-2">
           <Stat
             title="Total Organizations"
             value={[
@@ -80,7 +80,7 @@
           />
         </div>
         <div
-          class="w-full h-full bg-gray-700 2xl:row-start-4 2xl:row-span-3 2xl:col-span-3 xl:col-span-2"
+          class="w-full h-full bg-gray-700 2lg:row-start-4 2lg:row-span-3 2lg:col-span-3 lg:col-span-2"
         >
           <Stat
             title="Total Users"
@@ -90,21 +90,21 @@
             ]}
           />
         </div>
-        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-6 xl:col-span-2 xl:row-span-2 lg:col-span-2 lg:row-span-2">
+        <div class="w-full h-full bg-gray-700 2lg:col-span-3 2lg:row-span-6 lg:col-span-2 lg:row-span-2 lg:col-span-2 lg:row-span-2">
           <Notifications />
         </div>
-        <div class="w-full h-full bg-gray-700 2xl:col-span-6 2xl:row-span-6 xl:row-start-2 xl:col-span-3 lg:col-span-2">
+        <div class="w-full h-full bg-gray-700 2lg:col-span-6 2lg:row-span-6 lg:row-start-2 lg:col-span-3 lg:col-span-2">
           <OrganizationRequest />
         </div>
-        <div class="w-full h-full bg-gray-700 2xl:row-span-6 2xl:col-span-6 xl:row-start-3 xl:col-span-3 lg:row-start-3 lg:col-span-2">
+        <div class="w-full h-full bg-gray-700 2lg:row-span-6 2lg:col-span-6 lg:row-start-3 lg:col-span-3 lg:row-start-3 lg:col-span-2">
           <UserList />
         </div>
-        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-4"></div>
-        <div class="w-full h-full bg-gray-700 2xl:col-span-3 2xl:row-span-4 xl:col-span-2">
+        <div class="w-full h-full bg-gray-700 2lg:col-span-3 2lg:row-span-4"></div>
+        <div class="w-full h-full bg-gray-700 2lg:col-span-3 2lg:row-span-4 lg:col-span-2">
           <Time />
         </div>
         <div
-          class="w-full h-full bg-gray-700 2xl:col-start-7 2xl:row-span-2 2xl:col-span-6"
+          class="w-full h-full bg-gray-700 2lg:col-start-7 2lg:row-span-2 2lg:col-span-6"
         ></div>
       </section>
     </main>

@@ -273,7 +273,7 @@
     </div>
   {/if}
   <div
-    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-gray-100 rounded-xl xl:translate-y-36 xl:w-[30vw] xl:mx-auto"
+    class="px-6 py-5 mx-4 flex flex-col gap-10 bg-gray-100 rounded-xl lg:translate-y-36 lg:w-[30vw] lg:mx-auto"
   >
     <input
       on:input={handleFileInput}
@@ -298,14 +298,14 @@
         show_tooltip = create_status === "not_created";
       }}
       type="button"
-      class="flex relative rounded-full bg-blue-500 w-fit mx-auto flex-col gap-2 items-center xl:w-32 xl:h-32"
+      class="flex relative rounded-full bg-blue-500 w-fit mx-auto flex-col gap-2 items-center lg:w-32 lg:h-32"
     >
       <div
-        class="bg-blue-100 transition-all border-2 border-transparent hover:border-orange-500 rounded-full flex items-center justify-center overflow-hidden w-20 h-20 xl:w-32 xl:h-32"
+        class="bg-blue-100 transition-all border-2 border-transparent hover:border-orange-500 rounded-full flex items-center justify-center overflow-hidden w-20 h-20 lg:w-32 lg:h-32"
       >
         <img
           bind:this={image_element}
-          class="w-10 xl:w-16 mx-auto"
+          class="w-10 lg:w-16 mx-auto"
           src={building}
           alt=""
         />
@@ -317,12 +317,12 @@
       >
     </button>
     <div
-      class="h-[35vh] overflow-y-scroll flex flex-col gap-4 xl:grid xl:grid-cols-2"
+      class="h-[35vh] overflow-y-scroll flex flex-col gap-4 lg:grid lg:grid-cols-2"
     >
       {#each inputValue as { type, label, list, onOpen, placeholder, icon }}
         {#if type === "select"}
           <Select
-            icon_class="xl:w-5"
+            icon_class="lg:w-5"
             custom_empty_message={label === "city" ? "Select a capital" : ""}
             on:item_click={(e) => {
               const { id, name } = e.detail;
@@ -366,7 +366,7 @@
         {/if}
       {/each}
       <TextArea
-        icon_class="xl:w-5"
+        icon_class="lg:w-5"
         Icon={Description}
         on:input={(data) => {
           const { label, value } = data.detail;
@@ -391,7 +391,7 @@
         ? 'none'
         : 'auto'}
             "
-      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white xl:w-fit xl:px-20 xl:mx-auto"
+      class="p-4 w-full block transition-all rounded-xl bg-orange-600 font-medium mt-5 text-white lg:w-fit lg:px-20 lg:mx-auto"
       type="button"
       >{create_status === "pending"
         ? "Adding Company, please wait..."

@@ -14,10 +14,10 @@ export const Auth = () => {
 function handleAuth() {
   const token = useToken();
   const { pathname } = window.location;
-  const valid_routes = ["/signup", "/login"];
+  const valid_routes = ["/signup", "/login", "/home"];
 
   if (!token && !valid_routes.includes(pathname)) {
-    navigate("/login");
+    navigate("/home");
   }
 }
 
@@ -29,7 +29,7 @@ export const getUserRole = async () => {
     console.log("Could not verify token");
   } else {
     const { privilege } = res.data?.data;
-    console.log(privilege)
+    console.log(privilege);
     store.update((c) => {
       c.user_role = privilege;
       return c;

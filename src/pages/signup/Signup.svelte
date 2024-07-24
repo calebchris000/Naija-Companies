@@ -93,7 +93,7 @@
   }
 </script>
 
-<section class="space-y-8 xl:w-[30vw] xl:mx-auto xl:mt-20">
+<section class="space-y-8 lg:w-[30vw] lg:mx-auto lg:mt-20">
   {#if $store.device === "mobile"}
     <div class="flex items-center gap-6 mx-4 mt-10">
       <Action custom_path="/home" title="Create a new account" />

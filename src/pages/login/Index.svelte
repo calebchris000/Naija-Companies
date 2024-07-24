@@ -79,7 +79,7 @@
   }
 </script>
 
-<section class="space-y-8 xl:space-y-0">
+<section class="space-y-8 lg:space-y-0">
   {#if $store.device === "mobile"}
     <div class="flex items-center gap-6 mx-4 mt-10">
       <Action custom_path="/home" title="Sign in your account" />
@@ -89,7 +89,7 @@
     <div></div>
   </Navbar>
   <div
-    class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem] xl:w-[30vw] xl:mx-auto xl:translate-y-32"
+    class="px-6 py-5 mx-4 flex flex-col gap-4 bg-orange-50 rounded-[1.6rem] lg:w-[30vw] lg:mx-auto lg:translate-y-32"
   >
     <img class="w-[50%] mx-auto rounded-3xl" src={man_on_pc} alt="" />
     <Input

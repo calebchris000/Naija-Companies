@@ -151,7 +151,7 @@
   });
 </script>
 
-<section class="pt-20 xl:p-0">
+<section class="pt-20 lg:p-0 bg-gray-900">
   <Navbar>
     <button
       on:click={() => {
@@ -160,19 +160,19 @@
           href[href.length - 1] === "/" ? href.slice(0, -2) : href.slice(0, -1);
         navigate(_href);
       }}
-      class="text-orange-500 w-full justify-center p-1 transition-all flex items-center gap-2"
+      class="text-yellow-500 w-full justify-center p-1 transition-all flex items-center gap-2"
       type="button"
     >
       <span class="text-sm">Write a review</span>
       <Pencil className="w-3" />
     </button>
   </Navbar>
-  <div class="py-4 xl:pt-32">
+  <div class="py-4 lg:pt-32">
     <Action custom_path="/home" title="" />
   </div>
 
   <div
-    class="px-4 flex flex-col gap-4 xl:flex-row xl:gap-20 xl:w-[85vw] xl:mx-auto"
+    class="px-4 flex flex-col gap-4 lg:flex-row lg:gap-20 lg:w-[85vw] lg:mx-auto"
   >
     <CompanyDetail
       organization_name={organization_info.name}
@@ -183,7 +183,7 @@
     />
 
     <div class="flex flex-col gap-4 w-full">
-      <div class="py-5 flex items-center justify-between gap-8 xl:py-0">
+      <div class="py-5 flex items-center justify-between gap-8 lg:py-0">
         <Select
           on:item_click={(e) => {
             filter_by.year = e.detail.name;
@@ -207,7 +207,7 @@
           icon={month}
         />
       </div>
-      <div class="flex flex-col gap-4 xl:h-[75vh] overflow-y-scroll">
+      <div class="flex flex-col gap-4 lg:h-[75vh] overflow-y-scroll">
         {#if filter_reviews.length}
           {#each filter_reviews as { id, userId, fullName, star, userReaction, quickReactionView, content }}
             <Review
@@ -224,7 +224,7 @@
           {/each}
         {:else}
           <span class="text-3xl text-gray-500 font-medium translate-y-10"
-            >Be the first to <button class="text-orange-500 underline" on:click={handleAddReview} type="button"
+            >Be the first to <button class="text-yellow-500 underline" on:click={handleAddReview} type="button"
               >add a review.</button
             >
           </span>
