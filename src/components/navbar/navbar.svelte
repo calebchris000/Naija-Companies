@@ -1,7 +1,10 @@
 <script lang="ts">
     import logo from "@src/assets/logo.png";
+    import { VerifyToken } from "@src/core/api/auth";
+    import { useToken } from "@src/core/utils/utils";
     import { Link, navigate } from "svelte-routing";
 
+    const token = useToken();
     $: menu_open = false;
     $: screen_height = window.innerHeight;
     $: scroll_y = 0;
@@ -52,20 +55,47 @@
             <Link to="/home">Services</Link>
         </div>
         <div class="gap-4 items-center justify-self-end lg:flex ms-auto">
-            <button
-                on:click={() => {
-                    navigate("/signup");
-                }}
-                class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
-                type="button">Get Started</button
-            >
-            <button
-                on:click={() => {
-                    navigate("/login");
-                }}
-                class="font-semibold text-cto"
-                type="button">Log In</button
-            >
+            {#await VerifyToken({ token }) then { status, data }}
+                {#if status === 200}
+                    <button
+                        on:click={() => {
+                            navigate("/home/capital");
+                        }}
+                        class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
+                        type="button">Dashboard</button
+                    >
+                {:else}
+                    <button
+                        on:click={() => {
+                            navigate("/signup");
+                        }}
+                        class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
+                        type="button">Get Started</button
+                    >
+                    <button
+                        on:click={() => {
+                            navigate("/login");
+                        }}
+                        class="font-semibold text-cto"
+                        type="button">Log In</button
+                    >
+                {/if}
+            {:catch err}
+                <button
+                    on:click={() => {
+                        navigate("/signup");
+                    }}
+                    class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
+                    type="button">Get Started</button
+                >
+                <button
+                    on:click={() => {
+                        navigate("/login");
+                    }}
+                    class="font-semibold text-cto"
+                    type="button">Log In</button
+                >
+            {/await}
         </div>
     </div>
     <!--* Desktop  -->
