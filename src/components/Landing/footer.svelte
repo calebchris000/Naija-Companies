@@ -1,5 +1,35 @@
 <script lang="ts">
     import logo from "@src/assets/logo-white.png";
+    import { AddEmail } from "@src/core/api/email";
+    import { emailRegex } from "@src/core/utils/utils";
+    import { Notification } from "@src/utils/notification";
+    const notification = new Notification();
+    let email_element: HTMLInputElement;
+    async function handleAddEmail() {
+        if (!email_element) return;
+        const { value } = email_element;
+
+        if (!value) {
+            notification.error({ text: "Fill out the email field" });
+            return;
+        }
+        if (!emailRegex.test(value)) {
+            notification.error({ text: "Fill out a valid email" });
+            return;
+        }
+
+        const response = await AddEmail({ email: value });
+
+        if (response.status !== 200) {
+            notification.error({
+                text: "Submission failed: " + response.data ?? "Network error",
+            });
+        } else {
+            notification.success({ text: "Subscription Successful!" });
+            email_element.value = "";
+        }
+        console.log(value, "is val");
+    }
 </script>
 
 <section
@@ -16,11 +46,13 @@
             class="flex items-center flex-col lg:flex-row h-32 gap-4 mx-auto mt-4 lg:h-14 lg:w-[50vw]"
         >
             <input
+                bind:this={email_element}
                 class="bg-primary w-full h-full text-secondary placeholder:text-secondary px-10 outline-none rounded-md"
-                type="text"
+                type="email"
                 placeholder="Your email address"
             />
             <button
+                on:click={handleAddEmail}
                 class="bg-cto h-full px-10 w-full lg:w-fit rounded-md font-semibold"
                 type="button">Submit</button
             >
