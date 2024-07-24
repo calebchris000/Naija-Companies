@@ -1,5 +1,17 @@
 <script lang="ts">
     import Pencil from "@src/assets/svg/Pencil.svelte";
+    import { useToken } from "@src/core/utils/utils";
+    import { navigate } from "svelte-routing";
+
+    function handleWriteReview() {
+        const token = useToken();
+        console.log(token);
+        if (!token) {
+            navigate("/signup");
+        } else {
+            navigate("/home/capital");
+        }
+    }
 </script>
 
 <section
@@ -73,7 +85,8 @@
                 employees and customers.</span
             >
             <button
-                class="self-start mt-5 1-full flex items-center bg-skyblue p-3 px-4 gap-4 rounded-lg"
+                on:click={handleWriteReview}
+                class="self-start mt-5 1-full flex items-center bg-skyblue p-4 gap-4 rounded-lg"
                 type="button"
             >
                 <span class="font-semibold">Write A Review</span>

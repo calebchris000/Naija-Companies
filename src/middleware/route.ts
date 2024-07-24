@@ -11,12 +11,13 @@ export const HandleRoute = async () => {
   const path =
     pathname[pathname.length - 1] === "/" ? pathname.slice(0, -2) : pathname;
   const split = path.split("/");
+  console.log(split);
 
-  if(!split[1]) {
+  if (!split[1]) {
     window.location.href = "home";
-    return
+    return;
   }
-  
+
   const res = await VerifyToken({ token });
   if (res.status && res.status !== 200) {
     local.clear();

@@ -47,9 +47,9 @@
             <img class="w-36 -translate-y-1" src={logo} alt="" />
         </button>
         <div class="items-center gap-10 font-medium text-secondary lg:flex">
-            <Link to="/">Blog</Link>
-            <Link to="/">Features</Link>
-            <Link to="/">Services</Link>
+            <Link to="/home">Blog</Link>
+            <Link to="/home">Features</Link>
+            <Link to="/home">Services</Link>
         </div>
         <div class="gap-4 items-center justify-self-end lg:flex ms-auto">
             <button
@@ -102,14 +102,22 @@
                 </button>
             </div>
 
-            <div class="flex flex-col gap-4">
-                <Link class="text-[4rem] text-primary font-semibold" to="/"
+            <!-- svelte-ignore a11y-interactive-supports-focus -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div
+                role="button"
+                on:click={() => {
+                    menu_open = false;
+                }}
+                class="flex flex-col gap-4"
+            >
+                <Link class="text-[4rem] text-primary font-semibold" to="/home"
                     >Blog</Link
                 >
-                <Link class="text-[4rem] text-primary font-semibold" to="/"
+                <Link class="text-[4rem] text-primary font-semibold" to="/home"
                     >Features</Link
                 >
-                <Link class="text-[4rem] text-primary font-semibold" to="/"
+                <Link class="text-[4rem] text-primary font-semibold" to="/home"
                     >Services</Link
                 >
             </div>
