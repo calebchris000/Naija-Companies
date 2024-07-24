@@ -1,5 +1,6 @@
 <script lang="ts">
     import logo from "@src/assets/logo.png";
+    import Arrow from "@src/assets/svg/Arrow.svelte";
     import { VerifyToken } from "@src/core/api/auth";
     import { useToken } from "@src/core/utils/utils";
     import { Link, navigate } from "svelte-routing";
@@ -169,12 +170,35 @@
                 }}
                 class="flex flex-col gap-4"
             >
-                <Link class="text-[4rem] text-light font-semibold" to="/signup"
-                    >Sign Up</Link
-                >
-                <Link class="text-[4rem] text-light font-semibold" to="/login"
-                    >Log In</Link
-                >
+                {#await VerifyToken({ token }) then { status }}
+                    {#if status === 200}
+                        <Link
+                            class="text-[4rem] flex items-center gap-8 text-light font-semibold"
+                            to="/home/capital"
+                        >
+                            <span>Review</span>
+                            <Arrow className="w-8 rotate-180" />
+                        </Link>
+                    {:else}
+                        <Link
+                            class="text-[4rem] text-light font-semibold"
+                            to="/signup">Sign Up</Link
+                        >
+                        <Link
+                            class="text-[4rem] text-light font-semibold"
+                            to="/login">Log In</Link
+                        >
+                    {/if}
+                {:catch err}
+                    <Link
+                        class="text-[4rem] text-light font-semibold"
+                        to="/signup">Sign Up</Link
+                    >
+                    <Link
+                        class="text-[4rem] text-light font-semibold"
+                        to="/login">Log In</Link
+                    >
+                {/await}
             </div>
         </div>
     </div>
