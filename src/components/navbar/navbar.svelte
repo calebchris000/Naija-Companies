@@ -32,7 +32,7 @@
     bind:this={nav_element}
     style="box-shadow: {scroll_y > 0
         ? '0 1px 10px rgba(131, 143, 165, 0.5)'
-        : ''}; z-index: {scroll_y > 0 ? '100' : '0'}"
+        : ''}; z-index: {scroll_y > 0 ? '100' : '50'}"
     class="sticky top-0 w-full bg-primary h-20 transition-all"
 >
     <!--* Desktop -->
@@ -63,10 +63,10 @@
 
     <!--* Mobile -->
     <div
-        class="w-full h-full px-4 flex relative items-center justify-end lg:hidden"
+        class="w-full h-full z-0 px-4 flex relative items-center justify-end lg:hidden"
     >
         <img
-            class="w-32 absolute left-[50%] translate-x-[-50%]"
+            class="w-40 absolute left-[50%] translate-x-[-50%]"
             src={logo}
             alt=""
         />
@@ -81,10 +81,11 @@
 
         <div
             bind:this={menu_element}
+            on:wheel|preventDefault={() => {}}
             style="height: {menu_open ? '100vh' : '0'}; padding-top: {menu_open
                 ? '2.5rem'
                 : '0'}; padding-bottom: {menu_open ? '2.5rem' : '0'}"
-            class="fixed slow-transition flex flex-col overflow-hidden p-10 justify-between inset-0 bg-secondary"
+            class="fixed slow-transition flex w-full h-full z-[9999] flex-col overflow-hidden p-10 justify-between inset-0 bg-secondary"
         >
             <div class="flex justify-end w-full">
                 <button
@@ -112,11 +113,19 @@
                     >Services</Link
                 >
             </div>
-            <div class="flex flex-col gap-4">
-                <Link class="text-[4rem] text-light font-semibold" to="/"
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-interactive-supports-focus -->
+            <div
+                role="button"
+                on:click={() => {
+                    menu_open = false;
+                }}
+                class="flex flex-col gap-4"
+            >
+                <Link class="text-[4rem] text-light font-semibold" to="/signup"
                     >Sign Up</Link
                 >
-                <Link class="text-[4rem] text-light font-semibold" to="/"
+                <Link class="text-[4rem] text-light font-semibold" to="/login"
                     >Log In</Link
                 >
             </div>

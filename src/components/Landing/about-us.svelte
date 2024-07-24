@@ -3,15 +3,17 @@
 </script>
 
 <section
-    class="lg:max-h-[280vh] lg:w-full h-fit bg-secondary space-y-10 shapedividers_com-3867 py-40"
+    class="lg:max-h-[280vh] lg:w-full h-fit bg-secondary space-y-10 shapedividers_com-3867 p-4 py-40"
 >
     <span
         class="text-3xl text-light text-center flex justify-center font-medium"
         >About Us</span
     >
-    <section class="grid grid-cols-6 grid-rows-3 gap-4 h-[140vh] px-32">
+    <section
+        class="grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-3 gap-4 lg:h-[140vh] lg:px-32"
+    >
         <div
-            class="bg-skyblue h-full w-full rounded-xl col-span-2 p-4 flex flex-col py-10 gap-4 text-light"
+            class="bg-skyblue h-full w-full rounded-xl lg:col-span-2 p-4 flex flex-col py-10 gap-4 text-light"
         >
             <span class="text-xl font-semibold">Who Are We?</span>
             <span class="text-sm leading-loose"
@@ -22,7 +24,7 @@
             >
         </div>
         <div
-            class="bg-skyblue h-full w-full rounded-xl col-span-4 flex flex-col gap-4 p-4 py-10 text-light"
+            class="bg-skyblue h-full w-full rounded-xl lg:col-span-4 flex flex-col gap-4 p-4 py-10 text-light"
         >
             <span class="text-xl font-semibold"
                 >What was the motivation in creating this platform?</span
@@ -37,7 +39,7 @@
             </span>
         </div>
         <div
-            class="bg-skyblue h-full w-full rounded-xl col-span-4 flex flex-col gap-4 p-4 py-10 text-light"
+            class="bg-skyblue h-full w-full rounded-xl lg:col-span-4 flex flex-col gap-4 p-4 py-10 text-light"
         >
             <span class="text-xl font-semibold"
                 >What does Naija Companies do?</span
@@ -50,7 +52,7 @@
             >
         </div>
         <div
-            class="bg-skyblue h-full w-full rounded-xl col-span-2 row-span-2 flex flex-col gap-4 p-4 py-10 text-light"
+            class="bg-skyblue h-full w-full rounded-xl lg:col-span-2 lg:row-span-2 flex flex-col gap-4 p-4 py-10 text-light"
         >
             <span class="text-xl font-semibold">How can you get involved?</span>
             <span class="leading-loose"
@@ -61,7 +63,7 @@
                 Nigerian business world.</span
             >
         </div>
-        <div class="col-span-3 mt-16 text-light flex flex-col gap-4">
+        <div class="lg:col-span-3 mt-16 text-light flex flex-col gap-4">
             <span class="text-3xl font-semibold">OUR VISION</span>
             <span class="leading-loose text-lg"
                 >We aim to create a more transparent, fair, and thriving
@@ -83,7 +85,8 @@
 
 <style>
     .shapedividers_com-3867 {
-        overflow: hidden;
+        /* overflow: hidden; */
+        @apply lg:overflow-hidden;
         position: relative;
     }
     .shapedividers_com-3867::before {
