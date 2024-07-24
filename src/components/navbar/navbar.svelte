@@ -1,6 +1,6 @@
 <script lang="ts">
     import logo from "@src/assets/logo.png";
-    import { Link } from "svelte-routing";
+    import { Link, navigate } from "svelte-routing";
 
     $: menu_open = false;
     $: screen_height = window.innerHeight;
@@ -53,10 +53,19 @@
         </div>
         <div class="gap-4 items-center justify-self-end lg:flex ms-auto">
             <button
+                on:click={() => {
+                    navigate("/signup");
+                }}
                 class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
                 type="button">Get Started</button
             >
-            <button class="font-semibold text-cto" type="button">Log In</button>
+            <button
+                on:click={() => {
+                    navigate("/login");
+                }}
+                class="font-semibold text-cto"
+                type="button">Log In</button
+            >
         </div>
     </div>
     <!--* Desktop  -->
