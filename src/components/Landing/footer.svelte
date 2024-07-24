@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+    import logo from "@src/assets/logo-white.png";
 </script>
 
 <section class=" w-full bg-skyblue p-32 pb-4 px-16 text-primary space-y-24">
@@ -23,7 +24,9 @@
     </div>
 
     <div class="flex flex-col gap-10">
-        <span>Logo</span>
+        <div class="w-52">
+            <img class="w-full" src={logo} alt="" />
+        </div>
 
         <div class="flex gap-60">
             <figure class="flex flex-col gap-4">
