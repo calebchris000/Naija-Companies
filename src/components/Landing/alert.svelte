@@ -4,7 +4,7 @@
 </script>
 
 <section
-    class="w-full sticky top-0 h-10 flex items-center p-4 lg:px-32 gap-2 z-50 bg-orange-600"
+    class="w-full overflow-hidden sticky top-0 h-10 flex items-center p-4 lg:px-32 gap-2 z-50 bg-orange-600"
 >
     <InfoAlert className="w-5 text-white hidden lg:block" />
     <span class="font-medium text-white text-nowrap scroll"
