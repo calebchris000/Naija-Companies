@@ -1,5 +1,6 @@
 <script lang="ts">
     import AboutUs from "@src/components/Landing/about-us.svelte";
+    import Alert from "@src/components/Landing/alert.svelte";
     import BestRated from "@src/components/Landing/best-rated.svelte";
     import Footer from "@src/components/Landing/footer.svelte";
     import Hero from "@src/components/Landing/Hero.svelte";
@@ -9,6 +10,7 @@
 </script>
 
 <section class="">
+    <Alert />
     <Navbar />
     <Hero />
     <Stats />
