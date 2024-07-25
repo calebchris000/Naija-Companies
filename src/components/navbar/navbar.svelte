@@ -37,7 +37,7 @@
     style="box-shadow: {scroll_y > 0
         ? '0 1px 10px rgba(131, 143, 165, 0.5)'
         : ''}; z-index: {scroll_y > 0 ? '100' : '50'}"
-    class="sticky top-0 w-full bg-primary h-20 transition-all"
+    class="sticky top-10 w-full bg-primary h-20 transition-all"
 >
     <!--* Desktop -->
     <div class="hidden lg:flex items-center w-full h-full px-32 gap-20">
