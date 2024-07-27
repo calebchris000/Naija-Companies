@@ -9,7 +9,7 @@
     import Navbar from "@src/components/navbar/navbar.svelte";
 </script>
 
-<section class="">
+<section class="max-w-[100rem] mx-auto">
     <Alert />
     <Navbar />
     <Hero />

@@ -4,7 +4,7 @@
 </script>
 
 <section
-    class="hero w-full separator h-screen lg:h-[85vh] bg-primary flex justify-between p-4 py-10 lg:p-32 lg:py-20 pb-0 lg:pb-0"
+    class="hero max-h-[700px] w-full separator h-screen lg:h-[85vh] bg-primary flex justify-between p-4 py-10 lg:p-32 lg:py-20 pb-0 lg:pb-0"
 >
     <div class="w-full h-full flex flex-col gap-4 lg:w-[42rem] z-10">
         <span

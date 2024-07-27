@@ -14,7 +14,9 @@
             company culture.</span
         >
     </div>
-    <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-12 lg:gap-10 lg:h-[50vh]">
+    <div
+        class="grid grid-cols-1 max-h-[350px] gap-y-4 lg:grid-cols-12 lg:gap-10 lg:h-[50vh]"
+    >
         <CompanyCard className="col-span-7" />
         <CompanyReview className="col-span-5" />
     </div>

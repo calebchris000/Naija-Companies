@@ -43,11 +43,11 @@
             about newly reviewed organizations. Join our community today!</span
         >
         <div
-            class="flex items-center flex-col lg:flex-row h-32 gap-4 mx-auto mt-4 lg:h-14 lg:w-[50vw]"
+            class="flex items-center max-w-[1000px] flex-col lg:flex-row h-32 gap-4 mx-auto mt-4 lg:h-14 lg:w-[50vw]"
         >
             <input
                 bind:this={email_element}
-                class="bg-primary w-full h-full text-secondary placeholder:text-secondary px-10 outline-none rounded-md"
+                class="bg-primary mx-auto w-full h-full text-secondary placeholder:text-secondary px-10 outline-none rounded-md"
                 type="email"
                 placeholder="Your email address"
             />

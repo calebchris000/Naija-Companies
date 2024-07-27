@@ -22,7 +22,7 @@
         >About Us</span
     >
     <section
-        class="grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-3 gap-4 lg:h-[140vh] lg:px-32"
+        class="grid max-h-[1000px] grid-cols-1 lg:grid-cols-6 lg:grid-rows-3 gap-4 lg:h-[140vh] lg:px-32"
     >
         <div
             class="bg-skyblue h-full w-full rounded-xl lg:col-span-2 p-4 flex flex-col py-10 gap-4 text-light"
