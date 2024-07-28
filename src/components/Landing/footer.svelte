@@ -33,7 +33,7 @@
 </script>
 
 <section
-    class=" w-full bg-skyblue lg:pb-4 p-4 py-32 lg:px-16 text-primary space-y-24 lg:p-32"
+    class=" w-full bg-skyblue lg:pb-4 p-4 py-32 text-primary space-y-24 lg:p-32 lg:px-10"
 >
     <div class="flex flex-col gap-2 text-center">
         <span class="text-3xl font-medium">Join Our Newsletter</span>
