@@ -23,7 +23,7 @@
     });
 </script>
 
-<main>
+<main class="">
     <Router {url}>
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />

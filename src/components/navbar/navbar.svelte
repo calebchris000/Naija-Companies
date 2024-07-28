@@ -111,7 +111,7 @@
         class="w-full h-full z-0 px-4 flex relative items-center justify-end lg:hidden"
     >
         <img
-            style="left: {disabled ? '8%' : '50%'}; transform: {disabled
+            style="left: {disabled ? '16px' : '50%'}; transform: {disabled
                 ? 'translateX(0)'
                 : 'translateX(-50%)'}"
             class="w-40 absolute"

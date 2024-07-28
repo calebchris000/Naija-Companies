@@ -5,42 +5,45 @@
     import Review from "./components/review.svelte";
 </script>
 
-<figure class="bg-primary h-screen overflow-hidden max-w-[120rem] mx-auto">
+<figure class="bg-primary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
     <Navbar disabled={true} className="top-[0!important]" />
 
     <section
-        class="bg-primary grid grid-cols-2 w-full h-full gap-[10rem] px-10"
+        class="bg-primary w-full h-full px-4 lg:grid lg:gap-[10rem] lg:px-10 lg:grid-cols-2"
     >
-        <div class="w-full h-full space-y-4">
+        <div class="w-full space-y-4">
             <span class="text-3xl text-secondary font-normal"
                 >Create An Account</span
             >
 
-            <div class="space-y-4">
+            <div class="space-y-4 lg:max-w-[40rem]">
                 <Input
                     label="Full Name"
                     placeholder="First and last name in order"
                 />
                 <Input label="Username" placeholder="Minimum of 4 characters" />
                 <Input
+                    type="email"
                     label="Email Address"
                     placeholder="Valid email is required"
                 />
                 <Input
+                    type="password"
                     label="Password"
                     placeholder="Minimum of 6 characters. Make it unique"
                 />
                 <Button className="mt-2" name="Create Account" type="max" />
                 <span
                     class="w-fit ms-auto text-sm font-normal block mt-[10px!important] p-0"
-                    >Already have an account? <a class="underline" href="/login"
-                        >Login</a
+                    >Already have an account? <a
+                        class="underline font-medium"
+                        href="/login">Login</a
                     ></span
                 >
             </div>
         </div>
         <div
-            class="h-[85vh] max-w-[40vw] bg-skyblue rounded-lg p-4 flex flex-col gap-2"
+            class="h-[85vh] max-h-[40rem] max-w-[30rem] ms-auto bg-skyblue rounded-lg p-4 flex-col gap-2 hidden lg:flex"
         >
             <div class="flex flex-col gap-4">
                 <span
