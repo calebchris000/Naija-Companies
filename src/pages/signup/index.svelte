@@ -3,6 +3,7 @@
     import Input from "@src/components/Input/index.svelte";
     import Button from "@src/components/Input/button.svelte";
     import Review from "./components/review.svelte";
+    import Reviews from "./components/reviews.svelte";
 </script>
 
 <figure class="bg-primary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
@@ -56,15 +57,8 @@
                 >
             </div>
 
-            <div class="lg:mt-auto h-fit flex flex-col gap-2">
-                <Review />
-                <div
-                    class="flex cursor-pointer items-center justify-center gap-3"
-                >
-                    <span class="w-3 h-3 bg-light rounded-full"></span>
-                    <span class="w-3 h-3 bg-gray-300 rounded-full"></span>
-                    <span class="w-3 h-3 bg-gray-400 rounded-full"></span>
-                </div>
+            <div class="lg:mt-auto h-fit flex flex-col gap-6">
+                <Reviews />
             </div>
         </div>
     </section>
