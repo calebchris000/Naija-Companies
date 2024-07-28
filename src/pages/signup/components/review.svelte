@@ -12,7 +12,7 @@
 </script>
 
 <section
-    class="bg-light p-4 w-full h-full rounded-xl mb-2 space-y-4 text-secondary"
+    class="bg-light p-4 w-full lg:h-full rounded-xl mb-2 space-y-4 text-secondary"
 >
     <div class="flex items-center gap-4">
         <span class="text-lg font-medium">{name}</span>

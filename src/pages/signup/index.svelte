@@ -43,9 +43,9 @@
             </div>
         </div>
         <div
-            class="h-[85vh] max-h-[40rem] max-w-[30rem] ms-auto bg-skyblue rounded-lg p-4 flex-col gap-2 hidden lg:flex"
+            class="xl:h-[85vh] h-fit xl:max-h-[40rem] max-w-[30rem] ms-auto bg-skyblue rounded-lg p-8 flex-col gap-2 hidden lg:flex"
         >
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
                 <span
                     class="text-light text-3xl font-semibold block w-[340px] leading-normal xl:4xl 2xl:w-full"
                     >Start Your Journey With Us</span
