@@ -4,6 +4,27 @@
     import Button from "@src/components/Input/button.svelte";
     import Review from "./components/review.svelte";
     import Reviews from "./components/reviews.svelte";
+
+    $: submittable = true;
+    const inputs = new Map<string, string>([
+        ["full_name", ""],
+        ["email_address", ""],
+        ["username", ""],
+        ["password", ""],
+    ]);
+
+    function handleInput(data: { detail: { label: string; value: string } }) {
+        const object = data.detail;
+
+        const key = object.label?.toLowerCase().replace(/\s/g, "_");
+        if (key && inputs.has(key)) {
+            inputs.set(key, object.value);
+        }
+        console.log(key, inputs);
+        // submittable = Array.from(inputs.values()).every(
+        //     (value) => value !== "",
+        // );
+    }
 </script>
 
 <figure class="bg-primary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
@@ -19,21 +40,36 @@
 
             <div class="space-y-4 lg:max-w-[40rem]">
                 <Input
+                    on:input={handleInput}
                     label="Full Name"
                     placeholder="First and last name in order"
                 />
-                <Input label="Username" placeholder="Minimum of 4 characters" />
                 <Input
+                    on:input={handleInput}
+                    label="Username"
+                    placeholder="Minimum of 4 characters"
+                />
+                <Input
+                    on:input={handleInput}
                     type="email"
                     label="Email Address"
                     placeholder="Valid email is required"
                 />
                 <Input
+                    on:input={handleInput}
                     type="password"
                     label="Password"
                     placeholder="Minimum of 6 characters. Make it unique"
                 />
-                <Button className="mt-2" name="Create Account" type="max" />
+                <Button
+                    disabled={!submittable}
+                    on:click={() => {
+                        console.log(inputs);
+                    }}
+                    className="mt-2"
+                    name="Create Account"
+                    type="max"
+                />
                 <span
                     class="w-fit ms-auto text-sm font-normal block mt-[10px!important] p-0"
                     >Already have an account? <a
