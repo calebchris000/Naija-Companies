@@ -5,13 +5,91 @@
     import Review from "./components/review.svelte";
     import Reviews from "./components/reviews.svelte";
 
-    $: submittable = true;
+    $: submittable = false;
+
+    $: checks = {
+        full_name: { valid: true, reason: "" },
+        username: { valid: true, reason: "" },
+        email_address: { valid: true, reason: "" },
+        password: { valid: true, reason: "" },
+    };
+
     const inputs = new Map<string, string>([
         ["full_name", ""],
         ["email_address", ""],
         ["username", ""],
         ["password", ""],
     ]);
+
+    function checkInputs() {
+        const fullNameValue = inputs.get("full_name") || "";
+        const fullNameWords = fullNameValue.trim().split(/\s+/);
+
+        if (fullNameWords.length !== 2 && fullNameValue.length) {
+            checks.full_name = {
+                valid: false,
+                reason: "Full name must contain exactly two words",
+            };
+        } else {
+            checks.full_name = {
+                valid: true,
+                reason: "",
+            };
+        }
+
+        const usernameValue = inputs.get("username") || "";
+        if (
+            checks.username &&
+            usernameValue.length < 4 &&
+            usernameValue.length
+        ) {
+            checks.username = {
+                valid: false,
+                reason: "Username must be at least 4 characters long",
+            };
+        } else if (checks.username) {
+            checks.username = {
+                valid: true,
+                reason: "",
+            };
+        }
+
+        const emailValue = inputs.get("email_address") || "";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailValue) && emailValue.length) {
+            checks.email_address = {
+                valid: false,
+                reason: "Please enter a valid email address",
+            };
+        } else {
+            checks.email_address = {
+                valid: true,
+                reason: "",
+            };
+        }
+        const passwordValue = inputs.get("password") || "";
+        const passwordRegex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/;
+        if (passwordValue.length < 6) {
+            checks.password = {
+                valid: false,
+                reason: "Password must be at least 6 characters long",
+            };
+        } else if (!passwordRegex.test(passwordValue) && passwordValue.length) {
+            checks.password = {
+                valid: false,
+                reason: "Uppercase, lowercase, and a special character is required",
+            };
+        } else {
+            checks.password = {
+                valid: true,
+                reason: "",
+            };
+        }
+        submittable =
+            Array.from(inputs.values()).every((value) => value.length > 0) &&
+            Object.values(checks).every((check) => check.valid);
+    }
 
     function handleInput(data: { detail: { label: string; value: string } }) {
         const object = data.detail;
@@ -20,10 +98,8 @@
         if (key && inputs.has(key)) {
             inputs.set(key, object.value);
         }
-        console.log(key, inputs);
-        // submittable = Array.from(inputs.values()).every(
-        //     (value) => value !== "",
-        // );
+
+        checkInputs();
     }
 </script>
 
@@ -40,22 +116,26 @@
 
             <div class="space-y-4 lg:max-w-[40rem]">
                 <Input
+                    check={checks.full_name}
                     on:input={handleInput}
                     label="Full Name"
                     placeholder="First and last name in order"
                 />
                 <Input
+                    check={checks.username}
                     on:input={handleInput}
                     label="Username"
                     placeholder="Minimum of 4 characters"
                 />
                 <Input
+                    check={checks.email_address}
                     on:input={handleInput}
                     type="email"
                     label="Email Address"
                     placeholder="Valid email is required"
                 />
                 <Input
+                    check={checks.password}
                     on:input={handleInput}
                     type="password"
                     label="Password"
