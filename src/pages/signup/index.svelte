@@ -4,8 +4,27 @@
     import Button from "@src/components/Input/button.svelte";
     import Review from "./components/review.svelte";
     import Reviews from "./components/reviews.svelte";
+    import { LocalStorage } from "@src/core/utils/utils";
+    import { onMount } from "svelte";
 
     $: submittable = false;
+    $: signup_status = "inactive" as
+        | "inactive"
+        | "pending"
+        | "success"
+        | "failure";
+
+    $: default_values = {
+        full_name: "",
+        username: "",
+        email_address: "",
+        password: "",
+    } as {
+        full_name: string;
+        username: string;
+        email_address: string;
+        password: string;
+    };
 
     $: checks = {
         full_name: { valid: true, reason: "" },
@@ -21,7 +40,27 @@
         ["password", ""],
     ]);
 
+    function saveInputValues() {
+        const local_storage = new LocalStorage();
+        let storageObject = local_storage.getItem("userInputs", false);
+
+        if (!storageObject) {
+            storageObject = {};
+        }
+
+        inputs.forEach((value, key) => {
+            if (key !== "password" && value) {
+                storageObject[key] = value;
+            }
+        });
+
+        local_storage.setItem("userInputs", storageObject);
+    }
+
     function checkInputs() {
+        if (typeof saveInputValues === "function") {
+            saveInputValues();
+        }
         const fullNameValue = inputs.get("full_name") || "";
         const fullNameWords = fullNameValue.trim().split(/\s+/);
 
@@ -70,7 +109,7 @@
         const passwordValue = inputs.get("password") || "";
         const passwordRegex =
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/;
-        if (passwordValue.length < 6) {
+        if (passwordValue.length < 6 && passwordValue.length) {
             checks.password = {
                 valid: false,
                 reason: "Password must be at least 6 characters long",
@@ -101,6 +140,35 @@
 
         checkInputs();
     }
+    function handleSubmit() {
+        signup_status = "pending";
+        submittable = false;
+
+        setTimeout(() => {
+            signup_status = "success";
+        }, 2000);
+        setTimeout(() => {
+            signup_status = "failure";
+        }, 4000);
+        setTimeout(() => {
+            signup_status = "inactive";
+            submittable = true;
+        }, 6000);
+    }
+
+    onMount(() => {
+        const local_storage = new LocalStorage();
+        const storageObject = local_storage.getItem("userInputs", false);
+        if (storageObject) {
+            Object.entries(storageObject).forEach(([key, value]) => {
+                if (key in default_values) {
+                    (default_values as Record<string, string>)[key] =
+                        value as string;
+                }
+                inputs.set(key, value as string);
+            });
+        }
+    });
 </script>
 
 <figure class="bg-primary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
@@ -119,12 +187,14 @@
                     check={checks.full_name}
                     on:input={handleInput}
                     label="Full Name"
+                    defaultValue={default_values.full_name}
                     placeholder="First and last name in order"
                 />
                 <Input
                     check={checks.username}
                     on:input={handleInput}
                     label="Username"
+                    defaultValue={default_values.username}
                     placeholder="Minimum of 4 characters"
                 />
                 <Input
@@ -132,6 +202,7 @@
                     on:input={handleInput}
                     type="email"
                     label="Email Address"
+                    defaultValue={default_values.email_address}
                     placeholder="Valid email is required"
                 />
                 <Input
@@ -143,11 +214,20 @@
                 />
                 <Button
                     disabled={!submittable}
-                    on:click={() => {
-                        console.log(inputs);
-                    }}
+                    on:click={handleSubmit}
                     className="mt-2"
-                    name="Create Account"
+                    style="background-color: {signup_status === 'success'
+                        ? 'green'
+                        : signup_status === 'failure'
+                          ? 'red'
+                          : ''}"
+                    name={signup_status === "pending"
+                        ? "Creating Account..."
+                        : signup_status === "success"
+                          ? "Account Successfully Created!"
+                          : signup_status === "failure"
+                            ? "Account Creation Failure!"
+                            : "Create Account"}
                     type="max"
                 />
                 <span

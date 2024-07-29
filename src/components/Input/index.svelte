@@ -4,6 +4,7 @@
     export let type: "text" | "number" | "email" | "password" = "text";
     export let label: string = "";
     export let placeholder: string = "";
+    export let defaultValue = "";
     export let check = { valid: true, reason: "" };
     const dispatch = createEventDispatcher();
 
@@ -30,6 +31,7 @@
         on:input={handleInput}
         class="outline-none text-secondary rounded-lg p-4 bg-light placeholder:text-secondary border-transparent w-full"
         {type}
+        value={defaultValue}
         {placeholder}
     />
 </div>
