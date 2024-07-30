@@ -14,7 +14,7 @@ export const Auth = () => {
 function handleAuth() {
   const token = useToken();
   const { pathname } = window.location;
-  const valid_routes = ["/signup", "/login", "/home"];
+  const valid_routes = ["/signup", "/login", "/home", "/verify-otp"];
 
   if (!token && !valid_routes.includes(pathname)) {
     navigate("/home");
