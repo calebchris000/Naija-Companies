@@ -125,6 +125,7 @@
                 reason: "Uppercase, lowercase, and a special character is required",
             };
         } else if (
+            usernameValue &&
             passwordValue.toLowerCase() === usernameValue.toLowerCase()
         ) {
             checks.password = {

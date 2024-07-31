@@ -11,9 +11,15 @@
     const input_ids = [1, 2, 3, 4, 5, 6];
     const notification = new Notification();
     const local_storage = new LocalStorage();
+    let submit_button: HTMLButtonElement;
 
     $: otp_numbers = new Array(6).fill(null);
     $: otp_message = "";
+    $: otp_status = "inactive" as
+        | "inactive"
+        | "pending"
+        | "success"
+        | "failure";
 
     function focusNext(id: number) {
         const activeElement = document.activeElement as HTMLInputElement;
@@ -47,7 +53,9 @@
         }
     }
 
-    async function handleSubmit() {
+    async function handleSubmit(e: any) {
+        e.preventDefault();
+
         const filter_otp = otp_numbers.filter((number) => number);
         if (filter_otp.length < 6) {
             setTimeout(() => {
@@ -62,10 +70,13 @@
         });
 
         const join_otp = filter_otp.join("");
+        otp_status = "pending";
+        submit_button.disabled = true;
         //* Sending the otp
         const userId = local_storage.getItem("user", false)?.id;
         const response = await VerifyOtp({ otp: join_otp, userId });
         if (response.status !== 200) {
+            otp_status = "failure";
             otp_message = response.data.message as string;
             document.querySelectorAll(".otp").forEach((el: any) => {
                 el.value = "";
@@ -74,7 +85,7 @@
                     el.focus();
                 }
             });
-
+            otp_numbers = new Array(6).fill(null);
             return;
         }
         notification.success({ text: "Email successfully verified!" });
@@ -86,9 +97,11 @@
     }
 
     $: {
-        if (otp_message) {
+        if (otp_message || otp_status === "failure") {
             setTimeout(() => {
                 otp_message = "";
+                submit_button.disabled = false;
+                otp_status = "inactive";
             }, 3000);
         }
     }
@@ -162,9 +175,20 @@
                     <span>Back</span>
                 </button>
                 <button
+                    style="background: {otp_status === 'pending'
+                        ? 'gray'
+                        : otp_status === 'failure'
+                          ? 'red'
+                          : ''}"
+                    bind:this={submit_button}
                     on:click={handleSubmit}
-                    class="bg-cto text-light p-2 px-4 rounded-lg"
-                    type="button">Confirm</button
+                    class="bg-cto transition-all submit text-light p-2 px-4 rounded-lg"
+                    type="button"
+                    >{otp_status === "pending"
+                        ? "Checking..."
+                        : otp_status === "failure"
+                          ? "Verification Failed!"
+                          : "Confirm"}</button
                 >
             </div>
         </div>
