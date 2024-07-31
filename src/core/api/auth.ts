@@ -12,28 +12,38 @@ export const Signup = async ({
   password: string;
 }) => {
   const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
-
-  const response = await axios.post(
-    `${base_url}/user/signup`,
-    JSON.stringify({
-      firstName,
-      lastName,
-      email,
-      password,
-    }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:5174",
+  try {
+    const response = await axios.post(
+      `${base_url}/user/signup`,
+      JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:5174",
+        },
       },
-    }
-  );
-  const { data, status } = response;
+    );
+    const { data, status } = response;
 
-  return {
-    status,
-    data: data as ResponseType,
-  };
+    return {
+      status,
+      data: data as ResponseType,
+    };
+  } catch (error: any) {
+    if (error?.response) {
+      return {
+        status: 500,
+        data: error.response?.data?.message as ResponseType,
+      };
+    } else {
+      return { status: 500, data: error as ResponseType };
+    }
+  }
 };
 
 export const Login = async ({
@@ -56,7 +66,7 @@ export const Login = async ({
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "http://localhost:5174",
       },
-    }
+    },
   );
   const { data, status } = response;
 
@@ -86,7 +96,7 @@ export const VerifyOtp = async ({
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "http://localhost:5174",
       },
-    }
+    },
   );
   const { data, status } = response;
 
@@ -109,7 +119,7 @@ export const ResendOtp = async ({ userId }: { userId: string }) => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "http://localhost:5174",
       },
-    }
+    },
   );
   const { data, status } = response;
 
@@ -130,7 +140,7 @@ export const VerifyToken = async ({ token }: { token: string }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
   const { data, status } = response;
 

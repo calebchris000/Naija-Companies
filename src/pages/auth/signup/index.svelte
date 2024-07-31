@@ -5,7 +5,10 @@
     import Review from "./components/review.svelte";
     import Reviews from "./components/reviews.svelte";
     import { LocalStorage } from "@src/core/utils/utils";
+    import { Notification } from "@src/utils/notification";
     import { onMount } from "svelte";
+    import { Signup } from "@src/core/api/auth";
+    import { navigate } from "svelte-routing";
 
     $: submittable = false;
     $: signup_status = "inactive" as
@@ -33,6 +36,7 @@
         password: { valid: true, reason: "" },
     };
 
+    const notification = new Notification();
     const inputs = new Map<string, string>([
         ["full_name", ""],
         ["email_address", ""],
@@ -119,6 +123,13 @@
                 valid: false,
                 reason: "Uppercase, lowercase, and a special character is required",
             };
+        } else if (
+            passwordValue.toLowerCase() === usernameValue.toLowerCase()
+        ) {
+            checks.password = {
+                valid: false,
+                reason: "Password cannot be the same as username",
+            };
         } else {
             checks.password = {
                 valid: true,
@@ -140,20 +151,52 @@
 
         checkInputs();
     }
-    function handleSubmit() {
+    async function handleSubmit() {
         signup_status = "pending";
         submittable = false;
+        const to_object: any = Object.fromEntries(inputs);
+        const fullNameParts = to_object.full_name.split(" ");
+        to_object.firstName = fullNameParts[0];
+        to_object.lastName = fullNameParts[1];
+        to_object.email = to_object.email_address;
+        to_object.userName = to_object.username;
+        delete to_object.full_name;
+        delete to_object.email_address;
+        delete to_object.username;
+
+        const credentials: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            userName: string;
+            password: string;
+        } = to_object;
+
+        const response = await Signup(credentials);
+        const { status, data } = response;
+
+        if (status !== 201) {
+            const r = response.data as any;
+            notification.error({
+                text: r ?? "The email address or username is already in use.",
+            });
+            signup_status = "failure";
+            return;
+        }
+        signup_status = "success";
 
         setTimeout(() => {
-            signup_status = "success";
+            navigate("/signup/verify-otp");
         }, 2000);
-        setTimeout(() => {
-            signup_status = "failure";
-        }, 4000);
-        setTimeout(() => {
-            signup_status = "inactive";
-            submittable = true;
-        }, 6000);
+    }
+
+    $: {
+        if (signup_status === "failure") {
+            setTimeout(() => {
+                signup_status = "inactive";
+                submittable = true;
+            }, 3000);
+        }
     }
 
     onMount(() => {
