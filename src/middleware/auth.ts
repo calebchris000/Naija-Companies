@@ -14,7 +14,14 @@ export const Auth = () => {
 function handleAuth() {
   const token = useToken();
   const { pathname } = window.location;
-  const valid_routes = ["/signup", "/login", "/home", "/verify-otp"];
+  const valid_routes = [
+    "/signup",
+    "/login",
+    "/home",
+    "/signup/verify-otp",
+    "/signup/find-companies",
+    "/signup/success",
+  ];
 
   if (!token && !valid_routes.includes(pathname)) {
     navigate("/home");

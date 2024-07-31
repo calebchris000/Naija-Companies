@@ -50,11 +50,11 @@ input[type="number"] {
 }
 
 ::-webkit-scrollbar-track {
-    background: #b4c5e4; /* Color of the tracking area */
+    background: #f1f1f1; /* Color of the tracking area */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #f97316; /* Color of the scroll thumb */
+    background: #b4c5e4; /* Color of the scroll thumb */
     border-radius: 10px; /* Roundness of the scroll thumb */
 }
 
