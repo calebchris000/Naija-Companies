@@ -78,6 +78,7 @@
             return;
         }
         notification.success({ text: "Email successfully verified!" });
+        local_storage.setItem("step", "/signup/find-companies");
 
         setTimeout(() => {
             navigate("/signup/find-companies");
@@ -93,6 +94,13 @@
     }
 
     onMount(() => {
+        const current_step = local_storage.getItem("step", true);
+        if (!current_step) {
+            local_storage.setItem("step", "/signup");
+            navigate("/signup");
+        } else if (current_step !== "/signup/verify-otp") {
+            navigate(current_step);
+        }
         const firstInput = document.getElementById("input1")?.focus();
         document.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.key === "Backspace") {

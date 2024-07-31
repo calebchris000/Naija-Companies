@@ -4,6 +4,20 @@
     import CompanyEdit from "./components/company-edit.svelte";
     import SkipForward from "@src/assets/svg/skip_forward.svelte";
     import Arrow from "@src/assets/svg/Arrow.svelte";
+    import { onMount } from "svelte";
+    import { LocalStorage } from "@src/core/utils/utils";
+    import { navigate } from "svelte-routing";
+
+    const local_storage = new LocalStorage();
+
+    onMount(() => {
+        const current_step = local_storage.getItem("step", true);
+
+        if (!current_step) {
+            local_storage.setItem("step", "/signup");
+            navigate("/signup");
+        }
+    });
 </script>
 
 <figure>

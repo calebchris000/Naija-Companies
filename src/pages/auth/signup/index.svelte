@@ -186,6 +186,7 @@
         }
         signup_status = "success";
         local_storage.setItem("user", response.data?.data);
+        local_storage.setItem("step", "/signup/verify-otp");
 
         setTimeout(() => {
             navigate("/signup/verify-otp");
@@ -203,6 +204,13 @@
 
     onMount(() => {
         const local_storage = new LocalStorage();
+        const current_step = local_storage.getItem("step", true);
+        if (!current_step) {
+            local_storage.setItem("step", "/signup");
+        } else if (current_step !== "/signup") {
+            navigate(current_step);
+        }
+
         const storageObject = local_storage.getItem("userInputs", false);
         if (storageObject) {
             Object.entries(storageObject).forEach(([key, value]) => {
