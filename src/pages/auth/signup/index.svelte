@@ -37,6 +37,7 @@
     };
 
     const notification = new Notification();
+    const local_storage = new LocalStorage();
     const inputs = new Map<string, string>([
         ["full_name", ""],
         ["email_address", ""],
@@ -184,6 +185,7 @@
             return;
         }
         signup_status = "success";
+        local_storage.setItem("user", response.data?.data);
 
         setTimeout(() => {
             navigate("/signup/verify-otp");

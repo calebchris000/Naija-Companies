@@ -3,8 +3,14 @@
     import Navbar from "@src/components/navbar/navbar.svelte";
     import check_otp from "@src/assets/animated/check_otp.gif";
     import { onMount } from "svelte";
+    import { VerifyOtp } from "@src/core/api/auth";
+    import { LocalStorage } from "@src/core/utils/utils";
+    import { Notification } from "@src/utils/notification";
+    import { navigate } from "svelte-routing";
 
     const input_ids = [1, 2, 3, 4, 5, 6];
+    const notification = new Notification();
+    const local_storage = new LocalStorage();
 
     $: otp_numbers = new Array(6).fill(null);
     $: otp_message = "";
@@ -41,7 +47,7 @@
         }
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         const filter_otp = otp_numbers.filter((number) => number);
         if (filter_otp.length < 6) {
             setTimeout(() => {
@@ -56,7 +62,34 @@
         });
 
         const join_otp = filter_otp.join("");
-        console.log(join_otp);
+        //* Sending the otp
+        const userId = local_storage.getItem("user", false)?.id;
+        const response = await VerifyOtp({ otp: join_otp, userId });
+        if (response.status !== 200) {
+            otp_message = response.data.message as string;
+            document.querySelectorAll(".otp").forEach((el: any) => {
+                el.value = "";
+                el.disabled = false;
+                if (el.id === "input1") {
+                    el.focus();
+                }
+            });
+
+            return;
+        }
+        notification.success({ text: "Email successfully verified!" });
+
+        setTimeout(() => {
+            navigate("/signup/find-companies");
+        }, 2000);
+    }
+
+    $: {
+        if (otp_message) {
+            setTimeout(() => {
+                otp_message = "";
+            }, 3000);
+        }
     }
 
     onMount(() => {
@@ -72,9 +105,9 @@
 <figure class="h-screen bg-primary max-w-[120rem]">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:rounded-xl lg:shadow-md grid grid-cols-12 lg:p-10 p-4 text-secondary lg:bg-light lg:w-[80vw] lg:max-h-[70vh] lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
+        class="lg:rounded-xl lg:shadow-md lg:grid lg:grid-cols-12 lg:p-10 p-4 text-secondary lg:bg-light lg:w-[80vw] lg:max-h-[70vh] lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
     >
-        <div class="flex flex-col gap-4 col-span-6">
+        <div class="flex flex-col gap-4 lg:col-span-6">
             <span class="text-3xl font-medium">Verify Email Address</span>
             <div class="flex flex-col text-sm gap-2 lg:gap-0">
                 <span
@@ -127,7 +160,7 @@
                 >
             </div>
         </div>
-        <div class="col-span-6 ms-auto">
+        <div class="lg:col-span-6 ms-auto hidden lg:block">
             <img src={check_otp} alt="OTP Check" class="w-[20rem] mx-auto" />
         </div>
     </section>

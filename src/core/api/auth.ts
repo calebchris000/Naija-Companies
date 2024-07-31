@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { ResponseType } from "@src/types";
+
 export const Signup = async ({
   firstName,
   lastName,
@@ -37,7 +38,7 @@ export const Signup = async ({
   } catch (error: any) {
     if (error?.response) {
       return {
-        status: 500,
+        status: 400,
         data: error.response?.data?.message as ResponseType,
       };
     } else {
@@ -85,25 +86,39 @@ export const VerifyOtp = async ({
 }) => {
   const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
 
-  const response = await axios.post(
-    `${base_url}/user/verifyOtp`,
-    {
-      otp,
-      userId,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:5174",
+  try {
+    const response = await axios.post(
+      `${base_url}/user/verifyOtp`,
+      {
+        otp,
+        userId,
       },
-    },
-  );
-  const { data, status } = response;
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:5174",
+        },
+      },
+    );
+    const { data, status } = response;
 
-  return {
-    status,
-    data: data as ResponseType,
-  };
+    return {
+      status,
+      data: data as ResponseType,
+    };
+  } catch (error: any) {
+    if (error?.response) {
+      return {
+        status: error.response.status,
+        data: error.response.data as ResponseType,
+      };
+    } else {
+      return {
+        status: 500,
+        data: { message: "An error occurred" } as ResponseType,
+      };
+    }
+  }
 };
 
 export const ResendOtp = async ({ userId }: { userId: string }) => {
