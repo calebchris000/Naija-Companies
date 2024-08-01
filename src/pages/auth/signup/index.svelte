@@ -285,7 +285,7 @@
                     type="max"
                 />
                 <span
-                    class="w-fit ms-auto text-sm font-normal block mt-[10px!important] p-0"
+                    class="w-fit ms-auto text-sm font-normal text-secondary block mt-[10px!important] p-0"
                     >Already have an account? <a
                         class="underline font-medium"
                         href="/login">Login</a
@@ -294,14 +294,14 @@
             </div>
         </div>
         <div
-            class="xl:h-[85vh] h-fit xl:max-h-[40rem] max-w-[30rem] ms-auto bg-skyblue rounded-lg p-8 flex-col gap-2 hidden lg:flex"
+            class="xl:h-[85vh] h-fit xl:max-h-[40rem] max-w-[30rem] ms-auto bg-accent rounded-lg p-8 flex-col gap-2 hidden lg:flex"
         >
             <div class="flex flex-col gap-2">
                 <span
-                    class="text-light text-3xl font-semibold block w-[340px] leading-normal xl:4xl 2xl:w-full"
+                    class="text-primary text-3xl font-semibold block w-[340px] leading-normal xl:4xl 2xl:w-full"
                     >Start Your Journey With Us</span
                 >
-                <span class="text-light leading-relaxed"
+                <span class="text-primary leading-relaxed"
                     >Discover 1000+ fresh startups and explore real user
                     opinions about them.</span
                 >

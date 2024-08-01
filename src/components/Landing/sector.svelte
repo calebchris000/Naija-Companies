@@ -7,10 +7,11 @@
     class="bg-white w-full h-full p-4 py-20 flex flex-col gap-10 lg:h-fit lg:p-32 lg:px-10"
 >
     <div class="flex flex-col gap-4 text-center lg:max-w-[36vw] mx-auto">
-        <span class="text-3xl text-secondary font-medium"
+        <span
+            class="text-3xl text-primary font-medium underline underline-offset-8"
             >Find Organizations By Sector</span
         >
-        <span class="text-sm text-secondary leading-loose"
+        <span class="text-primary leading-loose"
             >Explore and share honest reviews of Nigerian companies by industry.
             Find insights on workplace experiences across diverse sectors.</span
         >

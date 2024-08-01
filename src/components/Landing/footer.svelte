@@ -33,11 +33,11 @@
 </script>
 
 <section
-    class=" w-full bg-skyblue lg:pb-4 p-4 py-32 text-primary space-y-24 lg:p-32 lg:px-10"
+    class=" w-full bg-primary lg:pb-4 p-4 py-32 text-primary space-y-24 lg:p-32 lg:px-10"
 >
-    <div class="flex flex-col gap-2 text-center">
+    <div class="flex flex-col gap-2 text-center text-accent">
         <span class="text-3xl font-medium">Join Our Newsletter</span>
-        <span class="leading-loose lg:max-w-[55vw] mx-auto text-sm"
+        <span class="leading-loose lg:max-w-[55vw] mx-auto"
             >Stay informed about Nigerian workplace trends, company reviews, and
             career insights. Get exclusive updates and be the first to know
             about newly reviewed organizations. Join our community today!</span
@@ -47,13 +47,13 @@
         >
             <input
                 bind:this={email_element}
-                class="bg-primary mx-auto w-full h-full text-secondary placeholder:text-secondary px-10 outline-none rounded-md"
+                class="bg-primary mx-auto w-full h-full text-accent placeholder:text-accent font-medium px-10 outline-none rounded-md"
                 type="email"
                 placeholder="Your email address"
             />
             <button
                 on:click={handleAddEmail}
-                class="bg-cto h-full px-10 w-full lg:w-fit rounded-md font-semibold"
+                class="bg-primary text-accent h-full px-10 w-full lg:w-fit rounded-md font-semibold"
                 type="button">Submit</button
             >
         </div>
@@ -64,10 +64,10 @@
             <img class="w-full" src={logo} alt="" />
         </div>
 
-        <div class="flex flex-col gap-10 lg:flex-row lg:gap-60">
+        <div class="flex flex-col text-accent gap-10 lg:flex-row lg:gap-60">
             <figure class="flex flex-col gap-4">
                 <span class="font-semibold">Follow Us</span>
-                <div class="flex flex-col gap-4 text-sm">
+                <div class="flex flex-col gap-4">
                     <span>Facebook</span>
                     <span>Twitter</span>
                     <span>LinkedIn</span>
@@ -76,7 +76,7 @@
             </figure>
             <figure class="flex flex-col gap-4">
                 <span class="font-semibold">About</span>
-                <div class="flex flex-col gap-4 text-sm">
+                <div class="flex flex-col gap-4">
                     <span>About Us</span>
                     <span>Blog</span>
                     <span>Services</span>
@@ -85,7 +85,7 @@
             </figure>
             <figure class="flex flex-col gap-4">
                 <span class="font-semibold">Community</span>
-                <div class="flex flex-col gap-4 text-sm">
+                <div class="flex flex-col gap-4">
                     <span>Help Center</span>
                     <span>Login</span>
                     <span>Signup</span>
@@ -94,7 +94,7 @@
             </figure>
             <figure class="flex flex-col gap-4">
                 <span class="font-semibold">Community</span>
-                <div class="flex flex-col gap-4 text-sm">
+                <div class="flex flex-col gap-4">
                     <span>Help Center</span>
                     <span>Login</span>
                     <span>Signup</span>
@@ -105,7 +105,7 @@
     </div>
 
     <div
-        class="text-primary font-medium text-xs flex flex-col lg:flex-row items-center gap-4"
+        class="text-accent font-medium text-xs flex flex-col lg:flex-row items-center gap-4"
     >
         <span>© 2024 Naija Companies. All rights reserved. </span>
         <span class="lg:inline hidden">|</span>

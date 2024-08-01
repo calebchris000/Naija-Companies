@@ -19,11 +19,9 @@
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     min-height: 100vh;
-
-    min-width: 100vw;
     -moz-osx-font-smoothing: grayscale;
 
-    --primary: "#b4c5e4";
+    --primary: "#0d1321";
     --secondary: "#3c3744";
     --cto: "#090c9b";
     --skyblue: "#3d52d5";
@@ -33,6 +31,7 @@
 :root * {
     /* cursor: url("/src/assets/svg/arrow.svg"), auto; */
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -46,18 +45,23 @@ input[type="number"] {
 
 /* Custom scrollbar for WebKit browsers */
 ::-webkit-scrollbar {
-    width: 10px; /* Adjust the width of the scrollbar */
+    width: 10px;
+    /* Adjust the width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color of the tracking area */
+    background: #f1f1f1;
+    /* Color of the tracking area */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #b4c5e4; /* Color of the scroll thumb */
-    border-radius: 10px; /* Roundness of the scroll thumb */
+    background: #b4c5e4;
+    /* Color of the scroll thumb */
+    border-radius: 10px;
+    /* Roundness of the scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #3c3744; /* Color of the scroll thumb on hover */
+    background: #3c3744;
+    /* Color of the scroll thumb on hover */
 }

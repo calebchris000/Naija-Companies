@@ -1,5 +1,5 @@
 <script lang="ts">
-    import logo from "@src/assets/logo.png";
+    import logo from "@src/assets/logo-white.png";
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import { VerifyToken } from "@src/core/api/auth";
     import { useToken } from "@src/core/utils/utils";
@@ -38,9 +38,9 @@
 <nav
     bind:this={nav_element}
     style="box-shadow: {scroll_y > 0
-        ? '0 1px 10px rgba(131, 143, 165, 0.5)'
+        ? '0 1px 5px rgba(255,255,255, 0.1)'
         : ''}; z-index: {scroll_y > 0 ? '100' : '50'}"
-    class="sticky top-10 w-full bg-primary h-20 transition-all {className}"
+    class="sticky top-0 w-full bg-primary h-20 transition-all {className}"
 >
     <!--* Desktop -->
     <div class="hidden lg:flex items-center w-full h-full px-10 gap-20">
@@ -66,7 +66,7 @@
                             on:click={() => {
                                 navigate("/home/capital");
                             }}
-                            class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
+                            class=" bg-cto p-2 px-4 rounded-full font-semibold text-light"
                             type="button">Dashboard</button
                         >
                     {:else}
@@ -74,7 +74,7 @@
                             on:click={() => {
                                 navigate("/signup");
                             }}
-                            class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
+                            class=" bg-cto p-2 px-6 rounded-full font-semibold text-light"
                             type="button">Get Started</button
                         >
                         <button
@@ -90,7 +90,7 @@
                         on:click={() => {
                             navigate("/signup");
                         }}
-                        class=" bg-cto p-2 px-4 rounded-lg font-semibold text-light"
+                        class=" bg-cto p-2 px-6 rounded-full font-semibold text-light"
                         type="button">Get Started</button
                     >
                     <button

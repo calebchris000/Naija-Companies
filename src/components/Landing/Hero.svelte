@@ -4,28 +4,26 @@
 </script>
 
 <section
-    class="hero max-h-[700px] w-full separator h-screen lg:h-[85vh] bg-primary flex justify-between p-4 py-10 lg:p-32 lg:px-10 lg:py-20 pb-0 lg:pb-0"
+    class="hero lg:max-h-[700px] w-full separator grid grid-cols-1 lg:grid-cols-12 h-screen lg:h-[85vh] bg-primary p-4 py-10 lg:p-32 lg:px-10 lg:py-10 pb-0 lg:pb-0"
 >
-    <div class="w-full h-full flex flex-col gap-4 lg:w-[42rem] z-10">
+    <div class="w-full h-full flex flex-col gap-4 z-10 lg:col-span-5">
         <span
-            class="leading-relaxed text-4xl font-medium text-secondary text-center lg:text-start lg:text-3xl"
+            class="leading-tight text-4xl font-medium text-secondary text-center lg:text-start lg:text-[40px]"
         >
             Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
             Reviews
         </span>
-        <span
-            class="text-secondary leading-loose text-center lg:text-start lg:text-sm"
-        >
+        <span class="text-secondary leading-loose text-center lg:text-start">
             Get honest insights from real Nigerian employees. Make informed
             career decisions based on genuine workplace experiences.
         </span>
 
         <div
-            class="bg-skyblue max-w-[42rem] flex h-16 items-center p-4 gap-4 rounded-lg mt-10 lg:h-12"
+            class="bg-secondary flex h-16 items-center p-4 gap-4 rounded-full mt-5 lg:h-12"
         >
             <Search className="w-6 text-light" />
             <input
-                class="text-light placeholder:text-light outline-none w-full bg-transparent"
+                class="text-light placeholder:text-primary font-medium outline-none w-full bg-transparent"
                 placeholder="Search for a company"
                 type="text"
                 name=""
@@ -33,7 +31,7 @@
             />
         </div>
     </div>
-    <div class="w-full hidden lg:block z-10">
+    <div class="w-full lg:col-span-7 hidden lg:block z-10 -translate-y-5">
         <img class="ms-auto w-[28rem]" src={hero_review} alt="" />
     </div>
 </section>

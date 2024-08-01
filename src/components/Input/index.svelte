@@ -17,19 +17,19 @@
 </script>
 
 <div class="flex flex-col space-y-2 relative rounded-lg w-full">
-    <label class="font-medium relative text-secondary" for={label}
+    <label class="font-medium relative text-primary" for={label}
         >{label}
 
         <span
             style="opacity: {check.valid ? '0' : '1'}"
-            class="text-red-600 transition-all font-medium absolute right-0 text-sm"
+            class="text-white font-semibold transition-all absolute right-0 text-sm"
         >
             {check.reason}</span
         >
     </label>
     <input
         on:input={handleInput}
-        class="outline-none text-secondary rounded-lg p-4 bg-light placeholder:text-secondary border-transparent w-full"
+        class="outline-none bg-accent text-primary rounded-lg p-4 bg-light placeholder:text-primary border-transparent w-full"
         {type}
         value={defaultValue}
         {placeholder}

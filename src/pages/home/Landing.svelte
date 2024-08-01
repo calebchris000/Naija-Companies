@@ -10,7 +10,7 @@
 </script>
 
 <section class="max-w-[120rem] mx-auto">
-    <Alert />
+    <!-- <Alert /> -->
     <Navbar />
     <Hero />
     <Stats />

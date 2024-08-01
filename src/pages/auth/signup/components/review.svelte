@@ -12,11 +12,11 @@
 </script>
 
 <section
-    class="bg-light p-4 w-full lg:h-full rounded-xl mb-2 space-y-4 text-secondary"
+    class="bg-primary text-secondary p-4 w-full lg:h-full rounded-xl mb-2 space-y-4"
 >
     <div class="flex items-center gap-4">
         <span class="text-lg font-medium">{name}</span>
-        <span class="text-2xl text-green-500">{stars}</span>
+        <span class="text-2xl">{stars}</span>
     </div>
     <div>
         <span class="leading-loose">{review}</span>
