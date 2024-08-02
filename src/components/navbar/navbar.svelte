@@ -1,5 +1,6 @@
 <script lang="ts">
-    import logo from "@src/assets/logo-white.png";
+    import logo_white from "@src/assets/logo-white.png";
+    import logo_black from "@src/assets/logo.png";
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import { VerifyToken } from "@src/core/api/auth";
     import { useToken } from "@src/core/utils/utils";
@@ -7,6 +8,7 @@
 
     export let disabled = false;
     export let className = "";
+    export let use_dark_logo = false;
 
     const token = useToken();
     $: menu_open = false;
@@ -51,7 +53,11 @@
             }}
             class="items-center hidden lg:flex"
         >
-            <img class="w-36 -translate-y-1" src={logo} alt="" />
+            <img
+                class="w-36 -translate-y-1"
+                src={use_dark_logo ? logo_black : logo_white}
+                alt=""
+            />
         </button>
         {#if !disabled}
             <div class="items-center gap-10 font-medium text-secondary lg:flex">
@@ -110,12 +116,18 @@
     <div
         class="w-full h-full z-0 px-4 flex relative items-center justify-end lg:hidden"
     >
+        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
+            on:click={() => {
+                navigate("/home");
+            }}
             style="left: {disabled ? '16px' : '50%'}; transform: {disabled
                 ? 'translateX(0)'
                 : 'translateX(-50%)'}"
-            class="w-40 absolute"
-            src={logo}
+            class="w-40 absolute cursor-pointer"
+            src={use_dark_logo ? logo_black : logo_white}
             alt=""
         />
 

@@ -16,20 +16,20 @@
     }
 </script>
 
-<div class="flex flex-col space-y-2 relative rounded-lg w-full">
+<div class="flex flex-col space-y-2 relative rounded-full w-full">
     <label class="font-medium relative text-primary" for={label}
         >{label}
 
         <span
             style="opacity: {check.valid ? '0' : '1'}"
-            class="text-white font-semibold transition-all absolute right-0 text-sm"
+            class="text-[#ff4500] font-semibold transition-all max-w-[20rem] ms-auto absolute right-0 text-sm"
         >
             {check.reason}</span
         >
     </label>
     <input
         on:input={handleInput}
-        class="outline-none bg-accent text-primary rounded-lg p-4 bg-light placeholder:text-primary border-transparent w-full"
+        class="outline-none bg-primary rounded-full p-4 px-6 text-white placeholder:text-white border-transparent w-full"
         {type}
         value={defaultValue}
         {placeholder}

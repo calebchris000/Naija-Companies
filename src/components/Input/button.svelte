@@ -18,7 +18,7 @@
         ? '100%'
         : 'fit-content'}; background-color: {disabled ? 'gray' : ''}; {style}"
     on:click={handleClick}
-    class="bg-cto p-4 text-light transition-all font-semibold rounded-lg {className}"
+    class="bg-black p-4 text-secondary transition-all font-semibold rounded-full {className}"
 >
     {name}</button
 >

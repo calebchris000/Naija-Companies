@@ -89,7 +89,7 @@
         ) {
             checks.username = {
                 valid: false,
-                reason: "Username must be at least 4 characters long",
+                reason: "Minimum of 4 characters long",
             };
         } else if (checks.username) {
             checks.username = {
@@ -122,7 +122,7 @@
         } else if (!passwordRegex.test(passwordValue) && passwordValue.length) {
             checks.password = {
                 valid: false,
-                reason: "Uppercase, lowercase, and a special character is required",
+                reason: "Uppercase, lowercase, a special character",
             };
         } else if (
             usernameValue &&
@@ -225,14 +225,18 @@
     });
 </script>
 
-<figure class="bg-primary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
-    <Navbar disabled={true} className="top-[0!important]" />
+<figure class="bg-secondary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
+    <Navbar
+        disabled={true}
+        use_dark_logo={true}
+        className="top-[0!important] bg-secondary"
+    />
 
     <section
-        class="bg-primary w-full h-full px-4 lg:grid lg:gap-[10rem] lg:px-10 lg:grid-cols-2"
+        class="bg-secondary w-full h-full px-4 lg:grid lg:gap-[10rem] lg:px-10 lg:grid-cols-2"
     >
         <div class="w-full space-y-4">
-            <span class="text-3xl text-secondary font-normal"
+            <span class="text-3xl text-primary font-medium"
                 >Create An Account</span
             >
 
@@ -285,7 +289,7 @@
                     type="max"
                 />
                 <span
-                    class="w-fit ms-auto text-sm font-normal text-secondary block mt-[10px!important] p-0"
+                    class="w-fit ms-auto text-sm font-normal text-primary block mt-[10px!important] p-0"
                     >Already have an account? <a
                         class="underline font-medium"
                         href="/login">Login</a

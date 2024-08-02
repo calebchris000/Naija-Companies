@@ -1,27 +1,61 @@
 <script lang="ts">
+    import { isIntersecting } from "@src/utils/intersection";
+
+    let parent: HTMLElement;
+    $: statistics = [
+        { title: "Organization", number: 200 },
+        { title: "Reviews", number: 15000 },
+        { title: "Caegories", number: 44 },
+    ];
+
+    $: intersected = false;
+
+    $: isIntersecting(parent, (b) => {
+        if (intersected) return;
+        beginAnimation(b);
+        intersected = b;
+    });
+
+    function beginAnimation(b: boolean) {
+        const nums = [200, 15000, 44];
+        if (b) {
+            statistics.forEach((stat, index) => {
+                const lowest_number = Math.min(
+                    ...statistics.map((stat) => stat.number),
+                );
+                let count = stat.number - lowest_number;
+                const interval = setInterval(() => {
+                    if (count < nums[index]) {
+                        count++;
+                        statistics[index].number = count;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 20);
+            });
+        } else {
+            [200, 15000, 44].forEach((stat, index) => {
+                statistics[index].number = stat;
+            });
+        }
+    }
 </script>
 
 <section
+    bind:this={parent}
+    id="stats"
     class="shapedividers_com-3867 w-full h-full gap-20 bg-white text-primary flex flex-col items-center px-10 py-40 pb-20 justify-between lg:flex-row lg:py-0 lg:pt-40 lg:h-fit lg:gap-0"
 >
-    <div
-        class="flex flex-col justify-center gap-1 leading-tight lg:gap-2 items-center"
-    >
-        <span class="text-[6rem] ps-10 lg:text-[4rem] font-semibold">200+</span>
-        <span class="text-xl lg:text-xl">Organizations</span>
-    </div>
-    <div
-        class="flex flex-col justify-center gap-1 leading-tight lg:gap-2 items-center"
-    >
-        <span class="text-[6rem] lg:text-[4rem] font-semibold">15,000+</span>
-        <span class="text-xl lg:text-xl">Reviews</span>
-    </div>
-    <div
-        class="flex flex-col justify-center gap-1 leading-tight lg:gap-2 items-center"
-    >
-        <span class="text-[6rem] lg:text-[4rem] font-semibold">44+</span>
-        <span class="text-xl lg:text-lg">Categories Added</span>
-    </div>
+    {#each statistics as { title, number }}
+        <div
+            class="flex flex-col justify-center gap-1 leading-tight lg:gap-2 items-center"
+        >
+            <span class="text-[6rem] ps-10 lg:text-[4rem] font-semibold"
+                >{new Intl.NumberFormat("en-US").format(number)}+</span
+            >
+            <span class="text-xl lg:text-xl">{title}</span>
+        </div>
+    {/each}
 </section>
 
 <style>
