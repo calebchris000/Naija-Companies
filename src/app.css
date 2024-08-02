@@ -45,7 +45,7 @@ input[type="number"] {
 
 /* Custom scrollbar for WebKit browsers */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 0px;
     /* Adjust the width of the scrollbar */
 }
 

@@ -20,18 +20,18 @@
     });
 </script>
 
-<figure class="bg-secondary">
+<figure class="bg-white h-screen">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:absolute p-4 flex flex-col justify-between bg-accent rounded-lg lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%] lg:bg-white lg:w-[80vw] lg:h-[75vh] lg:p-10"
+        class="lg:absolute p-4 flex flex-col justify-between rounded-2xl lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%] lg:bg-primary lg:w-[80vw] lg:h-[70vh] lg:p-10"
     >
         <div class="top flex flex-col lg:grid lg:grid-cols-12 gap-32 lg:gap-10">
             <div class="left lg:col-span-5 flex flex-col gap-4">
                 <div class="text-top flex flex-col gap-4">
-                    <span class="text-3xl text-accent font-medium"
+                    <span class="text-3xl text-secondary font-medium"
                         >Find Your Companies</span
                     >
-                    <span class="text-accent leading-loose lg:text-sm"
+                    <span class="text-secondary leading-loose lg:text-sm"
                         >Select the companies you're currently employed by or
                         have worked for recently. This step helps us verify your
                         eligibility to provide authentic reviews. We prioritize
@@ -40,7 +40,7 @@
                     >
                 </div>
                 <div
-                    class="search bg-accent rounded-md text-accent mt-4 flex items-center gap-4 p-4"
+                    class="search bg-secondary rounded-md text-secondary mt-4 flex items-center gap-4 p-4"
                 >
                     <Search className="w-6 text-primary" />
                     <input
@@ -57,10 +57,12 @@
                         type="button"
                     >
                         <span class="">Skip </span>
-                        <SkipForward className="w-5 text-accent stroke-cto" />
+                        <SkipForward
+                            className="w-5 text-secondary stroke-cto"
+                        />
                     </button>
                     <button
-                        class="text-accent2 bg-cto p-2 px-4 rounded-md font-medium flex items-center gap-2"
+                        class="text-primary bg-cto p-2 px-4 rounded-md font-medium flex items-center gap-2"
                         type="button"
                     >
                         <span>Next</span>
@@ -86,7 +88,7 @@
                 <SkipForward className="w-5" />
             </button>
             <button
-                class="text-cto font-medium flex items-center gap-2"
+                class="text-primary font-medium flex items-center gap-2"
                 type="button"
             >
                 <span>Next Step</span>

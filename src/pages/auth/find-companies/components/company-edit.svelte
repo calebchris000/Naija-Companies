@@ -67,7 +67,7 @@
                 <button
                     type="button"
                     on:click={handleAddRole}
-                    class="lg:w-6 lg:h-6 w-8 mt-4 lg:m-0 h-8 bg-skyblue rounded-full relative text-light"
+                    class="lg:w-6 lg:h-6 w-8 mt-4 lg:m-0 h-8 bg-secondary rounded-full relative text-primary"
                 >
                     <span
                         class="absolute top-[54%] left-[52%] -translate-x-[50%] -translate-y-[50%]"
@@ -88,14 +88,14 @@
                 <div class="flex flex-col w-full gap-2 lg:gap-0">
                     <span class=" flex flex-col">Start</span>
                     <input
-                        class="lg:bg-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
+                        class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
                     />
                 </div>
                 <div class="flex flex-col w-full gap-2 lg:gap-0">
                     <span>End</span>
                     <input
-                        class="lg:bg-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
+                        class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
                     />
                 </div>
