@@ -100,7 +100,7 @@
 
         const emailValue = inputs.get("email_address") || "";
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailValue) && emailValue.length) {
+        if (emailValue && !emailRegex.test(emailValue) && emailValue.length) {
             checks.email_address = {
                 valid: false,
                 reason: "Please enter a valid email address",

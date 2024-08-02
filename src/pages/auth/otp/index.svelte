@@ -123,12 +123,12 @@
     });
 </script>
 
-<figure class="h-screen bg-primary max-w-[120rem]">
+<figure class="h-screen bg-secondary max-w-[120rem]">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:rounded-xl lg:shadow-md lg:grid lg:grid-cols-12 lg:p-10 p-4 text-secondary lg:bg-light lg:w-[80vw] lg:max-h-[70vh] lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
+        class="lg:rounded-2xl bg-primary lg:grid lg:grid-cols-12 lg:p-10 p-4 text-secondary lg:bg-light lg:w-[80vw] lg:max-h-[70vh] lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
     >
-        <div class="flex flex-col gap-4 lg:col-span-6">
+        <div class="flex flex-col text-secondary gap-4 lg:col-span-6">
             <span class="text-3xl font-medium">Verify Email Address</span>
             <div class="flex flex-col text-sm gap-2 lg:gap-0">
                 <span
@@ -146,7 +146,7 @@
                 {#each input_ids as id}
                     <input
                         id="input{id}"
-                        class="w-full otp caret-transparent max-w-[80px] mx-auto h-12 lg:h-20 rounded-lg lg:rounded-xl outline-none bg-light text-secondary lg:bg-skyblue lg:text-light text-center text-xl lg:text-3xl font-bold"
+                        class="w-full otp caret-transparent max-w-[80px] mx-auto h-12 lg:h-20 rounded-lg lg:rounded-xl outline-none bg-secondary text-black lg:bg-skyblue lg:text-light text-center text-xl lg:text-3xl font-bold"
                         type="number"
                         maxlength="1"
                         on:input={(e) => {
@@ -182,7 +182,7 @@
                           : ''}"
                     bind:this={submit_button}
                     on:click={handleSubmit}
-                    class="bg-cto transition-all submit text-light p-2 px-4 rounded-lg"
+                    class="bg-cto transition-all submit text-primary font-medium p-2 px-4 rounded-lg"
                     type="button"
                     >{otp_status === "pending"
                         ? "Checking..."
