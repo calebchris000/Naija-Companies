@@ -50,7 +50,7 @@
         {/each}
     </div>
     <button
-        class="bg-cto p-4 rounded-md font-semibold flex items-center gap-4 text-primary"
+        class="bg-cto p-4 py-3 rounded-full font-semibold flex items-center gap-4 text-primary"
         type="button"
     >
         <span>See Reviews</span>

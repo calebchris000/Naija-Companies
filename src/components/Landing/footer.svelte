@@ -33,9 +33,9 @@
 </script>
 
 <section
-    class=" w-full bg-primary lg:pb-4 p-4 py-32 text-primary space-y-24 lg:p-32 lg:px-10"
+    class=" w-full bg-black lg:pb-4 p-4 py-32 text-primary space-y-24 lg:p-32 lg:px-10"
 >
-    <div class="flex flex-col gap-2 text-center text-accent">
+    <div class="flex flex-col gap-2 text-center text-secondary">
         <span class="text-3xl font-medium">Join Our Newsletter</span>
         <span class="leading-loose lg:max-w-[55vw] mx-auto"
             >Stay informed about Nigerian workplace trends, company reviews, and
@@ -47,13 +47,13 @@
         >
             <input
                 bind:this={email_element}
-                class="bg-primary mx-auto w-full h-full text-accent placeholder:text-accent font-medium px-10 outline-none rounded-md"
+                class="bg-secondary mx-auto w-full h-full text-black placeholder:text-black font-medium px-10 py-3 outline-none rounded-full"
                 type="email"
                 placeholder="Your email address"
             />
             <button
                 on:click={handleAddEmail}
-                class="bg-primary text-accent h-full px-10 w-full lg:w-fit rounded-md font-semibold"
+                class="bg-primary text-white h-full px-10 py-3 w-full lg:w-fit rounded-full font-semibold"
                 type="button">Submit</button
             >
         </div>
@@ -64,7 +64,7 @@
             <img class="w-full" src={logo} alt="" />
         </div>
 
-        <div class="flex flex-col text-accent gap-10 lg:flex-row lg:gap-60">
+        <div class="flex flex-col text-secondary gap-10 lg:flex-row lg:gap-60">
             <figure class="flex flex-col gap-4">
                 <span class="font-semibold">Follow Us</span>
                 <div class="flex flex-col gap-4">
@@ -105,7 +105,7 @@
     </div>
 
     <div
-        class="text-accent font-medium text-xs flex flex-col lg:flex-row items-center gap-4"
+        class="text-secondary font-medium text-xs flex flex-col lg:flex-row items-center gap-4"
     >
         <span>© 2024 Naija Companies. All rights reserved. </span>
         <span class="lg:inline hidden">|</span>

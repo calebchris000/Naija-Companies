@@ -4,7 +4,7 @@
 </script>
 
 <section
-    class="hero lg:max-h-[700px] w-full separator grid grid-cols-1 lg:grid-cols-12 h-screen lg:h-[85vh] bg-primary p-4 py-10 lg:p-32 lg:px-10 lg:py-10 pb-0 lg:pb-0"
+    class="hero lg:max-h-[700px] bg-gradient-to-br w-full separator grid grid-cols-1 lg:grid-cols-12 h-screen lg:h-[85vh] bg-primary p-4 py-10 lg:p-32 lg:px-10 lg:py-10 pb-0 lg:pb-0"
 >
     <div class="w-full h-full flex flex-col gap-4 z-10 lg:col-span-5">
         <span
@@ -21,7 +21,7 @@
         <div
             class="bg-secondary flex h-16 items-center p-4 gap-4 rounded-full mt-5 lg:h-12"
         >
-            <Search className="w-6 text-light" />
+            <Search className="lg:w-6 w-10 text-primary" />
             <input
                 class="text-light placeholder:text-primary font-medium outline-none w-full bg-transparent"
                 placeholder="Search for a company"

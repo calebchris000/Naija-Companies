@@ -74,7 +74,7 @@
                             on:click={() => {
                                 navigate("/signup");
                             }}
-                            class=" bg-cto p-2 px-6 rounded-full font-semibold text-light"
+                            class=" bg-cto p-2 px-6 rounded-full font-semibold text-primary"
                             type="button">Get Started</button
                         >
                         <button
@@ -90,7 +90,7 @@
                         on:click={() => {
                             navigate("/signup");
                         }}
-                        class=" bg-cto p-2 px-6 rounded-full font-semibold text-light"
+                        class=" bg-cto p-2 px-6 rounded-full font-semibold text-primary"
                         type="button">Get Started</button
                     >
                     <button
@@ -137,7 +137,7 @@
                     : '0'}; padding-top: {menu_open
                     ? '2.5rem'
                     : '0'}; padding-bottom: {menu_open ? '2.5rem' : '0'}"
-                class="fixed slow-transition flex w-full h-full z-[9999] flex-col overflow-hidden p-10 justify-between inset-0 bg-secondary"
+                class="fixed slow-transition flex w-full h-full z-[9999] flex-col overflow-hidden p-10 justify-between inset-0 bg-black"
             >
                 <div class="flex justify-end w-full">
                     <button
@@ -146,10 +146,10 @@
                         class="w-8 flex flex-col gap-2 absolute right-4"
                     >
                         <span
-                            class="w-full h-[0.3rem] rounded-lg rotate-45 bg-primary"
+                            class="w-full h-[0.3rem] rounded-lg rotate-45 bg-secondary"
                         ></span>
                         <span
-                            class="w-full h-[0.3rem] rounded-lg -rotate-45 bg-primary absolute"
+                            class="w-full h-[0.3rem] rounded-lg -rotate-45 bg-secondary absolute"
                         ></span>
                     </button>
                 </div>
@@ -164,15 +164,15 @@
                     class="flex flex-col gap-4"
                 >
                     <Link
-                        class="text-[4rem] text-primary font-semibold"
+                        class="text-[4rem] text-secondary font-semibold"
                         to="/home">Blog</Link
                     >
                     <Link
-                        class="text-[4rem] text-primary font-semibold"
+                        class="text-[4rem] text-secondary font-semibold"
                         to="/home">Features</Link
                     >
                     <Link
-                        class="text-[4rem] text-primary font-semibold"
+                        class="text-[4rem] text-secondary font-semibold"
                         to="/home">Services</Link
                     >
                 </div>
@@ -188,7 +188,7 @@
                     {#await VerifyToken({ token }) then { status }}
                         {#if status === 200}
                             <Link
-                                class="text-[4rem] flex items-center gap-8 text-light font-semibold"
+                                class="text-[4rem] flex items-center gap-8 text-secondary font-semibold"
                                 to="/home/capital"
                             >
                                 <span>Review</span>
@@ -196,21 +196,21 @@
                             </Link>
                         {:else}
                             <Link
-                                class="text-[4rem] text-light font-semibold"
+                                class="text-[4rem] text-secondary font-semibold"
                                 to="/signup">Sign Up</Link
                             >
                             <Link
-                                class="text-[4rem] text-light font-semibold"
+                                class="text-[4rem] text-secondary font-semibold"
                                 to="/login">Log In</Link
                             >
                         {/if}
                     {:catch err}
                         <Link
-                            class="text-[4rem] text-light font-semibold"
+                            class="text-[4rem] text-secondary font-semibold"
                             to="/signup">Sign Up</Link
                         >
                         <Link
-                            class="text-[4rem] text-light font-semibold"
+                            class="text-[4rem] text-secondary font-semibold"
                             to="/login">Log In</Link
                         >
                     {/await}

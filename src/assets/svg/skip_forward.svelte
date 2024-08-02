@@ -10,7 +10,6 @@
 >
     <path
         d="M19 5V19M5 4L15 12L5 20V4Z"
-        stroke="#090C9B"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"

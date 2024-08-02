@@ -8,7 +8,7 @@
 >
     <div class="flex flex-col gap-4 text-center lg:max-w-[36vw] mx-auto">
         <span
-            class="text-3xl text-primary font-medium underline underline-offset-8"
+            class="text-3xl text-primary leading-relaxed font-medium underline underline-offset-8"
             >Find Organizations By Sector</span
         >
         <span class="text-primary leading-loose"

@@ -3,9 +3,12 @@
     import CompanyReview from "./components/company-review.svelte";
 </script>
 
-<section class="lg:p-32 lg:px-10 p-4 h-full py-20 space-y-10 bg-accent">
-    <div class="flex flex-col gap-4 items-center font-medium text-s">
-        <span class="text-center text-2xl lg:text-3xl"
+<section class="lg:px-10 p-4 space-y-10 bg-white flex flex-col py-20">
+    <div
+        class="flex flex-col gap-4 items-center font-medium text-s text-primary"
+    >
+        <span
+            class="text-center text-3xl leading-relaxed underline underline-offset-8"
             >Best Rated Organization Of 2024</span
         >
         <span class="lg:max-w-[50vw] text-center font-normal leading-loose"
@@ -14,10 +17,8 @@
             company culture.</span
         >
     </div>
-    <div
-        class="grid grid-cols-1 max-h-[350px] gap-y-4 lg:grid-cols-12 lg:gap-10 lg:h-[50vh]"
-    >
-        <CompanyCard className="col-span-7" />
-        <CompanyReview className="col-span-5" />
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <CompanyCard className="lg:col-span-7" />
+        <CompanyReview className="lg:col-span-5" />
     </div>
 </section>
