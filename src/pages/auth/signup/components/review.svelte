@@ -12,7 +12,7 @@
 </script>
 
 <section
-    class="bg-primary text-secondary p-4 w-full lg:h-full rounded-xl mb-2 space-y-4"
+    class="bg-secondary text-primary p-4 w-full lg:h-full rounded-xl mb-2 space-y-4"
 >
     <div class="flex items-center gap-4">
         <span class="text-lg font-medium">{name}</span>
@@ -22,7 +22,7 @@
         <span class="leading-loose">{review}</span>
     </div>
     <div class="flex items-center justify-end">
-        <span class="text-sm text-cto"
+        <span class="text-sm text-primary"
             >{reviewer} {!is_employee ? " | Ex-Employee" : " | Employee"}</span
         >
     </div>

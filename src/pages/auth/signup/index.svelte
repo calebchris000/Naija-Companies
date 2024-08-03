@@ -179,6 +179,7 @@
 
         if (status !== 201) {
             const r = response.data as any;
+            console.log(response);
             notification.error({
                 text: r ?? "The email address or username is already in use.",
             });
@@ -225,7 +226,9 @@
     });
 </script>
 
-<figure class="bg-secondary lg:overflow-hidden max-w-[120rem] lg:mx-auto">
+<figure
+    class="bg-secondary h-screen lg:overflow-hidden max-w-[120rem] lg:mx-auto"
+>
     <Navbar
         disabled={true}
         use_dark_logo={true}
@@ -298,14 +301,14 @@
             </div>
         </div>
         <div
-            class="xl:h-[85vh] h-fit xl:max-h-[40rem] max-w-[30rem] ms-auto bg-accent rounded-lg p-8 flex-col gap-2 hidden lg:flex"
+            class="xl:h-[85vh] h-fit xl:max-h-[40rem] max-w-[30rem] ms-auto bg-primary rounded-lg p-8 flex-col gap-2 hidden lg:flex"
         >
             <div class="flex flex-col gap-2">
                 <span
-                    class="text-primary text-3xl font-semibold block w-[340px] leading-normal xl:4xl 2xl:w-full"
+                    class="text-secondary text-3xl font-semibold block w-[340px] leading-normal xl:4xl 2xl:w-full"
                     >Start Your Journey With Us</span
                 >
-                <span class="text-primary leading-relaxed"
+                <span class="text-secondary leading-relaxed"
                     >Discover 1000+ fresh startups and explore real user
                     opinions about them.</span
                 >
