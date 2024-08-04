@@ -1,5 +1,7 @@
 <script lang="ts">
     import Cancel from "@src/assets/svg/cancel.svelte";
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 
     export let index = 0;
     export let company_name = "";
@@ -37,17 +39,19 @@
         }
     }
 
-    function handleRemove() {}
+    function handleRemove() {
+        dispatch("cancel");
+    }
     function handleAddRole() {}
 </script>
 
-<figure class="flex flex-col gap-4 lg:h-[24rem]">
+<figure class="flex flex-col gap-4 h-fit">
     <section class="flex gap-10 items-center border-b pb-4 one">
         <span class="text-cto text-2xl font-semibold">{index}.</span>
         <span class="text-cto font-semibold text-2xl">{company_name}</span>
         <span class="text-red-500 text-2xl ms-auto">
             <button on:click={handleRemove} type="button">
-                <Cancel className="w-4" />
+                <Cancel className="w-4 hover:text-white transition-all" />
             </button>
         </span>
     </section>

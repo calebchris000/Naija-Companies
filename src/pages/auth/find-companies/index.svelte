@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Search from "@src/assets/svg/search.svelte";
     import Navbar from "@src/components/navbar/navbar.svelte";
     import CompanyEdit from "./components/company-edit.svelte";
     import SkipForward from "@src/assets/svg/skip_forward.svelte";
@@ -7,8 +6,18 @@
     import { onMount } from "svelte";
     import { LocalStorage } from "@src/core/utils/utils";
     import { navigate } from "svelte-routing";
+    import Search from "@src/components/Input/search.svelte";
 
     const local_storage = new LocalStorage();
+    $: selected_orgs_id = [] as number[];
+    $: search = "";
+    $: org_filter = organizations.filter((org) => {
+        const lower = org.name.toLowerCase();
+        const search_lower = search.toLowerCase();
+        return (
+            lower.includes(search_lower) && !selected_orgs_id.includes(org.id)
+        );
+    });
 
     onMount(() => {
         const current_step = local_storage.getItem("step", true);
@@ -18,6 +27,16 @@
             navigate("/signup");
         }
     });
+
+    const organizations = [
+        { name: "Gotocourse", id: 0 },
+        { name: "Acme Corporation", id: 1 },
+        { name: "TechSolutions Inc.", id: 2 },
+        { name: "GlobalTech Enterprises", id: 3 },
+        { name: "InnovateCorp", id: 4 },
+        { name: "FutureSystems Ltd.", id: 5 },
+        { name: "Quantum Dynamics", id: 6 },
+    ];
 </script>
 
 <figure class="bg-white h-screen">
@@ -39,15 +58,47 @@
                         company isn't listed, you can request to add it.</span
                     >
                 </div>
-                <div
-                    class="search bg-secondary rounded-md text-secondary mt-4 flex items-center gap-4 p-4"
-                >
-                    <Search className="w-6 text-primary" />
-                    <input
-                        class="bg-transparent outline-none text-primary placeholder:text-primary"
-                        type="text"
-                        placeholder="Search for a company"
+
+                <div class="relative">
+                    <Search
+                        on:input={(e) => {
+                            search = e.detail;
+                            // console.log(e.detail, "is value");
+                        }}
                     />
+
+                    <div
+                        style="opacity: {search
+                            ? '1'
+                            : '0'}; pointer-events: {search ? 'auto' : 'none'}"
+                        class="absolute z-50 transition-all max-h-40 top-20 bg-secondary flex flex-col overflow-y-scroll items-start rounded-lg shadow-lg left-0 right-0"
+                    >
+                        {#if !org_filter.length}
+                            <button
+                                on:click={() => {
+                                    search = "";
+                                }}
+                                id="org0"
+                                class="font-medium text-primary h-full hover:bg-primary hover:text-secondary transition-all py-3 px-4 w-full text-start"
+                                type="button">No Organization</button
+                            >
+                        {:else}
+                            {#each org_filter as { name, id }}
+                                <button
+                                    on:click={() => {
+                                        selected_orgs_id = [
+                                            ...selected_orgs_id,
+                                            id,
+                                        ];
+                                        search = "";
+                                    }}
+                                    id="org{id}"
+                                    class="font-medium text-primary h-full hover:bg-primary hover:text-secondary transition-all py-3 px-4 w-full text-start"
+                                    type="button">{name}</button
+                                >
+                            {/each}
+                        {/if}
+                    </div>
                 </div>
                 <div
                     class="bottom mt-auto max-md:hidden flex items-center justify-between"
@@ -71,12 +122,23 @@
                 </div>
             </div>
             <div
-                class="right lg:col-span-7 lg:h-[95%] lg:pe-5 lg:overflow-y-scroll"
+                class="right lg:col-span-7 lg:h-[24rem] flex flex-col gap-10 lg:pe-5 lg:overflow-y-scroll"
             >
-                <CompanyEdit index={1} company_name="Zed Enterprise" />
+                {#each selected_orgs_id as org_id, id}
+                    <CompanyEdit
+                        index={id + 1}
+                        company_name={organizations[org_id].name ?? "this"}
+                        on:cancel={() => {
+                            selected_orgs_id = selected_orgs_id.filter(
+                                (id) => id !== org_id,
+                            );
+                        }}
+                    />
+                {/each}
             </div>
         </div>
 
+        <!--* Mobile actions -->
         <div
             class="bottom w-full flex items-center mt-10 justify-between lg:hidden lg:absolute lg:bottom-10"
         >
