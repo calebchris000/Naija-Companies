@@ -28,9 +28,11 @@
         "Full Stack Developer",
         "UI/UX Designer",
     ];
+
     let add_role_input: HTMLInputElement;
     $: file_name = "";
     $: role_input = "";
+    $: filtered_roles = roles as string[];
     $: selected_roles = [] as string[];
 
     let doc_file_input: HTMLInputElement | null;
@@ -124,6 +126,18 @@
                                 selected_roles = selected_roles.filter(
                                     (r) => r !== role,
                                 );
+                                filtered_roles = [
+                                    ...roles.filter(
+                                        (r) => !selected_roles.includes(r),
+                                    ),
+                                ];
+
+                                if (role_input) {
+                                    role_input = "";
+                                    if (add_role_input) {
+                                        add_role_input.value = "";
+                                    }
+                                }
                             }}
                             class=" "
                             type="button"
@@ -131,9 +145,6 @@
                             <Cancel className="w-4 text-red-500" />
                         </button>
                     </div>
-                    <!-- {#if roles.length - 1 !== index}
-                        <span class="w-2 h-2 bg-secondary rounded-full"></span>
-                    {/if} -->
                 {/each}
 
                 <div class="relative">
@@ -155,7 +166,7 @@
                             : 'none'}"
                         class="absolute transition-all z-50 top-12 rounded-lg flex flex-col bg-secondary text-primary w-full"
                     >
-                        {#if !roles.length}
+                        {#if !filtered_roles.length}
                             <button
                                 on:click={() => {
                                     role_input = "";
@@ -167,17 +178,15 @@
                                 >No Roles</button
                             >
                         {:else}
-                            {#each roles as role}
+                            {#each filtered_roles as role}
                                 <button
                                     on:click={() => {
                                         selected_roles = [
                                             ...selected_roles,
                                             role,
                                         ];
-                                        roles = roles.filter(
-                                            (r) =>
-                                                r.toLowerCase() !==
-                                                role.toLowerCase(),
+                                        filtered_roles = filtered_roles.filter(
+                                            (r) => r !== role,
                                         );
                                         role_input = "";
                                         if (!add_role_input) return;
