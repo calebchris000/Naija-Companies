@@ -7,7 +7,7 @@
 
     type DataType = {
         id: number;
-        selected_role: { id: number; role: string }[];
+        selected_roles: string[];
         document_proof: string;
         tenure: { start: string; end: string; current: boolean };
         type: "remote" | "onsite" | "hybrid";
@@ -15,13 +15,13 @@
 
     export let index = 0;
     export let company_name = "";
-    const data: DataType = {
+    $: data = {
         id: 0,
-        selected_role: [{ id: 11, role: "FullStack Web Developer" }],
+        selected_roles: ["FullStack Web Developer"],
         document_proof: "",
         tenure: { start: "", end: "", current: false },
         type: "remote",
-    };
+    } as DataType;
     export let roles = [
         "Backend Developer",
         "Frontend Developer",
@@ -43,7 +43,6 @@
     ) {
         const val = (e.target as HTMLInputElement)?.value;
         data.tenure = { ...data.tenure, [type]: val };
-        console.log(data);
     }
 
     function handleCurrentWorked(
@@ -58,7 +57,6 @@
     ) {
         const value = (e.target as HTMLInputElement).id;
         data.type = value as "remote" | "onsite" | "hybrid";
-        console.log(data);
     }
 
     function handleFileInput(e: Event & { target: HTMLInputElement }) {
@@ -73,7 +71,6 @@
                 e.target.value = "";
                 return;
             }
-            console.log("Document name:", file.name);
             file_name = file.name;
             // Get the document and process it
             const reader = new FileReader();
@@ -81,8 +78,6 @@
                 if (event.target && event.target.result) {
                     const base64 = event.target.result as string;
                     data.document_proof = base64;
-                    // console.log("Base64 encoded file:", base64);
-                    // You can now use the base64 string as needed
                 }
             };
             reader.readAsDataURL(file);
@@ -96,13 +91,16 @@
         e: Event & { currentTarget: EventTarget & HTMLInputElement },
     ) {
         const val = (e.target as HTMLInputElement).value;
-        console.log(val);
         role_input = val ?? "";
         filtered_roles = roles.filter(
             (role) =>
                 role.toLowerCase().includes(role_input.toLowerCase()) &&
                 !selected_roles.includes(role),
         );
+    }
+
+    $: {
+        dispatch("update", data);
     }
 </script>
 
@@ -136,6 +134,7 @@
                                         (r) => !selected_roles.includes(r),
                                     ),
                                 ];
+                                data.selected_roles = selected_roles;
 
                                 if (role_input) {
                                     role_input = "";
@@ -194,6 +193,7 @@
                                             (r) => r !== role,
                                         );
                                         role_input = "";
+                                        data.selected_roles = selected_roles;
                                         if (!add_role_input) return;
                                         add_role_input.value = "";
                                     }}
@@ -317,6 +317,7 @@
                             if (!doc_file_input) return;
                             doc_file_input.value = "";
                             file_name = "";
+                            data.document_proof = "";
                         }}
                     >
                         <Cancel className="w-3 text-red-500" />

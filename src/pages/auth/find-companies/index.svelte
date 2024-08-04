@@ -131,6 +131,9 @@
             >
                 {#each selected_orgs_id as org_id, id}
                     <CompanyEdit
+                        on:update={(e) => {
+                            console.log(e.detail);
+                        }}
                         index={id + 1}
                         company_name={organizations[org_id].name ?? "this"}
                         on:cancel={() => {
