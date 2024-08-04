@@ -13,6 +13,7 @@
         type: "remote" | "onsite" | "hybrid";
     };
 
+    export let sn = 0;
     export let index = 0;
     export let company_name = "";
     $: data = {
@@ -110,7 +111,7 @@
 
 <figure class="flex flex-col gap-4 h-fit">
     <section class="flex gap-10 items-center border-b pb-4 one">
-        <span class="text-cto text-2xl font-semibold">{index}.</span>
+        <span class="text-cto text-2xl font-semibold">{sn}.</span>
         <span class="text-cto font-semibold text-2xl">{company_name}</span>
         <span class="text-red-500 text-2xl ms-auto">
             <button on:click={handleRemove} type="button">

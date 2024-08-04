@@ -71,7 +71,8 @@
 
         if (isValid) {
             // Proceed to next step
-            navigate("/next-step");
+            // navigate("/next-step");
+            console.log("passed");
         }
     }
 
@@ -186,11 +187,15 @@
                             }
                             console.log(companies_data, detail);
                         }}
-                        index={id + 1}
+                        index={org_id}
+                        sn={id + 1}
                         company_name={organizations[org_id].name}
                         on:cancel={() => {
                             selected_orgs_id = selected_orgs_id.filter(
                                 (id) => id !== org_id,
+                            );
+                            companies_data = companies_data.filter(
+                                (company) => company.id !== org_id,
                             );
                         }}
                     />
