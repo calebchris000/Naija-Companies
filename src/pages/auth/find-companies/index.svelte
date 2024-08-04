@@ -37,6 +37,9 @@
         { name: "FutureSystems Ltd.", id: 5 },
         { name: "Quantum Dynamics", id: 6 },
     ];
+
+    function handleSkip() {}
+    function handleNext() {}
 </script>
 
 <figure class="bg-white h-screen">
@@ -104,6 +107,7 @@
                     class="bottom mt-auto max-md:hidden flex items-center justify-between"
                 >
                     <button
+                        on:click={handleSkip}
                         class="text-cto border border-cto p-2 px-4 rounded-md font-medium flex items-center gap-2 flex-row-reverse"
                         type="button"
                     >
@@ -113,6 +117,7 @@
                         />
                     </button>
                     <button
+                        on:click={handleNext}
                         class="text-primary bg-cto p-2 px-4 rounded-md font-medium flex items-center gap-2"
                         type="button"
                     >
