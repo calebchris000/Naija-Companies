@@ -1,7 +1,7 @@
 <script lang="ts">
     import Cancel from "@src/assets/svg/cancel.svelte";
     import { Notification } from "@src/utils/notification";
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     const dispatch = createEventDispatcher();
     const notification = new Notification();
 
@@ -17,7 +17,7 @@
     export let company_name = "";
     $: data = {
         id: index,
-        selected_roles: ["FullStack Web Developer"],
+        selected_roles: [],
         document_proof: "",
         tenure: { start: "", end: "", current: false },
         type: "remote",
@@ -102,6 +102,10 @@
     $: {
         dispatch("update", data);
     }
+
+    onMount(() => {
+        dispatch("update", data);
+    });
 </script>
 
 <figure class="flex flex-col gap-4 h-fit">

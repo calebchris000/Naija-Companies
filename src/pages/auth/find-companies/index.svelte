@@ -7,9 +7,11 @@
     import { LocalStorage } from "@src/core/utils/utils";
     import { navigate } from "svelte-routing";
     import Search from "@src/components/Input/search.svelte";
+    import { Notification } from "@src/utils/notification";
 
     const local_storage = new LocalStorage();
-    let companies_data: any[] = [];
+    const notification = new Notification();
+    $: companies_data = [] as any[];
     $: selected_orgs_id = [] as number[];
     $: search = "";
     $: org_filter = organizations.filter((org) => {
@@ -31,7 +33,47 @@
     ];
 
     function handleSkip() {}
-    function handleNext() {}
+    function handleNext() {
+        if (companies_data.length === 0) {
+            notification.error({ text: "Please add at least one company" });
+            return;
+        }
+
+        const isValid = companies_data.every((company) => {
+            if (company.selected_roles.length === 0) {
+                notification.error({
+                    text: `Please select at least one role for ${organizations.find((org) => org.id === company.id)?.name}`,
+                });
+                return false;
+            }
+
+            if (!company.tenure.start) {
+                notification.error({
+                    text: `Please select a start date for ${organizations.find((org) => org.id === company.id)?.name}`,
+                });
+                return false;
+            }
+            if (!company.tenure.current && !company.tenure.end) {
+                notification.error({
+                    text: `Please select an end date for ${organizations.find((org) => org.id === company.id)?.name}`,
+                });
+                return false;
+            }
+            if (!company.document_proof) {
+                notification.error({
+                    text: `Please upload a document proof for ${organizations.find((org) => org.id === company.id)?.name}`,
+                });
+                return false;
+            }
+
+            return true;
+        });
+
+        if (isValid) {
+            // Proceed to next step
+            navigate("/next-step");
+        }
+    }
 
     onMount(() => {
         const current_step = local_storage.getItem("step", true);
