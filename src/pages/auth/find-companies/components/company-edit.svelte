@@ -289,22 +289,23 @@
         </div>
     </section>
     <section
-        class="four text-secondary w-full relative lg:grid lg:grid-cols-1 flex flex-col gap-4 pb-4 border-b"
+        class="four text-secondary w-full relative flex flex-col gap-4 pb-4 border-b"
     >
         <span class="proof font-medium col-span-6 w-fit relative">
             PROOF OF EMPLOYMENT:
         </span>
 
-        <div class="flex flex-col lg:flex-row lg:items-center lg:gap-10">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:gap-10 w-full">
             <button
                 on:click={() => {
                     doc_file_input?.click();
                 }}
-                class="lg:bg-primary w-full bg-white text-nowrap border border-secondary border-dashed text-secondary lg:p-3 p-4 px-10 rounded-lg"
-                type="button">Choose from disk.</button
+                class="lg:bg-secondary lg:text-primary lg:text-start lg:font-medium w-full bg-white text-nowrap border border-secondary border-dashed text-secondary lg:p-3 p-4 px-10 rounded-lg"
+                type="button"
+                >{file_name ? "Change Selected." : "Choose from disk."}</button
             >
-            <div class="flex items-center gap-2">
-                {#if file_name}
+            {#if file_name}
+                <div class="flex items-center gap-2">
                     <span class="text-sm text-nowrap font-medium text-secondary"
                         >{file_name.length > 24
                             ? file_name.slice(0, 20) + "...pdf"
@@ -319,8 +320,8 @@
                     >
                         <Cancel className="w-3 text-red-500" />
                     </button>
-                {/if}
-            </div>
+                </div>
+            {/if}
             <input
                 bind:this={doc_file_input}
                 on:change={handleFileInput}
