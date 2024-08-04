@@ -227,6 +227,7 @@
                 <div class="flex flex-col w-full gap-2 lg:gap-0">
                     <span>End</span>
                     <input
+                        disabled={data.tenure.current}
                         on:change={(e) => handleDateChange(e, "end")}
                         class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
