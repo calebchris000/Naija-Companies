@@ -1,19 +1,63 @@
 <script lang="ts">
     import Cancel from "@src/assets/svg/cancel.svelte";
+    import { Notification } from "@src/utils/notification";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
+    const notification = new Notification();
+
+    type DataType = {
+        id: number;
+        selected_role: { id: number; role: string }[];
+        document_proof: string;
+        tenure: { start: string; end: string; current: boolean };
+        type: "remote" | "onsite" | "hybrid";
+    };
 
     export let index = 0;
     export let company_name = "";
+    const data: DataType = {
+        id: 0,
+        selected_role: [{ id: 11, role: "FullStack Web Developer" }],
+        document_proof: "",
+        tenure: { start: "", end: "", current: false },
+        type: "remote",
+    };
     export let roles = [
         "Backend Developer",
         "Frontend Developer",
         "Full Stack Developer",
         "UI/UX Designer",
     ];
+    let add_role_input: HTMLInputElement;
     $: file_name = "";
+    $: role_input = "";
+    $: selected_roles = [] as string[];
 
     let doc_file_input: HTMLInputElement | null;
+
+    function handleDateChange(
+        e: Event & { currentTarget: EventTarget & HTMLInputElement },
+        type: "start" | "end",
+    ) {
+        const val = (e.target as HTMLInputElement)?.value;
+        data.tenure = { ...data.tenure, [type]: val };
+        console.log(data);
+    }
+
+    function handleCurrentWorked(
+        e: Event & { currentTarget: EventTarget & HTMLInputElement },
+    ) {
+        const currently_worked = (e.target as HTMLInputElement).checked;
+        data.tenure.current = currently_worked;
+    }
+
+    function handleWorkType(
+        e: Event & { currentTarget: EventTarget & HTMLInputElement },
+    ) {
+        const value = (e.target as HTMLInputElement).id;
+        data.type = value as "remote" | "onsite" | "hybrid";
+        console.log(data);
+    }
 
     function handleFileInput(e: Event & { target: HTMLInputElement }) {
         if (!e.target || !e.target.files) return;
@@ -21,8 +65,11 @@
         if (file) {
             const fileExtension = file.name.split(".").pop()?.toLowerCase();
             if (fileExtension !== "pdf" && fileExtension !== "docx") {
-                alert("Please upload a PDF or DOCX file only.");
-                e.target.value = ""; // Clear the file input
+                notification.error({
+                    text: "Please upload a PDF or DOCX file only.",
+                });
+                e.target.value = "";
+                return;
             }
             console.log("Document name:", file.name);
             file_name = file.name;
@@ -31,7 +78,8 @@
             reader.onload = (event) => {
                 if (event.target && event.target.result) {
                     const base64 = event.target.result as string;
-                    console.log("Base64 encoded file:", base64);
+                    data.document_proof = base64;
+                    // console.log("Base64 encoded file:", base64);
                     // You can now use the base64 string as needed
                 }
             };
@@ -42,7 +90,13 @@
     function handleRemove() {
         dispatch("cancel");
     }
-    function handleAddRole() {}
+    function handleAddRole(
+        e: Event & { currentTarget: EventTarget & HTMLInputElement },
+    ) {
+        const val = (e.target as HTMLInputElement).value;
+        console.log(val);
+        role_input = val ?? "";
+    }
 </script>
 
 <figure class="flex flex-col gap-4 h-fit">
@@ -60,24 +114,83 @@
         <div class="flex flex-col gap-2 lg:grid lg:grid-cols-12 lg:gap-4">
             <span class="font-medium text-lg lg:col-span-2">ROLE(S):</span>
             <div
-                class="flex items-center flex-wrap lg:col-span-10 gap-4 gap-y-1"
+                class="flex items-center flex-wrap lg:col-span-10 gap-4 gap-y-4"
             >
-                {#each roles as role, index}
-                    <span class="text-lg">{role}</span>
-                    {#if roles.length - 1 !== index}
+                {#each selected_roles as role, index}
+                    <div class="flex items-center gap-4">
+                        <span class="text-lg">{role}</span>
+                        <button
+                            on:click={() => {
+                                selected_roles = selected_roles.filter(
+                                    (r) => r !== role,
+                                );
+                            }}
+                            class=" "
+                            type="button"
+                        >
+                            <Cancel className="w-4 text-red-500" />
+                        </button>
+                    </div>
+                    <!-- {#if roles.length - 1 !== index}
                         <span class="w-2 h-2 bg-secondary rounded-full"></span>
-                    {/if}
+                    {/if} -->
                 {/each}
-                <button
-                    type="button"
-                    on:click={handleAddRole}
-                    class="lg:w-6 lg:h-6 w-8 mt-4 lg:m-0 h-8 bg-secondary rounded-full relative text-primary"
-                >
-                    <span
-                        class="absolute top-[54%] left-[52%] -translate-x-[50%] -translate-y-[50%]"
-                        >+</span
+
+                <div class="relative">
+                    <input
+                        class="outline-none p-3 px-4 text-primary placeholder:text-primary font-medium rounded-md w-full"
+                        type="text"
+                        bind:this={add_role_input}
+                        on:input={handleAddRole}
+                        placeholder="Add a role"
+                        name=""
+                        id=""
+                    />
+
+                    <div
+                        style="opacity: {role_input
+                            ? '1'
+                            : '0'}; pointer-events: {role_input
+                            ? 'auto'
+                            : 'none'}"
+                        class="absolute transition-all z-50 top-12 rounded-lg flex flex-col bg-secondary text-primary w-full"
                     >
-                </button>
+                        {#if !roles.length}
+                            <button
+                                on:click={() => {
+                                    role_input = "";
+                                    if (!add_role_input) return;
+                                    add_role_input.value = "";
+                                }}
+                                type="button"
+                                class="font-medium p-4 text-start hover:bg-primary hover:text-secondary"
+                                >No Roles</button
+                            >
+                        {:else}
+                            {#each roles as role}
+                                <button
+                                    on:click={() => {
+                                        selected_roles = [
+                                            ...selected_roles,
+                                            role,
+                                        ];
+                                        roles = roles.filter(
+                                            (r) =>
+                                                r.toLowerCase() !==
+                                                role.toLowerCase(),
+                                        );
+                                        role_input = "";
+                                        if (!add_role_input) return;
+                                        add_role_input.value = "";
+                                    }}
+                                    type="button"
+                                    class="font-medium p-4 text-start hover:bg-primary hover:text-secondary"
+                                    >{role}</button
+                                >
+                            {/each}
+                        {/if}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -92,6 +205,7 @@
                 <div class="flex flex-col w-full gap-2 lg:gap-0">
                     <span class=" flex flex-col">Start</span>
                     <input
+                        on:change={(e) => handleDateChange(e, "start")}
                         class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
                     />
@@ -99,13 +213,18 @@
                 <div class="flex flex-col w-full gap-2 lg:gap-0">
                     <span>End</span>
                     <input
+                        on:change={(e) => handleDateChange(e, "end")}
                         class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
                     />
                 </div>
             </div>
             <div class="worked-here flex items-center gap-4">
-                <input class="scale-150" type="checkbox" />
+                <input
+                    on:change={(e) => handleCurrentWorked(e)}
+                    class="scale-150"
+                    type="checkbox"
+                />
                 <span>I currently work here</span>
             </div>
         </div>
@@ -117,15 +236,40 @@
 
         <div class="flex items-center lg:col-span-10 justify-between w-full">
             <div class="flex items-center gap-4">
-                <input name="location" class="scale-150" type="radio" checked />
+                <input
+                    on:change={(e) => {
+                        handleWorkType(e);
+                    }}
+                    name="location"
+                    id="remote"
+                    class="scale-150"
+                    type="radio"
+                    checked
+                />
                 <span>Remote</span>
             </div>
             <div class="flex items-center gap-4">
-                <input name="location" class="scale-150" type="radio" />
+                <input
+                    on:change={(e) => {
+                        handleWorkType(e);
+                    }}
+                    name="location"
+                    id="onsite"
+                    class="scale-150"
+                    type="radio"
+                />
                 <span>On Site</span>
             </div>
             <div class="flex items-center gap-4">
-                <input name="location" class="scale-150" type="radio" />
+                <input
+                    on:change={(e) => {
+                        handleWorkType(e);
+                    }}
+                    name="location"
+                    id="hybrid"
+                    class="scale-150"
+                    type="radio"
+                />
                 <span>Hybrid</span>
             </div>
         </div>

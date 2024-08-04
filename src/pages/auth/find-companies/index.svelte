@@ -93,7 +93,7 @@
                                         search = "";
                                     }}
                                     id="org{id}"
-                                    class="font-medium text-primary h-full hover:bg-primary hover:text-secondary transition-all py-3 px-4 w-full text-start"
+                                    class="font-medium text-primary h-full hover:bg-primary hover:text-secondary transition-all p-4 w-full text-start"
                                     type="button">{name}</button
                                 >
                             {/each}
