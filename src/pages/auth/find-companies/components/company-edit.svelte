@@ -16,7 +16,7 @@
     export let index = 0;
     export let company_name = "";
     $: data = {
-        id: 0,
+        id: index,
         selected_roles: ["FullStack Web Developer"],
         document_proof: "",
         tenure: { start: "", end: "", current: false },

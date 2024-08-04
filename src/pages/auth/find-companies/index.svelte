@@ -9,6 +9,7 @@
     import Search from "@src/components/Input/search.svelte";
 
     const local_storage = new LocalStorage();
+    let companies_data: any[] = [];
     $: selected_orgs_id = [] as number[];
     $: search = "";
     $: org_filter = organizations.filter((org) => {
@@ -17,15 +18,6 @@
         return (
             lower.includes(search_lower) && !selected_orgs_id.includes(org.id)
         );
-    });
-
-    onMount(() => {
-        const current_step = local_storage.getItem("step", true);
-
-        if (!current_step) {
-            local_storage.setItem("step", "/signup");
-            navigate("/signup");
-        }
     });
 
     const organizations = [
@@ -40,6 +32,15 @@
 
     function handleSkip() {}
     function handleNext() {}
+
+    onMount(() => {
+        const current_step = local_storage.getItem("step", true);
+
+        if (!current_step) {
+            local_storage.setItem("step", "/signup");
+            navigate("/signup");
+        }
+    });
 </script>
 
 <figure class="bg-white h-screen">
@@ -132,10 +133,19 @@
                 {#each selected_orgs_id as org_id, id}
                     <CompanyEdit
                         on:update={(e) => {
-                            console.log(e.detail);
+                            const { detail } = e;
+                            const index = companies_data.findIndex(
+                                (cd) => cd.id === detail.id,
+                            );
+                            if (index !== -1) {
+                                companies_data[index] = detail;
+                            } else {
+                                companies_data.push(detail);
+                            }
+                            console.log(companies_data, detail);
                         }}
                         index={id + 1}
-                        company_name={organizations[org_id].name ?? "this"}
+                        company_name={organizations[org_id].name}
                         on:cancel={() => {
                             selected_orgs_id = selected_orgs_id.filter(
                                 (id) => id !== org_id,
