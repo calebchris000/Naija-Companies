@@ -98,6 +98,11 @@
         const val = (e.target as HTMLInputElement).value;
         console.log(val);
         role_input = val ?? "";
+        filtered_roles = roles.filter(
+            (role) =>
+                role.toLowerCase().includes(role_input.toLowerCase()) &&
+                !selected_roles.includes(role),
+        );
     }
 </script>
 
@@ -147,7 +152,7 @@
                     </div>
                 {/each}
 
-                <div class="relative">
+                <div class="relative w-full">
                     <input
                         class="outline-none p-3 px-4 text-primary placeholder:text-primary font-medium rounded-md w-full"
                         type="text"
