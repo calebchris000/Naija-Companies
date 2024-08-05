@@ -22,7 +22,7 @@
     window.addEventListener("resize", handleResize);
 
     onMount(() => {
-        Middleware();
+        // Middleware();
     });
 </script>
 

@@ -113,7 +113,7 @@
 
             placeholder: "Capital",
             icon: castle,
-            list: [],
+            list: capitals,
         },
         {
             type: "select",
@@ -308,7 +308,7 @@
             >
                 <img
                     bind:this={image_element}
-                    class="w-10 lg:w-16 mx-auto"
+                    class="aw"
                     src={building}
                     alt=""
                 />

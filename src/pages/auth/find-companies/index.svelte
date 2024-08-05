@@ -8,13 +8,14 @@
     import { navigate } from "svelte-routing";
     import Search from "@src/components/Input/search.svelte";
     import { Notification } from "@src/utils/notification";
+    import { GetOrganizations } from "@src/core/api/organization";
 
     const local_storage = new LocalStorage();
     const notification = new Notification();
     $: companies_data = [] as any[];
     $: selected_orgs_id = [] as number[];
     $: search = "";
-    $: org_filter = organizations.filter((org) => {
+    $: org_filter = organizations.filter((org: any) => {
         const lower = org.name.toLowerCase();
         const search_lower = search.toLowerCase();
         return (
@@ -22,15 +23,28 @@
         );
     });
 
-    const organizations = [
-        { name: "Gotocourse", id: 0 },
-        { name: "Acme Corporation", id: 1 },
-        { name: "TechSolutions Inc.", id: 2 },
-        { name: "GlobalTech Enterprises", id: 3 },
-        { name: "InnovateCorp", id: 4 },
-        { name: "FutureSystems Ltd.", id: 5 },
-        { name: "Quantum Dynamics", id: 6 },
-    ];
+    $: organizations = [] as any[];
+
+    async function getOrganizations() {
+        const response = await GetOrganizations({ token: "" });
+        console.log(response);
+        if (response.status !== 200) {
+            notification.error({
+                text:
+                    response.data?.message ??
+                    "Organizations could not be fetched",
+            });
+            return;
+        }
+        const formatted = response.data.data.map((org: any) => {
+            return {
+                id: org.id,
+                name: org.name,
+            };
+        });
+        organizations = formatted;
+        console.log(response.data?.data);
+    }
 
     function handleSkip() {}
     function handleNext() {
@@ -70,9 +84,18 @@
         });
 
         if (isValid) {
-            // Proceed to next step
             // navigate("/next-step");
             console.log("passed");
+            const formatted = companies_data.map((cd) => {
+                const { id, document_proof, selected_roles, ...others } = cd;
+                return {
+                    companyId: id,
+                    proof: document_proof,
+                    roles: selected_roles,
+                    ...others,
+                };
+            });
+            console.log(formatted, "is company");
         }
     }
 
@@ -83,13 +106,16 @@
             local_storage.setItem("step", "/signup");
             navigate("/signup");
         }
+        getOrganizations();
     });
+
+    $: console.log(selected_orgs_id);
 </script>
 
 <figure class="bg-white h-screen">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:absolute p-4 flex flex-col justify-between rounded-2xl lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%] lg:bg-primary lg:w-[80vw] lg:h-[70vh] lg:p-10"
+        class="lg:absolute p-4 flex flex-col justify-between rounded-2xl lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[45%] lg:bg-primary lg:w-[80vw] lg:h-[70vh] lg:p-10"
     >
         <div class="top flex flex-col lg:grid lg:grid-cols-12 gap-32 lg:gap-10">
             <div class="left lg:col-span-5 flex flex-col gap-4">
@@ -173,33 +199,43 @@
             <div
                 class="right lg:col-span-7 lg:h-[24rem] flex flex-col gap-10 lg:pe-5 lg:overflow-y-scroll"
             >
-                {#each selected_orgs_id as org_id, id}
-                    <CompanyEdit
-                        on:update={(e) => {
-                            const { detail } = e;
-                            const index = companies_data.findIndex(
-                                (cd) => cd.id === detail.id,
-                            );
-                            if (index !== -1) {
-                                companies_data[index] = detail;
-                            } else {
-                                companies_data.push(detail);
-                            }
-                            console.log(companies_data, detail);
-                        }}
-                        index={org_id}
-                        sn={id + 1}
-                        company_name={organizations[org_id].name}
-                        on:cancel={() => {
-                            selected_orgs_id = selected_orgs_id.filter(
-                                (id) => id !== org_id,
-                            );
-                            companies_data = companies_data.filter(
-                                (company) => company.id !== org_id,
-                            );
-                        }}
-                    />
-                {/each}
+                {#if selected_orgs_id.length === 0}
+                    <div class="text-center text-secondary">
+                        <span class="font-medium text-3xl text-start"
+                            >Please select an organization to add.</span
+                        >
+                    </div>
+                {:else}
+                    {#each selected_orgs_id as org_id, id}
+                        <CompanyEdit
+                            on:update={(e) => {
+                                const { detail } = e;
+                                const index = companies_data.findIndex(
+                                    (cd) => cd.id === detail.id,
+                                );
+                                if (index !== -1) {
+                                    companies_data[index] = detail;
+                                } else {
+                                    companies_data.push(detail);
+                                }
+                                console.log(companies_data, detail);
+                            }}
+                            index={org_id}
+                            sn={id + 1}
+                            company_name={organizations.find(
+                                (o) => o.id === org_id,
+                            )?.name}
+                            on:cancel={() => {
+                                selected_orgs_id = selected_orgs_id.filter(
+                                    (id) => id !== org_id,
+                                );
+                                companies_data = companies_data.filter(
+                                    (company) => company.id !== org_id,
+                                );
+                            }}
+                        />
+                    {/each}
+                {/if}
             </div>
         </div>
 
