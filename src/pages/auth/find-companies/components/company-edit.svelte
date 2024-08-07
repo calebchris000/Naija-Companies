@@ -1,5 +1,6 @@
 <script lang="ts">
     import Cancel from "@src/assets/svg/cancel.svelte";
+    import { job_roles } from "@src/lib/roles";
     import { Notification } from "@src/utils/notification";
     import { createEventDispatcher, onMount } from "svelte";
     const dispatch = createEventDispatcher();
@@ -8,7 +9,7 @@
     type DataType = {
         id: number;
         selected_roles: string[];
-        document_proof: string;
+        document_proof: any | null;
         tenure: { start: string; end: string; current: boolean };
         type: "remote" | "onsite" | "hybrid";
     };
@@ -19,16 +20,11 @@
     $: data = {
         id: index,
         selected_roles: [],
-        document_proof: "",
+        document_proof: null,
         tenure: { start: "", end: "", current: false },
         type: "remote",
     } as DataType;
-    export let roles = [
-        "Backend Developer",
-        "Frontend Developer",
-        "Full Stack Developer",
-        "UI/UX Designer",
-    ];
+    export let roles = job_roles;
 
     let add_role_input: HTMLInputElement;
     $: file_name = "";
@@ -65,14 +61,22 @@
         const file = e.target.files[0];
         if (file) {
             const fileExtension = file.name.split(".").pop()?.toLowerCase();
-            if (fileExtension !== "pdf" && fileExtension !== "docx") {
+            if (
+                fileExtension !== "jpg" &&
+                fileExtension !== "jpeg" &&
+                fileExtension !== "png" &&
+                fileExtension !== "webp"
+            ) {
                 notification.error({
-                    text: "Please upload a PDF or DOCX file only.",
+                    text: "Please upload a JPG, JPEG, PNG, or WebP image file only.",
                 });
                 e.target.value = "";
                 return;
             }
             file_name = file.name;
+            // Create a URL for the file
+            const fileUrl = URL.createObjectURL(file);
+            // Example: sendToBackend(fileUrl);
             // Get the document and process it
             const reader = new FileReader();
             reader.onload = (event) => {
@@ -322,7 +326,7 @@
                             if (!doc_file_input) return;
                             doc_file_input.value = "";
                             file_name = "";
-                            data.document_proof = "";
+                            data.document_proof = null;
                         }}
                     >
                         <Cancel className="w-3 text-red-500" />

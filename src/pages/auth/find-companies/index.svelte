@@ -5,11 +5,13 @@
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import { onMount } from "svelte";
     import { LocalStorage } from "@src/core/utils/utils";
+    import pako from "pako";
     import { navigate } from "svelte-routing";
     import Search from "@src/components/Input/search.svelte";
     import { Notification } from "@src/utils/notification";
     import { GetOrganizations } from "@src/core/api/organization";
-
+    import { AddJobExperiences } from "@src/core/api/experiences";
+    import Company from "@src/pages/home/capital/[capital]/Company.svelte";
     const local_storage = new LocalStorage();
     const notification = new Notification();
     $: companies_data = [] as any[];
@@ -36,6 +38,8 @@
             });
             return;
         }
+        console.log(response.data);
+        if (!response.data?.data?.length) return;
         const formatted = response.data.data.map((org: any) => {
             return {
                 id: org.id,
@@ -47,55 +51,61 @@
     }
 
     function handleSkip() {}
-    function handleNext() {
+    async function handleNext() {
         if (companies_data.length === 0) {
             notification.error({ text: "Please add at least one company" });
             return;
         }
-
-        const isValid = companies_data.every((company) => {
-            if (company.selected_roles.length === 0) {
+        console.log(companies_data, "is data and ", organizations, "is valid");
+        let isValid = true;
+        companies_data.forEach((company) => {
+            if (company.selected_roles?.length === 0) {
                 notification.error({
                     text: `Please select at least one role for ${organizations.find((org) => org.id === company.id)?.name}`,
                 });
-                return false;
+                isValid = false;
+                return;
             }
-
             if (!company.tenure.start) {
                 notification.error({
                     text: `Please select a start date for ${organizations.find((org) => org.id === company.id)?.name}`,
                 });
-                return false;
+                isValid = false;
+                return;
             }
             if (!company.tenure.current && !company.tenure.end) {
                 notification.error({
                     text: `Please select an end date for ${organizations.find((org) => org.id === company.id)?.name}`,
                 });
-                return false;
+                isValid = false;
+                return;
             }
             if (!company.document_proof) {
                 notification.error({
                     text: `Please upload a document proof for ${organizations.find((org) => org.id === company.id)?.name}`,
                 });
-                return false;
+                isValid = false;
+                return;
             }
-
-            return true;
         });
 
-        if (isValid) {
-            // navigate("/next-step");
-            console.log("passed");
-            const formatted = companies_data.map((cd) => {
-                const { id, document_proof, selected_roles, ...others } = cd;
-                return {
-                    companyId: id,
-                    proof: document_proof,
-                    roles: selected_roles,
-                    ...others,
-                };
+        if (!isValid) {
+            return;
+        }
+
+        // navigate("/next-step");
+        console.log("passed");
+
+        const res = await AddJobExperiences(companies_data, "");
+
+        if (res.status !== 201) {
+            notification.error({
+                text: res.data?.message ?? "Could not add experiences",
             });
-            console.log(formatted, "is company");
+        } else {
+            notification.success({
+                text: "Experiences added successfully",
+            });
         }
     }
 
@@ -108,8 +118,6 @@
         }
         getOrganizations();
     });
-
-    $: console.log(selected_orgs_id);
 </script>
 
 <figure class="bg-white h-screen">
