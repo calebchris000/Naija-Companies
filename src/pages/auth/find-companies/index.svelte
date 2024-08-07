@@ -5,7 +5,6 @@
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import { onMount } from "svelte";
     import { LocalStorage } from "@src/core/utils/utils";
-    import pako from "pako";
     import { navigate } from "svelte-routing";
     import Search from "@src/components/Input/search.svelte";
     import { Notification } from "@src/utils/notification";
@@ -66,6 +65,7 @@
 
     function handleSkip() {}
     async function handleNext() {
+        console.log("next is clicked");
         upload_status = "pending";
         if (companies_data.length === 0) {
             upload_status = "failure";
@@ -143,18 +143,20 @@
     });
 </script>
 
-<figure class="bg-white h-screen">
+<figure class="bg-white lg:h-screen">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:absolute p-4 flex flex-col justify-between rounded-2xl lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[45%] lg:bg-primary lg:w-[80vw] lg:h-[70vh] lg:p-10"
+        class="lg:absolute text-primary p-4 flex flex-col justify-between rounded-2xl lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[45%] lg:bg-primary lg:w-[80vw] lg:h-[70vh] lg:p-10"
     >
         <div class="top flex flex-col lg:grid lg:grid-cols-12 gap-32 lg:gap-10">
             <div class="left lg:col-span-5 flex flex-col gap-4">
                 <div class="text-top flex flex-col gap-4">
-                    <span class="text-3xl text-secondary font-medium"
+                    <span
+                        class="text-3xl lg:text-start text-center text-primary lg:text-secondary font-medium"
                         >Find Your Companies</span
                     >
-                    <span class="text-secondary leading-loose lg:text-sm"
+                    <span
+                        class="text-primary lg:text-start text-center lg:text-secondary leading-loose lg:text-sm"
                         >Select the companies you're currently employed by or
                         have worked for recently. This step helps us verify your
                         eligibility to provide authentic reviews. We prioritize
@@ -165,44 +167,16 @@
 
                 <div class="relative">
                     <Search
-                        on:input={(e) => {
-                            search = e.detail;
-                            // console.log(e.detail, "is value");
+                        on:click={(e) => {
+                            const { detail } = e;
+                            selected_orgs_id = [
+                                ...selected_orgs_id,
+                                detail?.id,
+                            ];
                         }}
+                        selected_items={selected_orgs_id}
+                        items={organizations}
                     />
-
-                    <div
-                        style="opacity: {search
-                            ? '1'
-                            : '0'}; pointer-events: {search ? 'auto' : 'none'}"
-                        class="absolute z-50 transition-all max-h-40 top-20 bg-secondary flex flex-col overflow-y-scroll items-start rounded-lg shadow-lg left-0 right-0"
-                    >
-                        {#if !org_filter.length}
-                            <button
-                                on:click={() => {
-                                    search = "";
-                                }}
-                                id="org0"
-                                class="font-medium text-primary h-full hover:bg-primary hover:text-secondary transition-all py-3 px-4 w-full text-start"
-                                type="button">No Organization</button
-                            >
-                        {:else}
-                            {#each org_filter as { name, id }}
-                                <button
-                                    on:click={() => {
-                                        selected_orgs_id = [
-                                            ...selected_orgs_id,
-                                            id,
-                                        ];
-                                        search = "";
-                                    }}
-                                    id="org{id}"
-                                    class="font-medium text-primary h-full hover:bg-primary hover:text-secondary transition-all p-4 w-full text-start"
-                                    type="button">{name}</button
-                                >
-                            {/each}
-                        {/if}
-                    </div>
                 </div>
                 <div
                     class="bottom mt-auto max-md:hidden flex items-center justify-between"
@@ -242,11 +216,11 @@
                 </div>
             </div>
             <div
-                class="right lg:col-span-7 lg:h-[24rem] flex flex-col gap-10 lg:pe-5 lg:overflow-y-scroll"
+                class="right translate-y-[-5rem] lg:translate-y-0 lg:col-span-7 lg:h-[24rem] flex flex-col gap-10 lg:pe-5 lg:overflow-y-scroll"
             >
                 {#if selected_orgs_id.length === 0}
-                    <div class="text-center text-secondary">
-                        <span class="font-medium text-3xl text-start"
+                    <div class="text-center text-primary lg:text-secondary">
+                        <span class="font-medium lg:text-3xl text-start"
                             >Please select an organization to add.</span
                         >
                     </div>
@@ -289,11 +263,13 @@
             class="bottom w-full flex items-center mt-10 justify-between lg:hidden lg:absolute lg:bottom-10"
         >
             <button
-                class="text-cto font-medium flex items-center gap-2 flex-row-reverse"
+                class="lg:text-secondary font-medium flex items-center gap-2 flex-row-reverse"
                 type="button"
             >
                 <span class="">Skip This Step</span>
-                <SkipForward className="w-5" />
+                <SkipForward
+                    className="w-5 stroke-primary lg:stroke-secondary"
+                />
             </button>
             <button
                 class="text-primary font-medium flex items-center gap-2"

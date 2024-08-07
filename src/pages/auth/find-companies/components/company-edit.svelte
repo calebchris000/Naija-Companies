@@ -115,8 +115,12 @@
 
 <figure class="flex flex-col gap-4 h-fit">
     <section class="flex gap-10 items-center border-b pb-4 one">
-        <span class="text-cto text-2xl font-semibold">{sn}.</span>
-        <span class="text-cto font-semibold text-2xl">{company_name}</span>
+        <span class="text-primary lg:text-secondary text-2xl font-semibold"
+            >{sn}.</span
+        >
+        <span class="text-primary lg:text-secondary font-semibold text-2xl"
+            >{company_name}</span
+        >
         <span class="text-red-500 text-2xl ms-auto">
             <button on:click={handleRemove} type="button">
                 <Cancel className="w-4 hover:text-white transition-all" />
@@ -125,7 +129,9 @@
     </section>
 
     <section class="two text-secondary pb-4 border-b">
-        <div class="flex flex-col gap-2 lg:grid lg:grid-cols-12 lg:gap-4">
+        <div
+            class="flex text-primary lg:text-secondary flex-col gap-2 lg:grid lg:grid-cols-12 lg:gap-4"
+        >
             <span class="font-medium text-lg lg:col-span-2">ROLE(S):</span>
             <div
                 class="flex items-center flex-wrap lg:col-span-10 gap-4 gap-y-4"
@@ -160,9 +166,9 @@
                     </div>
                 {/each}
 
-                <div class="relative w-full">
+                <div class="relative w-full filter_items">
                     <input
-                        class="outline-none p-3 px-4 text-primary placeholder:text-primary font-medium rounded-md w-full"
+                        class="outline-none p-3 px-4 text-primary border border-primary lg:border-none placeholder:text-primary font-medium rounded-md w-full"
                         type="text"
                         bind:this={add_role_input}
                         on:input={handleAddRole}
@@ -177,7 +183,7 @@
                             : '0'}; pointer-events: {role_input
                             ? 'auto'
                             : 'none'}"
-                        class="absolute transition-all z-50 top-12 rounded-lg flex flex-col bg-secondary text-primary w-full"
+                        class="absolute filter_content transition-all max-h-40 overflow-y-scroll shadow-md z-50 top-12 rounded-lg flex flex-col bg-secondary text-primary w-full"
                     >
                         {#if !filtered_roles.length}
                             <button
@@ -218,7 +224,7 @@
         </div>
     </section>
     <section
-        class="three text-secondary flex flex-col gap-2 lg:grid lg:grid-cols-12 lg:gap-4 pb-4 border-b"
+        class="three lg:text-secondary flex flex-col gap-2 lg:grid lg:grid-cols-12 lg:gap-4 pb-4 border-b"
     >
         <span class="font-medium lg:col-span-2">TENURE:</span>
         <div class="space-y-4 w-full col-span-10">
@@ -229,7 +235,7 @@
                     <span class=" flex flex-col">Start</span>
                     <input
                         on:change={(e) => handleDateChange(e, "start")}
-                        class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
+                        class="lg:bg-secondary bg-primary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
                     />
                 </div>
@@ -238,7 +244,7 @@
                     <input
                         disabled={data.tenure.current}
                         on:change={(e) => handleDateChange(e, "end")}
-                        class="lg:bg-secondary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
+                        class="lg:bg-secondary bg-primary lg:text-primary outline-none text-secondary font-medium w-full p-3 px-4 rounded-md"
                         type="date"
                     />
                 </div>
@@ -254,7 +260,7 @@
         </div>
     </section>
     <section
-        class="four text-secondary flex flex-col lg:grid lg:grid-cols-12 gap-4 pb-4 lg:pt-0 border-b"
+        class="four lg:text-secondary flex flex-col lg:grid lg:grid-cols-12 gap-4 pb-4 lg:pt-0 border-b"
     >
         <span class="font-medium lg:col-span-2">TYPE:</span>
 
@@ -299,7 +305,7 @@
         </div>
     </section>
     <section
-        class="four text-secondary w-full relative flex flex-col gap-4 pb-4 border-b"
+        class="four lg:text-secondary w-full relative flex flex-col gap-4 pb-4 border-b"
     >
         <span class="proof font-medium col-span-6 w-fit relative">
             PROOF OF EMPLOYMENT:
@@ -310,13 +316,14 @@
                 on:click={() => {
                     doc_file_input?.click();
                 }}
-                class="lg:bg-secondary lg:text-primary lg:text-start lg:font-medium w-full bg-white text-nowrap border border-secondary border-dashed text-secondary lg:p-3 p-4 px-10 rounded-lg"
+                class="lg:bg-primary lg:text-secondary text-primary lg:text-start lg:font-medium w-full text-nowrap border border-primary lg:border-secondary border-dashed lg:p-3 p-4 px-10 rounded-lg"
                 type="button"
                 >{file_name ? "Change Selected." : "Choose from disk."}</button
             >
             {#if file_name}
                 <div class="flex items-center gap-2">
-                    <span class="text-sm text-nowrap font-medium text-secondary"
+                    <span
+                        class="text-sm text-nowrap font-medium text-primary lg:text-secondary"
                         >{file_name.length > 24
                             ? file_name.slice(0, 20) + "...pdf"
                             : file_name}</span

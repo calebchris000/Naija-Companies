@@ -3,7 +3,7 @@
     import Navbar from "@src/components/navbar/navbar.svelte";
     import check_otp from "@src/assets/animated/check_otp.gif";
     import { onMount } from "svelte";
-    import { VerifyOtp } from "@src/core/api/auth";
+    import { ResendOtp, VerifyOtp } from "@src/core/api/auth";
     import { LocalStorage } from "@src/core/utils/utils";
     import { Notification } from "@src/utils/notification";
     import { navigate } from "svelte-routing";
@@ -92,8 +92,24 @@
         local_storage.setItem("step", "/signup/find-companies");
 
         setTimeout(() => {
-            navigate("/signup/find-companies");
+            window.location.href = "/signup/find-companies";
         }, 2000);
+    }
+
+    async function handleTryAgain() {
+        const user = local_storage.getItem("user", false);
+
+        const response = await ResendOtp({ userId: user?.id });
+        if (response.status !== 200) {
+            notification.error({
+                text:
+                    response.data?.message ?? "Could not get token. Try again",
+            });
+        } else {
+            notification.success({
+                text: "New OTP has been sent to your email.",
+            });
+        }
     }
 
     $: {
@@ -127,18 +143,22 @@
 <figure class="h-screen bg-secondary max-w-[120rem]">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:rounded-2xl bg-primary lg:grid lg:grid-cols-12 lg:p-10 p-4 text-secondary lg:bg-light lg:w-[80vw] lg:max-h-[70vh] lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
+        class="pt-12 text-primary lg:rounded-2xl lg:bg-primary lg:grid lg:grid-cols-12 lg:p-10 p-4 lg:text-secondary lg:bg-light lg:w-[80vw] lg:max-h-[70vh] lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
     >
-        <div class="flex flex-col text-secondary gap-4 lg:col-span-6">
+        <div
+            class="flex flex-col text-primary lg:text-secondary gap-4 lg:col-span-6"
+        >
             <span class="text-3xl font-medium">Verify Email Address</span>
             <div class="flex flex-col text-sm gap-2 lg:gap-0">
                 <span
                     >Enter the 6-digit code sent to calebchris000@gmail.com</span
                 >
                 <span
-                    >Didn’t receive the code? <span
+                    >Didn’t receive the code? <button
+                        type="button"
+                        on:click={handleTryAgain}
                         class="cursor-pointer text-sm font-medium underline hover:text-cto"
-                        >Try Again</span
+                        >Try Again</button
                     ></span
                 >
             </div>
@@ -147,7 +167,7 @@
                 {#each input_ids as id}
                     <input
                         id="input{id}"
-                        class="w-full otp caret-transparent max-w-[80px] mx-auto h-12 lg:h-20 rounded-lg lg:rounded-xl outline-none bg-secondary text-black lg:bg-skyblue lg:text-light text-center text-xl lg:text-3xl font-bold"
+                        class="w-full otp caret-transparent max-w-[80px] mx-auto h-12 lg:h-20 rounded-lg lg:rounded-xl outline-none bg-primary text-secondary lg:bg-secondary lg:text-black lg:bg-skyblue lg:text-light text-center text-xl lg:text-3xl font-bold"
                         type="number"
                         maxlength="1"
                         on:input={(e) => {
@@ -169,7 +189,7 @@
             >
             <div class="flex items-center justify-between mt-auto">
                 <button
-                    class="border border-cto text-cto p-2 px-4 rounded-lg flex items-center gap-2"
+                    class="border border-primary text-primary p-2 px-4 rounded-lg flex items-center gap-2"
                     type="button"
                 >
                     <Arrow className="w-3" />
@@ -183,7 +203,7 @@
                           : ''}"
                     bind:this={submit_button}
                     on:click={handleSubmit}
-                    class="bg-cto transition-all submit text-primary font-medium p-2 px-4 rounded-lg"
+                    class="bg-primary transition-all submit text-secondary font-medium p-2 px-4 rounded-lg"
                     type="button"
                     >{otp_status === "pending"
                         ? "Checking..."

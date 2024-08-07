@@ -29,7 +29,7 @@
 <figure class="bg-secondary h-screen">
     <Navbar disabled={true} className="top-[0!important]" />
     <section
-        class="lg:w-[70vw] lg:shadow-lg px-4 lg:grid lg:grid-cols-6 lg:p-10 text-secondary lg:min-h-[50vh] lg:rounded-xl lg:bg-primary lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
+        class="lg:w-[70vw] lg:shadow-lg px-4 lg:grid lg:grid-cols-6 lg:p-10 text-primary lg:text-secondary lg:min-h-[50vh] lg:rounded-xl lg:bg-primary lg:absolute lg:top-[50%] lg:left-[50%] lg:-translate-x-[50%] lg:-translate-y-[50%]"
     >
         <div
             class="lg:col-span-4 lg:space-y-10 flex flex-col gap-10 lg:block pt-10 lg:p-0"
@@ -44,13 +44,14 @@
                 >
             </div>
             <div
-                class="lg:w-[32rem] flex flex-col gap-2 bg-white lg:bg-transparent p-4 rounded-lg lg:p-0"
+                class="lg:w-[32rem] flex flex-col gap-2 bg-white lg:bg-transparent rounded-lg lg:p-0"
             >
-                <span class="text-3xl lg:text-2xl font-medium text-secondary"
+                <span
+                    class="text-3xl text-orange-600 lg:text-2xl font-medium lg:text-secondary"
                     >Important!</span
                 >
                 <span
-                    class="text-secondary font-medium leading-relaxed lg:text-sm lg:leading-loose"
+                    class="lg:text-secondary text-orange-600 font-medium leading-relaxed lg:text-sm lg:leading-loose"
                     >Do not use your real name in reviews. If you have, please
                     go to your profile page immediately and change it. Using
                     your real name could jeopardize your current employment if
@@ -59,7 +60,7 @@
             </div>
             <div>
                 <button
-                    class="lg:p-2 p-3 flex items-center gap-2 px-10 lg:px-4 hover:rounded-none transition-all rounded-md bg-secondary text-primary font-medium text-xl lg:text-lg"
+                    class="lg:p-2 p-3 flex items-center gap-2 px-10 lg:px-4 hover:rounded-none transition-all rounded-md text-secondary bg-primary lg:bg-secondary lg:text-primary font-medium text-xl lg:text-lg"
                     type="button"
                     ><span>Let's Go!</span>
                     <Arrow className="w-4 rotate-180" />
