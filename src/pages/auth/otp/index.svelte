@@ -108,7 +108,8 @@
 
     onMount(() => {
         const current_step = local_storage.getItem("step", true);
-        if (!current_step) {
+        const user = local_storage.getItem("user", false);
+        if (!current_step || !user?.id) {
             local_storage.setItem("step", "/signup");
             navigate("/signup");
         } else if (current_step !== "/signup/verify-otp") {

@@ -25,6 +25,20 @@
         );
     });
 
+    $: upload_status = "inactive" as
+        | "inactive"
+        | "pending"
+        | "success"
+        | "failure";
+
+    $: {
+        if (upload_status === "failure") {
+            setTimeout(() => {
+                upload_status = "inactive";
+            }, 1000);
+        }
+    }
+
     $: organizations = [] as any[];
 
     async function getOrganizations() {
@@ -52,7 +66,9 @@
 
     function handleSkip() {}
     async function handleNext() {
+        upload_status = "pending";
         if (companies_data.length === 0) {
+            upload_status = "failure";
             notification.error({ text: "Please add at least one company" });
             return;
         }
@@ -90,29 +106,36 @@
         });
 
         if (!isValid) {
+            upload_status = "failure";
             return;
         }
 
-        // navigate("/next-step");
         console.log("passed");
 
         const res = await AddJobExperiences(companies_data, "");
 
         if (res.status !== 201) {
+            upload_status = "failure";
             notification.error({
                 text: res.data?.message ?? "Could not add experiences",
             });
         } else {
+            upload_status = "success";
             notification.success({
                 text: "Experiences added successfully",
             });
+
+            setTimeout(() => {
+                navigate("/signup/success");
+            }, 3000);
         }
     }
 
     onMount(() => {
         const current_step = local_storage.getItem("step", true);
+        const user = local_storage.getItem("user", false);
 
-        if (!current_step) {
+        if (!current_step || !user?.id) {
             local_storage.setItem("step", "/signup");
             navigate("/signup");
         }
@@ -195,11 +218,25 @@
                         />
                     </button>
                     <button
+                        disabled={upload_status !== "inactive"}
+                        class:cursor-not-allowed={upload_status !== "inactive"}
+                        class:bg-green-600={upload_status === "success"}
+                        class:bg-red-500={upload_status === "failure"}
+                        class:text-secondary={upload_status === "failure" ||
+                            upload_status === "success"}
                         on:click={handleNext}
-                        class="text-primary bg-cto p-2 px-4 rounded-md font-medium flex items-center gap-2"
+                        class="text-primary transition-all bg-cto p-2 px-4 rounded-md font-medium flex items-center gap-2"
                         type="button"
                     >
-                        <span>Next</span>
+                        {#if upload_status === "pending"}
+                            <span>Processing...</span>
+                        {:else if upload_status === "success"}
+                            <span>Success</span>
+                        {:else if upload_status === "failure"}
+                            <span>Failed</span>
+                        {:else}
+                            <span>Next</span>
+                        {/if}
                         <Arrow className="w-4 rotate-180" />
                     </button>
                 </div>
