@@ -42,7 +42,6 @@
 
     async function getOrganizations() {
         const response = await GetOrganizations({ token: "" });
-        console.log(response);
         if (response.status !== 200) {
             notification.error({
                 text:
@@ -51,7 +50,6 @@
             });
             return;
         }
-        console.log(response.data);
         if (!response.data?.data?.length) return;
         const formatted = response.data.data.map((org: any) => {
             return {
@@ -60,7 +58,6 @@
             };
         });
         organizations = formatted;
-        console.log(response.data?.data);
     }
 
     function handleSkip() {
@@ -68,14 +65,12 @@
         navigate("/signup/success");
     }
     async function handleNext() {
-        console.log("next is clicked");
         upload_status = "pending";
         if (companies_data.length === 0) {
             upload_status = "failure";
             notification.error({ text: "Please add at least one company" });
             return;
         }
-        console.log(companies_data, "is data and ", organizations, "is valid");
         let isValid = true;
         companies_data.forEach((company) => {
             if (company.selected_roles?.length === 0) {
@@ -240,7 +235,6 @@
                                 } else {
                                     companies_data.push(detail);
                                 }
-                                console.log(companies_data, detail);
                             }}
                             index={org_id}
                             sn={id + 1}
@@ -280,7 +274,15 @@
                 class="text-primary font-medium flex items-center gap-2"
                 type="button"
             >
-                <span>Next Step</span>
+                {#if upload_status === "pending"}
+                    <span>Processing...</span>
+                {:else if upload_status === "success"}
+                    <span>Success</span>
+                {:else if upload_status === "failure"}
+                    <span>Failed</span>
+                {:else}
+                    <span>Next</span>
+                {/if}
                 <Arrow className="w-4 rotate-180" />
             </button>
         </div>

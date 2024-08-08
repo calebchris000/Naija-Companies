@@ -5,7 +5,6 @@
 
     function handleWriteReview() {
         const token = useToken();
-        console.log(token);
         if (!token) {
             navigate("/signup");
         } else {

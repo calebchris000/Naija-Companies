@@ -28,7 +28,6 @@
             notification.success({ text: "Subscription Successful!" });
             email_element.value = "";
         }
-        console.log(value, "is val");
     }
 </script>
 

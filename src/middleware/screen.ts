@@ -1,8 +1,8 @@
 import { store } from "@src/lib/store";
 
 export const Screen = () => {
-    handleResize()
-}
+  handleResize();
+};
 
 export const handleResize = () => {
   const { innerWidth } = window;
@@ -12,8 +12,6 @@ export const handleResize = () => {
       c.device = "tablet";
       return c;
     });
-    console.log("tablet");
-
   } else if (innerWidth > 1024 && innerWidth <= 1200) {
     store.update((c) => {
       c.device = "large-tablet";
@@ -24,14 +22,10 @@ export const handleResize = () => {
       c.device = "desktop";
       return c;
     });
-    console.log("desktop");
-
   } else {
     store.update((c) => {
       c.device = "mobile";
       return c;
     });
-    console.log("mobile");
-    
   }
 };
