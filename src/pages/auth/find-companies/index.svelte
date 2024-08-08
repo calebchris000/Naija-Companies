@@ -63,7 +63,10 @@
         console.log(response.data?.data);
     }
 
-    function handleSkip() {}
+    function handleSkip() {
+        local_storage.setItem("step", "/signup/success");
+        navigate("/signup/success");
+    }
     async function handleNext() {
         console.log("next is clicked");
         upload_status = "pending";
@@ -263,6 +266,7 @@
             class="bottom w-full flex items-center mt-10 justify-between lg:hidden lg:absolute lg:bottom-10"
         >
             <button
+                on:click={handleSkip}
                 class="lg:text-secondary font-medium flex items-center gap-2 flex-row-reverse"
                 type="button"
             >
