@@ -2,6 +2,7 @@
     import logo_white from "@src/assets/logo-white.png";
     import logo_black from "@src/assets/logo.png";
     import Arrow from "@src/assets/svg/Arrow.svelte";
+    import Pencil from "@src/assets/svg/Pencil.svelte";
     import { VerifyToken } from "@src/core/api/auth";
     import { useToken } from "@src/core/utils/utils";
     import { Link, navigate } from "svelte-routing";
@@ -71,9 +72,12 @@
                             on:click={() => {
                                 navigate("/home/capital");
                             }}
-                            class=" bg-cto p-2 px-4 rounded-full font-semibold text-light"
-                            type="button">Dashboard</button
+                            class=" bg-cto flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-light"
+                            type="button"
                         >
+                            <span>Write A Review</span>
+                            <Pencil className="w-4" />
+                        </button>
                     {:else}
                         <button
                             on:click={() => {

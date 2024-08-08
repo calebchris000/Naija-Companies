@@ -88,6 +88,7 @@
         }
         notification.success({ text: "Email successfully verified!" });
         local_storage.setItem("step", "/signup/find-companies");
+        local_storage.setItem("token", response.data.data?.token);
 
         setTimeout(() => {
             window.location.href = "/signup/find-companies";
