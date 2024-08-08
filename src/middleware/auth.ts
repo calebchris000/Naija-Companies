@@ -36,7 +36,6 @@ export const getUserRole = async () => {
     console.log("Could not verify token");
   } else {
     const { privilege } = res.data?.data;
-    console.log(privilege);
     store.update((c) => {
       c.user_role = privilege;
       return c;

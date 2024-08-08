@@ -10,16 +10,12 @@ export const isIntersecting = (
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log("Element is intersecting");
         callback(true);
       } else {
         callback(false);
-        console.log("Element is not intersecting");
       }
     });
   });
-
-  console.log(selected_element);
 
   if (selected_element) {
     observer.observe(selected_element as HTMLElement);

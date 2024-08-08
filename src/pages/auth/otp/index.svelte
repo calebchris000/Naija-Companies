@@ -31,8 +31,6 @@
         }
     }
 
-    $: console.log(otp_numbers);
-
     function focusPrev(e: Event) {
         e?.preventDefault();
         const activeElement = document.activeElement as HTMLInputElement;

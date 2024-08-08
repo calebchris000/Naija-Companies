@@ -20,7 +20,6 @@
 
     function handleMenuToggle() {
         menu_open = !menu_open;
-        console.log(menu_open);
     }
 
     window.addEventListener("scroll", () => {
