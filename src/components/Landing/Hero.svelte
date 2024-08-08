@@ -10,8 +10,9 @@
         <span
             class="leading-tight text-4xl font-medium text-secondary text-center lg:text-start lg:text-[40px]"
         >
-            Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
-            Reviews
+            Uncover the Truth About Nigerian Workplaces - Read <b
+                class="hover:text-orange-500 transition-all">Authentic</b
+            > Employee Reviews
         </span>
         <span class="text-secondary leading-loose text-center lg:text-start">
             Get honest insights from real Nigerian employees. Make informed

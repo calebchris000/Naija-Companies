@@ -3,6 +3,8 @@
     import logo_black from "@src/assets/logo.png";
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import Pencil from "@src/assets/svg/Pencil.svelte";
+    import PersonFilled from "@src/assets/svg/person_filled.svelte";
+    import User from "@src/assets/svg/User.svelte";
     import { VerifyToken } from "@src/core/api/auth";
     import { useToken } from "@src/core/utils/utils";
     import { Link, navigate } from "svelte-routing";
@@ -61,29 +63,45 @@
         </button>
         {#if !disabled}
             <div class="items-center gap-10 font-medium text-secondary lg:flex">
-                <Link to="/home">Blog</Link>
-                <Link to="/home">Features</Link>
-                <Link to="/home">Services</Link>
+                <Link
+                    class="border-b-2 transition-all border-transparent hover:border-orange-500"
+                    to="/home">Blog</Link
+                >
+                <Link
+                    class="border-b-2 transition-all border-transparent hover:border-orange-500"
+                    to="/home">Features</Link
+                >
+                <Link
+                    class="border-b-2 transition-all border-transparent hover:border-orange-500"
+                    to="/home">Services</Link
+                >
             </div>
-            <div class="gap-4 items-center justify-self-end lg:flex ms-auto">
+            <div class="gap-4 items-center justify-between lg:flex ms-auto">
                 {#await VerifyToken({ token }) then { status, data }}
                     {#if status === 200}
                         <button
                             on:click={() => {
                                 navigate("/home/capital");
                             }}
-                            class=" bg-cto flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-light"
+                            class=" bg-secondary border-2 border-transparent hover:border-orange-500 transition-all w-fit justify-self-end flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-primary"
                             type="button"
                         >
                             <span>Write A Review</span>
                             <Pencil className="w-4" />
+                        </button>
+
+                        <button
+                            type="button"
+                            class="h-10 w-10 border-2 border-transparent hover:border-orange-500 transition-all rounded-full justify-self-end p-2 grid place-items-center ms-end bg-secondary"
+                        >
+                            <PersonFilled className="w-4 text-primary" />
                         </button>
                     {:else}
                         <button
                             on:click={() => {
                                 navigate("/signup");
                             }}
-                            class=" bg-cto p-2 px-6 rounded-full font-semibold text-primary"
+                            class=" bg-secondary border-2 border-transparent hover:border-orange-500 p-2 px-6 rounded-full font-semibold text-primary"
                             type="button">Get Started</button
                         >
                         <button
