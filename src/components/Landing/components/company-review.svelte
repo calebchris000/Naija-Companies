@@ -11,16 +11,18 @@
     ];
 </script>
 
-<figure class="bg-skyblue w-full h-full rounded-xl p-10 space-y-8 {className}">
-    <div class="text-light space-y-4">
-        <span class="font-medium text-2xl text-light">Reviews & Ratings</span>
+<figure class="bg-primary w-full h-full rounded-xl p-10 space-y-8 {className}">
+    <div class="text-secondary space-y-4">
+        <span class="font-medium text-2xl text-secondary"
+            >Reviews & Ratings</span
+        >
         <div class="flex items-center gap-4">
-            <span class="text-[4rem] font-semibold text-light leading-none"
+            <span class="text-[4rem] font-semibold text-secondary leading-none"
                 >4.9</span
             >
             <div class="flex flex-col gap-2">
                 <span class="text-4xl leading-none">★★★★★</span>
-                <span class="text-sm text-primary leading-none"
+                <span class=" text-secondary leading-none"
                     >Based on 449 ratings</span
                 >
             </div>
@@ -35,9 +37,9 @@
     <div class="grid grid-cols-1 gap-5 lg:gap-8 lg:grid-cols-2">
         {#each rating as { label, percent }}
             <div class="space-y-2">
-                <span class="font-normal text-sm text-light">{label}</span>
+                <span class="font-normal text-secondary">{label}</span>
                 <div
-                    class="w-full h-2 bg-light relative rounded-2xl overflow-hidden"
+                    class="w-full h-2 bg-white relative rounded-2xl overflow-hidden"
                 >
                     <span
                         style="width: {percent}%;"
@@ -48,7 +50,7 @@
         {/each}
     </div>
     <button
-        class="bg-light p-4 rounded-md font-semibold flex items-center gap-4 text-secondary"
+        class="bg-cto p-4 py-3 rounded-full font-semibold flex items-center gap-4 text-primary"
         type="button"
     >
         <span>See Reviews</span>

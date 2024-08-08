@@ -10,7 +10,7 @@
 >
     <span style="background-color: {color};" class="h-full w-full col-span-1"
     ></span>
-    <span class="col-span-11 ps-4 font-medium text-secondary text-wrap"
+    <span class="col-span-11 ps-4 font-medium text-primary text-wrap"
         >{label}</span
     >
 </div>

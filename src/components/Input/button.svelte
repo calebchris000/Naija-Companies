@@ -1,0 +1,24 @@
+<script lang="ts">
+    import { createEventDispatcher } from "svelte";
+
+    export let name = "Submit";
+    export let disabled = false;
+    export let style: string = "";
+    export let className = "";
+    export let type: "fit" | "max" = "fit";
+    const dispatch = createEventDispatcher();
+    function handleClick() {
+        dispatch("click");
+    }
+</script>
+
+<button
+    {disabled}
+    style="width: {type === 'max'
+        ? '100%'
+        : 'fit-content'}; background-color: {disabled ? 'gray' : ''}; {style}"
+    on:click={handleClick}
+    class="bg-black p-4 text-secondary transition-all font-semibold rounded-full {className}"
+>
+    {name}</button
+>
