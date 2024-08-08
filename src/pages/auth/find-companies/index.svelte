@@ -272,6 +272,7 @@
                 />
             </button>
             <button
+                on:click={handleNext}
                 class="text-primary font-medium flex items-center gap-2"
                 type="button"
             >

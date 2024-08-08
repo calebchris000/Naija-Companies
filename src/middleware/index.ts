@@ -7,9 +7,4 @@ export const Middleware = () => {
   closeFilterItems();
 };
 
-function closeFilterItems() {
-  console.log("this works");
-  document.addEventListener("click", (e) => {
-    console.log(e.target.className);
-  });
-}
+function closeFilterItems() {}
