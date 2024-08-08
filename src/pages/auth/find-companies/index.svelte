@@ -280,7 +280,15 @@
                 class="text-primary font-medium flex items-center gap-2"
                 type="button"
             >
-                <span>Next Step</span>
+                {#if upload_status === "pending"}
+                    <span>Processing...</span>
+                {:else if upload_status === "success"}
+                    <span>Success</span>
+                {:else if upload_status === "failure"}
+                    <span>Failed</span>
+                {:else}
+                    <span>Next</span>
+                {/if}
                 <Arrow className="w-4 rotate-180" />
             </button>
         </div>

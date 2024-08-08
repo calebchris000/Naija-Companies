@@ -5,6 +5,7 @@
     import check_animated from "@src/assets/animated/completed.gif";
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import { onMount } from "svelte";
+    import { navigate } from "svelte-routing";
 
     onMount(() => {
         var myCanvas = document.createElement("canvas");
@@ -60,6 +61,9 @@
             </div>
             <div>
                 <button
+                    on:click={() => {
+                        navigate("/home");
+                    }}
                     class="lg:p-2 p-3 flex items-center gap-2 px-10 lg:px-4 hover:rounded-none transition-all rounded-md text-secondary bg-primary lg:bg-secondary lg:text-primary font-medium text-xl lg:text-lg"
                     type="button"
                     ><span>Let's Go!</span>
