@@ -8,7 +8,7 @@
 </script>
 
 <nav
-    class="h-20 sticky top-0 bg-secondary flex items-center justify-between px-10"
+    class="h-20 sticky top-0 bg-secondary shadow-md flex items-center justify-between px-10"
 >
     <button
         type="button"
