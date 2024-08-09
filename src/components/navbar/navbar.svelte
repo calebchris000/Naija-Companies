@@ -81,7 +81,7 @@
                     {#if status === 200}
                         <button
                             on:click={() => {
-                                navigate("/home/capital");
+                                navigate("/home/review");
                             }}
                             class=" bg-secondary border-2 border-transparent hover:border-orange-500 transition-all w-fit justify-self-end flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-primary"
                             type="button"

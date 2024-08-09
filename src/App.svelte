@@ -9,9 +9,8 @@
     import Capital from "@src/pages/home/capital/Index.svelte";
     import Organization from "./pages/home/capital/[capital]/Index.svelte";
     import CompanyRedirect from "./pages/home/capital/[capital]/[organization]/Index.svelte";
-    import Review from "./pages/home/capital/[capital]/[organization]/review/Index.svelte";
     import Reviews from "./pages/home/capital/[capital]/[organization]/reviews/Index.svelte";
-    import CreateOrganization from "./pages/home/organization/create/Index.svelte";
+    import Review from "./pages/home/organizations/index.svelte";
     import AdminDashboard from "@src/pages/admin/dashboard/index.svelte";
     import { onMount } from "svelte";
     import { Middleware } from "./middleware";
@@ -29,18 +28,22 @@
 <main class="">
     <Router {url}>
         <Route path="/home" component={Home} />
+        <!-- Auth Pages -->
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/signup/find-companies" component={FindCompanies} />
         <Route path="/signup/verify-otp" component={Otp} />
         <Route path="/signup/success" component={SignupSuccess} />
+        <!-- Auth Pages -->
         <Route path="/about" component={Home} />
-        <Route path="/home/capital" component={Capital} />
-        <Route path="/home/capital/:capital" component={Organization} />
+
+        <!-- Review Pages -->
+        <Route path="/home/review" component={Review} />
         <Route
             path="/home/capital/:capital/:company"
             component={CompanyRedirect}
         />
+        <!-- Review Pages -->
         <Route
             path="/home/capital/:capital/:company/review"
             component={Review}
@@ -49,7 +52,6 @@
             path="/home/capital/:capital/:company/reviews"
             component={Reviews}
         />
-        <Route path="/home/organization/add" component={CreateOrganization} />
     </Router>
 
     <!-- Admin Routes -->
