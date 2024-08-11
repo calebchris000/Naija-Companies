@@ -3,7 +3,9 @@
     import Sort from "@src/assets/svg/sort.svelte";
     import { capitals } from "@src/lib/capitals";
     import Capital from "../../capital/Capital.svelte";
+    import { createEventDispatcher } from "svelte";
 
+    const dispatch = createEventDispatcher();
     $: item_clicked = { filter: false, sort: false };
     $: selected_filters = { filter: "Lagos", sort: "Alphabetical" };
 </script>
@@ -27,6 +29,7 @@
                     <button
                         on:click={() => {
                             selected_filters.filter = capital.name;
+                            dispatch("filter", capital.name);
                         }}
                         class="p-2 hover:bg-primary hover:text-secondary w-full text-start"
                         type="button">{capital.name}</button
@@ -52,6 +55,7 @@
                     <button
                         on:click={() => {
                             selected_filters.sort = sortType;
+                            dispatch("sort", sortType);
                         }}
                         class="p-2 hover:bg-primary hover:text-secondary w-full text-start"
                         type="button">{sortType}</button

@@ -14,7 +14,14 @@
                 placeholder="Search a company"
                 input_class="bg-gray-200 placeholder:text-primary text-primary"
             />
-            <Filters />
+            <Filters
+                on:filter={(e) => {
+                    console.log("filter is", e.detail);
+                }}
+                on:sort={(e) => {
+                    console.log("sort is ", e.detail);
+                }}
+            />
         </div>
         <div class="flex flex-col gap-10">
             <CompanyList type="Trending" />
