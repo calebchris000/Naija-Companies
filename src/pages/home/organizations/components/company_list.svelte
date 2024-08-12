@@ -69,7 +69,7 @@
     ];
 </script>
 
-<section class="flex flex-col gap-2">
+<section class="flex flex-col gap-1">
     <span class="font-medium text-primary">{type}</span>
     <div class="flex w-full overflow-x-auto items-center gap-4 py-4">
         <div class="flex-nowrap gap-4 inline-flex">

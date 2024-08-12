@@ -3,11 +3,11 @@
 
     const dispatch = createEventDispatcher();
     export let items: { id: string; name: string }[] = [
-        { id: "a7x9", name: "Apple" },
-        { id: "b3k2", name: "Banana" },
-        { id: "c5m8", name: "Cherry" },
-        { id: "d1f4", name: "Date" },
-        { id: "e6h7", name: "Elderberry" },
+        { id: "a7x9", name: "Acme Corporation" },
+        { id: "b3k2", name: "Globex Industries" },
+        { id: "c5m8", name: "Umbrella Corp" },
+        { id: "d1f4", name: "Stark Enterprises" },
+        { id: "e6h7", name: "Weyland-Yutani" },
     ];
 
     export let placeholder = "";
@@ -26,6 +26,12 @@
             item.name.toLowerCase().includes(inputValue.toLowerCase()),
         );
     }
+
+    function handleItemSelect(item: { id: string; name: string }) {
+        dispatch("itemSelect", item);
+        inputValue = "";
+        input.value = "";
+    }
 </script>
 
 <div class="w-full relative {container_class}">
@@ -37,7 +43,7 @@
     />
     {#if inputValue}
         <div
-            class="filtered-items absolute left-0 right-0 top-16 bg-gray-200 overflow-y-auto max-h-72 rounded-3xl"
+            class="filtered-items z-50 absolute left-0 right-0 top-16 bg-gray-200 overflow-y-auto max-h-72 rounded-3xl"
         >
             {#if filter_items.length > 0}
                 {#each filter_items as item}
@@ -45,8 +51,7 @@
                         class="w-full p-4 border-b text-primary border-gray-300 px-10 hover:bg-primary hover:text-secondary transition-all font-medium
                         text-left"
                         on:click={() => {
-                            inputValue = "";
-                            input.value = "";
+                            handleItemSelect(item);
                         }}>{item.name}</button
                     >
                 {/each}

@@ -5,12 +5,15 @@
     import Search from "./components/search.svelte";
 </script>
 
-<section class="h-full org bg-secondary">
+<section class="h-full 2xl:h-screen org bg-secondary">
     <Navbar />
 
     <section class="px-10 flex flex-col gap-10">
         <div class="mt-10 w-[50vw] mx-auto flex flex-col gap-4">
             <Search
+                on:itemSelect={(e) => {
+                    console.log(e.detail, "is selected");
+                }}
                 placeholder="Search a company"
                 input_class="bg-gray-200 placeholder:text-primary text-primary"
             />
@@ -29,9 +32,3 @@
         </div>
     </section>
 </section>
-
-<style>
-    .org {
-        font-family: "Inter", sans-serif;
-    }
-</style>

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { getStarRating } from "@src/core/logic/getStarRating";
+    import { navigate } from "svelte-routing";
 
     export let item: {
         id: string;
@@ -10,10 +11,18 @@
     };
 
     const stars = getStarRating(item?.rating).join("");
+
+    function handleClick() {
+        navigate(`/home/organizations/${item.id}`);
+    }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-interactive-supports-focus -->
 <div
-    class="w-80 max-w-96 max-h-64 bg-gray-200 flex flex-col p-4 justify-between"
+    role="button"
+    on:click={handleClick}
+    class="w-80 border border-transparent hover:border-primary transition-all max-w-96 max-h-64 bg-gray-200 flex flex-col p-4 justify-between"
 >
     <div class="flex flex-col gap-1 justify-center items-center text-primary">
         <span class="w-16 h-16 bg-primary overflow-hidden rounded-full"></span>
