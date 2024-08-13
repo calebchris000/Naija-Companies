@@ -9,12 +9,12 @@
     $: selected_filters = { filter: "Lagos", sort: "Alphabetical" };
 </script>
 
-<div class="flex items-center gap-4">
+<div class="flex justify-between xl:justify-start xl:items-center gap-4">
     <button
         on:click={() => {
             item_clicked.filter = !item_clicked.filter;
         }}
-        class=" py-1 rounded-full relative bg-gray-200 px-6 min-w-[14vw] flex items-center gap-4 hover:text-primary text-primary"
+        class=" py-1 rounded-full relative bg-gray-200 px-6 xl:min-w-[14vw] flex items-center gap-4 hover:text-primary text-primary"
         type="button"
     >
         <Filter className="w-4 fill-primary" />
@@ -22,7 +22,7 @@
 
         {#if item_clicked.filter}
             <div
-                class="absolute flex flex-col items-center top-10 bg-gray-200 left-0 right-0 max-h-32 overflow-y-auto"
+                class="absolute flex flex-col items-center top-10 bg-gray-200 left-0 right-0 xl:max-h-32 overflow-y-auto"
             >
                 {#each capitals as capital}
                     <button

@@ -9,8 +9,8 @@
 <section class="h-full 2xl:h-screen org bg-secondary">
     <Navbar />
 
-    <section class="px-10 flex flex-col gap-10">
-        <div class="mt-10 w-[50vw] mx-auto flex flex-col gap-4">
+    <section class="lg:px-10 px-4 flex flex-col gap-10">
+        <div class="mt-10 lg:w-[50vw] mx-auto flex flex-col gap-4">
             <Search
                 on:itemSelect={(e) => {
                     navigate(`/home/organizations/${e.detail.id}`);
