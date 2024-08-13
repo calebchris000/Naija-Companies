@@ -2,7 +2,6 @@
     import Filter from "@src/assets/svg/filter.svelte";
     import Sort from "@src/assets/svg/sort.svelte";
     import { capitals } from "@src/lib/capitals";
-    import Capital from "../../capital/Capital.svelte";
     import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();

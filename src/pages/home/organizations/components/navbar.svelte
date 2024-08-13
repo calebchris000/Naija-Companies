@@ -23,7 +23,7 @@
     <div class="flex items-center gap-20">
         <button type="button" class="bell">
             <BellRead
-                className="w-6 fill-primary transition-transform hover:scale-105"
+                className="w-6 lg:block hidden fill-primary transition-transform hover:scale-105"
             />
         </button>
 
@@ -33,7 +33,7 @@
             >
                 <PersonFilled className="text-secondary w-4" />
             </span>
-            <abbr title="Caleb Nwaizu" class="no-underline"
+            <abbr title="Caleb Nwaizu" class="no-underline hidden lg:inline"
                 ><span class="font-medium">Caleb Nwaizu</span></abbr
             >
         </button>

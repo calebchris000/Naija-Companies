@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { navigate } from "svelte-routing";
     import CompanyList from "./components/company_list.svelte";
     import Filters from "./components/filters.svelte";
     import Navbar from "./components/navbar.svelte";
@@ -12,6 +13,7 @@
         <div class="mt-10 w-[50vw] mx-auto flex flex-col gap-4">
             <Search
                 on:itemSelect={(e) => {
+                    navigate(`/home/organizations/${e.detail.id}`);
                     console.log(e.detail, "is selected");
                 }}
                 placeholder="Search a company"
