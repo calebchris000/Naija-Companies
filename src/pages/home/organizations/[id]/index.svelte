@@ -10,7 +10,7 @@
     const stars = getStarRating(5).join("");
 </script>
 
-<section class="h-screen 2xl:h-screen bg-secondary">
+<section class="h-screen 2xl:h-screen bg-secondary max-w-[120rem] mx-auto">
     <Navbar />
     <section class="mx-auto mt-10 px-56">
         <div class="flex flex-col gap-4">
