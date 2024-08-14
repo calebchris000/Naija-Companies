@@ -1,12 +1,33 @@
 <script lang="ts">
     import Filter from "@src/assets/svg/filter.svelte";
     import Sort from "@src/assets/svg/sort.svelte";
-    import { capitals } from "@src/lib/capitals";
-    import { createEventDispatcher } from "svelte";
+    import { GetCapital } from "@src/core/api/capital";
+    import { useToken } from "@src/core/utils/utils";
+    import { Notification } from "@src/utils/notification";
+    import { createEventDispatcher, onMount } from "svelte";
 
     const dispatch = createEventDispatcher();
+    const notification = new Notification();
+
+    const token = useToken();
+    $: capitals = [] as any[];
     $: item_clicked = { filter: false, sort: false };
-    $: selected_filters = { filter: "Lagos", sort: "Alphabetical" };
+    $: selected_filters = {
+        filter: { id: "LAG", name: "Lagos" },
+        sort: "Ascending",
+    };
+
+    onMount(() => {
+        GetCapital({ token }).then((d) => {
+            const { status, data } = d;
+
+            if (status !== 200) {
+                return notification.error({ text: data?.message ?? "" });
+            }
+            console.log(data?.data);
+            capitals = data?.data;
+        });
+    });
 </script>
 
 <div class="flex justify-between xl:justify-start xl:items-center gap-4">
@@ -18,7 +39,7 @@
         type="button"
     >
         <Filter className="w-4 fill-primary" />
-        <span>{selected_filters.filter}</span>
+        <span>{selected_filters.filter.name}</span>
 
         {#if item_clicked.filter}
             <div
@@ -27,8 +48,11 @@
                 {#each capitals as capital}
                     <button
                         on:click={() => {
-                            selected_filters.filter = capital.name;
-                            dispatch("filter", capital.name);
+                            selected_filters.filter = {
+                                id: capital.id,
+                                name: capital.name,
+                            };
+                            dispatch("filter", selected_filters.filter);
                         }}
                         class="p-2 hover:bg-primary hover:text-secondary w-full text-start"
                         type="button">{capital.name}</button
@@ -50,7 +74,7 @@
             <div
                 class="absolute flex flex-col items-center top-10 bg-gray-200 left-0 right-0 max-h-32 overflow-y-auto"
             >
-                {#each ["Ascending", "Descending"] as sortType}
+                {#each ["Default", "Ascending", "Descending"] as sortType}
                     <button
                         on:click={() => {
                             selected_filters.sort = sortType;

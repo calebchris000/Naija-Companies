@@ -11,7 +11,9 @@
 
     const token = useToken();
     const notification = new Notification();
+    $: filters = { sort: "", filter: "" };
     $: organizations = [] as any[];
+    $: organizations_filter = organizations;
 
     async function getOrganizations() {
         const response = await GetOrganizations({ token, showAverage: true });
@@ -29,6 +31,7 @@
             id: org.id,
             image: org.logoUrl,
             name: org.name,
+            capitalId: org.capitalId,
             rating: org.average,
             reviews: [org.city ?? ""],
         }));
@@ -54,16 +57,33 @@
             />
             <Filters
                 on:filter={(e) => {
-                    console.log("filter is", e.detail);
+                    const { id, name } = e.detail;
+                    organizations_filter = organizations.filter((org) => {
+                        return org.capitalId === id;
+                    });
                 }}
                 on:sort={(e) => {
                     console.log("sort is ", e.detail);
+                    if (e.detail === "Ascending") {
+                        console.log("it is");
+                        organizations_filter = organizations_filter.sort(
+                            (a, b) => a.name.localeCompare(b.name),
+                        );
+                    } else if (e.detail === "Descending") {
+                        organizations_filter = organizations_filter.sort(
+                            (a, b) => b.name.localeCompare(a.name),
+                        );
+                    } else {
+                        organizations_filter = organizations.filter((org) => {
+                            return organizations_filter.includes(org);
+                        });
+                    }
                 }}
             />
         </div>
         <div class="flex flex-col gap-10">
-            <CompanyList list={organizations} type="Trending" />
-            <CompanyList list={organizations} type="Upcoming Startups" />
+            <CompanyList list={organizations_filter} type="Trending" />
+            <CompanyList list={organizations_filter} type="Upcoming Startups" />
         </div>
     </section>
 </section>
