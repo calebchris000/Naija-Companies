@@ -8,8 +8,18 @@ export type UserDataType = {
   firstName: string;
   lastName: string;
   email: string;
-  role?: "admin" |"user" | "sub-admin";
+  role?: "admin" | "user" | "sub-admin";
   userName: string | null;
   id: string;
 };
 
+export type OrganizationsType = {
+  id: string;
+  image: string;
+  name: string;
+  type: string;
+  average: number;
+  website: string;
+  description: string;
+  verified: boolean;
+};

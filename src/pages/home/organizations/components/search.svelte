@@ -1,14 +1,12 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
+    import { GetOrganizations } from "@src/core/api/organization";
+    import { useToken } from "@src/core/utils/utils";
+    import { Notification } from "@src/utils/notification";
+    import { createEventDispatcher, onMount } from "svelte";
 
     const dispatch = createEventDispatcher();
-    export let items: { id: string; name: string }[] = [
-        { id: "a7x9", name: "Acme Corporation" },
-        { id: "b3k2", name: "Globex Industries" },
-        { id: "c5m8", name: "Umbrella Corp" },
-        { id: "d1f4", name: "Stark Enterprises" },
-        { id: "e6h7", name: "Weyland-Yutani" },
-    ];
+    const token = useToken();
+    const notification = new Notification();
 
     export let placeholder = "";
     export let container_class = "";
@@ -17,12 +15,13 @@
     let input: HTMLInputElement;
     let inputValue = "";
 
-    $: filter_items = items;
+    $: organizations = [] as any[];
+    $: filter_items = organizations;
 
     function handleSelect(event: Event) {
         const target = event.target as HTMLInputElement;
         inputValue = target.value;
-        filter_items = items.filter((item) =>
+        filter_items = organizations.filter((item) =>
             item.name.toLowerCase().includes(inputValue.toLowerCase()),
         );
     }
@@ -32,6 +31,27 @@
         inputValue = "";
         input.value = "";
     }
+
+    async function getOrganizations() {
+        const response = await GetOrganizations({ token, showAverage: true });
+
+        const { status, data } = response;
+        console.log(data);
+
+        if (status !== 200) {
+            return notification.error({
+                text: data?.message ?? "Could not get organizations",
+            });
+        }
+
+        organizations = data?.data.map((org: any) => ({
+            id: org.id,
+            name: org.name,
+        }));
+    }
+    onMount(() => {
+        getOrganizations();
+    });
 </script>
 
 <div class="w-full relative {container_class}">

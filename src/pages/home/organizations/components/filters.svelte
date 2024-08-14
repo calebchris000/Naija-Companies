@@ -14,7 +14,7 @@
         on:click={() => {
             item_clicked.filter = !item_clicked.filter;
         }}
-        class=" py-1 rounded-full relative bg-gray-200 px-6 xl:min-w-[14vw] flex items-center gap-4 hover:text-primary text-primary"
+        class=" py-1 rounded-full relative bg-gray-200 px-6 xl:min-w-[14%] flex items-center gap-4 hover:text-primary text-primary"
         type="button"
     >
         <Filter className="w-4 fill-primary" />
@@ -41,7 +41,7 @@
         on:click={() => {
             item_clicked.sort = !item_clicked.sort;
         }}
-        class="min-w-[14vw] py-1 relative rounded-full alpha bg-gray-200 px-6 flex items-center gap-4 hover:text-primary text-primary"
+        class="min-w-[14%] py-1 relative rounded-full alpha bg-gray-200 px-6 flex items-center gap-4 hover:text-primary text-primary"
         type="button"
     >
         <Sort className="w-4 fill-primary" />

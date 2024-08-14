@@ -1,8 +1,10 @@
 <script lang="ts">
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import Building from "@src/assets/svg/building.svelte";
+    import HalfStar from "@src/assets/svg/half_star.svelte";
+    import Star from "@src/assets/svg/star.svelte";
 
-    import { getStarRating } from "@src/core/logic/getStarRating";
+    import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
 
     type DetailType = {
         id: string;
@@ -25,8 +27,8 @@
             "Innovative software solutions for all businesses. Expert team delivers cutting-edge tech tailored to needs. Comprehensive services: custom apps, cloud integration, cybersecurity. Driving digital transformation, empowering organizations to stay ahead, focusing on scalability and user experience.",
         verified: true,
     };
+    const stars = getStarRating(detail.average);
 
-    const stars = getStarRating(detail.average).join("");
     $: image_loaded = false;
     function handleImageLoad() {
         image_loaded = true;
@@ -69,12 +71,23 @@
                 <span class="w-4 h-4 rounded-full bg-green-500"></span>
             {/if}
         </div>
-        <span class="text-3xl">{stars}</span>
+        <span class="text-3xl flex gap-1">
+            {#each stars as star}
+                {#if star === "half"}
+                    <HalfStar className="w-6" />
+                {:else if star === "empty"}
+                    e
+                {:else}
+                    <Star className="w-6" />
+                {/if}
+            {/each}</span
+        >
+        <Star />
         <a class="flex items-center gap-2" href={detail.website}>
             <span>Visit Website</span>
             <Arrow className="w-3 rotate-[135deg]" />
         </a>
         <div class="flex-grow"></div>
-        <span>{detail.description}</span>
+        <span class="leading-loose">{detail.description}</span>
     </div>
 </section>
