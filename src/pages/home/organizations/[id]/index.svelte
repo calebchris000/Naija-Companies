@@ -8,34 +8,44 @@
     import HalfStar from "@src/assets/svg/half_star.svelte";
     import Star from "@src/assets/svg/star.svelte";
     import EmptyStar from "@src/assets/svg/empty_star.svelte";
-    type DetailType = {
-        id: string;
-        image: string;
-        name: string;
-        type: string;
-        average: number;
-        website: string;
-        description: string;
-        verified: boolean;
-    };
+    import type { OrganizationDetailType } from "@src/types";
+    import { GetOrganization } from "@src/core/api/organization";
+    import { useToken } from "@src/core/utils/utils";
+    import { Notification } from "@src/utils/notification";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
-    const detail: DetailType = {
+    const token = useToken();
+    const notification = new Notification();
+
+    const detail: OrganizationDetailType = {
         id: "comp123",
-        image: "https://picsum.photos/200",
         name: "TechWave Solutions",
-        type: "Technology",
+        logoUrl: "https://picsum.photos/200",
+        industry: "Technology",
         average: 4.7,
         website: "https://techwavesolutions.com",
         description:
             "Innovative software solutions for all businesses. Expert team delivers cutting-edge tech tailored to needs. Comprehensive services: custom apps, cloud integration, cybersecurity. Driving digital transformation, empowering organizations to stay ahead, focusing on scalability and user experience.",
         verified: true,
     };
+
+    $: organization_detail = [] as OrganizationDetailType[];
     const stars = getStarRating(detail.average);
     let top_section: HTMLDivElement;
 
     $: isIntersecting = true as any;
     onMount(() => {
+        GetOrganization({ token, organizationId: params_id }).then((d) => {
+            const { status, data } = d;
+
+            if (status !== 200) {
+                return notification.error({
+                    text: data?.message ?? "Could not get organization info",
+                });
+            }
+            console.log(data?.data, "is details");
+            organization_detail = data.data as OrganizationDetailType[];
+        });
         const observer = new IntersectionObserver(
             ([entry]) => {
                 isIntersecting = entry.isIntersecting;
@@ -59,7 +69,7 @@
     <Navbar shadow={isIntersecting} />
     <section class="mx-auto mt-10 px-56">
         <div bind:this={top_section} class="flex flex-col gap-4">
-            <CompanyInfo />
+            <CompanyInfo detail={organization_detail} />
             <div
                 class="bg-primary w-full h-24 rounded-3xl p-4 px-8 flex justify-between items-center"
             >

@@ -1,26 +1,18 @@
 <script lang="ts">
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import Building from "@src/assets/svg/building.svelte";
+    import EmptyStar from "@src/assets/svg/empty_star.svelte";
     import HalfStar from "@src/assets/svg/half_star.svelte";
     import Star from "@src/assets/svg/star.svelte";
 
     import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
+    import type { OrganizationDetailType } from "@src/types";
 
-    type DetailType = {
-        id: string;
-        image: string;
-        name: string;
-        type: string;
-        average: number;
-        website: string;
-        description: string;
-        verified: boolean;
-    };
-    export let detail: DetailType = {
+    export let detail: OrganizationDetailType = {
         id: "comp123",
-        image: "https://picsum.photos/200",
+        logoUrl: "https://picsum.photos/200",
         name: "TechWave Solutions",
-        type: "Technology",
+        industry: "Technology",
         average: 4.7,
         website: "https://techwavesolutions.com",
         description:
@@ -47,7 +39,7 @@
                 hidden={!image_loaded}
                 on:load={handleImageLoad}
                 class=""
-                src={detail.image}
+                src={detail.logoUrl}
                 alt="logo"
             />
             <span
@@ -59,7 +51,7 @@
         </div>
         <span
             class="bg-secondary rounded-md mx-auto text-primary font-bold w-fit px-4"
-            >{detail.type.toUpperCase()}</span
+            >{detail.industry?.toUpperCase()}</span
         >
     </div>
     <div class="flex flex-col gap-2 h-full">
@@ -76,13 +68,12 @@
                 {#if star === "half"}
                     <HalfStar className="w-6" />
                 {:else if star === "empty"}
-                    e
+                    <EmptyStar className="w-6" />
                 {:else}
                     <Star className="w-6" />
                 {/if}
             {/each}</span
         >
-        <Star />
         <a class="flex items-center gap-2" href={detail.website}>
             <span>Visit Website</span>
             <Arrow className="w-3 rotate-[135deg]" />

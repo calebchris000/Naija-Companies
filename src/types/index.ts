@@ -23,3 +23,20 @@ export type OrganizationsType = {
   description: string;
   verified: boolean;
 };
+export type OrganizationDetailType = {
+  id: string;
+  name: string;
+  city?: string;
+  postalCode?: string;
+  website: string;
+  email?: string;
+  foundedYear?: string;
+  size?: string;
+  industry: string;
+  description: string;
+  verified: boolean;
+  addedById?: string;
+  logoUrl: string;
+  average: number;
+  capitalId?: string;
+};
