@@ -7,7 +7,9 @@
     import Star from "@src/assets/svg/star.svelte";
     import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
     import type { ReviewType } from "@src/types";
+    import { Notification } from "@src/utils/notification";
 
+    const notification = new Notification();
     $: rating_type = "All" as "All" | "5" | "4" | "3" | "2" | "1";
 
     export let reviews: any[] = [
@@ -119,7 +121,15 @@
                     class="flex px-10 items-center justify-between w-full bg-gray-100 py-5"
                 >
                     <div class="flex items-center gap-4">
-                        <button class="flex items-center gap-2" type="button">
+                        <button
+                            on:click={() => {
+                                notification.info({
+                                    text: "This feature will be implemented soon 🙂",
+                                });
+                            }}
+                            class="flex items-center gap-2"
+                            type="button"
+                        >
                             <Like
                                 className="w-6 hover:scale-110 transition-all"
                             />
