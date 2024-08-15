@@ -69,16 +69,33 @@
             verified: true,
         },
     ];
+
+    $: summarize_status = "inactive" as
+        | "inactive"
+        | "pending"
+        | "success"
+        | "failure";
+
+    function handleSummarize() {
+        summarize_status = "pending";
+    }
 </script>
 
 <section class="mt-10 text-primary w-full p-4 px-0 flex flex-col gap-4">
     <div class="flex items-center justify-between">
         <button
+            on:click={handleSummarize}
+            class:linear_animate={summarize_status === "pending"}
             class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
             type="button"
         >
-            <span>Summarize Review</span>
-            <MultipleStars className="w-6" />
+            <span class="font-medium">Summarize Review</span>
+            <div
+                class:rotate={summarize_status === "pending"}
+                style="transition: transform 1s linear;"
+            >
+                <MultipleStars className="w-6 " />
+            </div>
         </button>
         <button
             class="bg-primary flex items-center gap-4 p-2 px-4 rounded-full text-secondary"
@@ -160,3 +177,35 @@
         {/each}
     </div>
 </section>
+
+<style>
+    .rotate {
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .linear_animate {
+        background-size: 200% 200%;
+        animation: gradient 2s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>

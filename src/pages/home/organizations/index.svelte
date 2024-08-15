@@ -14,6 +14,11 @@
     $: filters = { sort: "", filter: "" };
     $: organizations = [] as any[];
     $: organizations_filter = organizations;
+    $: summarize_status = "inactive" as
+        | "inactive"
+        | "pending"
+        | "success"
+        | "failure";
 
     async function getOrganizations() {
         const response = await GetOrganizations({ token, showAverage: true });
@@ -35,6 +40,10 @@
             rating: org.average,
             reviews: [org.city ?? ""],
         }));
+    }
+
+    function handleSummarize() {
+        summarize_status = "pending";
     }
 
     onMount(() => {
