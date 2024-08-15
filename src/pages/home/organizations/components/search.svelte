@@ -14,6 +14,7 @@
 
     let input: HTMLInputElement;
     let inputValue = "";
+    let filteredItemsDiv: HTMLDivElement;
 
     $: organizations = [] as any[];
     $: filter_items = organizations;
@@ -30,6 +31,17 @@
         dispatch("itemSelect", item);
         inputValue = "";
         input.value = "";
+    }
+
+    function handleClickOutside(event: MouseEvent) {
+        if (
+            filteredItemsDiv &&
+            !filteredItemsDiv.contains(event.target as Node)
+        ) {
+            filter_items = [];
+            inputValue = "";
+            input.value = "";
+        }
     }
 
     async function getOrganizations() {
@@ -49,8 +61,13 @@
             name: org.name,
         }));
     }
+
     onMount(() => {
         getOrganizations();
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
     });
 </script>
 
@@ -63,6 +80,7 @@
     />
     {#if inputValue}
         <div
+            bind:this={filteredItemsDiv}
             class="filtered-items z-50 absolute left-0 right-0 top-16 bg-gray-200 overflow-y-auto max-h-72 rounded-3xl"
         >
             {#if filter_items.length > 0}

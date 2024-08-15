@@ -83,7 +83,7 @@
                             on:click={() => {
                                 navigate("/home/review");
                             }}
-                            class=" bg-secondary border-2 border-transparent hover:border-orange-500 transition-all w-fit justify-self-end flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-primary"
+                            class=" bg-secondary transition-all w-fit justify-self-end flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-primary"
                             type="button"
                         >
                             <span>Write A Review</span>
@@ -92,7 +92,7 @@
 
                         <button
                             type="button"
-                            class="h-10 w-10 border-2 border-transparent hover:border-orange-500 transition-all rounded-full justify-self-end p-2 grid place-items-center ms-end bg-secondary"
+                            class="h-10 w-10 transition-all rounded-full justify-self-end p-2 grid place-items-center ms-end bg-secondary"
                         >
                             <PersonFilled className="w-4 text-primary" />
                         </button>
@@ -101,7 +101,7 @@
                             on:click={() => {
                                 navigate("/signup");
                             }}
-                            class=" bg-secondary border-2 border-transparent hover:border-orange-500 p-2 px-6 rounded-full font-semibold text-primary"
+                            class=" bg-secondary p-2 px-6 rounded-full font-semibold text-primary"
                             type="button">Get Started</button
                         >
                         <button

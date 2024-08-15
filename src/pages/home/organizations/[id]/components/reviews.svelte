@@ -14,63 +14,7 @@
     $: rating_open = false;
     $: rating_type = "All" as string | "All" | "5" | "4" | "3" | "2" | "1";
 
-    export let reviews: any[] = [
-        {
-            id: "1",
-            title: "Great work environment",
-            content:
-                "I've been working here for 2 years and I love the company culture. The team is supportive, and management really values work-life balance. We have regular team-building activities and the office amenities are top-notch. The flexible working hours are a big plus, and I appreciate the opportunities for professional development.",
-            rating: 5,
-            reviewer: "John Doe",
-            isEmployee: true,
-            agreed: 15,
-            verified: true,
-        },
-        {
-            id: "2",
-            title: "Room for improvement",
-            content:
-                "The pay is good but the workload can be overwhelming at times. While the company offers competitive salaries, the project deadlines are often unrealistic. This leads to frequent overtime and stress. The management could improve on resource allocation and project planning. Despite these challenges, my colleagues are great to work with and the benefits package is comprehensive.",
-            rating: 3,
-            reviewer: "Jane Smith",
-            isEmployee: true,
-            agreed: 8,
-            verified: true,
-        },
-        {
-            id: "3",
-            title: "Excellent customer service",
-            content:
-                "I had a great experience with their support team. Very helpful! When I encountered an issue with my product, I reached out to customer service expecting a long wait. To my surprise, I got an immediate response. The representative was knowledgeable, patient, and went above and beyond to resolve my problem. They even followed up a week later to ensure everything was still working well.",
-            rating: 5,
-            reviewer: "Mike Johnson",
-            isEmployee: false,
-            agreed: 22,
-            verified: false,
-        },
-        {
-            id: "4",
-            title: "Disappointing product quality",
-            content:
-                "The product I received was not up to the standards I expected. The marketing materials promised high-quality materials and durability, but what I got fell short. The finish was inconsistent, and some parts felt flimsy. When I tried to return it, the process was unnecessarily complicated. While the customer service was polite, they couldn't fully address my concerns about the product quality.",
-            rating: 2,
-            reviewer: "Sarah Brown",
-            isEmployee: false,
-            agreed: 5,
-            verified: false,
-        },
-        {
-            id: "5",
-            title: "Good company, but slow growth",
-            content:
-                "It's a stable job, but career progression is quite slow here. The company provides a secure work environment with good benefits, which is appreciated. However, the promotional opportunities are limited, and it often feels like there's a ceiling to how far you can advance. The company could benefit from implementing clearer career paths and more frequent performance reviews. Despite this, the work-life balance is excellent, and my colleagues are fantastic.",
-            rating: 4,
-            reviewer: "Chris Lee",
-            isEmployee: true,
-            agreed: 11,
-            verified: true,
-        },
-    ];
+    export let reviews: any[] = [];
 
     $: reviews_filter = reviews;
 

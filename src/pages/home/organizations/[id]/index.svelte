@@ -78,7 +78,7 @@
     });
 </script>
 
-<section class="h-full bg-secondary max-w-[120rem] mx-auto">
+<section class=" bg-secondary max-w-[120rem] mx-auto">
     <Navbar shadow={isIntersecting} />
     <section class="mx-auto mt-10 px-56">
         <div bind:this={top_section} class="flex flex-col gap-4">

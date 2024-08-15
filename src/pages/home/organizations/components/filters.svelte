@@ -17,7 +17,21 @@
         sort: "Ascending",
     };
 
+    function handleClickOutside(event: MouseEvent) {
+        const filterElement = document.querySelector(".filter");
+        const sortElement = document.querySelector(".sort");
+
+        if (filterElement && !filterElement.contains(event.target as Node)) {
+            item_clicked.filter = false;
+        }
+
+        if (sortElement && !sortElement.contains(event.target as Node)) {
+            item_clicked.sort = false;
+        }
+    }
+
     onMount(() => {
+        document.addEventListener("click", handleClickOutside);
         GetCapital({ token }).then((d) => {
             const { status, data } = d;
 
@@ -35,7 +49,7 @@
         on:click={() => {
             item_clicked.filter = !item_clicked.filter;
         }}
-        class=" py-1 rounded-full relative bg-gray-200 px-6 xl:min-w-[14%] flex items-center gap-4 hover:text-primary text-primary"
+        class="filter py-1 rounded-full relative bg-gray-200 px-6 xl:min-w-[14%] flex items-center gap-4 hover:text-primary text-primary"
         type="button"
     >
         <Filter className="w-4 fill-primary" />
@@ -65,7 +79,7 @@
         on:click={() => {
             item_clicked.sort = !item_clicked.sort;
         }}
-        class="min-w-[14%] py-1 relative rounded-full alpha bg-gray-200 px-6 flex items-center gap-4 hover:text-primary text-primary"
+        class="sort min-w-[14%] py-1 relative rounded-full alpha bg-gray-200 px-6 flex items-center gap-4 hover:text-primary text-primary"
         type="button"
     >
         <Sort className="w-4 fill-primary" />
