@@ -11,7 +11,8 @@
     import { Notification } from "@src/utils/notification";
 
     const notification = new Notification();
-    $: rating_type = "All" as "All" | "5" | "4" | "3" | "2" | "1";
+    $: rating_open = false;
+    $: rating_type = "All" as string | "All" | "5" | "4" | "3" | "2" | "1";
 
     export let reviews: any[] = [
         {
@@ -71,8 +72,20 @@
         },
     ];
 
+    $: reviews_filter = reviews;
+
     function handleSummarize() {
         $store.summarize_status = "pending";
+    }
+
+    function handleRating() {
+        if (rating_type === "All") {
+            reviews_filter = reviews;
+        } else {
+            reviews_filter = reviews.filter(
+                (review) => review.rating === parseInt(rating_type),
+            );
+        }
     }
 </script>
 
@@ -93,15 +106,42 @@
             </div>
         </button>
         <button
-            class="bg-primary flex items-center gap-4 p-2 px-4 rounded-full text-secondary"
+            on:click={() => {
+                rating_open = !rating_open;
+            }}
+            class="bg-primary relative flex items-center gap-4 p-2 px-4 rounded-full text-secondary"
             type="button"
         >
             <Filter className="fill-secondary w-4" />
-            <span>Rating: <b class="ps-2">{rating_type}</b></span>
+            <span
+                >Rating: <b class="ps-2"
+                    >{rating_type} {rating_type === "1" ? "star" : "stars"}</b
+                ></span
+            >
+
+            {#if rating_open}
+                <div
+                    class="absolute flex flex-col rounded-xl overflow-hidden top-12 left-0 right-0 bg-white text-primary shadow-md"
+                >
+                    {#each ["All", "5", "4", "3", "2", "1"] as rating}
+                        <button
+                            on:click|stopPropagation={() => {
+                                rating_open = false;
+
+                                rating_type = rating.toString();
+                                handleRating();
+                            }}
+                            type="button"
+                            class="transition-all py-2 hover:bg-primary hover:text-secondary"
+                            >{rating}
+                        </button>
+                    {/each}
+                </div>
+            {/if}
         </button>
     </div>
     <div class="flex flex-col gap-4">
-        {#each reviews as review}
+        {#each reviews_filter as review}
             <div
                 class="review border border-gray-100 overflow-hidden rounded-3xl flex flex-col gap-2"
             >

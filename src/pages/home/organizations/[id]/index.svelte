@@ -109,7 +109,7 @@
         <figure
             class:opacity-100={!isIntersecting}
             class:pointer-events-none={isIntersecting}
-            class="opacity-0 transition-all max-w-[120rem] mx-auto fixed top-20 shadow-md bg-gray-100 px-10 py-4 left-0 right-0 flex flex-col gap-4"
+            class="opacity-0 z-50 transition-all max-w-[120rem] mx-auto fixed top-20 shadow-md bg-gray-100 px-10 py-4 left-0 right-0 flex flex-col gap-4"
         >
             <section class="flex items-center gap-4">
                 <div class="w-16 rounded-full overflow-hidden">
