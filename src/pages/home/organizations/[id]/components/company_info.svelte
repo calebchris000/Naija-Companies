@@ -8,17 +8,7 @@
     import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
     import type { OrganizationDetailType } from "@src/types";
 
-    export let detail: OrganizationDetailType = {
-        id: "comp123",
-        logoUrl: "https://picsum.photos/200",
-        name: "TechWave Solutions",
-        industry: "Technology",
-        average: 4.7,
-        website: "https://techwavesolutions.com",
-        description:
-            "Innovative software solutions for all businesses. Expert team delivers cutting-edge tech tailored to needs. Comprehensive services: custom apps, cloud integration, cybersecurity. Driving digital transformation, empowering organizations to stay ahead, focusing on scalability and user experience.",
-        verified: true,
-    };
+    export let detail: OrganizationDetailType = {};
 
     $: stars = getStarRating(detail.average);
 
@@ -72,7 +62,13 @@
                 {/if}
             {/each}</span
         >
-        <a class="flex items-center gap-2" href={detail.website}>
+        <a
+            class="flex items-center gap-2"
+            target="_blank"
+            href={detail.website && !detail.website.startsWith("http")
+                ? `https://${detail.website}`
+                : detail.website}
+        >
             <span>Visit Website</span>
             <Arrow className="w-3 rotate-[135deg]" />
         </a>
