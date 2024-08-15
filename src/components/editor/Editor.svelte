@@ -1,76 +1,51 @@
 <script lang="ts">
-  import EditorJS from "@editorjs/editorjs";
-  import { getStarRating } from "@src/core/logic/getStarRating";
-  import { createEventDispatcher, onDestroy, onMount } from "svelte";
-  import edjsHTML from "editorjs-html";
-  import { store } from "@src/lib/store";
+    import { onDestroy, onMount } from "svelte";
+    import EditorJS from "@editorjs/editorjs";
 
-  const dispatch = createEventDispatcher();
-  const edjsParser = edjsHTML();
+    let editor: EditorJS;
+    let element: HTMLElement;
 
-  $: rated_value = 0;
-  $: stars = getStarRating(rated_value).join("");
-  let editor: EditorJS;
+    export let focus = false;
 
-  function handleSave() {
-    editor.save().then((d) => {
-      const html = edjsParser.parse(d);
-      
-      dispatch("save", { content: html, star: rated_value });
-    });
-  }
-
-  document.addEventListener("onSaveEditor", handleSave);
-
-  onMount(() => {
-    editor = new EditorJS({
-      holder: "editor_parent",
-      placeholder: "Write your review here.",
-      onReady: () => {
-        console.log("Editor is ready!");
-      },
-    });
-  });
-
-  onDestroy(() => {
-    if (editor) {
-      editor.destroy();
+    $: {
+        if (!focus && editor && editor.blocks) {
+            editor?.destroy();
+        } else if (focus && !editor?.blocks) {
+            editor = new EditorJS({
+                holder: "editor",
+                tools: {},
+                placeholder: "Write your review...",
+                autofocus: true,
+            });
+        }
     }
-  });
 
-  function handleChange(e: Event) {
-    const { value } = e.target as any;
-    const float = parseFloat(value);
-    const converted = (float / 100) * 5;
-    if (converted % 0.5 === 0 && float) {
-      rated_value = converted;
-    }
-  }
-  $: star_color =
-    rated_value < 2.5
-      ? "red"
-      : rated_value >= 2.5 && rated_value <= 3.5
-        ? "orange"
-        : "green";
+    onMount(() => {
+        if (!focus) return;
+        editor = new EditorJS({
+            holder: "editor",
+            tools: {},
+            placeholder: "Write your review...",
+            autofocus: true,
+        });
+    });
+
+    onDestroy(() => {
+        if (editor) {
+            editor?.destroy();
+        }
+    });
 </script>
 
-<section class="relative flex flex-col gap-2">
-  {#if $store.device === "desktop"}
-    <span class="font-medium text-orange-600 translate-y-2">Slide on the stars to review</span>
-  {/if}
-  <span style="color: {star_color}" class="text-3xl">{stars}</span>
-  <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0 lg:top-10">
-    <input
-      on:change={handleChange}
-      on:input={handleChange}
-      type="range"
-      class="h-full"
-      name=""
-      id=""
-    />
-  </div>
-  <div
-    class="px-4 w-full border border-gray-400 max-h-44 overflow-auto lg:max-h-[24rem]"
-    id="editor_parent"
-  ></div>
+<section
+    bind:this={element}
+    class="outline-none border rounded-xl h-full flex flex-col"
+>
+    <div id="editor" class="editor py-4 w-full border-none outline-none"></div>
 </section>
+
+<style>
+    .editor {
+        height: 10rem !important;
+    }
+</style>

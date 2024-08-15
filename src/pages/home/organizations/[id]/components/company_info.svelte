@@ -63,13 +63,13 @@
             {/each}</span
         >
         <a
-            class="flex items-center gap-2"
+            class="flex items-center gap-1"
             target="_blank"
             href={detail.website && !detail.website.startsWith("http")
                 ? `https://${detail.website}`
                 : detail.website}
         >
-            <span>Visit Website</span>
+            <span class="font-medium">{detail.website}</span>
             <Arrow className="w-3 rotate-[135deg]" />
         </a>
         <div class="flex-grow"></div>

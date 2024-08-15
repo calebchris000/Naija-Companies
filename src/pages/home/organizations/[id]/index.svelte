@@ -14,6 +14,7 @@
     import { Notification } from "@src/utils/notification";
     import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
     import { store } from "@src/lib/store";
+    import Editor from "@src/components/editor/Editor.svelte";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
     const token = useToken();
@@ -37,7 +38,7 @@
     $: reviews_filter = reviews as ReviewType[];
     $: stars = getStarRating(detail.average);
     $: image_loaded = false as boolean;
-
+    $: review_modal_open = false;
     $: isIntersecting = true as any;
 
     function handleSummarize() {
@@ -83,11 +84,66 @@
     <section class="mx-auto mt-10 px-56">
         <div bind:this={top_section} class="flex flex-col gap-4">
             <CompanyInfo detail={organization_detail} />
+
+            <section
+                class:opacity-100={review_modal_open}
+                class:pointer-events-auto={review_modal_open}
+                class="fixed z-[100] transition-all opacity-0 grid place-items-center pointer-events-none overflow-hidden inset-0"
+            >
+                <div
+                    class="absolute inset-0 bg-black bg-opacity-45 backdrop-filter backdrop-blur-sm"
+                ></div>
+                <div
+                    class="relative rounded-2xl p-10 bg-secondary w-[60vw] h-[70vh] flex flex-col gap-4 justify-between"
+                >
+                    <div class="flex justify-between items-center">
+                        <input
+                            class="text-2xl font-semibold outline-none text-primary placeholder:text-primary"
+                            type="text"
+                            placeholder="Title..."
+                        />
+                        <span class="text-3xl flex gap-1">
+                            <EmptyStar
+                                className="w-6 bg-secondary text-primary"
+                            />
+                            <EmptyStar
+                                className="w-6 bg-secondary text-primary"
+                            />
+                            <EmptyStar
+                                className="w-6 bg-secondary text-primary"
+                            />
+                            <EmptyStar
+                                className="w-6 bg-secondary text-primary"
+                            />
+                            <EmptyStar
+                                className="w-6 bg-secondary text-primary"
+                            />
+                        </span>
+                    </div>
+                    <Editor focus={review_modal_open} />
+                    <div class="flex z-10 items-center justify-between">
+                        <button
+                            on:click={() => {
+                                review_modal_open = false;
+                            }}
+                            class="font-medium bg-primary text-secondary p-2 px-4 rounded-full"
+                            type="button">Cancel</button
+                        >
+                        <button
+                            class="font-medium bg-primary text-secondary p-2 px-4 rounded-full"
+                            type="button">Submit</button
+                        >
+                    </div>
+                </div>
+            </section>
             <div
                 class="bg-primary w-full h-24 rounded-3xl p-4 px-8 flex justify-between items-center"
             >
                 <button
-                    class="text-secondary flex items-center gap-4"
+                    on:click={() => {
+                        review_modal_open = !review_modal_open;
+                    }}
+                    class="text-secondary hover:text-primary hover:bg-secondary p-3 px-2 rounded-lg transition-all flex items-center gap-4"
                     type="button"
                 >
                     <span class="">Write a review</span>
@@ -207,5 +263,11 @@
         100% {
             background-position: 0% 50%;
         }
+    }
+
+    .blur {
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(9.7px);
+        -webkit-backdrop-filter: blur(9.7px);
     }
 </style>
