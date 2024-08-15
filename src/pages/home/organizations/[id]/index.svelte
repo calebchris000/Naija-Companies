@@ -143,7 +143,7 @@
                     on:click={() => {
                         review_modal_open = !review_modal_open;
                     }}
-                    class="text-secondary hover:text-primary hover:bg-secondary p-3 px-2 rounded-lg transition-all flex items-center gap-4"
+                    class="text-secondary hover:text-primary hover:bg-secondary p-2 px-4 rounded-full transition-all flex items-center gap-4"
                     type="button"
                 >
                     <span class="">Write a review</span>
