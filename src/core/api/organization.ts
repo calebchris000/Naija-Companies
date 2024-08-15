@@ -37,14 +37,16 @@ export const GetOrganizations = async ({
 export const GetOrganization = async ({
   token,
   organizationId,
+  query,
 }: {
   token: string;
   organizationId: string;
+  query?: string;
 }) => {
   try {
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
     const response = await axios.get(
-      `${base_url}/organization?organizationId=${organizationId}`,
+      `${base_url}/organization?organizationId=${organizationId}&${query}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

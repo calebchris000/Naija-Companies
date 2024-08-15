@@ -8,15 +8,15 @@
     import HalfStar from "@src/assets/svg/half_star.svelte";
     import Star from "@src/assets/svg/star.svelte";
     import EmptyStar from "@src/assets/svg/empty_star.svelte";
-    import type { OrganizationDetailType } from "@src/types";
+    import type { OrganizationDetailType, ReviewType } from "@src/types";
     import { GetOrganization } from "@src/core/api/organization";
     import { useToken } from "@src/core/utils/utils";
     import { Notification } from "@src/utils/notification";
+    import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
     const token = useToken();
     const notification = new Notification();
-
     const detail: OrganizationDetailType = {
         id: "comp123",
         name: "TechWave Solutions",
@@ -29,13 +29,21 @@
         verified: true,
     };
 
-    $: organization_detail = [] as OrganizationDetailType[];
-    const stars = getStarRating(detail.average);
     let top_section: HTMLDivElement;
+
+    $: organization_detail = {} as OrganizationDetailType;
+    $: reviews = [] as ReviewType[];
+    $: reviews_filter = reviews as ReviewType[];
+    $: stars = getStarRating(detail.average);
+    $: image_loaded = false as boolean;
 
     $: isIntersecting = true as any;
     onMount(() => {
-        GetOrganization({ token, organizationId: params_id }).then((d) => {
+        GetOrganization({
+            token,
+            organizationId: params_id,
+            query: "getReviews=true",
+        }).then((d) => {
             const { status, data } = d;
 
             if (status !== 200) {
@@ -43,8 +51,8 @@
                     text: data?.message ?? "Could not get organization info",
                 });
             }
-            console.log(data?.data, "is details");
-            organization_detail = data.data as OrganizationDetailType[];
+            organization_detail = data.data as OrganizationDetailType;
+            reviews = data.data.reviews as ReviewType[];
         });
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -100,7 +108,21 @@
         >
             <section class="flex items-center gap-4">
                 <div class="w-16 rounded-full overflow-hidden">
-                    <img src={detail.image} alt="" />
+                    {#if !image_loaded}
+                        <span
+                            class="w-full h-16 bg-gray-200 flex items-center justify-center text-gray-400"
+                        >
+                            Logo
+                        </span>
+                    {/if}
+                    <img
+                        class:hidden={!image_loaded}
+                        on:load={() => {
+                            image_loaded = true;
+                        }}
+                        src={organization_detail.logoUrl}
+                        alt=""
+                    />
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-xl font-medium text-primary"
@@ -124,20 +146,23 @@
             </section>
             <section class="flex items-center justify-between">
                 <button
-                    class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full"
-                    type="button">Summarize Review</button
+                    class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
+                    type="button"
                 >
+                    <span>Summarize Review</span>
+                    <MultipleStars className="w-6" />
+                </button>
                 <button
                     class="bg-primary flex items-center gap-2 text-secondary p-2 px-4 rounded-full"
                     type="button"
                 >
                     <span>Write a Review</span>
-                    <Pencil className="w-3" />
+                    <Pencil className="w-4" />
                 </button>
             </section>
         </figure>
         <div>
-            <Reviews />
+            <Reviews reviews={reviews_filter} />
         </div>
     </section>
 </section>

@@ -19,7 +19,8 @@
             "Innovative software solutions for all businesses. Expert team delivers cutting-edge tech tailored to needs. Comprehensive services: custom apps, cloud integration, cybersecurity. Driving digital transformation, empowering organizations to stay ahead, focusing on scalability and user experience.",
         verified: true,
     };
-    const stars = getStarRating(detail.average);
+
+    $: stars = getStarRating(detail.average);
 
     $: image_loaded = false;
     function handleImageLoad() {
@@ -31,10 +32,7 @@
     class="bg-primary max-h-[20rem] text-secondary w-full rounded-3xl h-[50vh] flex items-start gap-10 p-10 pb-20"
 >
     <div class="flex flex-col justify-between gap-4 h-full">
-        <div
-            class:border-none={image_loaded}
-            class="w-40 mx-auto rounded-full overflow-hidden border-2 border-secondary"
-        >
+        <div class="w-40 mx-auto rounded-full overflow-hidden">
             <img
                 hidden={!image_loaded}
                 on:load={handleImageLoad}
@@ -44,9 +42,9 @@
             />
             <span
                 style="display: {image_loaded ? 'none' : 'gridq'}"
-                class="w-40 grid place-items-center h-40"
+                class="w-40 grid text-xl place-items-center bg-gray-300 text-gray-500 h-40"
             >
-                <Building className="w-20" />
+                Logo
             </span>
         </div>
         <span

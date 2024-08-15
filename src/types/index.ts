@@ -40,3 +40,15 @@ export type OrganizationDetailType = {
   average: number;
   capitalId?: string;
 };
+
+export type ReviewType = {
+  id: string;
+  title: string;
+  content: string;
+  rating: number;
+  reviewer: any;
+  isEmployee: boolean;
+  organizationId?: string;
+  agreed?: number;
+  verified: boolean;
+};
