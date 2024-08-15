@@ -13,6 +13,7 @@
     import { useToken } from "@src/core/utils/utils";
     import { Notification } from "@src/utils/notification";
     import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
+    import { store } from "@src/lib/store";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
     const token = useToken();
@@ -39,14 +40,8 @@
 
     $: isIntersecting = true as any;
 
-    $: summarize_status = "inactive" as
-        | "inactive"
-        | "pending"
-        | "success"
-        | "failure";
-
     function handleSummarize() {
-        summarize_status = "pending";
+        $store.summarize_status = "pending";
     }
     onMount(() => {
         GetOrganization({
@@ -157,13 +152,13 @@
             <section class="flex items-center justify-between">
                 <button
                     on:click={handleSummarize}
-                    class:linear_animate={summarize_status === "pending"}
+                    class:linear_animate={$store.summarize_status === "pending"}
                     class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
                     type="button"
                 >
                     <span>Summarize Review</span>
                     <div
-                        class:rotate={summarize_status === "pending"}
+                        class:rotate={$store.summarize_status === "pending"}
                         style="transition: transform 1s linear;"
                     >
                         <MultipleStars className="w-6 " />

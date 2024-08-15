@@ -13,6 +13,7 @@ type StoreType = {
   application: {
     selected_capital: SelectedCapital;
   };
+  summarize_status: "inactive" | "pending" | "success" | "failure";
   device: DeviceType;
   sidebar_selected: string;
 };
@@ -21,11 +22,12 @@ const initialValue: StoreType = {
   capital_list: [],
   user_role: "user",
   selected_capital: [],
+  summarize_status: "inactive",
   application: {
     selected_capital: { id: "", name: "" },
   },
   device: "desktop" as "desktop" | "mobile" | "tablet" | "large-tablet",
-  sidebar_selected: "Users"
+  sidebar_selected: "Users",
 };
 
 // Define a writable store with an initial value

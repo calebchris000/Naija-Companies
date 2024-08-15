@@ -6,6 +6,7 @@
     import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
     import Star from "@src/assets/svg/star.svelte";
     import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
+    import { store } from "@src/lib/store";
     import type { ReviewType } from "@src/types";
     import { Notification } from "@src/utils/notification";
 
@@ -70,14 +71,8 @@
         },
     ];
 
-    $: summarize_status = "inactive" as
-        | "inactive"
-        | "pending"
-        | "success"
-        | "failure";
-
     function handleSummarize() {
-        summarize_status = "pending";
+        $store.summarize_status = "pending";
     }
 </script>
 
@@ -85,13 +80,13 @@
     <div class="flex items-center justify-between">
         <button
             on:click={handleSummarize}
-            class:linear_animate={summarize_status === "pending"}
+            class:linear_animate={$store.summarize_status === "pending"}
             class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
             type="button"
         >
             <span class="font-medium">Summarize Review</span>
             <div
-                class:rotate={summarize_status === "pending"}
+                class:rotate={$store.summarize_status === "pending"}
                 style="transition: transform 1s linear;"
             >
                 <MultipleStars className="w-6 " />
