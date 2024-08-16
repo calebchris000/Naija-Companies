@@ -28,7 +28,7 @@
 
         if (status !== 200) {
             return notification.error({
-                text: data?.message ?? "Could not get organizations",
+                text: data?.message ?? "Could nwot get organizations",
             });
         }
 

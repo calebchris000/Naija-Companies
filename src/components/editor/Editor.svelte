@@ -39,7 +39,7 @@
 
 <section
     bind:this={element}
-    class="outline-none border rounded-xl h-full flex flex-col"
+    class="outline-none border border-primary rounded-xl h-full flex flex-col"
 >
     <div id="editor" class="editor py-4 w-full border-none outline-none"></div>
 </section>

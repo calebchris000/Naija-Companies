@@ -1,9 +1,11 @@
 <script>
     export let className = "w-4";
+    export let style = "";
 </script>
 
 <svg
     class={className}
+    {style}
     stroke="currentColor"
     fill="currentColor"
     stroke-width="0"

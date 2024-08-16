@@ -15,6 +15,8 @@
     import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
     import { store } from "@src/lib/store";
     import Editor from "@src/components/editor/Editor.svelte";
+    import Arrow from "@src/assets/svg/Arrow.svelte";
+    import InteractiveStars from "./components/interactive_stars.svelte";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
     const token = useToken();
@@ -38,7 +40,7 @@
     $: reviews_filter = reviews as ReviewType[];
     $: stars = getStarRating(detail.average);
     $: image_loaded = false as boolean;
-    $: review_modal_open = false;
+    $: review_modal_open = true;
     $: isIntersecting = true as any;
 
     function handleSummarize() {
@@ -94,7 +96,7 @@
                     class="absolute inset-0 bg-black bg-opacity-45 backdrop-filter backdrop-blur-sm"
                 ></div>
                 <div
-                    class="relative rounded-2xl p-10 bg-secondary w-[60vw] h-[70vh] flex flex-col gap-4 justify-between"
+                    class="relative select-none rounded-2xl p-10 bg-secondary w-[60vw] h-[70vh] flex flex-col gap-4 justify-between"
                 >
                     <div class="flex justify-between items-center">
                         <input
@@ -102,23 +104,7 @@
                             type="text"
                             placeholder="Title..."
                         />
-                        <span class="text-3xl flex gap-1">
-                            <EmptyStar
-                                className="w-6 bg-secondary text-primary"
-                            />
-                            <EmptyStar
-                                className="w-6 bg-secondary text-primary"
-                            />
-                            <EmptyStar
-                                className="w-6 bg-secondary text-primary"
-                            />
-                            <EmptyStar
-                                className="w-6 bg-secondary text-primary"
-                            />
-                            <EmptyStar
-                                className="w-6 bg-secondary text-primary"
-                            />
-                        </span>
+                        <InteractiveStars />
                     </div>
                     <Editor focus={review_modal_open} />
                     <div class="flex z-10 items-center justify-between">
@@ -126,13 +112,19 @@
                             on:click={() => {
                                 review_modal_open = false;
                             }}
-                            class="font-medium bg-primary text-secondary p-2 px-4 rounded-full"
-                            type="button">Cancel</button
+                            class="font-medium hover:bg-orange-500 hover:font-semibold transition-all hover:border-transparent hover:text-white flex items-center gap-4 border border-primary text-primary p-2 px-6 rounded-full"
+                            type="button"
                         >
+                            <Arrow className="w-4" />
+                            <span>Cancel</span>
+                        </button>
                         <button
-                            class="font-medium bg-primary text-secondary p-2 px-4 rounded-full"
-                            type="button">Submit</button
+                            class="font-medium flex items-center gap-4 bg-primary text-secondary p-2 px-6 rounded-full"
+                            type="button"
                         >
+                            <span>Submit</span>
+                            <Arrow className="w-4 rotate-180" />
+                        </button>
                     </div>
                 </div>
             </section>
@@ -150,16 +142,10 @@
                     <Pencil className="w-4" />
                 </button>
 
-                <button
-                    class="text-secondary text-4xl flex gap-1"
-                    type="button"
-                >
-                    <EmptyStar className="w-6" />
-                    <EmptyStar className="w-6" />
-                    <EmptyStar className="w-6" />
-                    <EmptyStar className="w-6" />
-                    <EmptyStar className="w-6" />
-                </button>
+                <InteractiveStars
+                    focus={review_modal_open}
+                    default_star_color="white"
+                />
             </div>
         </div>
         <figure
