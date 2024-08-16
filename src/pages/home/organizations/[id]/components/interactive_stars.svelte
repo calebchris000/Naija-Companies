@@ -23,7 +23,7 @@
         <!-- svelte-ignore a11y-mouse-events-have-key-events -->
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <button
-            class="p-[0.1rem] transition-all"
+            class="p-[0.1rem]"
             style="color: {star_color}"
             type="button"
             on:click={() => {
