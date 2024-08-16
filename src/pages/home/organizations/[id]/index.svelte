@@ -38,13 +38,39 @@
     $: organization_detail = {} as OrganizationDetailType;
     $: reviews = [] as ReviewType[];
     $: reviews_filter = reviews as ReviewType[];
-    $: stars = getStarRating(detail.average);
     $: image_loaded = false as boolean;
-    $: review_modal_open = true;
+    $: review_modal_open = false;
     $: isIntersecting = true as any;
+    $: stars = getStarRating(detail.average);
+    $: review_data = { title: "", content: "" } as {
+        title: string;
+        content: string[] | "";
+    };
 
     function handleSummarize() {
         $store.summarize_status = "pending";
+    }
+
+    function handleSubmit() {
+        console.log(review_data, $store.organization.rating);
+
+        if (!$store.organization.rating) {
+            return notification.error({
+                text: "Please provide a rating for your review",
+            });
+        }
+
+        if (!review_data.title) {
+            return notification.error({
+                text: "Please provide a title for your review",
+            });
+        }
+        if (!review_data.content?.length) {
+            return notification.error({
+                text: "Please provide content for your review",
+            });
+        }
+        review_modal_open = false;
     }
     onMount(() => {
         GetOrganization({
@@ -100,13 +126,22 @@
                 >
                     <div class="flex justify-between items-center">
                         <input
+                            on:input={(e) => {
+                                if (!e.target) return;
+                                review_data.title = e.target.value;
+                            }}
                             class="text-2xl font-semibold outline-none text-primary placeholder:text-primary"
                             type="text"
                             placeholder="Title..."
                         />
                         <InteractiveStars />
                     </div>
-                    <Editor focus={review_modal_open} />
+                    <Editor
+                        on:change={(e) => {
+                            review_data.content = e.detail;
+                        }}
+                        focus={review_modal_open}
+                    />
                     <div class="flex z-10 items-center justify-between">
                         <button
                             on:click={() => {
@@ -119,6 +154,7 @@
                             <span>Cancel</span>
                         </button>
                         <button
+                            on:click={handleSubmit}
                             class="font-medium flex items-center gap-4 bg-primary text-secondary p-2 px-6 rounded-full"
                             type="button"
                         >
