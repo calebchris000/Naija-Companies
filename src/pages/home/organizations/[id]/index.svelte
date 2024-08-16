@@ -17,6 +17,7 @@
     import Editor from "@src/components/editor/Editor.svelte";
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import InteractiveStars from "./components/interactive_stars.svelte";
+    import { AddReview } from "@src/core/api/review";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
     const token = useToken();
@@ -51,7 +52,7 @@
         $store.summarize_status = "pending";
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         console.log(review_data, $store.organization.rating);
 
         if (!$store.organization.rating) {
@@ -70,7 +71,38 @@
                 text: "Please provide content for your review",
             });
         }
+
+        const response = await AddReview({
+            token,
+            data: {
+                ...review_data,
+                content: review_data.content,
+                rating: String($store.organization.rating),
+                organizationId: $store.organization.id,
+            },
+        });
+
+        if (response.status !== 201) {
+            return notification.error({
+                text: response.data ?? "Failed to add review",
+            });
+        }
         review_modal_open = false;
+
+        notification.success({
+            text: "Review added successfully",
+        });
+
+        // Refresh reviews
+        GetOrganization({
+            token,
+            organizationId: params_id,
+            query: "getReviews=true",
+        }).then((d) => {
+            if (d.status === 200) {
+                reviews = d.data.data.reviews as ReviewType[];
+            }
+        });
     }
     onMount(() => {
         GetOrganization({
@@ -243,6 +275,9 @@
                     </div>
                 </button>
                 <button
+                    on:click={() => {
+                        review_modal_open = !review_modal_open;
+                    }}
                     class="bg-primary flex items-center gap-2 text-secondary p-2 px-4 rounded-full"
                     type="button"
                 >

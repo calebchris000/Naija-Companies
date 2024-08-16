@@ -25,7 +25,7 @@
                 onChange: (api, event) => {
                     api.saver.save().then((d) => {
                         const html = parser.parse(d);
-                        dispatch("change", html);
+                        dispatch("change", `<div>${html.join("")}</div>`);
                     });
                 },
                 minHeight: 0,
@@ -48,7 +48,7 @@
             onChange: (api, event) => {
                 api.saver.save().then((d) => {
                     const html = parser.parse(d);
-                    dispatch("change", html);
+                    dispatch("change", `<div>${html.join("")}</div>`);
                 });
             },
             minHeight: 0,

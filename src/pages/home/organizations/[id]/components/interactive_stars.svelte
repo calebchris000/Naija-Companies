@@ -4,6 +4,8 @@
     import { getStarColor } from "@src/core/logic/getStarRating";
     import { store } from "@src/lib/store";
 
+    const params_id = window.location.href.split("/").slice(-1).join("");
+
     export let default_star_color = "#003366";
     export let focus = false;
 
@@ -29,6 +31,7 @@
             on:click={() => {
                 selected_star = i + 1;
                 $store.organization.rating = selected_star;
+                $store.organization.id = params_id;
 
                 const button = event.target.closest("button");
                 button.style.transform = "scale(1.2)";

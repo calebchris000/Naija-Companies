@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="px-10 py-5">
-                    <span class="leading-loose">{review.content}</span>
+                    <span class="leading-loose">{@html review.content}</span>
                 </div>
 
                 <div
