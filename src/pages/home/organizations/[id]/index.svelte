@@ -50,6 +50,11 @@
 
     function handleSummarize() {
         $store.summarize_status = "pending";
+
+        setTimeout(() => {
+            $store.summarize_status = "inactive";
+            notification.info({ text: "Feature is coming very soon!" });
+        }, 1000);
     }
 
     async function handleSubmit() {
