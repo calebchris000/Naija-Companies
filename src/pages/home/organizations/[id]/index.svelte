@@ -144,10 +144,10 @@
     });
 </script>
 
-<section class=" bg-secondary max-w-[120rem] mx-auto">
+<section class=" bg-secondary lg:max-w-[120rem] mx-auto">
     <Navbar shadow={isIntersecting} />
-    <section class="mx-auto mt-10 px-56">
-        <div bind:this={top_section} class="flex flex-col gap-4">
+    <section class="mx-auto mt-10 xl:px-56">
+        <div bind:this={top_section} class="flex flex-col gap-4 px-4 xl:p-0">
             <CompanyInfo detail={organization_detail} />
 
             <section
@@ -201,7 +201,7 @@
                 </div>
             </section>
             <div
-                class="bg-primary w-full h-24 rounded-3xl p-4 px-8 flex justify-between items-center"
+                class="bg-primary w-full flex-col xl:flex-row h-24 rounded-3xl p-4 px-8 flex justify-between items-center"
             >
                 <button
                     on:click={() => {
@@ -223,10 +223,10 @@
         <figure
             class:opacity-100={!isIntersecting}
             class:pointer-events-none={isIntersecting}
-            class="opacity-0 z-50 transition-all max-w-[120rem] mx-auto fixed top-20 shadow-md bg-gray-100 px-10 py-4 left-0 right-0 flex flex-col gap-4"
+            class="opacity-0 hidden z-50 transition-all xl:max-w-[120rem] mx-auto fixed top-20 shadow-md bg-gray-100 px-10 py-4 left-0 right-0 xl:flex flex-col gap-4"
         >
-            <section class="flex items-center gap-4">
-                <div class="w-16 rounded-full overflow-hidden">
+            <section class="flex flex-col xl:flex-row items-center gap-4">
+                <div class="xl:w-16 w-24 rounded-full overflow-hidden">
                     {#if !image_loaded}
                         <span
                             class="w-full h-16 bg-gray-200 flex items-center justify-center text-gray-400"
@@ -243,7 +243,7 @@
                         alt=""
                     />
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-col xl:flex-row">
                     <span class="text-xl font-medium text-primary"
                         >{detail.name}</span
                     >
@@ -263,11 +263,13 @@
                     >
                 </div>
             </section>
-            <section class="flex items-center justify-between">
+            <section
+                class="flex items-center justify-between flex-col gap-2 xl:flex-row xl:gap-0"
+            >
                 <button
                     on:click={handleSummarize}
                     class:linear_animate={$store.summarize_status === "pending"}
-                    class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
+                    class="bg-gradient-to-r from-red-500 w-full xl:w-fit justify-between xl:justify-start to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
                     type="button"
                 >
                     <span>Summarize Review</span>
@@ -282,7 +284,7 @@
                     on:click={() => {
                         $store.review_modal_open = !$store.review_modal_open;
                     }}
-                    class="bg-primary flex items-center gap-2 text-secondary p-2 px-4 rounded-full"
+                    class="bg-primary flex items-center gap-2 justify-between xl:justify-start w-full xl:w-fit text-secondary p-2 px-4 rounded-full"
                     type="button"
                 >
                     <span>Write a Review</span>
@@ -290,7 +292,7 @@
                 </button>
             </section>
         </figure>
-        <div class="py-6 w-full">
+        <div class="py-6 w-full px-4 xl:px-0">
             {#if !reviews_filter.length}
                 <span
                     class="text-gray-600 text-lg font-medium w-fit block mx-auto"

@@ -19,7 +19,7 @@
 </script>
 
 <section
-    class="bg-primary max-h-[20rem] text-secondary w-full rounded-3xl h-[50vh] flex items-start gap-10 p-10 pb-20"
+    class="bg-primary xl:max-h-[20rem] text-secondary w-full rounded-3xl xl:h-[50vh] flex flex-col items-center xl:flex-row xl:items-start gap-10 p-10 pb-20"
 >
     <div class="flex flex-col justify-between gap-4 h-full">
         <div class="w-40 mx-auto rounded-full overflow-hidden">
@@ -38,20 +38,27 @@
             </span>
         </div>
         <span
-            class="bg-secondary rounded-md mx-auto text-primary font-bold w-fit px-4"
+            class="bg-secondary hidden xl:inline rounded-md mx-auto text-primary font-bold w-fit px-4"
             >{detail.industry?.toUpperCase()}</span
         >
     </div>
     <div class="flex flex-col gap-2 h-full">
-        <div class="flex items-center gap-2">
-            <span class="text-2xl text-secondary font-semibold"
+        <div class="flex items-center gap-2 flex-col xl:flex-row">
+            <span class="text-2xl text-nowrap text-secondary font-semibold"
                 >{detail.name}</span
             >
             {#if detail.verified}
-                <span class="w-4 h-4 rounded-full bg-green-500"></span>
+                <span class="w-4 h-4 hidden xl:inline rounded-full bg-green-500"
+                ></span>
+                <span
+                    class="xl:hidden bg-green-500 font-semibold uppercase px-4 rounded-md text-white"
+                    >Verified</span
+                >
             {/if}
         </div>
-        <span class="text-3xl flex gap-1">
+        <span
+            class="text-3xl flex gap-1 justify-center xl:justify-start xl:py-0 py-2"
+        >
             {#each stars as star}
                 {#if star === "half"}
                     <HalfStar className="w-6" />
@@ -63,7 +70,7 @@
             {/each}</span
         >
         <a
-            class="flex items-center gap-1"
+            class="flex items-center gap-1 justify-center xl:justify-start"
             target="_blank"
             href={detail.website && !detail.website.startsWith("http")
                 ? `https://${detail.website}`
@@ -73,6 +80,8 @@
             <Arrow className="w-3 rotate-[135deg]" />
         </a>
         <div class="flex-grow"></div>
-        <span class="leading-loose">{detail.description}</span>
+        <span class="leading-loose text-center xl:text-start"
+            >{detail.description}</span
+        >
     </div>
 </section>

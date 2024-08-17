@@ -38,11 +38,11 @@
 </script>
 
 <section class="mt-10 text-primary w-full p-4 px-0 flex flex-col gap-4">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center flex-col gap-4 justify-between xl:flex-row">
         <button
             on:click={handleSummarize}
             class:linear_animate={$store.summarize_status === "pending"}
-            class="bg-gradient-to-r from-red-500 to-orange-500 text-secondary p-2 px-4 rounded-full flex items-center gap-2"
+            class="bg-gradient-to-r from-red-500 w-full p-4 xl:w-fit to-orange-500 text-secondary xl:p-2 px-4 rounded-full flex justify-between items-center gap-2 xl:justify-start"
             type="button"
         >
             <span class="font-medium">Summarize Review</span>
@@ -57,7 +57,7 @@
             on:click={() => {
                 rating_open = !rating_open;
             }}
-            class="bg-primary relative flex items-center gap-4 p-2 px-4 rounded-full text-secondary"
+            class="bg-primary relative flex w-full xl:w-fit p-4 items-center gap-4 xl:p-2 px-4 rounded-full text-secondary justify-between xl:flex-row flex-row-reverse xl:justify-start"
             type="button"
         >
             <Filter className="fill-secondary w-4" />
@@ -94,20 +94,22 @@
                 class="review border border-gray-100 overflow-hidden rounded-3xl flex flex-col gap-2"
             >
                 <div
-                    class="flex px-10 py-5 bg-gray-100 items-center justify-between"
+                    class="flex flex-col xl:flex-row px-10 gap-2 xl:gap-0 py-5 bg-gray-100 items-center justify-between"
                 >
-                    <span class="font-medium text-lg">{review.title}</span>
+                    <span class="font-medium text-xl xl:text-lg"
+                        >{review.title}</span
+                    >
                     <span
                         style="color: {getStarColor(review.rating)}"
                         class="text-2xl flex gap-1"
                     >
                         {#each getStarRating(review.rating) as star}
                             {#if star === "half"}
-                                <HalfStar className="w-6" />
+                                <HalfStar className="xl:w-6 w-8" />
                             {:else if star === "empty"}
-                                <EmptyStar className="w-6" />
+                                <EmptyStar className="xl:w-6 w-8" />
                             {:else}
-                                <Star className="w-6" />
+                                <Star className="xl:w-6 w-8" />
                             {/if}
                         {/each}
                     </span>
@@ -118,7 +120,7 @@
                 </div>
 
                 <div
-                    class="flex px-10 items-center justify-between w-full bg-gray-100 py-5"
+                    class="flex px-10 flex-col gap-4 xl:gap-0 xl:flex-row items-center justify-between w-full bg-gray-100 py-5"
                 >
                     <div class="flex items-center gap-4">
                         <button
@@ -142,7 +144,9 @@
                         {/if}
                     </div>
 
-                    <div class="flex font-medium items-center gap-2">
+                    <div
+                        class="flex font-medium flex-col xl:flex-row items-center gap-2"
+                    >
                         <span
                             >{review.reviewer.firstName}
                             {review.reviewer.lastName} -

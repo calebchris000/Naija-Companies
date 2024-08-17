@@ -51,7 +51,7 @@
     });
 </script>
 
-<section class="2xl:h-screen org bg-secondary max-w-[120rem] mx-auto">
+<section class="2xl:h-screen bg-secondary xl:max-w-[120rem] xl:mx-auto">
     <Navbar />
 
     <section class="lg:px-10 px-4 flex flex-col gap-10">
