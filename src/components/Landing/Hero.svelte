@@ -1,6 +1,7 @@
 <script lang="ts">
     import hero_review from "@src/assets/svg/hero_review.svg";
-    import Search from "@src/assets/svg/search.svelte";
+    import Search from "@src/pages/home/organizations/components/search.svelte";
+    import { navigate } from "svelte-routing";
 </script>
 
 <section
@@ -19,16 +20,14 @@
             career decisions based on genuine workplace experiences.
         </span>
 
-        <div
-            class="bg-secondary flex h-16 items-center p-4 gap-4 rounded-full mt-5 lg:h-12"
-        >
-            <Search className="lg:w-6 w-10 text-primary" />
-            <input
-                class="text-light placeholder:text-primary font-medium outline-none w-full bg-transparent"
-                placeholder="Search for a company"
-                type="text"
-                name=""
-                id=""
+        <div class="flex h-16 items-center gap-4 rounded-full mt-5 lg:h-12">
+            <Search
+                on:itemSelect={(e) => {
+                    navigate(`/home/organizations/${e.detail.id}`);
+                    console.log(e.detail, "is selected");
+                }}
+                placeholder="Search a company"
+                input_class="bg-secondary placeholder:text-primary text-primary"
             />
         </div>
     </div>
