@@ -123,6 +123,7 @@
                 });
             }
             organization_detail = data.data as OrganizationDetailType;
+            console.log(data.data, "is data");
             reviews = data.data.reviews as ReviewType[];
         });
         const observer = new IntersectionObserver(

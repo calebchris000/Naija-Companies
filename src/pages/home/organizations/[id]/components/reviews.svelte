@@ -148,9 +148,11 @@
                             {review.reviewer.lastName} -
                         </span>
                         <span
-                            >{!review.isEmployee ? "Ex Employee" : "Employee"}
+                            >{!review.reviewer.isEmployee
+                                ? "Ex Employee"
+                                : "Employee"}
                         </span>
-                        {#if review.verified}
+                        {#if review.reviewer.experienceVerified}
                             <span class="w-3 h-3 bg-green-500 rounded-full"
                             ></span>
                         {/if}
