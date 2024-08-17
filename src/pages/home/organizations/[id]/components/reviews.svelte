@@ -147,10 +147,13 @@
                             >{review.reviewer.firstName}
                             {review.reviewer.lastName} -
                         </span>
-                        <span
-                            >{!review.reviewer.isEmployee
-                                ? "Ex Employee"
-                                : "Employee"}
+                        <span>
+                            {review.reviewer.isEmployee === null ||
+                            typeof review.reviewer.isEmployee !== "boolean"
+                                ? "Non Employee"
+                                : review.reviewer.isEmployee
+                                  ? "Employee"
+                                  : "Ex Employee"}
                         </span>
                         {#if review.reviewer.experienceVerified}
                             <span class="w-3 h-3 bg-green-500 rounded-full"
