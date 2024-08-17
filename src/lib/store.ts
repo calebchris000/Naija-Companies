@@ -10,9 +10,11 @@ type StoreType = {
   capital_list: CapitalListType;
   user_role: "user" | "admin" | "unset";
   selected_capital: any[];
+  review_modal_open: boolean;
   organization: {
     id: string | null;
     rating: number;
+    starColor: number | undefined;
   };
   application: {
     selected_capital: SelectedCapital;
@@ -26,9 +28,11 @@ const initialValue: StoreType = {
   capital_list: [],
   user_role: "user",
   selected_capital: [],
+  review_modal_open: false,
   organization: {
     id: null,
     rating: 0,
+    starColor: 0,
   },
   summarize_status: "inactive",
   application: {

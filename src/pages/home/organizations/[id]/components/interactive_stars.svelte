@@ -11,7 +11,6 @@
 
     $: hoveredStar = 0;
     $: selected_star = 0;
-    $: star_color = getStarColor(hoveredStar);
     $: {
         if (focus) {
             console.log("focused and rating is", $store.organization.rating);
@@ -26,10 +25,11 @@
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <button
             class="p-[0.1rem]"
-            style="color: {star_color}"
+            style="color: {$store.organization.starColor}"
             type="button"
             on:click={() => {
                 selected_star = i + 1;
+                $store.organization.starColor = getStarColor(selected_star);
                 $store.organization.rating = selected_star;
                 $store.organization.id = params_id;
 
@@ -38,12 +38,24 @@
                 setTimeout(() => {
                     button.style.transform = "scale(1)";
                 }, 200);
+
+                setTimeout(() => {
+                    if (!$store.review_modal_open) {
+                        $store.review_modal_open = true;
+                    }
+                }, 500);
             }}
-            on:mouseover={() => (hoveredStar = i + 1)}
-            on:mouseout={() => (hoveredStar = selected_star)}
+            on:mouseover={() => {
+                hoveredStar = i + 1;
+                $store.organization.starColor = getStarColor(hoveredStar);
+            }}
+            on:mouseout={() => {
+                hoveredStar = selected_star;
+                $store.organization.starColor = getStarColor(hoveredStar);
+            }}
         >
             {#if (i < $store.organization.rating && $store.organization.rating > 0 && $store.organization.rating <= 5) || i < hoveredStar}
-                <Star className="w-6" />
+                <Star className="w-6 " />
             {:else}
                 <EmptyStar
                     style="color: {default_star_color}"

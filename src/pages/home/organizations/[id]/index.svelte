@@ -40,7 +40,6 @@
     $: reviews = [] as ReviewType[];
     $: reviews_filter = reviews as ReviewType[];
     $: image_loaded = false as boolean;
-    $: review_modal_open = false;
     $: isIntersecting = true as any;
     $: stars = getStarRating(detail.average);
     $: review_data = { title: "", content: "" } as {
@@ -92,7 +91,7 @@
                 text: response.data ?? "Failed to add review",
             });
         }
-        review_modal_open = false;
+        $store.review_modal_open = false;
 
         notification.success({
             text: "Review added successfully",
@@ -152,8 +151,8 @@
             <CompanyInfo detail={organization_detail} />
 
             <section
-                class:opacity-100={review_modal_open}
-                class:pointer-events-auto={review_modal_open}
+                class:opacity-100={$store.review_modal_open}
+                class:pointer-events-auto={$store.review_modal_open}
                 class="fixed z-[100] transition-all opacity-0 grid place-items-center pointer-events-none overflow-hidden inset-0"
             >
                 <div
@@ -178,12 +177,11 @@
                         on:change={(e) => {
                             review_data.content = e.detail;
                         }}
-                        focus={review_modal_open}
                     />
                     <div class="flex z-10 items-center justify-between">
                         <button
                             on:click={() => {
-                                review_modal_open = false;
+                                $store.review_modal_open = false;
                             }}
                             class="font-medium hover:bg-orange-500 hover:font-semibold transition-all hover:border-transparent hover:text-white flex items-center gap-4 border border-primary text-primary p-2 px-6 rounded-full"
                             type="button"
@@ -207,7 +205,7 @@
             >
                 <button
                     on:click={() => {
-                        review_modal_open = !review_modal_open;
+                        $store.review_modal_open = !$store.review_modal_open;
                     }}
                     class="text-secondary hover:text-primary hover:bg-secondary p-2 px-4 rounded-full transition-all flex items-center gap-4"
                     type="button"
@@ -217,7 +215,7 @@
                 </button>
 
                 <InteractiveStars
-                    focus={review_modal_open}
+                    focus={$store.review_modal_open}
                     default_star_color="white"
                 />
             </div>
@@ -282,7 +280,7 @@
                 </button>
                 <button
                     on:click={() => {
-                        review_modal_open = !review_modal_open;
+                        $store.review_modal_open = !$store.review_modal_open;
                     }}
                     class="bg-primary flex items-center gap-2 text-secondary p-2 px-4 rounded-full"
                     type="button"

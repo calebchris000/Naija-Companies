@@ -2,11 +2,12 @@
     import { onDestroy, onMount, createEventDispatcher } from "svelte";
     import edjsHTML from "editorjs-html";
     import EditorJS from "@editorjs/editorjs";
+    import { store } from "@src/lib/store";
 
     let editor: EditorJS | null;
     let element: HTMLElement;
 
-    export let focus = false;
+    $: focus = $store.review_modal_open;
 
     const dispatch = createEventDispatcher();
     const parser = edjsHTML();
