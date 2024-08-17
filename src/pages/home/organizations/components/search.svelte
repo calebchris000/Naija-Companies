@@ -11,6 +11,7 @@
     export let placeholder = "";
     export let container_class = "";
     export let input_class = "";
+    export let list_class = "";
 
     let input: HTMLInputElement;
     let inputValue = "";
@@ -81,7 +82,7 @@
     {#if inputValue}
         <div
             bind:this={filteredItemsDiv}
-            class="filtered-items z-50 absolute left-0 right-0 top-16 bg-gray-200 overflow-y-auto max-h-72 rounded-3xl"
+            class="filtered-items z-50 absolute left-0 right-0 top-16 bg-gray-200 overflow-y-auto max-h-72 rounded-3xl {list_class}"
         >
             {#if filter_items.length > 0}
                 {#each filter_items as item}

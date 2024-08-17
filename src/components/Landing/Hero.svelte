@@ -28,6 +28,7 @@
                 }}
                 placeholder="Search a company"
                 input_class="bg-secondary placeholder:text-primary text-primary"
+                list_class="bg-white"
             />
         </div>
     </div>

@@ -2,6 +2,7 @@
     import logo_white from "@src/assets/logo-white.png";
     import logo_black from "@src/assets/logo.png";
     import Arrow from "@src/assets/svg/Arrow.svelte";
+    import Exit from "@src/assets/svg/exit.svelte";
     import Pencil from "@src/assets/svg/Pencil.svelte";
     import PersonFilled from "@src/assets/svg/person_filled.svelte";
     import User from "@src/assets/svg/User.svelte";
@@ -257,6 +258,14 @@
                                 <span>Review</span>
                                 <Arrow className="w-8 rotate-180" />
                             </Link>
+                            <button
+                                on:click={handleLogout}
+                                class="text-white grid items-center grid-cols-2 gap-4 text-[4rem] font-semibold w-fit h-fit"
+                                type="button"
+                            >
+                                <span>Logout</span>
+                                <Exit className="w-12 ms-auto" />
+                            </button>
                         {:else}
                             <Link
                                 class="text-[4rem] text-secondary font-semibold"
