@@ -290,8 +290,15 @@
                 </button>
             </section>
         </figure>
-        <div>
-            <Reviews reviews={reviews_filter} />
+        <div class="py-6 w-full">
+            {#if !reviews_filter.length}
+                <span
+                    class="text-gray-600 text-lg font-medium w-fit block mx-auto"
+                    >No reviews yet. Be the first to share your experience!</span
+                >
+            {:else}
+                <Reviews reviews={reviews_filter} />
+            {/if}
         </div>
     </section>
 </section>

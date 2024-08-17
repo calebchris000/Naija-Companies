@@ -6,7 +6,7 @@
     import PersonFilled from "@src/assets/svg/person_filled.svelte";
     import User from "@src/assets/svg/User.svelte";
     import { VerifyToken } from "@src/core/api/auth";
-    import { useToken } from "@src/core/utils/utils";
+    import { LocalStorage, useToken, useUserData } from "@src/core/utils/utils";
     import { Link, navigate } from "svelte-routing";
 
     export let disabled = false;
@@ -14,15 +14,23 @@
     export let use_dark_logo = false;
 
     const token = useToken();
+    const local_storage = new LocalStorage();
+    let user = useUserData();
     $: menu_open = false;
     $: screen_height = window.innerHeight;
     $: scroll_y = 0;
+    $: profile_menu_open = false;
 
     let menu_element: HTMLDivElement;
     let nav_element: HTMLElement;
 
     function handleMenuToggle() {
         menu_open = !menu_open;
+    }
+
+    function handleLogout() {
+        local_storage.clear();
+        window.location.reload();
     }
 
     window.addEventListener("scroll", () => {
@@ -76,7 +84,7 @@
                     to="/home">Services</Link
                 >
             </div>
-            <div class="gap-4 items-center justify-between lg:flex ms-auto">
+            <div class="gap-4 items-center justify-between xl:flex ms-auto">
                 {#await VerifyToken({ token }) then { status, data }}
                     {#if status === 200}
                         <button
@@ -91,10 +99,32 @@
                         </button>
 
                         <button
+                            on:click={() => {
+                                profile_menu_open = !profile_menu_open;
+                            }}
                             type="button"
-                            class="h-10 w-10 transition-all rounded-full justify-self-end p-2 grid place-items-center ms-end bg-secondary"
+                            class=" w-fit relative transition-all p-1 px-4 flex items-center gap-4 border border-secondary border-opacity-25 hover:border-opacity-100 rounded-full ms-end"
                         >
-                            <PersonFilled className="w-4 text-primary" />
+                            <div
+                                class="h-8 w-8 bg-secondary grid place-items-center rounded-full"
+                            >
+                                <PersonFilled className="w-3 text-primary" />
+                            </div>
+                            <span class="text-white flex font-medium"
+                                >{user?.firstName} {user?.lastName}</span
+                            >
+
+                            <div
+                                class:opacity-100={profile_menu_open}
+                                class:pointer-events-auto={profile_menu_open}
+                                class="transition-all pointer-events-none opacity-0 bg-white overflow-hidden w-full absolute top-12 left-0 right-0 rounded-2xl"
+                            >
+                                <button
+                                    class="text-primary hover:bg-primary w-full transition-all py-2 hover:text-secondary"
+                                    on:click|stopPropagation={handleLogout}
+                                    >Logout</button
+                                >
+                            </div>
                         </button>
                     {:else}
                         <button
