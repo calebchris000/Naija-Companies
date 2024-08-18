@@ -5,13 +5,20 @@
     import Like from "@src/assets/svg/Like.svelte";
     import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
     import Star from "@src/assets/svg/star.svelte";
+    import Trash from "@src/assets/svg/trash.svelte";
+    import { DeleteReview } from "@src/core/api/review";
     import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
+    import { useToken, useUserData } from "@src/core/utils/utils";
     import { store } from "@src/lib/store";
     import type { ReviewType } from "@src/types";
     import { Notification } from "@src/utils/notification";
+    import { onMount } from "svelte";
 
     const notification = new Notification();
+    const token = useToken();
+    const user = useUserData();
     $: rating_open = false;
+    $: rating_options_open = false;
     $: rating_type = "All" as string | "All" | "5" | "4" | "3" | "2" | "1";
 
     export let reviews: any[] = [];
@@ -35,6 +42,36 @@
             );
         }
     }
+
+    async function handleDelete(reviewId: string) {
+        console.log(reviewId);
+        const response = await DeleteReview({ token, reviewId });
+
+        if (response.status !== 200) {
+            notification.error({
+                text:
+                    response.data ??
+                    "Failed to delete review. Please try again.",
+            });
+            return;
+        } else {
+            window.location.reload();
+        }
+    }
+
+    function handleClickOutside(e: MouseEvent) {
+        const target = e.target as HTMLElement;
+        const rating_option = document.querySelector(".rating_option");
+        if (!rating_option) return;
+
+        if (!target.classList.contains("option")) {
+            rating_options_open = false;
+        }
+    }
+
+    onMount(() => {
+        document.addEventListener("click", handleClickOutside);
+    });
 </script>
 
 <section class="mt-10 text-primary w-full p-4 px-0 flex flex-col gap-4">
@@ -99,20 +136,52 @@
                     <span class="font-medium text-xl xl:text-lg"
                         >{review.title}</span
                     >
-                    <span
-                        style="color: {getStarColor(review.rating)}"
-                        class="text-2xl flex gap-1"
-                    >
-                        {#each getStarRating(review.rating) as star}
-                            {#if star === "half"}
-                                <HalfStar className="xl:w-6 w-8" />
-                            {:else if star === "empty"}
-                                <EmptyStar className="xl:w-6 w-8" />
-                            {:else}
-                                <Star className="xl:w-6 w-8" />
-                            {/if}
-                        {/each}
-                    </span>
+                    <div class="flex items-center gap-10 relative">
+                        <span
+                            style="color: {getStarColor(review.rating)}"
+                            class="text-2xl flex gap-1"
+                        >
+                            {#each getStarRating(review.rating) as star}
+                                {#if star === "half"}
+                                    <HalfStar className="xl:w-6 w-8" />
+                                {:else if star === "empty"}
+                                    <EmptyStar className="xl:w-6 w-8" />
+                                {:else}
+                                    <Star className="xl:w-6 w-8" />
+                                {/if}
+                            {/each}
+                        </span>
+                        {#if review.userId === user.id}
+                            <button
+                                on:click={() => {
+                                    console.log("clicekd");
+                                    rating_options_open = true;
+                                }}
+                                type="button"
+                                class="flex option flex-col items-center gap-[0.1rem]"
+                            >
+                                {#each Array(3) as _}
+                                    <span
+                                        class="w-1 h-1 option rounded-full bg-primary"
+                                    ></span>
+                                {/each}
+                            </button>
+                            <div
+                                class:opacity-100={rating_options_open}
+                                class:pointer-events-auto={rating_options_open}
+                                class="absolute option opacity-0 pointer-events-none flex flex-col rounded-lg overflow-hidden transition-all translate-x-10 left-0 right-0 top-10 bg-white shadow-lg"
+                            >
+                                <button
+                                    on:click={() => handleDelete(review.id)}
+                                    type="button"
+                                    class="hover:bg-primary option rating_option justify-between flex p-2 px-4 items-center gap-4 w-full transition-all hover:text-secondary"
+                                >
+                                    <span>Delete</span>
+                                    <Trash className="w-4 text-red-500" />
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
                 </div>
 
                 <div class="px-10 py-5">
