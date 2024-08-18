@@ -10,7 +10,7 @@
     import EmptyStar from "@src/assets/svg/empty_star.svelte";
     import type { OrganizationDetailType, ReviewType } from "@src/types";
     import { GetOrganization } from "@src/core/api/organization";
-    import { useToken } from "@src/core/utils/utils";
+    import { useToken, useUserData } from "@src/core/utils/utils";
     import { Notification } from "@src/utils/notification";
     import MultipleStars from "@src/assets/svg/multiple_stars.svelte";
     import { store } from "@src/lib/store";
@@ -18,9 +18,11 @@
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import InteractiveStars from "./components/interactive_stars.svelte";
     import { AddReview } from "@src/core/api/review";
+    import { navigate } from "svelte-routing";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
     const token = useToken();
+    const user = useUserData();
     const notification = new Notification();
     const detail: OrganizationDetailType = {
         id: "comp123",
@@ -205,6 +207,10 @@
             >
                 <button
                     on:click={() => {
+                        if (!token || !user) {
+                            navigate("/signup");
+                            return;
+                        }
                         $store.review_modal_open = !$store.review_modal_open;
                     }}
                     class="text-secondary hover:text-primary hover:bg-secondary p-2 px-4 rounded-full transition-all flex items-center gap-4"
@@ -282,6 +288,10 @@
                 </button>
                 <button
                     on:click={() => {
+                        if (!token || !user) {
+                            navigate("/signup");
+                            return;
+                        }
                         $store.review_modal_open = !$store.review_modal_open;
                     }}
                     class="bg-primary flex items-center gap-2 justify-between xl:justify-start w-full xl:w-fit text-secondary p-2 px-4 rounded-full"

@@ -4,9 +4,12 @@
     import BellUnread from "@src/assets/svg/bell_unread.svelte";
     import PersonFilled from "@src/assets/svg/person_filled.svelte";
     import User from "@src/assets/svg/User.svelte";
+    import { useToken, useUserData } from "@src/core/utils/utils";
     import { navigate } from "svelte-routing";
 
     export let shadow = true;
+    const user = useUserData();
+    const token = useToken();
 </script>
 
 <nav
@@ -38,9 +41,20 @@
             >
                 <PersonFilled className="text-secondary w-4" />
             </span>
-            <abbr title="Caleb Nwaizu" class="no-underline hidden lg:inline"
-                ><span class="font-medium">Caleb Nwaizu</span></abbr
-            >
+
+            {#if !token}
+                <a href="/signup">
+                    <abbr
+                        title="Sign in or create an account"
+                        class="no-underline hidden lg:inline"
+                        ><span class="font-medium">User</span></abbr
+                    >
+                </a>
+            {:else}
+                <abbr title="Caleb Nwaizu" class="no-underline hidden lg:inline"
+                    ><span class="font-medium">Caleb Nwaizu</span></abbr
+                >
+            {/if}
         </button>
     </div>
 </nav>

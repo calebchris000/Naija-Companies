@@ -74,7 +74,7 @@
             <div class="items-center gap-10 font-medium text-secondary lg:flex">
                 <Link
                     class="border-b-2 transition-all border-transparent hover:border-orange-500"
-                    to="/home">Blog</Link
+                    to="/home/review">Companies</Link
                 >
                 <Link
                     class="border-b-2 transition-all border-transparent hover:border-orange-500"
@@ -229,7 +229,7 @@
                 >
                     <Link
                         class="text-[4rem] text-secondary font-semibold"
-                        to="/home">Blog</Link
+                        to="/home/review">Companies</Link
                     >
                     <Link
                         class="text-[4rem] text-secondary font-semibold"

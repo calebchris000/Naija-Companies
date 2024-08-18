@@ -2,10 +2,13 @@
     import EmptyStar from "@src/assets/svg/empty_star.svelte";
     import Star from "@src/assets/svg/star.svelte";
     import { getStarColor } from "@src/core/logic/getStarRating";
+    import { useToken, useUserData } from "@src/core/utils/utils";
     import { store } from "@src/lib/store";
+    import { navigate } from "svelte-routing";
 
     const params_id = window.location.href.split("/").slice(-1).join("");
-
+    const token = useToken();
+    const user = useUserData();
     export let default_star_color = "#003366";
     export let focus = false;
 
@@ -40,6 +43,10 @@
                 }, 200);
 
                 setTimeout(() => {
+                    if (!token || !user) {
+                        navigate("/signup");
+                        return;
+                    }
                     if (!$store.review_modal_open) {
                         $store.review_modal_open = true;
                     }
