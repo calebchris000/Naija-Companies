@@ -27,18 +27,18 @@ export type OrganizationDetailType = {
   id: string;
   name: string;
   city?: string;
-  postalCode?: string;
+  verified: boolean;
   website: string;
+  industry: string;
+  postalCode?: string;
   email?: string;
   foundedYear?: string;
   size?: string;
-  industry: string;
   description: string;
-  verified: boolean;
   addedById?: string;
+  capitalId?: string;
   logoUrl: string;
   average: number;
-  capitalId?: string;
 };
 
 export type ReviewType = {

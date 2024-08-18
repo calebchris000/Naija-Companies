@@ -1,3 +1,4 @@
+import type { OrganizationDetailType } from "@src/types";
 import { writable } from "svelte/store";
 
 type CapitalListType = Array<string>;
@@ -15,6 +16,7 @@ type StoreType = {
     id: string | null;
     rating: number;
     starColor: number | undefined;
+    selected: OrganizationDetailType;
   };
   application: {
     selected_capital: SelectedCapital;
@@ -33,6 +35,16 @@ const initialValue: StoreType = {
     id: null,
     rating: 0,
     starColor: 0,
+    selected: {
+      id: "",
+      name: "",
+      website: "",
+      industry: "",
+      description: "",
+      average: 0,
+      logoUrl: "",
+      verified: false,
+    },
   },
   summarize_status: "inactive",
   application: {

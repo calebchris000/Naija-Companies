@@ -96,3 +96,7 @@
         </div>
     </section>
 </section>
+
+<svelte:head>
+    <title>Home | Naija Companies</title>
+</svelte:head>

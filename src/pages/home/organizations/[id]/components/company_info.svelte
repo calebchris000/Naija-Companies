@@ -6,9 +6,10 @@
     import Star from "@src/assets/svg/star.svelte";
 
     import { getStarColor, getStarRating } from "@src/core/logic/getStarRating";
+    import { store } from "@src/lib/store";
     import type { OrganizationDetailType } from "@src/types";
 
-    export let detail: OrganizationDetailType = {};
+    $: detail = $store.organization.selected;
 
     $: stars = getStarRating(detail.average);
 

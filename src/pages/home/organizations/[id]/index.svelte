@@ -36,7 +36,7 @@
 
     let top_section: HTMLDivElement;
 
-    $: organization_detail = {} as OrganizationDetailType;
+    $: organization_detail = $store.organization.selected ?? {};
     $: reviews = [] as ReviewType[];
     $: reviews_filter = reviews as ReviewType[];
     $: image_loaded = false as boolean;
@@ -122,7 +122,7 @@
                 });
             }
             organization_detail = data.data as OrganizationDetailType;
-            console.log(data.data, "is data");
+            $store.organization.selected = data.data as OrganizationDetailType;
             reviews = data.data.reviews as ReviewType[];
         });
         const observer = new IntersectionObserver(
@@ -148,7 +148,7 @@
     <Navbar shadow={isIntersecting} />
     <section class="mx-auto mt-10 xl:px-56">
         <div bind:this={top_section} class="flex flex-col gap-4 px-4 xl:p-0">
-            <CompanyInfo detail={organization_detail} />
+            <CompanyInfo />
 
             <section
                 class:opacity-100={$store.review_modal_open}
@@ -304,6 +304,10 @@
         </div>
     </section>
 </section>
+
+<svelte:head>
+    <title>{$store.organization.selected.name} | Naija Companies</title>
+</svelte:head>
 
 <style>
     .rotate {
