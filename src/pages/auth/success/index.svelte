@@ -6,8 +6,31 @@
     import Arrow from "@src/assets/svg/Arrow.svelte";
     import { onMount } from "svelte";
     import { navigate } from "svelte-routing";
+    import { LocalStorage, useToken, useUserData } from "@src/core/utils/utils";
+    import { GetUser } from "@src/core/api/user";
+    import { Notification } from "@src/utils/notification";
+
+    const user = useUserData();
+    const token = useToken();
+    const notify = new Notification();
+    const local = new LocalStorage();
 
     onMount(() => {
+        if (!user || !token) {
+            local.clear();
+            navigate("/signup");
+            return;
+        }
+        local.removeItem("step");
+        local.removeItem("userInputs");
+
+        GetUser({ token, userId: user?.id }).then((d) => {
+            if (d.status !== 200) {
+                notify.error({ text: "Sorry, something went wrong" });
+            } else {
+                local.setItem("user", d.data?.data);
+            }
+        });
         var myCanvas = document.createElement("canvas");
         document.body.appendChild(myCanvas);
         var myConfetti = confetti.create(myCanvas, {
