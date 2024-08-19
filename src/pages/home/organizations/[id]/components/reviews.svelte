@@ -128,7 +128,7 @@
     <div class="flex flex-col gap-4">
         {#each reviews_filter as review}
             <div
-                class="review border border-gray-100 overflow-hidden rounded-3xl flex flex-col gap-2"
+                class="review border border-gray-100 overflow-hidden rounded-xl flex flex-col gap-2"
             >
                 <div
                     class="flex relative flex-col items-start xl:items-center xl:flex-row px-10 gap-2 xl:gap-0 py-5 bg-gray-100 justify-between"
@@ -188,10 +188,11 @@
                             rating_options_open = !rating_options_open;
                         }}
                         type="button"
-                        class="grid option xl:hidden place-items-center py-8 hover:bg-gray-400 transition-all absolute right-0 h-full w-12 top-[50%] -translate-y-[50%] option flex-col items-center gap-[0.1rem]"
+                        class="grid mobile_option option xl:hidden place-items-center py-8 hover:bg-primary transition-all absolute right-0 h-full w-12 top-[50%] -translate-y-[50%] option flex-col items-center gap-[0.1rem]"
                     >
                         {#each Array(3) as _}
-                            <span class="w-2 h-2 option rounded-full bg-primary"
+                            <span
+                                class="w-2 h-2 dot option rounded-full bg-primary"
                             ></span>
                         {/each}
                     </button>
@@ -281,5 +282,9 @@
         100% {
             background-position: 0% 50%;
         }
+    }
+
+    .mobile_option:hover .dot {
+        background-color: white;
     }
 </style>

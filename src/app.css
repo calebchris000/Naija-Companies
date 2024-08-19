@@ -13,6 +13,14 @@
     font-weight: 400;
     font-synthesis: none;
     margin: 0;
+    background-image: radial-gradient(circle, #f0f0f0 10%, transparent 10%),
+        radial-gradient(circle, #f0f0f0 10%, transparent 10%);
+    background-size: 20px 20px;
+    background-position:
+        0 0,
+        10px 10px;
+    background-repeat: repeat;
+    background-color: #ffffff;
     padding: 0;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

@@ -146,7 +146,7 @@
     });
 </script>
 
-<section class=" bg-secondary lg:max-w-[120rem] mx-auto">
+<section class="  lg:max-w-[120rem] mx-auto">
     <Navbar shadow={isIntersecting} />
     <section class="mx-auto mt-10 xl:px-56">
         <div bind:this={top_section} class="flex flex-col gap-4 px-4 xl:p-0">
@@ -203,7 +203,7 @@
                 </div>
             </section>
             <div
-                class="bg-primary w-full flex-col xl:flex-row h-24 rounded-3xl p-4 px-8 flex justify-between items-center"
+                class="bg-primary w-full flex-col xl:flex-row h-24 rounded-xl p-4 px-8 flex justify-between items-center"
             >
                 <button
                     on:click={() => {

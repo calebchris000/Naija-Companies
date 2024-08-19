@@ -20,7 +20,7 @@
 </script>
 
 <section
-    class="bg-primary xl:max-h-[20rem] text-secondary w-full rounded-3xl xl:h-[50vh] flex flex-col items-center xl:flex-row xl:items-start gap-10 p-10 pb-20"
+    class="bg-primary xl:max-h-[20rem] text-secondary w-full rounded-2xl xl:h-[50vh] flex flex-col items-center xl:flex-row xl:items-start gap-10 p-10 pb-10"
 >
     <div class="flex flex-col justify-between gap-4 h-full">
         <div class="w-40 mx-auto rounded-full overflow-hidden">
