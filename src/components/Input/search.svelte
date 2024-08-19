@@ -3,11 +3,13 @@
     import { createEventDispatcher } from "svelte";
 
     type ItemType = {
-        id: string;
+        id: string | number;
         name: string;
     };
 
     const dispatch = createEventDispatcher();
+    export let className = "";
+    export let placeholder = "Search for a company";
     export let items: ItemType[] = [];
     export let selected_items = [] as string[] | number[];
 
@@ -35,14 +37,14 @@
 
 <section>
     <div
-        class="search filter_items bg-primary lg:bg-secondary rounded-md lg:text-secondary mt-4 flex items-center gap-4 p-4"
+        class="search filter_items bg-primary lg:bg-secondary rounded-md lg:text-secondary mt-4 flex items-center gap-4 p-4 {className}"
     >
         <Search className="w-6   text-secondary lg:text-primary" />
         <input
             on:input={handleInput}
             class="bg-transparent w-full text-secondary placeholder:text-secondary outline-none lg:text-primary lg:placeholder:text-primary"
             type="text"
-            placeholder="Search for a company"
+            {placeholder}
         />
     </div>
 

@@ -1,23 +1,23 @@
 export const getStarRating = (rating: number) => {
   // rating = Math.max(0.5, Math.min(5, rating));
-  const initial_stars = new Array(5).fill("☆");
+  const initial_stars = new Array(5).fill("empty");
 
   const full_stars = Math.floor(rating);
   const has_half_star = rating % 1 !== 0;
   if (rating > 0.5) {
     for (let i = 0; i < full_stars; i += 1) {
-      initial_stars[i] = "★";
+      initial_stars[i] = "full";
     }
   }
   if (has_half_star) {
-    initial_stars[full_stars] = "⯨";
+    initial_stars[full_stars] = "half";
   }
   return initial_stars;
 };
 
 export const getStarColor = (star: number): string => {
-  if(!star) {
-    return "black"
+  if (!star) {
+    return "black";
   }
   if (star < 2.5) {
     return "red";

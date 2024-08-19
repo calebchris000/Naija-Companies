@@ -2,29 +2,19 @@ import axios from "axios";
 
 export const GetOrganizations = async ({
   token,
-  getReviews,
-  verified,
-  capitalId,
+  showAverage = true,
 }: {
   token: string;
-  getReviews?: boolean;
-  verified?: boolean;
-  capitalId?: string;
+  showAverage: boolean;
 }) => {
   try {
-    let query = getReviews ? "getReviews=true" : "";
-    query = query + `&verified=${verified ?? false}`;
+    const query = showAverage ? "showAverage=true" : "";
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
-    const response = await axios.get(
-      `${base_url}/organizations?${query}${
-        capitalId ? `&capitalId=${capitalId}` : ""
-      }`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.get(`${base_url}/organizations?${query}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const { data, status } = response;
 
@@ -47,19 +37,21 @@ export const GetOrganizations = async ({
 export const GetOrganization = async ({
   token,
   organizationId,
+  query,
 }: {
   token: string;
   organizationId: string;
+  query?: string;
 }) => {
   try {
     const base_url = import.meta.env.VITE_NAIJA_COMPANIES_BASE_URL;
     const response = await axios.get(
-      `${base_url}/organization?organizationId=${organizationId}`,
+      `${base_url}/organization?organizationId=${organizationId}&${query}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
 
     const { data, status } = response;
@@ -133,7 +125,7 @@ export const AcceptOrReject = async ({
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     const { status, data } = response;
     return { status, data };

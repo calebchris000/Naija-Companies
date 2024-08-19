@@ -1,76 +1,92 @@
 <script lang="ts">
-  import EditorJS from "@editorjs/editorjs";
-  import { getStarRating } from "@src/core/logic/getStarRating";
-  import { createEventDispatcher, onDestroy, onMount } from "svelte";
-  import edjsHTML from "editorjs-html";
-  import { store } from "@src/lib/store";
+    import { onDestroy, onMount, createEventDispatcher } from "svelte";
+    import edjsHTML from "editorjs-html";
+    import EditorJS from "@editorjs/editorjs";
+    import { store } from "@src/lib/store";
 
-  const dispatch = createEventDispatcher();
-  const edjsParser = edjsHTML();
+    let editor: EditorJS | null;
+    let element: HTMLElement;
 
-  $: rated_value = 0;
-  $: stars = getStarRating(rated_value).join("");
-  let editor: EditorJS;
+    $: focus = $store.review_modal_open;
 
-  function handleSave() {
-    editor.save().then((d) => {
-      const html = edjsParser.parse(d);
-      
-      dispatch("save", { content: html, star: rated_value });
-    });
-  }
+    const dispatch = createEventDispatcher();
+    const parser = edjsHTML();
 
-  document.addEventListener("onSaveEditor", handleSave);
-
-  onMount(() => {
-    editor = new EditorJS({
-      holder: "editor_parent",
-      placeholder: "Write your review here.",
-      onReady: () => {
-        console.log("Editor is ready!");
-      },
-    });
-  });
-
-  onDestroy(() => {
-    if (editor) {
-      editor.destroy();
+    $: {
+        if (!focus && editor && editor.blocks) {
+            editor.destroy();
+            editor = null;
+        } else if (focus && !editor) {
+            editor = new EditorJS({
+                holder: "editor",
+                tools: {},
+                hideToolbar: true,
+                placeholder: "Write your review...",
+                autofocus: true,
+                onChange: (api, event) => {
+                    api.saver.save().then((d) => {
+                        const html = parser.parse(d);
+                        dispatch("change", `<div>${html.join("")}</div>`);
+                    });
+                },
+                minHeight: 0,
+                defaultBlock: "paragraph",
+            });
+        }
     }
-  });
 
-  function handleChange(e: Event) {
-    const { value } = e.target as any;
-    const float = parseFloat(value);
-    const converted = (float / 100) * 5;
-    if (converted % 0.5 === 0 && float) {
-      rated_value = converted;
-    }
-  }
-  $: star_color =
-    rated_value < 2.5
-      ? "red"
-      : rated_value >= 2.5 && rated_value <= 3.5
-        ? "orange"
-        : "green";
+    onMount(() => {
+        if (!focus) return;
+        if (editor) {
+            editor.destroy();
+        }
+        editor = new EditorJS({
+            holder: "editor",
+            tools: {},
+            hideToolbar: true,
+            placeholder: "Write your review...",
+            autofocus: true,
+            onChange: (api, event) => {
+                api.saver.save().then((d) => {
+                    const html = parser.parse(d);
+                    dispatch("change", `<div>${html.join("")}</div>`);
+                });
+            },
+            minHeight: 0,
+            defaultBlock: "paragraph",
+        });
+    });
+
+    onDestroy(() => {
+        if (editor) {
+            editor?.destroy();
+        }
+    });
 </script>
 
-<section class="relative flex flex-col gap-2">
-  {#if $store.device === "desktop"}
-    <span class="font-medium text-orange-600 translate-y-2">Slide on the stars to review</span>
-  {/if}
-  <span style="color: {star_color}" class="text-3xl">{stars}</span>
-  <div class="flex gap-2 h-5 border border-black absolute top-3 opacity-0 lg:top-10">
-    <input
-      on:change={handleChange}
-      on:input={handleChange}
-      type="range"
-      class="h-full"
-      name=""
-      id=""
-    />
-  </div>
-  <div
-    class="px-4 w-full border border-gray-400 max-h-44 overflow-auto lg:max-h-[24rem]"
-    id="editor_parent"
-  ></div>
+<section
+    bind:this={element}
+    class="outline-none border border-primary rounded-xl h-full flex flex-col"
+>
+    <div
+        id="editor"
+        class="editor h-full w-full border-none outline-none"
+    ></div>
 </section>
+
+<style>
+    .editor {
+        @apply p-4 px-10;
+    }
+    :global(.ce-toolbar) {
+        display: none !important;
+    }
+
+    :global(.codex-editor) {
+        height: 100% !important;
+    }
+
+    :global(.ce-block__content) {
+        max-width: 100% !important;
+    }
+</style>

@@ -1,6 +1,7 @@
 <script lang="ts">
     import hero_review from "@src/assets/svg/hero_review.svg";
-    import Search from "@src/assets/svg/search.svelte";
+    import Search from "@src/pages/home/organizations/components/search.svelte";
+    import { navigate } from "svelte-routing";
 </script>
 
 <section
@@ -10,24 +11,24 @@
         <span
             class="leading-tight text-4xl font-medium text-secondary text-center lg:text-start lg:text-[40px]"
         >
-            Uncover the Truth About Nigerian Workplaces - Read <b>Authentic</b> Employee
-            Reviews
+            Uncover the Truth About Nigerian Workplaces - Read <b
+                class="hover:text-orange-500 transition-all">Authentic</b
+            > Employee Reviews
         </span>
         <span class="text-secondary leading-loose text-center lg:text-start">
             Get honest insights from real Nigerian employees. Make informed
             career decisions based on genuine workplace experiences.
         </span>
 
-        <div
-            class="bg-secondary flex h-16 items-center p-4 gap-4 rounded-full mt-5 lg:h-12"
-        >
-            <Search className="lg:w-6 w-10 text-primary" />
-            <input
-                class="text-light placeholder:text-primary font-medium outline-none w-full bg-transparent"
-                placeholder="Search for a company"
-                type="text"
-                name=""
-                id=""
+        <div class="flex h-16 items-center gap-4 rounded-full mt-5 lg:h-12">
+            <Search
+                on:itemSelect={(e) => {
+                    navigate(`/home/organizations/${e.detail.id}`);
+                    console.log(e.detail, "is selected");
+                }}
+                placeholder="Search a company"
+                input_class="bg-secondary placeholder:text-primary text-primary"
+                list_class="bg-white"
             />
         </div>
     </div>

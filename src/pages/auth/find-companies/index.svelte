@@ -10,7 +10,6 @@
     import { Notification } from "@src/utils/notification";
     import { GetOrganizations } from "@src/core/api/organization";
     import { AddJobExperiences } from "@src/core/api/experiences";
-    import Company from "@src/pages/home/capital/[capital]/Company.svelte";
     const local_storage = new LocalStorage();
     const notification = new Notification();
     $: companies_data = [] as any[];

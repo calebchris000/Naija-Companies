@@ -2,8 +2,12 @@
     import logo_white from "@src/assets/logo-white.png";
     import logo_black from "@src/assets/logo.png";
     import Arrow from "@src/assets/svg/Arrow.svelte";
+    import Exit from "@src/assets/svg/exit.svelte";
+    import Pencil from "@src/assets/svg/Pencil.svelte";
+    import PersonFilled from "@src/assets/svg/person_filled.svelte";
+    import User from "@src/assets/svg/User.svelte";
     import { VerifyToken } from "@src/core/api/auth";
-    import { useToken } from "@src/core/utils/utils";
+    import { LocalStorage, useToken, useUserData } from "@src/core/utils/utils";
     import { Link, navigate } from "svelte-routing";
 
     export let disabled = false;
@@ -11,15 +15,23 @@
     export let use_dark_logo = false;
 
     const token = useToken();
+    const local_storage = new LocalStorage();
+    let user = useUserData();
     $: menu_open = false;
     $: screen_height = window.innerHeight;
     $: scroll_y = 0;
+    $: profile_menu_open = false;
 
     let menu_element: HTMLDivElement;
     let nav_element: HTMLElement;
 
     function handleMenuToggle() {
         menu_open = !menu_open;
+    }
+
+    function handleLogout() {
+        local_storage.clear();
+        window.location.reload();
     }
 
     window.addEventListener("scroll", () => {
@@ -60,26 +72,67 @@
         </button>
         {#if !disabled}
             <div class="items-center gap-10 font-medium text-secondary lg:flex">
-                <Link to="/home">Blog</Link>
-                <Link to="/home">Features</Link>
-                <Link to="/home">Services</Link>
+                <Link
+                    class="border-b-2 transition-all border-transparent hover:border-orange-500"
+                    to="/home/review">Companies</Link
+                >
+                <Link
+                    class="border-b-2 transition-all border-transparent hover:border-orange-500"
+                    to="/home">Features</Link
+                >
+                <Link
+                    class="border-b-2 transition-all border-transparent hover:border-orange-500"
+                    to="/home">Services</Link
+                >
             </div>
-            <div class="gap-4 items-center justify-self-end lg:flex ms-auto">
+            <div class="gap-4 items-center justify-between xl:flex ms-auto">
                 {#await VerifyToken({ token }) then { status, data }}
                     {#if status === 200}
                         <button
                             on:click={() => {
-                                navigate("/home/capital");
+                                navigate("/home/review");
                             }}
-                            class=" bg-cto p-2 px-4 rounded-full font-semibold text-light"
-                            type="button">Dashboard</button
+                            class=" bg-secondary transition-all w-fit justify-self-end flex items-center gap-4 p-2 px-4 rounded-full font-semibold text-primary"
+                            type="button"
                         >
+                            <span>Write A Review</span>
+                            <Pencil className="w-4" />
+                        </button>
+
+                        <button
+                            on:click={() => {
+                                profile_menu_open = !profile_menu_open;
+                            }}
+                            type="button"
+                            class=" w-fit relative transition-all p-1 px-4 flex items-center gap-4 border border-secondary border-opacity-25 hover:border-opacity-100 rounded-full ms-end"
+                        >
+                            <div
+                                class="h-8 w-8 bg-secondary grid place-items-center rounded-full"
+                            >
+                                <PersonFilled className="w-3 text-primary" />
+                            </div>
+                            <span class="text-white flex font-medium"
+                                >{user?.firstName} {user?.lastName}</span
+                            >
+
+                            <div
+                                class:opacity-100={profile_menu_open}
+                                class:pointer-events-auto={profile_menu_open}
+                                class="transition-all pointer-events-none opacity-0 bg-white overflow-hidden w-full absolute top-12 left-0 right-0 rounded-2xl"
+                            >
+                                <button
+                                    class="text-primary hover:bg-primary w-full transition-all py-2 hover:text-secondary"
+                                    on:click|stopPropagation={handleLogout}
+                                    >Logout</button
+                                >
+                            </div>
+                        </button>
                     {:else}
                         <button
                             on:click={() => {
                                 navigate("/signup");
                             }}
-                            class=" bg-cto p-2 px-6 rounded-full font-semibold text-primary"
+                            class=" bg-secondary p-2 px-6 rounded-full font-semibold text-primary"
                             type="button">Get Started</button
                         >
                         <button
@@ -176,7 +229,7 @@
                 >
                     <Link
                         class="text-[4rem] text-secondary font-semibold"
-                        to="/home">Blog</Link
+                        to="/home/review">Companies</Link
                     >
                     <Link
                         class="text-[4rem] text-secondary font-semibold"
@@ -205,6 +258,14 @@
                                 <span>Review</span>
                                 <Arrow className="w-8 rotate-180" />
                             </Link>
+                            <button
+                                on:click={handleLogout}
+                                class="text-white grid items-center grid-cols-2 gap-4 text-[4rem] font-semibold w-fit h-fit"
+                                type="button"
+                            >
+                                <span>Logout</span>
+                                <Exit className="w-12 ms-auto" />
+                            </button>
                         {:else}
                             <Link
                                 class="text-[4rem] text-secondary font-semibold"
