@@ -81,12 +81,37 @@
             <Arrow className="w-3 rotate-[135deg]" />
         </a>
         <span
-            class="bg-secondary hidden xl:inline text-wrap rounded-md text-primary font-bold px-4"
+            class="bg-secondary hidden xl:inline w-fit text-wrap rounded-md text-primary font-bold px-4"
             >{detail.industry?.toUpperCase()}
         </span>
         <div class="flex-grow"></div>
-        <span class="leading-loose text-center xl:text-start"
-            >{detail.description}</span
+        <span
+            class="leading-loose text-center overflow-y-auto max-h-[6rem] description xl:text-start"
+            >{detail.description}Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum. Nulla facilisi. Maecenas nec nunc vel nisi
+            tincidunt tincidunt. Vestibulum ante ipsum primis in faucibus orci
+            luctus et ultrices posuere cubilia curae; Donec vehicula, sapien
+            eget aliquam bibendum, nunc nisi faucibus nunc, vitae tincidunt nunc
+            nunc vel nunc. Sed euismod, nunc vel tincidunt tincidunt, nunc nunc
+            tincidunt nunc, nec tincidunt nunc nunc vel nunc. Sed euismod, nunc
+            vel tincidunt tincidunt, nunc nunc tincidunt nunc, nec tincidunt
+            nunc nunc vel nunc.</span
         >
     </div>
 </section>
+
+<style>
+    .description {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .description::-webkit-scrollbar {
+        display: none;
+    }
+</style>
