@@ -23,11 +23,13 @@
     class="bg-primary xl:max-h-[20rem] text-secondary w-full rounded-2xl xl:h-[50vh] flex flex-col items-center xl:flex-row xl:items-start gap-10 p-10 pb-10"
 >
     <div class="flex flex-col justify-between gap-4 h-full">
-        <div class="w-40 mx-auto rounded-full overflow-hidden">
+        <div
+            class="w-40 h-40 border mx-auto rounded-full overflow-hidden flex items-center justify-center"
+        >
             <img
                 hidden={!image_loaded}
                 on:load={handleImageLoad}
-                class=""
+                class="w-full h-fit"
                 src={detail.logoUrl}
                 alt="logo"
             />
@@ -38,10 +40,6 @@
                 Logo
             </span>
         </div>
-        <span
-            class="bg-secondary hidden xl:inline rounded-md mx-auto text-primary font-bold w-fit px-4"
-            >{detail.industry?.toUpperCase()}</span
-        >
     </div>
     <div class="flex flex-col gap-2 h-full">
         <div class="flex items-center gap-2 flex-col xl:flex-row">
@@ -57,6 +55,7 @@
                 >
             {/if}
         </div>
+
         <span
             class="text-3xl flex gap-1 justify-center xl:justify-start xl:py-0 py-2"
         >
@@ -70,6 +69,7 @@
                 {/if}
             {/each}</span
         >
+
         <a
             class="flex items-center gap-1 justify-center xl:justify-start"
             target="_blank"
@@ -80,9 +80,38 @@
             <span class="font-medium">{detail.website}</span>
             <Arrow className="w-3 rotate-[135deg]" />
         </a>
+        <span
+            class="bg-secondary hidden xl:inline w-fit text-wrap rounded-md text-primary font-bold px-4"
+            >{detail.industry?.toUpperCase()}
+        </span>
         <div class="flex-grow"></div>
-        <span class="leading-loose text-center xl:text-start"
-            >{detail.description}</span
+        <span
+            class="leading-loose text-center overflow-y-auto max-h-[6rem] description xl:text-start"
+            >{detail.description}Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum. Nulla facilisi. Maecenas nec nunc vel nisi
+            tincidunt tincidunt. Vestibulum ante ipsum primis in faucibus orci
+            luctus et ultrices posuere cubilia curae; Donec vehicula, sapien
+            eget aliquam bibendum, nunc nisi faucibus nunc, vitae tincidunt nunc
+            nunc vel nunc. Sed euismod, nunc vel tincidunt tincidunt, nunc nunc
+            tincidunt nunc, nec tincidunt nunc nunc vel nunc. Sed euismod, nunc
+            vel tincidunt tincidunt, nunc nunc tincidunt nunc, nec tincidunt
+            nunc nunc vel nunc.</span
         >
     </div>
 </section>
+
+<style>
+    .description {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .description::-webkit-scrollbar {
+        display: none;
+    }
+</style>
