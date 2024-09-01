@@ -229,17 +229,14 @@
         <figure
             class:opacity-100={!isIntersecting}
             class:pointer-events-none={isIntersecting}
-            class="opacity-0 hidden z-50 transition-all xl:max-w-[120rem] mx-auto fixed top-20 shadow-md bg-gray-100 px-10 py-4 left-0 right-0 xl:flex justify-between gap-4"
+            class="opacity-0 hidden z-50 transition-all xl:max-w-[120rem] mx-auto fixed top-20 shadow-md bg-primary px-10 py-4 left-0 right-0 xl:flex justify-between gap-4"
         >
             <section class="flex xl:flex-row items-center gap-4">
-                <div class="flex items-center gap-2">
-                    <span class="text-xl font-medium text-primary"
+                <div class="flex items-center gap-4">
+                    <span class="text-xl font-semibold text-secondary"
                         >{detail.name}</span
                     >
-                    <span
-                        style="color: {getStarColor(detail.average)}"
-                        class="text-2xl flex gap-1"
-                    >
+                    <span style="color: white" class="text-2xl flex gap-1">
                         {#each stars as star}
                             {#if star === "half"}
                                 <HalfStar className="w-5" />
@@ -277,7 +274,7 @@
                         }
                         $store.review_modal_open = !$store.review_modal_open;
                     }}
-                    class="bg-primary flex items-center gap-2 justify-between xl:justify-start w-full xl:w-fit text-secondary p-2 px-4 rounded-full"
+                    class="bg-secondary flex items-center gap-2 justify-between xl:justify-start w-full xl:w-fit text-primary p-2 px-4 rounded-full"
                     type="button"
                 >
                     <span>Write a Review</span>
