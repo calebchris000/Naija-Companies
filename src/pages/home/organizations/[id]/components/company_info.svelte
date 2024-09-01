@@ -44,7 +44,7 @@
     <div class="flex flex-col gap-2 h-full">
         <div class="flex items-center gap-2 flex-col xl:flex-row">
             <span class="text-2xl text-nowrap text-secondary font-semibold"
-                >{detail.name}</span
+                >{detail.name ?? "Unknown"}</span
             >
             {#if detail.verified}
                 <span class="w-4 h-4 hidden xl:inline rounded-full bg-green-500"
@@ -73,35 +73,26 @@
         <a
             class="flex items-center gap-1 justify-center xl:justify-start"
             target="_blank"
+            class:select-none={!detail.website}
+            class:pointer-events-none={!detail.website}
             href={detail.website && !detail.website.startsWith("http")
                 ? `https://${detail.website}`
-                : detail.website}
+                : (detail.website ?? "")}
         >
-            <span class="font-medium">{detail.website}</span>
-            <Arrow className="w-3 rotate-[135deg]" />
+            <span class="font-medium">{detail.website ?? ""}</span>
+            <Arrow
+                style="display: {!detail.website ? 'none' : 'block'};"
+                className="w-3 rotate-[135deg]"
+            />
         </a>
         <span
             class="bg-secondary hidden xl:inline w-fit text-wrap rounded-md text-primary font-bold px-4"
-            >{detail.industry?.toUpperCase()}
+            >{detail?.industry?.name?.toUpperCase() ?? ""}
         </span>
         <div class="flex-grow"></div>
         <span
             class="leading-loose text-center overflow-y-auto max-h-[6rem] description xl:text-start"
-            >{detail.description}Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Nulla facilisi. Maecenas nec nunc vel nisi
-            tincidunt tincidunt. Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae; Donec vehicula, sapien
-            eget aliquam bibendum, nunc nisi faucibus nunc, vitae tincidunt nunc
-            nunc vel nunc. Sed euismod, nunc vel tincidunt tincidunt, nunc nunc
-            tincidunt nunc, nec tincidunt nunc nunc vel nunc. Sed euismod, nunc
-            vel tincidunt tincidunt, nunc nunc tincidunt nunc, nec tincidunt
-            nunc nunc vel nunc.</span
+            >{detail.description ?? ""}</span
         >
     </div>
 </section>
