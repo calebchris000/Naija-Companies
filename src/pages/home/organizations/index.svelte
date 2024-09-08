@@ -24,7 +24,6 @@
         const response = await GetOrganizations({ token, showAverage: true });
 
         const { status, data } = response;
-        console.log(data);
 
         if (status !== 200) {
             return notification.error({
@@ -32,13 +31,13 @@
             });
         }
 
-        organizations = data?.data.map((org: any) => ({
-            id: org.id,
+        organizations = data.data.organizations.map((org: any) => ({
+            id: org._id,
             image: org.logoUrl,
             name: org.name,
             capitalId: org.capitalId,
             rating: org.average,
-            reviews: [org.city ?? ""],
+            reviews: [org.city.name ?? ""],
         }));
     }
 
@@ -59,7 +58,6 @@
             <Search
                 on:itemSelect={(e) => {
                     navigate(`/home/organizations/${e.detail.id}`);
-                    console.log(e.detail, "is selected");
                 }}
                 placeholder="Search a company"
                 input_class="bg-gray-200 placeholder:text-primary text-primary"
@@ -72,9 +70,7 @@
                     });
                 }}
                 on:sort={(e) => {
-                    console.log("sort is ", e.detail);
                     if (e.detail === "Ascending") {
-                        console.log("it is");
                         organizations_filter = organizations_filter.sort(
                             (a, b) => a.name.localeCompare(b.name),
                         );

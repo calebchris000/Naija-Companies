@@ -179,7 +179,6 @@
 
         if (status !== 201) {
             const r = response.data as any;
-            console.log(response);
             notification.error({
                 text: r ?? "The email address or username is already in use.",
             });

@@ -38,7 +38,6 @@
             if (status !== 200) {
                 return notification.error({ text: data?.message ?? "" });
             }
-            console.log(data?.data);
             capitals = data?.data;
         });
     });

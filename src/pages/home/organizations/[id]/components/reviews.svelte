@@ -44,7 +44,6 @@
     }
 
     async function handleDelete(reviewId: string) {
-        console.log(reviewId);
         const response = await DeleteReview({ token, reviewId });
 
         if (response.status !== 200) {
@@ -154,7 +153,6 @@
                         {#if review.userId === user.id}
                             <button
                                 on:click={() => {
-                                    console.log("clicekd");
                                     rating_options_open = !rating_options_open;
                                 }}
                                 type="button"
@@ -184,7 +182,6 @@
                     </div>
                     <button
                         on:click={() => {
-                            console.log("clicekd");
                             rating_options_open = !rating_options_open;
                         }}
                         type="button"

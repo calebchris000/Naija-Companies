@@ -107,8 +107,6 @@
             return;
         }
 
-        console.log("passed");
-
         const res = await AddJobExperiences(companies_data, "");
 
         if (res.status !== 201) {

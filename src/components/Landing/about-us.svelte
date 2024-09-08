@@ -8,7 +8,7 @@
         if (!token) {
             navigate("/signup");
         } else {
-            navigate("/home/capital");
+            navigate("/home/review");
         }
     }
 </script>

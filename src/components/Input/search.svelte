@@ -21,11 +21,14 @@
     ) {
         const target = event.target as HTMLInputElement;
         search_value = target?.value ?? "";
-        item_filter = items.filter(
-            (item: { id: string | number; name: string }) =>
-                item.name.toLowerCase().includes(search_value.toLowerCase()) &&
-                !selected_items.includes(item.id as never),
-        );
+        item_filter =
+            items.filter(
+                (item: { id: string | number; name: string }) =>
+                    (item.name ?? "None")
+                        .toLowerCase()
+                        .includes(search_value.toLowerCase()) &&
+                    !selected_items.includes(item?.id as never),
+            ) ?? [];
     }
 
     function handleCompanyClick({ name, id }: { name: string; id: string }) {

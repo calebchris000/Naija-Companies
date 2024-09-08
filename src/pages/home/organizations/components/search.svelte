@@ -49,7 +49,6 @@
         const response = await GetOrganizations({ token, showAverage: true });
 
         const { status, data } = response;
-        console.log(data);
 
         if (status !== 200) {
             return notification.error({
@@ -57,8 +56,8 @@
             });
         }
 
-        organizations = data?.data.map((org: any) => ({
-            id: org.id,
+        organizations = data.data.organizations.map((org: any) => ({
+            id: org._id,
             name: org.name,
         }));
     }

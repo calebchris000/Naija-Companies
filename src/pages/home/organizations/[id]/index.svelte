@@ -59,8 +59,6 @@
     }
 
     async function handleSubmit() {
-        console.log(review_data, $store.organization.rating);
-
         if (!$store.organization.rating) {
             return notification.error({
                 text: "Please provide a rating for your review",
