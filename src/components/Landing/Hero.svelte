@@ -24,7 +24,6 @@
             <Search
                 on:itemSelect={(e) => {
                     navigate(`/home/organizations/${e.detail.id}`);
-                    console.log(e.detail, "is selected");
                 }}
                 placeholder="Search a company"
                 input_class="bg-secondary placeholder:text-primary text-primary"

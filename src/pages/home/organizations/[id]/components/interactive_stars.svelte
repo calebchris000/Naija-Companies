@@ -16,7 +16,6 @@
     $: selected_star = 0;
     $: {
         if (focus) {
-            console.log("focused and rating is", $store.organization.rating);
             selected_star = $store.organization.rating;
         }
     }

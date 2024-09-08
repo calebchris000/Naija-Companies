@@ -253,7 +253,7 @@
                         {#if status === 200}
                             <Link
                                 class="text-[4rem] flex items-center gap-8 text-secondary font-semibold"
-                                to="/home/capital"
+                                to="/home/review"
                             >
                                 <span>Review</span>
                                 <Arrow className="w-8 rotate-180" />

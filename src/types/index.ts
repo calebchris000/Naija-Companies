@@ -29,7 +29,9 @@ export type OrganizationDetailType = {
   city?: string;
   verified: boolean;
   website: string;
-  industry: string;
+  industry: {
+    name: string;
+  };
   postalCode?: string;
   email?: string;
   foundedYear?: string;

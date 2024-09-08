@@ -59,8 +59,6 @@
     }
 
     async function handleSubmit() {
-        console.log(review_data, $store.organization.rating);
-
         if (!$store.organization.rating) {
             return notification.error({
                 text: "Please provide a rating for your review",
@@ -229,34 +227,14 @@
         <figure
             class:opacity-100={!isIntersecting}
             class:pointer-events-none={isIntersecting}
-            class="opacity-0 hidden z-50 transition-all xl:max-w-[120rem] mx-auto fixed top-20 shadow-md bg-gray-100 px-10 py-4 left-0 right-0 xl:flex flex-col gap-4"
+            class="opacity-0 hidden z-50 transition-all xl:max-w-[120rem] mx-auto fixed top-20 shadow-md bg-primary px-10 py-4 left-0 right-0 xl:flex justify-between gap-4"
         >
-            <section class="flex flex-col xl:flex-row items-center gap-4">
-                <div class="xl:w-16 w-24 rounded-full overflow-hidden">
-                    {#if !image_loaded}
-                        <span
-                            class="w-full h-16 bg-gray-200 flex items-center justify-center text-gray-400"
-                        >
-                            Logo
-                        </span>
-                    {/if}
-                    <img
-                        class:hidden={!image_loaded}
-                        on:load={() => {
-                            image_loaded = true;
-                        }}
-                        src={organization_detail.logoUrl}
-                        alt=""
-                    />
-                </div>
-                <div class="flex items-center gap-2 flex-col xl:flex-row">
-                    <span class="text-xl font-medium text-primary"
+            <section class="flex xl:flex-row items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <span class="text-xl font-semibold text-secondary"
                         >{detail.name}</span
                     >
-                    <span
-                        style="color: {getStarColor(detail.average)}"
-                        class="text-2xl flex gap-1"
-                    >
+                    <span style="color: white" class="text-2xl flex gap-1">
                         {#each stars as star}
                             {#if star === "half"}
                                 <HalfStar className="w-5" />
@@ -270,7 +248,7 @@
                 </div>
             </section>
             <section
-                class="flex items-center justify-between flex-col gap-2 xl:flex-row xl:gap-0"
+                class="flex items-center justify-between gap-4 space-x-4 xl:gap-0"
             >
                 <button
                     on:click={handleSummarize}
@@ -294,7 +272,7 @@
                         }
                         $store.review_modal_open = !$store.review_modal_open;
                     }}
-                    class="bg-primary flex items-center gap-2 justify-between xl:justify-start w-full xl:w-fit text-secondary p-2 px-4 rounded-full"
+                    class="bg-secondary flex items-center gap-2 justify-between xl:justify-start w-full xl:w-fit text-primary p-2 px-4 rounded-full"
                     type="button"
                 >
                     <span>Write a Review</span>
