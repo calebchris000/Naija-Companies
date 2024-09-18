@@ -8,6 +8,7 @@ type DeviceType = "desktop" | "mobile" | "tablet" | "large-tablet";
 // Define the StoreType based on the properties of initialValue
 type StoreType = {
   cities_in_capital: string[];
+  mobileSidebarOpen: boolean;
   capital_list: CapitalListType;
   user_role: "user" | "admin" | "unset";
   selected_capital: any[];
@@ -27,6 +28,7 @@ type StoreType = {
 };
 const initialValue: StoreType = {
   cities_in_capital: [],
+  mobileSidebarOpen: false,
   capital_list: [],
   user_role: "user",
   selected_capital: [],
@@ -39,7 +41,7 @@ const initialValue: StoreType = {
       id: "",
       name: "",
       website: "",
-      industry: "",
+      industry: { name: "" },
       description: "",
       average: 0,
       logoUrl: "",

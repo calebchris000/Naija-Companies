@@ -6,7 +6,7 @@
     import Hero from "@src/components/Landing/Hero.svelte";
     import Sector from "@src/components/Landing/sector.svelte";
     import Stats from "@src/components/Landing/stats.svelte";
-    import Navbar from "@src/components/navbar/navbar.svelte";
+    import Navbar from "@src/components/navbar/Index.svelte";
 </script>
 
 <section class="max-w-[120rem] mx-auto">
@@ -16,7 +16,7 @@
     <Stats />
     <Sector />
     <BestRated />
-    <AboutUs />
+    <!-- <AboutUs /> -->
     <Footer />
 </section>
 
