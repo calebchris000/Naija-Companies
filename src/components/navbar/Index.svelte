@@ -47,13 +47,15 @@
         }}
         class=""
     >
+        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+        <!-- svelte-ignore a11y-label-has-associated-control -->
         <label tabindex="0" class="btn btn-ghost lg:hidden">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                stroke="white"
             >
                 <path
                     stroke-linecap="round"
@@ -73,11 +75,17 @@
                 >Review an Organization</a
             >
         {:else}
-            <a
-                href="/signup"
-                class="btn bg-white text-primary border-none hover:bg-gray-100"
-                >Get Started</a
-            >
+            <div class="card flex-row gap-4">
+                <a
+                    href="/signup"
+                    class="btn bg-white px-10 text-primary border-none hover:bg-gray-100"
+                    >Get Started</a
+                >
+                <a
+                    href="/login"
+                    class="btn btn-ghost px-10 text-white border-none">Login</a
+                >
+            </div>
         {/if}
     </div>
 
